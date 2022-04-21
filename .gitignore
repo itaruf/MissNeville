@@ -38,4 +38,7 @@
 *.VC.db
 **/.aps
 **/Generated\ Files
+**/obj
+**/x64
+
 
