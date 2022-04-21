@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GameTest.cpp" />
+    <ClCompile Include="App\app.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\main.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SimpleSprite.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SimpleSound.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SimpleController.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+    <ClCompile Include="App\TextureLoader.cpp">
+      <Filter>API</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App\app.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\AppSettings.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\main.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SimpleSprite.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SimpleSound.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SimpleController.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="App\TextureLoader.h">
+      <Filter>API</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="API">
+      <UniqueIdentifier>{3e1485bf-3449-4966-8760-976ee866544b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
