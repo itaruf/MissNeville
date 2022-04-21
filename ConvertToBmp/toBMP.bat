@@ -1,0 +1,1 @@
+"%~dp0"texconv.exe -y -o . -if POINT -ft bmp -f R8G8B8A8_UNORM_SRGB %*
