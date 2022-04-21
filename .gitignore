@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# VS generated and binary files
+*.pfx
+*.user
+*.v11.suo
+*.VC.db
+**/.aps
+**/Generated\ Files
+
