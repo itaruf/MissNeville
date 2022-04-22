@@ -18,7 +18,7 @@ class CSimpleSprite
 public:
     // fileName: File must be a 32 bit BMP format (A8 R8 G8 B8). The alpha channel can be used to mask out the sprite.
 	// nColumns and nRows defines the number of frames in the sprite page. 
-    CSimpleSprite(const char *fileName, unsigned int nColumns = 1, unsigned int nRows = 1 );
+    CSimpleSprite(const char *fileName, unsigned int nColumns = 1, unsigned int nRows = 1);
 	// Update, call from your game update function.
     void Update(float dt);
 	// Draw, call from your game draw function.
@@ -57,6 +57,9 @@ public:
 	void SetVertex(unsigned int i, float v) { if(i < 8) m_points[i] = v; }
 	float GetVertex(unsigned int i) { if (i >= 8) i = 0; return m_points[i]; }
 
+    // Flip the UVs when rendering the texture, usefull if your asset pack provide a right anim but not the left one for example.
+    void SetVerticalFlip(const bool verticalFlip) { m_verticalFlip = verticalFlip; }
+
 private:
     void CalculateUVs();
     GLuint m_texture;
@@ -79,6 +82,7 @@ private:
 	float m_alpha = 1.0f;
     int     m_currentAnim = -1;
     float   m_animTime = 0.0F;
+    bool m_verticalFlip = false;
 
     struct sAnimation
     {

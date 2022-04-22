@@ -102,11 +102,29 @@ void CSimpleSprite::Draw()
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 
-    glBegin(GL_QUADS);       
+    glBegin(GL_QUADS);
+
+    std::vector<unsigned int> uvIDs = {
+        0, 1,   // top left
+        2, 3,   // top right
+        4, 5,   // bot right
+        6, 7    // bot left
+    };
+
+    if (m_verticalFlip)
+    {
+        uvIDs = {
+            2, 3,   // top right
+            0, 1,   // top left
+            6, 7,   // bot left
+            4, 5    // bot right
+        };
+    }
+    
     for (unsigned int i = 0; i < 8; i += 2)
     {
         glTexCoord2f(m_uvcoords[i], m_uvcoords[i + 1]);
-        glVertex2f(m_points[i], m_points[i+1]);
+        glVertex2f(m_points[uvIDs[i]], m_points[uvIDs[i + 1]]);
     }
     glEnd();
     glPopMatrix();
@@ -165,11 +183,11 @@ bool CSimpleSprite::LoadTexture(const char * filename)
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 		gluBuild2DMipmaps(GL_TEXTURE_2D, 4, m_texWidth, m_texHeight, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 		free(imageData);
 		sTextureDef textureDef = { m_texWidth, m_texHeight, texture };
