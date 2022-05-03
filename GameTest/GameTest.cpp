@@ -14,8 +14,9 @@
 //------------------------------------------------------------------------
 // Eample data....
 //------------------------------------------------------------------------
-CSimpleSprite *testSprite;
-CSimpleSprite *testSprite2;
+
+CSimpleSprite* testSprite;
+CSimpleSprite* testSprite2;
 CSimpleSprite* testSprite3;
 
 // Actors - Characters
@@ -23,12 +24,14 @@ std::shared_ptr<Actor> item;
 std::shared_ptr<Actor> item2;
 std::shared_ptr<Character> player;
 
-std::unique_ptr<CSimpleSprite> imaneSprite;
-
 std::string message = " ";
 std::string inputmessage = " ";
 std::string debug = " ";
 std::shared_ptr<Room> currentRoom = std::make_shared<Room>(1);
+
+Collision* collider;
+Collision* collider2;
+Collision* collider3;
 //------------------------------------------------------------------------
 // Called before first update. Do any initial setup here.
 //------------------------------------------------------------------------
@@ -37,12 +40,12 @@ void Init()
 	/*Instantiation du personnage*/
 	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 	Vector2D vector{ 900.0f, 400.0f };
-	Collision* collider = new Collision(Collision::ColliderType::Block, 10, 10);
+	collider = new Collision(Collision::ColliderType::Block, 10, 10);
 	player = std::make_shared<Character>("Imane", testSprite, vector, collider, currentRoom.get(), 20, 5);
 
 	/*Caractéristiques de bases*/
-	player->GetName() = "test";
-	player->GetHP() = 50;
+	player->SetName("test");
+	player->SetHP(50);
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_LEFT, 1.0f / 15.0f, { 8,9,10,11,12,13,14,15 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 16,17,18,19,20,21,22,23 });
@@ -57,20 +60,19 @@ void Init()
 	testSprite3->SetFrame(2);
 	testSprite3->SetScale(0.5f);
 
-	player->SetSprite(testSprite);
-
 	Vector2D vector2{ 400.0f, 400.0f };
-	Collision* collider2 = new Collision(Collision::ColliderType::Block, 15, 15);
+	collider2 = new Collision(Collision::ColliderType::Block, 15, 15);
 
 	item = std::make_shared<Actor>("Item1", testSprite2, vector2, collider2, currentRoom.get());
 
 	Vector2D vector3{ 400.f, 200.f };
-	Collision* collider3 = new Collision(Collision::ColliderType::Block, testSprite3->GetHeight() / 2, testSprite3->GetWidth() / 2);
+	collider3 = new Collision(Collision::ColliderType::Overlap, 40, 40);
 
 	item2 = std::make_shared<Actor>("Item2", testSprite3, vector3, collider3, currentRoom.get());
 
+	currentRoom->AddActor(player.get());
 	currentRoom->AddActor(item.get());
-	/*currentRoom->AddActor(item2.get());*/
+	currentRoom->AddActor(item2.get());
 }
 
 //------------------------------------------------------------------------
@@ -86,37 +88,37 @@ void Update(float deltaTime)
 	player->MoveHorizontally();
 	player->MoveVertically();
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, false))
-	{
-		player->GetSprite()->SetScale(player->GetSprite()->GetScale() + 0.1f);
-	}
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, false))
-	{
-		player->GetSprite()->SetScale(player->GetSprite()->GetScale() - 0.1f);
-	}
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, false))
-	{
-		player->GetSprite()->SetAngle(player->GetSprite()->GetAngle() + 0.1f);
-	}
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, false))
-	{
-		player->GetSprite()->SetAngle(player->GetSprite()->GetAngle() - 0.1f);
-	}
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-	{
-		player->GetSprite()->SetAnimation(-1);
-	}
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-	{
-		player->GetSprite()->SetVertex(0, player->GetSprite()->GetVertex(0) + 5.0f);
-	}
-	//------------------------------------------------------------------------
-	// Sample Sound.
-	//------------------------------------------------------------------------
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_Y, true))
-	{
-		App::PlaySound(".\\TestData\\Test.wav");
-	}
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, false))
+	//{
+	//	player->GetSprite()->SetScale(player->GetSprite()->GetScale() + 0.1f);
+	//}
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, false))
+	//{
+	//	player->GetSprite()->SetScale(player->GetSprite()->GetScale() - 0.1f);
+	//}
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, false))
+	//{
+	//	player->GetSprite()->SetAngle(player->GetSprite()->GetAngle() + 0.1f);
+	//}
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, false))
+	//{
+	//	player->GetSprite()->SetAngle(player->GetSprite()->GetAngle() - 0.1f);
+	//}
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	//{
+	//	player->GetSprite()->SetAnimation(-1);
+	//}
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	//{
+	//	player->GetSprite()->SetVertex(0, player->GetSprite()->GetVertex(0) + 5.0f);
+	//}
+	////------------------------------------------------------------------------
+	//// Sample Sound.
+	////------------------------------------------------------------------------
+	//if (App::GetController().CheckButton(XINPUT_GAMEPAD_Y, true))
+	//{
+	//	App::PlaySound(".\\TestData\\Test.wav");
+	//}
 }
 
 //------------------------------------------------------------------------
@@ -125,34 +127,11 @@ void Update(float deltaTime)
 //------------------------------------------------------------------------
 void Render()
 {	
-
-	//------------------------------------------------------------------------
-	// Example Line Drawing.
-	//------------------------------------------------------------------------
-	static float a = 0.0f;
-	float r = 1.0f;
-	float g = 1.0f;
-	float b = 1.0f;
-	a += 0.1f;
-	/*for (int i = 0; i < 20; i++)
+	for each (const auto& item in currentRoom->GetActors())
 	{
-
-		float sx = 200 + sinf(a + i * 0.1f)*60.0f;
-		float sy = 200 + cosf(a + i * 0.1f)*60.0f;
-		float ex = 700 - sinf(a + i * 0.1f)*60.0f;
-		float ey = 700 - cosf(a + i * 0.1f)*60.0f;
-		g = (float)i / 20.0f;
-		b = (float)i / 20.0f;
-		App::DrawLine(sx, sy, ex, ey,r,g,b);
-	}*/
-
-	player->GetSprite()->Draw();
-	testSprite2->Draw();
-	//testSprite3->Draw();
-
-	player->GetCollider()->DrawCollision(player.get(), 50, 50, 50);
-	item->GetCollider()->DrawCollision(item.get(), 100, 100, 100);
-	//item2->GetCollider()->DrawCollision(item2.get(), 150, 150, 150);
+		item->GetSprite()->Draw();
+		item->GetCollider()->DrawCollision(item, 50, 50, 50);
+	}
 
 	App::Print(700, 600, inputmessage.c_str());
 	App::Print(700, 400, message.c_str());
@@ -161,7 +140,6 @@ void Render()
 	auto string = std::to_string(pos.x) + " " + std::to_string(pos.y);
 
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
-	/*App::Print(500, 500, std::to_string(player->GetHP()).c_str());*/
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
 	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());
 	App::Print(800, 625, ("Player H (Col): " + std::to_string(player->GetCollider()->GetHeight())).c_str());
@@ -175,10 +153,7 @@ void Render()
 		App::Print(0 + i*50, 700, currentRoom->GetActor(i)->GetName().c_str());
 	}
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-	{
-		/*player->SetSprite(testSprite2);*/
-	}
+	App::Print(200, 200, std::to_string(player->GetSprite()->GetHeight()).c_str());
 }
 //------------------------------------------------------------------------
 // Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.

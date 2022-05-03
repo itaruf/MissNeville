@@ -24,14 +24,17 @@ public:
 	Actor(std::string name, CSimpleSprite*& sprite, Vector2D& position, Collision*& collider, Room* currentRoom);
 	~Actor() = default;
 
-	std::string& GetName();
-	CSimpleSprite*& GetSprite();
-	void SetSprite(CSimpleSprite* sprite);
-	Vector2D& GetPosition();
+	const std::string& GetName() const;
+	void SetName(std::string name);
+	CSimpleSprite* GetSprite();
+	void SetSprite(CSimpleSprite*& sprite);
+	void SetSprite(CSimpleSprite& sprite);
+	const Vector2D& GetPosition();
 	void SetPosition(Vector2D& position);
 	void SetPosition(float x = 0, float y = 0);
-	Collision*& GetCollider();
-	Room*& GetCurrentRoom();
+	Collision* GetCollider();
+	void SetCollider(Collision* collider);
+	Room* GetCurrentRoom();
 };
 
 #endif

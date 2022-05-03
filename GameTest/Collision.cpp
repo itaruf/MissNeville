@@ -6,19 +6,19 @@ Collision::Collision(ColliderType colliderType, float height, float width)
 {
 }
 
-//https://levelup.gitconnected.com/2d-collision-detection-8e50b6b8b5c0
+// https://levelup.gitconnected.com/2d-collision-detection-8e50b6b8b5c0
 bool Collision::isColliding(Actor* character, Actor*& other, float x, float y)
 {
-	if (x < other->GetPosition().x + other->GetCollider()->GetWidth() &&
+	if (x - width < other->GetPosition().x + other->GetCollider()->GetWidth() &&
 		x + width > other->GetPosition().x - other->GetCollider()->GetWidth() &&
-		y < other->GetPosition().y + other->GetCollider()->GetHeight() &&
+		y - height < other->GetPosition().y + other->GetCollider()->GetHeight() &&
 		y + height > other->GetPosition().y - other->GetCollider()->GetHeight())
 		return true;
 	return false;
 }
 
 
-float& Collision::GetHeight()
+const float& Collision::GetHeight() const
 {
 	return height;
 }
@@ -28,7 +28,7 @@ void Collision::SetHeight(float value)
 	height = value;
 }
 
-float& Collision::GetWidth()
+const float& Collision::GetWidth() const
 {
 	return width;
 }

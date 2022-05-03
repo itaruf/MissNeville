@@ -17,7 +17,7 @@ Actor*& Room::GetActor(int index)
 	return actors[index];
 }
 
-int& Room::GetID()
+const int& Room::GetID() const
 {
 	return ID;
 }

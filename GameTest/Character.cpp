@@ -5,7 +5,7 @@ Character::Character(std::string name, CSimpleSprite*& sprite, Vector2D& positio
 {
 }
 
-float& Character::GetHP()
+const float& Character::GetHP() const
 {
 	return HP;
 }
@@ -15,7 +15,7 @@ void Character::SetHP(float value)
 	HP = value;
 }
 
-float& Character::GetMovementSpeed()
+const float& Character::GetMovementSpeed() const
 {
 	return movementSpeed;
 }
@@ -29,7 +29,6 @@ bool Character::isMoving()
 {
 	if (App::GetController().GetLeftThumbStickY() == 0.f && App::GetController().GetLeftThumbStickX() == 0.f)
 	{
-		direction = Direction::STILL;
 		sprite->SetAnimation(-1);
 		return false;
 	}
@@ -42,10 +41,11 @@ void Character::MoveVertically()
 	{
 		direction = Direction::UP;
 		sprite->SetAnimation(sprite->ANIM_FORWARDS);
-		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
+		for (int i = 1; i < currentRoom->GetActors().size(); i++) 
 		{
 			if (collider->isColliding(this, currentRoom->GetActor(i), position.x, position.y + movementSpeed))
-			return;
+				if (currentRoom->GetActor(i)->GetCollider()->colliderType == Collision::ColliderType::Block)
+					return;
 		}
 		sprite->SetPosition(position.x, position.y + movementSpeed);
 	}
@@ -54,10 +54,11 @@ void Character::MoveVertically()
 	{
 		direction = Direction::DOWN;
 		sprite->SetAnimation(sprite->ANIM_BACKWARDS);
-		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
+		for (int i = 1; i < currentRoom->GetActors().size(); i++) 
 		{
 			if (collider->isColliding(this, currentRoom->GetActor(i), position.x, position.y - movementSpeed))
-			return;
+				if (currentRoom->GetActor(i)->GetCollider()->colliderType == Collision::ColliderType::Block)
+					return;
 		}
 		sprite->SetPosition(position.x, position.y - movementSpeed);
 	}
@@ -69,10 +70,11 @@ void Character::MoveHorizontally()
 	{
 		direction = Direction::RIGHT;
 		sprite->SetAnimation(sprite->ANIM_RIGHT);
-		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
+		for (int i = 1; i < currentRoom->GetActors().size(); i++) 
 		{
 			if (collider->isColliding(this, currentRoom->GetActor(i), position.x + movementSpeed, position.y))
-			return;
+				if (currentRoom->GetActor(i)->GetCollider()->colliderType == Collision::ColliderType::Block)
+					return;
 		}
 		sprite->SetPosition(position.x + movementSpeed, position.y);
 	}
@@ -81,10 +83,11 @@ void Character::MoveHorizontally()
 	{
 		direction = Direction::LEFT;
 		sprite->SetAnimation(sprite->ANIM_LEFT);
-		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
+		for (int i = 1; i < currentRoom->GetActors().size(); i++) 
 		{
 			if (collider->isColliding(this, currentRoom->GetActor(i), position.x - movementSpeed, position.y))
-			return;
+				if (currentRoom->GetActor(i)->GetCollider()->colliderType == Collision::ColliderType::Block)
+					return;
 		}
 		sprite->SetPosition(position.x - movementSpeed, position.y);
 	}

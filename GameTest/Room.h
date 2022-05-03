@@ -21,7 +21,7 @@ public:
 
 	void AddActor(Actor* actor);
 	Actor*& GetActor(int index);
-	int& GetID();
+	const int& GetID() const;
 	std::vector<Actor*>& GetActors();
 };
 

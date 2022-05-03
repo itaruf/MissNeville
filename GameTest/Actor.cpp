@@ -1,28 +1,40 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite*& sprite, Vector2D& position, Collision*& collider, Room* currentRoom) : name{ std::move(name) }, sprite{ std::move(sprite) }, position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
+Actor::Actor(std::string name, CSimpleSprite*& sprite, Vector2D& position, Collision*& collider, Room* currentRoom) : name{ std::move(name) }, sprite(sprite), position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
 {
 	SetPosition(position);
 }
 
-std::string& Actor::GetName()
+const std::string& Actor::GetName() const
 {
 	return name;
 }
 
-CSimpleSprite*& Actor::GetSprite()
+void Actor::SetName(std::string name)
+{
+	this->name = name;
+}
+
+CSimpleSprite* Actor::GetSprite()
 {
 	return sprite;
 }
 
-void Actor::SetSprite(CSimpleSprite* sprite)
+void Actor::SetSprite(CSimpleSprite*& sprite)
 {
-	sprite->SetPosition(position.x, position.y);
 	this->sprite = sprite;
+	this->sprite->SetPosition(position.x, position.y);
 }
 
-Vector2D& Actor::GetPosition()
+void Actor::SetSprite(CSimpleSprite& sprite)
+{
+	*(this->sprite) = sprite;
+	this->sprite->SetPosition(position.x, position.y);
+}
+
+
+const Vector2D& Actor::GetPosition()
 {
 	sprite->GetPosition(position.x, position.y);
 	return position;
@@ -41,12 +53,17 @@ void Actor::SetPosition(float x, float y)
 	position.y = y;
 }
 
-Collision*& Actor::GetCollider()
+Collision* Actor::GetCollider()
 {
 	return collider;
 }
 
-Room*& Actor::GetCurrentRoom()
+void Actor::SetCollider(Collision* collider)
+{
+	this->collider = collider;
+}
+
+Room* Actor::GetCurrentRoom()
 {
 	return currentRoom;
 }

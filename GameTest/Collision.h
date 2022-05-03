@@ -23,9 +23,9 @@ public:
 	~Collision() {}
 
 	bool isColliding(Actor* character, Actor*& other, float x, float y);
-	float& GetHeight();
+	const float& GetHeight() const;
 	void SetHeight(float value);
-	float& GetWidth();
+	const float& GetWidth() const;
 	void SetWidth(float value);
 	void DrawCollision(Actor* actor, float r, float g, float b);
 };

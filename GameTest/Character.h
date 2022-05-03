@@ -16,9 +16,9 @@ public:
 	Character(std::string name, CSimpleSprite*& sprite, Vector2D& position, Collision*& collider, Room* currentRoom, float HP, float movementSpeed);
 	~Character() = default;
 
-	float& GetHP();
+	const float& GetHP() const;
 	void SetHP(float value);
-	float& GetMovementSpeed();
+	const float& GetMovementSpeed() const;
 	void SetMovementSpeed(float value);
 	bool isMoving();
 	void MoveVertically();
