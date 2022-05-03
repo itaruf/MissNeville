@@ -23,6 +23,12 @@
     <ClCompile Include="App\TextureLoader.cpp">
       <Filter>API</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -52,6 +58,13 @@
     <ClInclude Include="App\TextureLoader.h">
       <Filter>API</Filter>
     </ClInclude>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="EDirection.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

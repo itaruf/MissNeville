@@ -16,6 +16,14 @@
 class CSimpleSprite
 {
 public:
+    enum
+    {
+        ANIM_FORWARDS,
+        ANIM_BACKWARDS,
+        ANIM_LEFT,
+        ANIM_RIGHT,
+    };
+
     // fileName: File must be a 32 bit BMP format (A8 R8 G8 B8). The alpha channel can be used to mask out the sprite.
 	// nColumns and nRows defines the number of frames in the sprite page. 
     CSimpleSprite(const char *fileName, unsigned int nColumns = 1, unsigned int nRows = 1);

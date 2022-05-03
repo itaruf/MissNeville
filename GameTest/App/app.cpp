@@ -34,6 +34,11 @@ namespace App
 		return new CSimpleSprite(fileName, columns, rows);
 	}
 
+	std::unique_ptr<CSimpleSprite> CreateSprite2(const char* fileName, int columns, int rows)
+	{
+		return std::make_unique<CSimpleSprite>(fileName, columns, rows);
+	}
+
 	bool IsKeyPressed(int key)
 	{
 		return ((GetAsyncKeyState(key) & 0x8000) != 0);
