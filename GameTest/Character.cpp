@@ -44,18 +44,19 @@ void Character::MoveVertically()
 		sprite->SetAnimation(sprite->ANIM_FORWARDS);
 		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
 		{
-			if (collider->isColliding(this, currentRoom->GetActor(i), GetPosition().x, GetPosition().y + movementSpeed))
+			if (collider->isColliding(this, currentRoom->GetActor(i), position.x, position.y + movementSpeed))
 			return;
 		}
 		sprite->SetPosition(position.x, position.y + movementSpeed);
 	}
-	if (App::GetController().GetLeftThumbStickY() < -0.5f)
+
+	else if (App::GetController().GetLeftThumbStickY() < -0.5f)
 	{
 		direction = Direction::DOWN;
 		sprite->SetAnimation(sprite->ANIM_BACKWARDS);
 		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
 		{
-			if (collider->isColliding(this, currentRoom->GetActor(i), GetPosition().x, GetPosition().y - movementSpeed))
+			if (collider->isColliding(this, currentRoom->GetActor(i), position.x, position.y - movementSpeed))
 			return;
 		}
 		sprite->SetPosition(position.x, position.y - movementSpeed);
@@ -70,19 +71,19 @@ void Character::MoveHorizontally()
 		sprite->SetAnimation(sprite->ANIM_RIGHT);
 		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
 		{
-			if (collider->isColliding(this, currentRoom->GetActor(i), GetPosition().x + movementSpeed, GetPosition().y))
+			if (collider->isColliding(this, currentRoom->GetActor(i), position.x + movementSpeed, position.y))
 			return;
 		}
 		sprite->SetPosition(position.x + movementSpeed, position.y);
 	}
 
-	if (App::GetController().GetLeftThumbStickX() < -0.5f)
+	else if (App::GetController().GetLeftThumbStickX() < -0.5f)
 	{
 		direction = Direction::LEFT;
 		sprite->SetAnimation(sprite->ANIM_LEFT);
 		for (int i = 0; i < currentRoom->GetActors().size(); i++) 
 		{
-			if (collider->isColliding(this, currentRoom->GetActor(i), GetPosition().x - movementSpeed, GetPosition().y))
+			if (collider->isColliding(this, currentRoom->GetActor(i), position.x - movementSpeed, position.y))
 			return;
 		}
 		sprite->SetPosition(position.x - movementSpeed, position.y);

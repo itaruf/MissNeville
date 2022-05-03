@@ -37,13 +37,10 @@ void Init()
 	/*Instantiation du personnage*/
 	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 	Vector2D vector{ 900.0f, 400.0f };
-	Collision* collider = new Collision(Collision::ColliderType::Block, 1, 1);
+	Collision* collider = new Collision(Collision::ColliderType::Block, 10, 10);
 	player = std::make_shared<Character>("Imane", testSprite, vector, collider, currentRoom.get(), 20, 5);
 
-	/*currentRoom->AddActor(player.get());*/
 	/*Caractéristiques de bases*/
-	player->GetCollider()->SetHeight(5);
-	player->GetCollider()->SetWidth(10);
 	player->GetName() = "test";
 	player->GetHP() = 50;
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7 });
@@ -63,17 +60,17 @@ void Init()
 	player->SetSprite(testSprite);
 
 	Vector2D vector2{ 400.0f, 400.0f };
-	Collision* collider2 = new Collision(Collision::ColliderType::Block, 2, 2);
+	Collision* collider2 = new Collision(Collision::ColliderType::Block, 15, 15);
 
 	item = std::make_shared<Actor>("Item1", testSprite2, vector2, collider2, currentRoom.get());
 
 	Vector2D vector3{ 400.f, 200.f };
-	Collision* collider3 = new Collision(Collision::ColliderType::Block, 2, 2);
+	Collision* collider3 = new Collision(Collision::ColliderType::Block, testSprite3->GetHeight() / 2, testSprite3->GetWidth() / 2);
 
 	item2 = std::make_shared<Actor>("Item2", testSprite3, vector3, collider3, currentRoom.get());
 
 	currentRoom->AddActor(item.get());
-	currentRoom->AddActor(item2.get());
+	/*currentRoom->AddActor(item2.get());*/
 }
 
 //------------------------------------------------------------------------
@@ -116,7 +113,7 @@ void Update(float deltaTime)
 	//------------------------------------------------------------------------
 	// Sample Sound.
 	//------------------------------------------------------------------------
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_Y, true))
 	{
 		App::PlaySound(".\\TestData\\Test.wav");
 	}
@@ -137,7 +134,7 @@ void Render()
 	float g = 1.0f;
 	float b = 1.0f;
 	a += 0.1f;
-	for (int i = 0; i < 20; i++)
+	/*for (int i = 0; i < 20; i++)
 	{
 
 		float sx = 200 + sinf(a + i * 0.1f)*60.0f;
@@ -147,39 +144,35 @@ void Render()
 		g = (float)i / 20.0f;
 		b = (float)i / 20.0f;
 		App::DrawLine(sx, sy, ex, ey,r,g,b);
-	}
+	}*/
 
 	player->GetSprite()->Draw();
 	testSprite2->Draw();
-	testSprite3->Draw();
+	//testSprite3->Draw();
+
+	player->GetCollider()->DrawCollision(player.get(), 50, 50, 50);
+	item->GetCollider()->DrawCollision(item.get(), 100, 100, 100);
+	//item2->GetCollider()->DrawCollision(item2.get(), 150, 150, 150);
 
 	App::Print(700, 600, inputmessage.c_str());
 	App::Print(700, 400, message.c_str());
 
-	auto string = std::to_string(player->GetPosition().x) + " " + std::to_string(player->GetPosition().y);
-
-	float x, y;
-	player->GetSprite()->GetPosition(x, y);
-
 	auto pos = player->GetPosition();
-	auto string2 = std::to_string(pos.x) + " " + std::to_string(pos.y);
+	auto string = std::to_string(pos.x) + " " + std::to_string(pos.y);
 
-	App::Print(100, 0, string.c_str());
-	App::Print(100, 20, string2.c_str());
-	App::Print(500, 500, std::to_string(player->GetHP()).c_str());
-	App::Print(500, 550, std::to_string(player->GetSprite()->GetHeight()).c_str());
-	App::Print(500, 575, std::to_string(player->GetSprite()->GetWidth()).c_str());
-	App::Print(600, 500, std::to_string(player->GetCollider()->GetHeight()).c_str());
-	App::Print(600, 500, std::to_string(player->GetCollider()->GetWidth()).c_str());
-	App::Print(700, 500, player->GetName().c_str());
+	App::Print(100, 20, ("Player Pos: " + string).c_str());
+	/*App::Print(500, 500, std::to_string(player->GetHP()).c_str());*/
+	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
+	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());
+	App::Print(800, 625, ("Player H (Col): " + std::to_string(player->GetCollider()->GetHeight())).c_str());
+	App::Print(800, 600, ("Player W (Col): " + std::to_string(player->GetCollider()->GetWidth())).c_str());
+	App::Print(800, 575, ("Player Name: " + player->GetName()).c_str());
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
-	App::Print(0, 500, std::to_string(currentRoom->GetActor(0)->GetPosition().x).c_str());
-	/*App::Print(50, 100, std::to_string(player->GetCurrentRoom()->GetActors().size()).c_str());*/
 
 	for (int i = 0; i < currentRoom->GetActors().size(); i++)
 	{
-		App::Print(100 + i*50, 500, currentRoom->GetActor(i)->GetName().c_str());
+		App::Print(0 + i*50, 700, currentRoom->GetActor(i)->GetName().c_str());
 	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
