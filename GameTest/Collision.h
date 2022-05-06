@@ -22,12 +22,16 @@ public:
 	Collision(ColliderType colliderType, float height, float width);
 	~Collision() {}
 
-	bool isColliding(Actor* character, Actor*& other, float x, float y);
+	bool isColliding(Actor* character, Actor* other, float x, float y);
 	const float& GetHeight() const;
 	void SetHeight(float value);
 	const float& GetWidth() const;
 	void SetWidth(float value);
 	void DrawCollision(Actor* actor, float r, float g, float b);
+	Vector2D* GetDownLeftColPos(Actor* character);
+	Vector2D* GetDownRightColPos(Actor* character);
+	Vector2D* GetUpLeftColPos(Actor* character);
+	Vector2D* GetUpRightColPos(Actor* character);
 };
 
 #endif

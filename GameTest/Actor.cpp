@@ -1,9 +1,13 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite*& sprite, Vector2D& position, Collision*& collider, Room* currentRoom) : name{ std::move(name) }, sprite(sprite), position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D& position, Collision* collider, Room* currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
 {
 	SetPosition(position);
+}
+
+Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), currentRoom(actor->currentRoom), mobility(actor->mobility), direction(actor->direction)
+{
 }
 
 const std::string& Actor::GetName() const
@@ -21,7 +25,7 @@ CSimpleSprite* Actor::GetSprite()
 	return sprite;
 }
 
-void Actor::SetSprite(CSimpleSprite*& sprite)
+void Actor::SetSprite(CSimpleSprite* sprite)
 {
 	this->sprite = sprite;
 	this->sprite->SetPosition(position.x, position.y);
@@ -66,4 +70,14 @@ void Actor::SetCollider(Collision* collider)
 Room* Actor::GetCurrentRoom()
 {
 	return currentRoom;
+}
+
+const Mobility& Actor::GetMobility()
+{
+	return mobility;
+}
+
+const Direction& Actor::GetDirection()
+{
+	return direction;
 }

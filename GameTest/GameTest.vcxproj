@@ -107,8 +107,10 @@
     <ClInclude Include="App\TextureLoader.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="EMobility.h" />
     <ClInclude Include="EDirection.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -126,6 +128,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTest.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(std::string name, CSimpleSprite*& sprite, Vector2D& position, Collision*& collider, Room* currentRoom, float HP, float movementSpeed) : Actor(name, sprite, position, collider, currentRoom), HP{ HP }, movementSpeed{ movementSpeed }
+Character::Character(std::string name, CSimpleSprite* sprite, Vector2D& position, Collision* collider, Room* currentRoom, float HP, float movementSpeed) : Actor(name, sprite, position, collider, currentRoom), HP{ HP }, movementSpeed{ movementSpeed }
 {
 }
 

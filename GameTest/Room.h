@@ -6,23 +6,27 @@
 #include <vector>
 
 class Actor;
+class Character;
 class Room
 {
 private:
 protected:
 	int ID;
 	std::vector<Actor*> actors;
+	Character* player = nullptr;
 public:
-	Room(int ID, std::vector<Actor*>& actors);
-	Room(int ID, Actor*& actor);
+	Room(int ID, std::vector<Actor*> actors);
+	Room(int ID, Actor* actor);
 	Room(int ID);
 
 	~Room() = default;
 
 	void AddActor(Actor* actor);
-	Actor*& GetActor(int index);
+	Actor* GetActor(int index);
 	const int& GetID() const;
 	std::vector<Actor*>& GetActors();
+	void AddPlayer(Character* player);
+	Character* GetPlayer();
 };
 
 #endif
