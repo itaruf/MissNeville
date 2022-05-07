@@ -4,16 +4,21 @@
 
 #include <algorithm>
 #include <vector>
+#include "Enigme.h"
 
 class Actor;
 class Character;
+class Candle;
+
 class Room
 {
 private:
 protected:
 	int ID;
 	std::vector<Actor*> actors;
+	std::vector<Candle*> candles;
 	Character* player = nullptr;
+	Enigme* enigme;
 public:
 	Room(int ID, std::vector<Actor*> actors);
 	Room(int ID, Actor* actor);
