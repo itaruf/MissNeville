@@ -26,5 +26,14 @@ GameState::~GameState()
 	delete currentRoom;
 	for each (auto var in rooms)
 		delete var;
-	
+}
+
+void GameState::AddPlayer(Character* player)
+{
+	this->player = player;
+}
+
+Character* GameState::GetPlayer()
+{
+	return player;
 }

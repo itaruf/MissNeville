@@ -105,12 +105,18 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\TextureLoader.h" />
+    <ClInclude Include="Candle.h" />
+    <ClInclude Include="CandleEnigme.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="EMobility.h" />
     <ClInclude Include="EDirection.h" />
+    <ClInclude Include="Enigme.h" />
+    <ClInclude Include="Entrance.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Page.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -124,11 +130,17 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\TextureLoader.cpp" />
+    <ClCompile Include="Candle.cpp" />
+    <ClCompile Include="CandleEnigme.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Enigme.cpp" />
+    <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTest.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Page.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

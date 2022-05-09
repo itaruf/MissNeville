@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D& position, Collision* collider, Room* currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
 {
 	SetPosition(position);
 }
 
-Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), currentRoom(actor->currentRoom), mobility(actor->mobility), direction(actor->direction)
+Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), mobility(actor->mobility), direction(actor->direction)
 {
 }
 
@@ -28,33 +28,33 @@ CSimpleSprite* Actor::GetSprite()
 void Actor::SetSprite(CSimpleSprite* sprite)
 {
 	this->sprite = sprite;
-	this->sprite->SetPosition(position.x, position.y);
+	this->sprite->SetPosition(position->x, position->y);
 }
 
 void Actor::SetSprite(CSimpleSprite& sprite)
 {
 	*(this->sprite) = sprite;
-	this->sprite->SetPosition(position.x, position.y);
+	this->sprite->SetPosition(position->x, position->y);
 }
 
 
-const Vector2D& Actor::GetPosition()
+Vector2D* Actor::GetPosition()
 {
-	sprite->GetPosition(position.x, position.y);
+	sprite->GetPosition(position->x, position->y);
 	return position;
 }
 
-void Actor::SetPosition(Vector2D& position)
+void Actor::SetPosition(Vector2D* position)
 {
-	sprite->SetPosition(position.x, position.y);
+	sprite->SetPosition(position->x, position->y);
 	this->position = GetPosition();
 }
 
 void Actor::SetPosition(float x, float y)
 {
 	sprite->SetPosition(x, y);
-	position.x = x;
-	position.y = y;
+	position->x = x;
+	position->y = y;
 }
 
 Collision* Actor::GetCollider()
@@ -70,6 +70,11 @@ void Actor::SetCollider(Collision* collider)
 Room* Actor::GetCurrentRoom()
 {
 	return currentRoom;
+}
+
+void Actor::SetCurrentRoom(Room* room)
+{
+	this->currentRoom = room;
 }
 
 const Mobility& Actor::GetMobility()

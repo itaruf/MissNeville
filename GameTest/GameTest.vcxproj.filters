@@ -30,6 +30,12 @@
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Page.cpp" />
+    <ClCompile Include="Enigme.cpp" />
+    <ClCompile Include="Candle.cpp" />
+    <ClCompile Include="CandleEnigme.cpp" />
+    <ClCompile Include="Entrance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -68,6 +74,12 @@
     <ClInclude Include="EDirection.h" />
     <ClInclude Include="EMobility.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Page.h" />
+    <ClInclude Include="Enigme.h" />
+    <ClInclude Include="Candle.h" />
+    <ClInclude Include="CandleEnigme.h" />
+    <ClInclude Include="Entrance.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

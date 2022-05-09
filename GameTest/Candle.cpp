@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Candle.h"
 
-Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D& position, Collision* collider, Room* currentRoom) : Item(name, sprite, position, collider, currentRoom)
+Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom) : Item(name, sprite, position, collider, currentRoom)
 {
 	
 }

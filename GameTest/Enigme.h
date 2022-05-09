@@ -20,6 +20,7 @@ public:
 	bool EndEnigme();
 	Status GetStatus();
 	virtual ~Enigme() = default;
+
 };
 
 #endif

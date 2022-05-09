@@ -9,8 +9,8 @@ class Item : public Actor
 private:
 protected:
 public:
-	Item(std::string name, CSimpleSprite* sprite, Vector2D& position, Collision* collider, Room* currentRoom);
-	~Item();
+	Item(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom);
+	~Item() = default;
 };
 
 #endif

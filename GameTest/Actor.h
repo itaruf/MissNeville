@@ -19,13 +19,13 @@ protected:
 
 	std::string name;
 	CSimpleSprite* sprite;
-	Vector2D position;
+	Vector2D* position;
 	Collision* collider;
 	Room* currentRoom;
 	Mobility mobility = defaultMobility;
 	Direction direction = defaultDirection;
 public:
-	Actor(std::string name, CSimpleSprite* sprite, Vector2D& position, Collision* collider, Room* currentRoom);
+	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom);
 	Actor(Actor* actor);
 	~Actor() = default;
 
@@ -34,12 +34,13 @@ public:
 	CSimpleSprite* GetSprite();
 	void SetSprite(CSimpleSprite* sprite);
 	void SetSprite(CSimpleSprite& sprite);
-	const Vector2D& GetPosition();
-	void SetPosition(Vector2D& position);
+	Vector2D* GetPosition();
+	void SetPosition(Vector2D* position);
 	void SetPosition(float x = 0, float y = 0);
 	Collision* GetCollider();
 	void SetCollider(Collision* collider);
 	Room* GetCurrentRoom();
+	void SetCurrentRoom(Room* room);
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
 };

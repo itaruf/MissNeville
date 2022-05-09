@@ -1,18 +1,18 @@
 #include "stdafx.h"
 #include "Collision.h"
 
-Collision::Collision(ColliderType colliderType, float height, float width)
-	: colliderType{ colliderType }, height{ height }, width{ width }
+Collision::Collision(ColliderType colliderType, float height, float width, Vector2D* offset)
+	: colliderType{ colliderType }, height{ height }, width{ width }, offset{std::move(offset)}
 {
 }
 
 // https://levelup.gitconnected.com/2d-collision-detection-8e50b6b8b5c0
-bool Collision::isColliding(Actor* character, Actor* other, float x, float y)
+bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 {
-	if (x - width < other->GetPosition().x + other->GetCollider()->GetWidth() &&
-		x + width > other->GetPosition().x - other->GetCollider()->GetWidth() &&
-		y - height < other->GetPosition().y + other->GetCollider()->GetHeight() &&
-		y + height > other->GetPosition().y - other->GetCollider()->GetHeight())
+	if (x + offset->x - width < other->GetPosition()->x + other->GetCollider()->offset->x + other->GetCollider()->GetWidth() &&
+		x + offset->x + width > other->GetPosition()->x + other->GetCollider()->offset->x - other->GetCollider()->GetWidth() &&
+		y + offset->y - height < other->GetPosition()->y + other->GetCollider()->offset->y + other->GetCollider()->GetHeight() &&
+		y + offset->y + height > other->GetPosition()->y + other->GetCollider()->offset->y - other->GetCollider()->GetHeight())
 		return true;
 	return false;
 }
@@ -40,71 +40,74 @@ void Collision::SetWidth(float value)
 
 void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 {
+	/*if (colliderType == ColliderType::Overlap)
+		return;*/
+
 	// Middle Lines
 	/*App::DrawLine(
-		actor->GetPosition().x - width,
-		actor->GetPosition().y,
-		actor->GetPosition().x + width,
-		actor->GetPosition().y,
+		actor->GetPosition()->x - width,
+		actor->GetPosition()->y,
+		actor->GetPosition()->x + width,
+		actor->GetPosition()->y,
 		r, g, b);
 
 	App::DrawLine(
-		actor->GetPosition().x,
-		actor->GetPosition().y - height,
-		actor->GetPosition().x,
-		actor->GetPosition().y + height,
+		actor->GetPosition()->x,
+		actor->GetPosition()->y - height,
+		actor->GetPosition()->x,
+		actor->GetPosition()->y + height,
 		r, g, b);*/
 
 	// Upper Bound
 	App::DrawLine(
-		actor->GetPosition().x - width, 
-		actor->GetPosition().y + height, 
-		actor->GetPosition().x + width, 
-		actor->GetPosition().y + height,
+		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
+		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
 		r, g, b);
 
 	// Bottom Bound
 	App::DrawLine(
-		actor->GetPosition().x - width, 
-		actor->GetPosition().y - height,
-		actor->GetPosition().x + width, 
-		actor->GetPosition().y - height,
+		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
+		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
 		r, g, b);
 
 	// Left Bound
 	App::DrawLine(
-		actor->GetPosition().x - width, 
-		actor->GetPosition().y - height, 
-		actor->GetPosition().x - width, 
-		actor->GetPosition().y + height, 
+		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
+		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
 		r, g, b);
 
 	// Right Bound
 	App::DrawLine(
-		actor->GetPosition().x + width, 
-		actor->GetPosition().y - height, 
-		actor->GetPosition().x + width, 
-		actor->GetPosition().y + height, 
+		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
+		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
+		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
 		r, g, b);
 }
 
-Vector2D* Collision::GetDownLeftColPos(Actor* character)
+Vector2D* Collision::GetDownLeftColPos(Actor* actor)
 {
-	return new Vector2D(character->GetPosition().x - width, character->GetPosition().y - height);
+	return new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y - height);
 }
 
-Vector2D* Collision::GetDownRightColPos(Actor* character)
+Vector2D* Collision::GetDownRightColPos(Actor* actor)
 {
-	return new Vector2D(character->GetPosition().x + width, character->GetPosition().y - height);
+	return new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y - height);
 
 }
 
-Vector2D* Collision::GetUpLeftColPos(Actor* character)
+Vector2D* Collision::GetUpLeftColPos(Actor* actor)
 {
-	return new Vector2D(character->GetPosition().x - width, character->GetPosition().y + height);
+	return new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y + height);
 }
 
-Vector2D* Collision::GetUpRightColPos(Actor* character)
+Vector2D* Collision::GetUpRightColPos(Actor* actor)
 {
-	return new Vector2D(character->GetPosition().x + width, character->GetPosition().y + height);
+	return new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y + height);
 }

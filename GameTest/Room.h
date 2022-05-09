@@ -17,7 +17,6 @@ protected:
 	int ID;
 	std::vector<Actor*> actors;
 	std::vector<Candle*> candles;
-	Character* player = nullptr;
 	Enigme* enigme;
 public:
 	Room(int ID, std::vector<Actor*> actors);
@@ -30,8 +29,9 @@ public:
 	Actor* GetActor(int index);
 	const int& GetID() const;
 	std::vector<Actor*>& GetActors();
-	void AddPlayer(Character* player);
-	Character* GetPlayer();
+	virtual void Init();
+	virtual void Update(float deltaTime);
+	virtual void Render();
 };
 
 #endif

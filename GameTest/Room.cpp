@@ -27,12 +27,15 @@ std::vector<Actor*>& Room::GetActors()
 	return actors;
 }
 
-void Room::AddPlayer(Character* player)
+
+void Room::Init()
 {
-	this->player = player;
 }
 
-Character* Room::GetPlayer()
+void Room::Update(float deltaTime)
 {
-	return player;
+}
+
+void Room::Render()
+{
 }
