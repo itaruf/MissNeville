@@ -5,7 +5,9 @@
 #include "Actor.h"
 #include "app\app.h"
 #include "EDirection.h"
+#include "Candle.h"
 
+class Candle;
 class Character : public Actor
 {
 private:
@@ -26,5 +28,6 @@ public:
 	bool isMoving();
 	void MoveVertically();
 	void MoveHorizontally();
+	bool UseLighter(Candle* candle);
 };
 #endif

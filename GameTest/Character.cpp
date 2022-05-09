@@ -100,3 +100,14 @@ void Character::MoveHorizontally()
 		sprite->SetPosition(position->x - movementSpeed, position->y);
 	}
 }
+
+bool Character::UseLighter(Candle* candle)
+{
+	if (candle == nullptr)
+		return;
+
+	if (candle->isEnlighted())
+		return;
+
+	candle->SetEnlightenment(true);
+}
