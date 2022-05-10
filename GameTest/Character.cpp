@@ -116,3 +116,8 @@ bool Character::UseLighter(Candle* candle)
 	}
 	return false;
 }
+
+float Character::GetGrabRange()
+{
+	return grabRange;
+}

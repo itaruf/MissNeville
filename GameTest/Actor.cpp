@@ -86,3 +86,13 @@ const Direction& Actor::GetDirection()
 {
 	return direction;
 }
+
+Vector2D* Actor::GetForwardVector()
+{
+	return new Vector2D(0, 1);
+}
+
+Vector2D* Actor::GetRightVector()
+{
+	return new Vector2D(1, 0);
+}

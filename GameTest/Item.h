@@ -3,14 +3,16 @@
 #define ITEM_H_
 
 #include "Actor.h"
-
+#include "Interactivity.h"
 class Item : public Actor
 {
 private:
 protected:
+	Interactivity interactivity;
 public:
-	Item(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom);
+	Item(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, Interactivity interactivity = Interactivity::Noninteractive);
 	~Item() = default;
+	Interactivity GetInteractivity();
 };
 
 #endif

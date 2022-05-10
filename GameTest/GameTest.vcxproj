@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="Sources.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="Enigme.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Interactivity.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Page.h" />

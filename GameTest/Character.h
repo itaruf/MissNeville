@@ -14,9 +14,7 @@ private:
 protected:
 	float HP;
 	float movementSpeed;
-	float grabXRange{ 10 };
-	float grabYRange{ 100 };
-	Vector2D grabRange{ position->x + grabXRange, position->y + grabYRange };
+	float grabRange{ 500 };
 public:
 	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, float HP, float movementSpeed);
 	~Character() = default;
@@ -29,5 +27,6 @@ public:
 	void MoveVertically();
 	void MoveHorizontally();
 	bool UseLighter(Candle* candle);
+	float GetGrabRange();
 };
 #endif

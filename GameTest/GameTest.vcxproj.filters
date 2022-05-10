@@ -80,9 +80,11 @@
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CandleEnigme.h" />
     <ClInclude Include="Entrance.h" />
+    <ClInclude Include="Interactivity.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="Sources.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

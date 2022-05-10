@@ -43,6 +43,8 @@ public:
 	void SetCurrentRoom(Room* room);
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
+	Vector2D* GetForwardVector();
+	Vector2D* GetRightVector();
 };
 
 #endif

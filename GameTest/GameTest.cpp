@@ -36,13 +36,11 @@ void Init()
 {
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite = App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4);
-	Vector2D* vector = new Vector2D{ 200.0f, 100.0f };
+	Vector2D* vector = new Vector2D{ 300.0f, 200.0f };
 	Collision* collider = new Collision(Collision::ColliderType::Block, 16, 16);
 	Character* player = new Character("Imane", playerSprite, vector, collider, nullptr, 20, 4);
 
 	/*Caractéristiques de bases*/
-	player->SetName("test");
-	player->SetHP(50);
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_LEFT, 1.0f / 15.0f, { 9,10,11,12,13,14,15,16,17 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 18,19,20,21,22,23,24,25,26 });
@@ -58,6 +56,7 @@ void Init()
 	gameState->entrance->gameState = gameState.get();
 	gameState->entrance->Init();
 }
+
 template<
 	typename T,
 	typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type
@@ -95,10 +94,7 @@ void Update(float deltaTime)
 // See App.h 
 //------------------------------------------------------------------------
 
-std::string returnInt(int x) 
-{
-	return std::to_string(x);
-}
+
 void Render()
 {
 	auto player = gameState->GetPlayer();
@@ -108,12 +104,8 @@ void Render()
 
 	App::Print(700, 500, (*ptr)(5).c_str());*/
 
-
-
-	App::Print(700, 500, GetChar(player->GetPosition()->x).c_str());
 	App::Print(500, 450, std::to_string(gameState->entrance->GetActors().size()).c_str());
-	App::Print(600, 450, std::to_string(gameState->entrance->candles.at(0)->GetCollider()->GetHeight()).c_str()); 
-	
+
 	gameState->entrance->Render();
 
 	for each (const auto & item in gameState->currentRoom->GetActors())
@@ -137,59 +129,81 @@ void Render()
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
 
-	float UpRange = 50;
-
-	if (player->GetDirection() == Direction::UP)
+	// Horizontally
+	if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
 	{
-		std::vector<int> rangeUp{};
-		for (int i = 0; i < gameState->currentRoom->GetActors().size(); i++)
+		float ms = player->GetMovementSpeed();
+		if (player->GetDirection() == Direction::LEFT)
+			ms = -player->GetMovementSpeed();
+		auto actors = gameState->currentRoom->GetActors();
+		try
 		{
-			auto item = gameState->currentRoom->GetActors()[i];
-			if (player->GetCollider()->isColliding(player, item, player->GetPosition()->x, player->GetPosition()->y + player->GetMovementSpeed()))
+			if (actors.size() != 0)
 			{
-				if (item->GetPosition()->x == player->GetPosition()->x)
+				std::sort(std::begin(actors), std::end(actors), [player](Actor* const& l, Actor* const& r)
+					{
+						return 
+							std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
+							< 
+							std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
+					});
+				if (static_cast<Item*>(actors[0])->GetInteractivity() == Interactivity::Interactive)
 				{
-					auto ecartPlayer = static_cast<int>(std::abs((player->GetPosition()->y + player->GetCollider()->height) - (player->GetPosition()->y + player->GetCollider()->height + UpRange)));
-
-					try 
+					App::Print(100, 600, ("Closest Item to Player : " + actors[0]->GetName()).c_str());
+					if (player->GetCollider()->isColliding(player, actors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
 					{
-						rangeUp.clear();
-						rangeUp.resize(ecartPlayer + 1);
-						std::iota(std::begin(rangeUp), std::end(rangeUp), player->GetPosition()->y + player->GetCollider()->height); // generate numbers from begin to end
-					}
-					catch (const std::length_error& le)
-					{
-						App::Print(350, 450, le.what());
-					}
-
-					auto ecartItem = static_cast<int>(std::abs((item->GetCollider()->GetDownLeftColPos(item))->y) - (item->GetCollider()->GetUpLeftColPos(item)->y));
-
-					auto it = std::find(rangeUp.begin(), rangeUp.end(), gameState->currentRoom->GetActor(i)->GetPosition()->y);
-
-					if (it != rangeUp.end())
-					{
-						App::Print(0 + i * 50, 650, gameState->currentRoom->GetActor(i)->GetName().c_str());
 						if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-						{
-							player->UseLighter(static_cast<Candle*>(gameState->currentRoom->GetActor(i)));
-							App::Print(50, 650, (gameState->currentRoom->GetActor(i)->GetName() + " Enlighted").c_str());
-						}
+							player->UseLighter(static_cast<Candle*>(actors[0]));
 					}
-					else 
-					{
-						App::Print(650, 650, "NOT ITEM IN RANGE (FORWARD)");
-					}
-
-
 				}
 			}
+		}
+		catch (const std::length_error& le)
+		{
+			App::Print(350, 450, le.what());
+		}
+	}
+
+	// Vertically
+	if (player->GetDirection() == Direction::UP || player->GetDirection() == Direction::DOWN)
+	{
+		float ms = player->GetMovementSpeed();
+		if (player->GetDirection() == Direction::DOWN)
+			ms = -player->GetMovementSpeed();
+		auto actors = gameState->currentRoom->GetActors();
+		try
+		{
+			if (actors.size() != 0)
+			{
+				std::sort(std::begin(actors), std::end(actors), [player](Actor* const& l, Actor* const& r)
+					{
+						return
+							std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
+							<
+							std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
+					});
+
+				if (static_cast<Item*>(actors[0])->GetInteractivity() == Interactivity::Interactive)
+				{
+					App::Print(100, 600, ("Closest Item to Player : " + actors[0]->GetName()).c_str());
+					if (player->GetCollider()->isColliding(player, actors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
+					{
+						if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+							player->UseLighter(static_cast<Candle*>(actors[0]));
+					}
+				}
+			}
+		}
+		catch (const std::length_error& le)
+		{
+			App::Print(350, 450, le.what());
 		}
 	}
 }
 
 //------------------------------------------------------------------------
 // Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.
-// Just before the app exits.
+// Just before the app exits.²
 //------------------------------------------------------------------------
 void Shutdown()
 {

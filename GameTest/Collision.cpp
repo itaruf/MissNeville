@@ -6,7 +6,6 @@ Collision::Collision(ColliderType colliderType, float height, float width, Vecto
 {
 }
 
-// https://levelup.gitconnected.com/2d-collision-detection-8e50b6b8b5c0
 bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 {
 	if (x + offset->x - width < other->GetPosition()->x + other->GetCollider()->offset->x + other->GetCollider()->GetWidth() &&
