@@ -103,11 +103,16 @@ void Character::MoveHorizontally()
 
 bool Character::UseLighter(Candle* candle)
 {
-	if (candle == nullptr)
-		return;
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	{
+		if (candle == nullptr)
+			return false;
 
-	if (candle->isEnlighted())
-		return;
+		if (candle->isEnlighted())
+			return false;
 
-	candle->SetEnlightenment(true);
+		candle->SetEnlightenment(true);
+		return true;
+	}
+	return false;
 }

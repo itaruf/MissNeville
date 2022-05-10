@@ -36,7 +36,7 @@ void Init()
 {
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite = App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4);
-	Vector2D* vector = new Vector2D{ 400.0f, 100.0f };
+	Vector2D* vector = new Vector2D{ 200.0f, 100.0f };
 	Collision* collider = new Collision(Collision::ColliderType::Block, 16, 16);
 	Character* player = new Character("Imane", playerSprite, vector, collider, nullptr, 20, 4);
 
@@ -108,6 +108,8 @@ void Render()
 
 	App::Print(700, 500, (*ptr)(5).c_str());*/
 
+
+
 	App::Print(700, 500, GetChar(player->GetPosition()->x).c_str());
 	App::Print(500, 450, std::to_string(gameState->entrance->GetActors().size()).c_str());
 	App::Print(600, 450, std::to_string(gameState->entrance->candles.at(0)->GetCollider()->GetHeight()).c_str()); 
@@ -140,7 +142,7 @@ void Render()
 	if (player->GetDirection() == Direction::UP)
 	{
 		std::vector<int> rangeUp{};
-		for (int i = 1; i < gameState->currentRoom->GetActors().size(); i++)
+		for (int i = 0; i < gameState->currentRoom->GetActors().size(); i++)
 		{
 			auto item = gameState->currentRoom->GetActors()[i];
 			if (player->GetCollider()->isColliding(player, item, player->GetPosition()->x, player->GetPosition()->y + player->GetMovementSpeed()))
@@ -164,14 +166,21 @@ void Render()
 
 					auto it = std::find(rangeUp.begin(), rangeUp.end(), gameState->currentRoom->GetActor(i)->GetPosition()->y);
 
-					if (it != rangeUp.end()) 
+					if (it != rangeUp.end())
 					{
 						App::Print(0 + i * 50, 650, gameState->currentRoom->GetActor(i)->GetName().c_str());
+						if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+						{
+							player->UseLighter(static_cast<Candle*>(gameState->currentRoom->GetActor(i)));
+							App::Print(50, 650, (gameState->currentRoom->GetActor(i)->GetName() + " Enlighted").c_str());
+						}
 					}
 					else 
 					{
 						App::Print(650, 650, "NOT ITEM IN RANGE (FORWARD)");
 					}
+
+
 				}
 			}
 		}
