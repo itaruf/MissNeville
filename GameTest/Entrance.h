@@ -11,6 +11,13 @@ class GameState;
 class Entrance : public Room
 {
 private:
+	/*enum class Status
+	{
+		NOTSTARTED,
+		PENDING,
+		CLEARED,
+	};*/
+
 protected:
 public:
 	GameState* gameState;
@@ -23,6 +30,7 @@ public:
 	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
+	bool IsRoomCleared() override;
 };
 
 #endif

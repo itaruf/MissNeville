@@ -12,10 +12,14 @@ bool Candle::isEnlighted()
 
 void Candle::SetEnlightenment(bool value)
 {
-	enlighted = value;
-
-	if (enlighted)
+	if (!enlighted) 
+	{
+		enlighted = true;
 		sprite->SetFrame(1);
+	}
 	else
+	{
+		enlighted = false;
 		sprite->SetFrame(0);
+	}
 }

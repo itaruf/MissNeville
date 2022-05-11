@@ -2,10 +2,13 @@
 #ifndef ENIGME_H_
 #define ENIGME_H_
 
+#include <vector>
+
 class Enigme
 {
 private:
 protected:
+public:
 	enum class Status
 	{
 		NOTSTARTED,
@@ -13,7 +16,6 @@ protected:
 		CLEARED,
 	};
 	Status status;
-public:
 	Enigme(Status status);
 	virtual bool IsCleared();
 	bool StartEnigme();

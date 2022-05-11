@@ -16,7 +16,6 @@ private:
 protected:
 	int ID;
 	std::vector<Actor*> actors;
-	std::vector<Candle*> candles;
 	Enigme* enigme;
 public:
 	Room(int ID, std::vector<Actor*> actors);
@@ -32,6 +31,7 @@ public:
 	virtual void Init();
 	virtual void Update(float deltaTime);
 	virtual void Render();
+	virtual bool IsRoomCleared();
 };
 
 #endif

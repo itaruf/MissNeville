@@ -39,3 +39,8 @@ void Room::Update(float deltaTime)
 void Room::Render()
 {
 }
+
+bool Room::IsRoomCleared()
+{
+	return false;
+}

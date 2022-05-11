@@ -37,7 +37,7 @@ void Init()
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite = App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4);
 	Vector2D* vector = new Vector2D{ 300.0f, 200.0f };
-	Collision* collider = new Collision(Collision::ColliderType::Block, 16, 16);
+	Collision* collider = new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10));
 	Character* player = new Character("Imane", playerSprite, vector, collider, nullptr, 20, 4);
 
 	/*Caractéristiques de bases*/
@@ -104,9 +104,7 @@ void Render()
 
 	App::Print(700, 500, (*ptr)(5).c_str());*/
 
-	App::Print(500, 450, std::to_string(gameState->entrance->GetActors().size()).c_str());
-
-	gameState->entrance->Render();
+	gameState->currentRoom->Render();
 
 	for each (const auto & item in gameState->currentRoom->GetActors())
 	{
@@ -128,6 +126,11 @@ void Render()
 	App::Print(800, 575, ("Player Name: " + player->GetName()).c_str());
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
+
+	if (gameState->currentRoom->IsRoomCleared())
+		App::Print(800, 700, "Room Cleared");
+	else
+		App::Print(800, 700, "Room Not Cleared");
 
 	// Horizontally
 	if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)

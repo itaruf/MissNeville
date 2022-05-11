@@ -15,8 +15,10 @@ Entrance::Entrance(int ID, CandleEnigme* candleEnigme) : Room(ID), candleEnigme{
 
 void Entrance::Init()
 {
+	candleEnigme = new CandleEnigme(CandleEnigme::Status::NOTSTARTED);
+
 	/*Background First*/
-	for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
+	/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
 	{ 
 		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
 		{
@@ -25,7 +27,8 @@ void Entrance::Init()
 			item->GetSprite()->SetScale(0.5);
 			actors.emplace_back(item);
 		}
-	}
+	}*/
+
 	std::vector<Vector2D*> v{ new Vector2D(514,464), new Vector2D(446,428), new Vector2D(580,428), new Vector2D(460,356), new Vector2D(564,356) };
 
 	auto wall = new Item("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(64*2, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), this, Interactivity::Noninteractive);
@@ -59,6 +62,7 @@ void Entrance::Init()
 		candles[i]->GetSprite()->SetFrame(0);
 		candles[i]->GetSprite()->SetScale(0.5);
 		actors.emplace_back(candles.at(i)); 
+		candleEnigme->GetCandles().emplace_back(candles[i]);
 	}
 
 	auto pentagramme = new Item("Pentagramme", App::CreateSprite(".\\TestData\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), this, Interactivity::Noninteractive);
@@ -75,6 +79,8 @@ void Entrance::Init()
 	clock->GetSprite()->SetFrame(1);
 	clock->GetSprite()->SetScale(2);
 	actors.emplace_back(clock);
+
+	candleEnigme->StartEnigme();
 }
 
 void Entrance::Update(float deltaTime)
@@ -93,3 +99,10 @@ void Entrance::Render()
 		candle->GetCollider()->DrawCollision(candle, 1, 1, 1);
 	}
 }
+
+bool Entrance::IsRoomCleared()
+{
+	return candleEnigme->IsCleared();
+}
+
+
