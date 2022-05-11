@@ -136,25 +136,30 @@ void Render()
 		if (player->GetDirection() == Direction::LEFT)
 			ms = -player->GetMovementSpeed();
 		auto actors = gameState->currentRoom->GetActors();
+		std::vector<Actor*> interactiveActors{};
+
 		try
 		{
 			if (actors.size() != 0)
 			{
-				std::sort(std::begin(actors), std::end(actors), [player](Actor* const& l, Actor* const& r)
+
+				for each (auto & actor in actors)
+					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
+						interactiveActors.emplace_back(actor);
+
+				std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
 					{
 						return 
 							std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
 							< 
 							std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
 					});
-				if (static_cast<Item*>(actors[0])->GetInteractivity() == Interactivity::Interactive)
+
+				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
+				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
 				{
-					App::Print(100, 600, ("Closest Item to Player : " + actors[0]->GetName()).c_str());
-					if (player->GetCollider()->isColliding(player, actors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
-					{
-						if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-							player->UseLighter(static_cast<Candle*>(actors[0]));
-					}
+					if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+						player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
 				}
 			}
 		}
@@ -171,11 +176,17 @@ void Render()
 		if (player->GetDirection() == Direction::DOWN)
 			ms = -player->GetMovementSpeed();
 		auto actors = gameState->currentRoom->GetActors();
+		std::vector<Actor*> interactiveActors{};
+
 		try
 		{
 			if (actors.size() != 0)
 			{
-				std::sort(std::begin(actors), std::end(actors), [player](Actor* const& l, Actor* const& r)
+				for each (auto & actor in actors)
+					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
+						interactiveActors.emplace_back(actor);
+
+				std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
 					{
 						return
 							std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
@@ -183,14 +194,11 @@ void Render()
 							std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
 					});
 
-				if (static_cast<Item*>(actors[0])->GetInteractivity() == Interactivity::Interactive)
+				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
+				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
 				{
-					App::Print(100, 600, ("Closest Item to Player : " + actors[0]->GetName()).c_str());
-					if (player->GetCollider()->isColliding(player, actors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
-					{
-						if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-							player->UseLighter(static_cast<Candle*>(actors[0]));
-					}
+					if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+						player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
 				}
 			}
 		}

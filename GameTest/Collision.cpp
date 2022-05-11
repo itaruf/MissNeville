@@ -39,8 +39,8 @@ void Collision::SetWidth(float value)
 
 void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 {
-	/*if (colliderType == ColliderType::Overlap)
-		return;*/
+	if (colliderType == ColliderType::Overlap)
+		return;
 
 	// Middle Lines
 	/*App::DrawLine(

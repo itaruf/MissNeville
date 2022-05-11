@@ -16,46 +16,65 @@ Entrance::Entrance(int ID, CandleEnigme* candleEnigme) : Room(ID), candleEnigme{
 void Entrance::Init()
 {
 	/*Background First*/
-	/*for (int j = 1; j < APP_VIRTUAL_HEIGHT / 64; j++)
+	for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
 	{ 
-		for (int i = 1; i < APP_VIRTUAL_WIDTH / 64; i++)
+		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
 		{
-			auto item = new Item("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 64, 64), this);
+			auto item = new Item("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this, Interactivity::Noninteractive);
 			item->GetSprite()->SetFrame(1);
 			item->GetSprite()->SetScale(0.5);
 			actors.emplace_back(item);
 		}
-	}*/
+	}
+	std::vector<Vector2D*> v{ new Vector2D(514,464), new Vector2D(446,428), new Vector2D(580,428), new Vector2D(460,356), new Vector2D(564,356) };
 
-	for (int i = 0; i < 3; i++) 
+	auto wall = new Item("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(64*2, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), this, Interactivity::Noninteractive);
+	wall->GetSprite()->SetFrame(1);
+	wall->GetSprite()->SetScale(3);
+	actors.emplace_back(wall);
+
+	auto wall2 = new Item("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), this, Interactivity::Noninteractive);
+	wall2->GetSprite()->SetFrame(1);
+	wall2->GetSprite()->SetScale(3);
+	actors.emplace_back(wall2);
+
+	auto wall3 = new Item("wall3", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - 64  * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), this, Interactivity::Noninteractive);
+	wall3->GetSprite()->SetFrame(1);
+	wall3->GetSprite()->SetScale(3);
+	actors.emplace_back(wall3);
+
+	auto wall4 = new Item("wall4", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - 64 * 2, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), this, Interactivity::Noninteractive);
+	wall4->GetSprite()->SetFrame(1);
+	wall4->GetSprite()->SetScale(3);
+	actors.emplace_back(wall4);
+
+	auto carpet = new Item("Carpet", App::CreateSprite(".\\TestData\\TMW2\\carpet.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64), this, Interactivity::Noninteractive);
+	carpet->GetSprite()->SetFrame(1);
+	carpet->GetSprite()->SetScale(3);
+	actors.emplace_back(carpet);
+
+	for (int i = 0; i < v.size(); i++)
 	{
-		candles.emplace_back(new Candle("Candle " +std::to_string(i) , App::CreateSprite(".\\TestData\\candle.bmp", 1, 2), new Vector2D(200+i*32, 200), new Collision(Collision::ColliderType::Block, 10, 10), this, Interactivity::Interactive));
+		candles.emplace_back(new Candle("Candle " +std::to_string(i) , App::CreateSprite(".\\TestData\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10), this, Interactivity::Interactive));
 		candles[i]->GetSprite()->SetFrame(0);
 		candles[i]->GetSprite()->SetScale(0.5);
-
-		// actors contain all the actors to collide or not with
 		actors.emplace_back(candles.at(i)); 
 	}
 
-	auto bear = new Item("Bear", App::CreateSprite(".\\TestData\\bear.bmp", 1, 1), new Vector2D(512, 512), new Collision(Collision::ColliderType::Overlap, 32, 32), this, Interactivity::Noninteractive);
-	actors.emplace_back(bear);
-	bear->GetSprite()->SetFrame(0);
-	bear->GetSprite()->SetScale(0.25);
+	auto pentagramme = new Item("Pentagramme", App::CreateSprite(".\\TestData\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), this, Interactivity::Noninteractive);
+	pentagramme->GetSprite()->SetFrame(0);
+	pentagramme->GetSprite()->SetScale(3);
+	actors.emplace_back(pentagramme);
 
-	auto bear2 = new Item("Bear2", App::CreateSprite(".\\TestData\\bear.bmp", 1, 1), new Vector2D(512, 564), new Collision(Collision::ColliderType::Overlap, 16, 16), this, Interactivity::Noninteractive);
-	actors.emplace_back(bear2);
-	bear2->GetSprite()->SetFrame(0);
-	bear2->GetSprite()->SetScale(0.1225);
+	auto bed = new Item("Bed", App::CreateSprite(".\\TestData\\TMW2\\bed-blue.bmp", 1, 1), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32), this, Interactivity::Noninteractive);
+	actors.emplace_back(bed);
+	bed->GetSprite()->SetFrame(0);
+	bed->GetSprite()->SetScale(2);
 
-	/*auto clock = new Item("Clock", App::CreateSprite(".\\TestData\\broken-glasses-blood.bmp", 5, 4), new Vector2D(128, 128), new Collision(Collision::ColliderType::Overlap, 32, 32), this);
-	clock->GetSprite()->SetFrame(4);
-	clock->GetSprite()->SetScale(4);
-	actors.emplace_back(clock);*/
-
-	auto chair = new Item("Chair", App::CreateSprite(".\\TestData\\Maru's MV Bits.bmp", 16, 10), new Vector2D(128, 128), new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, 10)), this, Interactivity::Noninteractive);
-	chair->GetSprite()->SetFrame(1);
-	chair->GetSprite()->SetScale(1);
-	actors.emplace_back(chair);
+	auto clock = new Item("Clock", App::CreateSprite(".\\TestData\\TMW2\\clock.bmp", 6, 1), new Vector2D(724, 464), new Collision(Collision::ColliderType::Block, 32, 16), this, Interactivity::Noninteractive);
+	clock->GetSprite()->SetFrame(1);
+	clock->GetSprite()->SetScale(2);
+	actors.emplace_back(clock);
 }
 
 void Entrance::Update(float deltaTime)
