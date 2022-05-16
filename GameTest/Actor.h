@@ -30,21 +30,22 @@ public:
 	~Actor() = default;
 
 	const std::string& GetName() const;
-	void SetName(std::string name);
 	CSimpleSprite* GetSprite();
-	void SetSprite(CSimpleSprite* sprite);
-	void SetSprite(CSimpleSprite& sprite);
 	Vector2D* GetPosition();
-	void SetPosition(Vector2D* position);
-	void SetPosition(float x = 0, float y = 0);
 	Collision* GetCollider();
-	void SetCollider(Collision* collider);
 	Room* GetCurrentRoom();
-	void SetCurrentRoom(Room* room);
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
 	Vector2D* GetForwardVector();
 	Vector2D* GetRightVector();
+
+	void SetName(std::string name);
+	void SetSprite(CSimpleSprite* sprite);
+	void SetSprite(CSimpleSprite& sprite);
+	void SetPosition(Vector2D* position);
+	void SetPosition(float x = 0, float y = 0);
+	void SetCollider(Collision* collider);
+	void SetCurrentRoom(Room* room);
 };
 
 #endif

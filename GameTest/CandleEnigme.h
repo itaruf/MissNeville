@@ -13,8 +13,10 @@ protected:
 public:
 	CandleEnigme(Status status);
 	~CandleEnigme() = default;
-	bool IsCleared() override;
+
 	std::vector<Candle*>& GetCandles();
+
+	bool IsCleared() override;
 };
 
 #endif

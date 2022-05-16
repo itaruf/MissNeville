@@ -16,13 +16,15 @@ public:
 		CLEARED,
 	};
 	Status status;
+
 	Enigme(Status status);
-	virtual bool IsCleared();
-	bool StartEnigme();
-	bool EndEnigme();
-	Status GetStatus();
 	virtual ~Enigme() = default;
 
+	Status GetStatus();
+	virtual bool IsCleared();
+
+	bool StartEnigme();
+	bool EndEnigme();
 };
 
 #endif

@@ -13,6 +13,7 @@ private:
 	std::vector<Page*> pages;
 protected:
 public:
+
 	void AddItem(Item* item);
 	Item* GetItem();
 };

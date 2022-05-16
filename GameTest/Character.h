@@ -19,14 +19,16 @@ public:
 	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, float HP, float movementSpeed);
 	~Character() = default;
 
-	const float& GetHP() const;
-	void SetHP(float value);
 	const float& GetMovementSpeed() const;
-	void SetMovementSpeed(float value);
+	const float& GetHP() const;
+	float GetGrabRange();
 	bool isMoving();
+
+	void SetHP(float value);
+	void SetMovementSpeed(float value);
+
 	void MoveVertically();
 	void MoveHorizontally();
 	bool UseLighter(Candle* candle);
-	float GetGrabRange();
 };
 #endif

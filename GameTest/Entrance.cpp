@@ -92,7 +92,8 @@ void Entrance::Update(float deltaTime)
 {
 	for each (const auto & candle in candles)
 	{
-		candle->GetSprite()->Update(deltaTime);
+		if (!candle)
+			candle->GetSprite()->Update(deltaTime);
 	}
 }
 
@@ -100,14 +101,18 @@ void Entrance::Render()
 {
 	for each (const auto& candle in candles)
 	{
-		candle->GetSprite()->Draw();
-		candle->GetCollider()->DrawCollision(candle, 1, 1, 1);
+		if (!candle)
+		{
+			candle->GetSprite()->Draw();
+			candle->GetCollider()->DrawCollision(candle, 1, 1, 1);
+		}
 	}
 }
 
 bool Entrance::IsRoomCleared()
 {
-	return candleEnigme->IsCleared();
+	if (!candleEnigme)
+		return candleEnigme->IsCleared();
 }
 
 

@@ -24,10 +24,12 @@ public:
 
 	~Room() = default;
 
-	void AddActor(Actor* actor);
 	Actor* GetActor(int index);
 	const int& GetID() const;
 	std::vector<Actor*>& GetActors();
+
+	void AddActor(Actor* actor);
+
 	virtual void Init();
 	virtual void Update(float deltaTime);
 	virtual void Render();
