@@ -53,7 +53,7 @@ void Init()
 	gameState->currentRoom = gameState->entrance;
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
-	gameState->entrance->gameState = gameState.get();
+	gameState->currentRoom->gameState = gameState.get();
 	gameState->entrance->Init();
 }
 

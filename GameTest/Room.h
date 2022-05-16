@@ -6,6 +6,7 @@
 #include <vector>
 #include "Enigme.h"
 
+class GameState;
 class Actor;
 class Character;
 class Candle;
@@ -17,12 +18,13 @@ protected:
 	int ID;
 	std::vector<Actor*> actors;
 	Enigme* enigme;
+
 public:
 	Room(int ID, std::vector<Actor*> actors);
 	Room(int ID, Actor* actor);
 	Room(int ID);
 
-	~Room() = default;
+	~Room();
 
 	Actor* GetActor(int index);
 	const int& GetID() const;
@@ -34,6 +36,8 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual bool IsRoomCleared();
+
+	GameState* gameState;
 };
 
 #endif

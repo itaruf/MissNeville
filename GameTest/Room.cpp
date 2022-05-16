@@ -7,6 +7,20 @@ Room::Room(int ID, Actor* actor) : ID{ ID } { actors.emplace_back(actor); }
 
 Room::Room(int ID) : ID{ ID } {}
 
+Room::~Room()
+{
+	/*if (gameState)
+		delete gameState;
+
+	if (enigme)
+		delete enigme;
+
+	for (auto actor : actors)
+		if (actor)
+			delete actor;
+	actors.clear();*/
+}
+
 void Room::AddActor(Actor* actor)
 {
 	actors.emplace_back(actor);

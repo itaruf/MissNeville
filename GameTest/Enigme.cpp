@@ -5,6 +5,10 @@ Enigme::Enigme(Status status) : status{ status }
 {
 }
 
+Enigme::~Enigme()
+{
+}
+
 bool Enigme::IsCleared()
 {
 	return false;

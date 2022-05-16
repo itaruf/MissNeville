@@ -13,6 +13,17 @@ Entrance::Entrance(int ID, CandleEnigme* candleEnigme) : Room(ID), candleEnigme{
 {
 }
 
+Entrance::~Entrance()
+{
+	/*if (candleEnigme)
+		delete candleEnigme;
+	
+	for (auto candle : candles)
+		if (candle)
+			delete candle;
+	candles.clear();*/
+}
+
 void Entrance::Init()
 {
 	candleEnigme = new CandleEnigme(CandleEnigme::Status::NOTSTARTED);
@@ -90,7 +101,7 @@ void Entrance::Init()
 
 void Entrance::Update(float deltaTime)
 {
-	for each (const auto & candle in candles)
+	for (const auto & candle : candles)
 	{
 		if (!candle)
 			candle->GetSprite()->Update(deltaTime);
@@ -99,7 +110,7 @@ void Entrance::Update(float deltaTime)
 
 void Entrance::Render()
 {
-	for each (const auto& candle in candles)
+	for (const auto& candle : candles)
 	{
 		if (!candle)
 		{
@@ -113,6 +124,7 @@ bool Entrance::IsRoomCleared()
 {
 	if (!candleEnigme)
 		return candleEnigme->IsCleared();
+	return false;
 }
 
 

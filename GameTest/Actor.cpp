@@ -10,6 +10,23 @@ Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(
 {
 }
 
+Actor::~Actor()
+{
+	std::cout << "ACTOR DESTRUCTOR CALLED" << std::endl;
+
+	/*if (sprite)
+		delete sprite;
+
+	if (position)
+		delete position;
+
+	if (collider)
+		delete collider;
+
+	if (currentRoom)
+		delete currentRoom;*/
+}
+
 const std::string& Actor::GetName() const
 {
 	return name;

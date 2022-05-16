@@ -12,7 +12,7 @@ protected:
 	std::vector<Candle*> candles;
 public:
 	CandleEnigme(Status status);
-	~CandleEnigme() = default;
+	~CandleEnigme();
 
 	std::vector<Candle*>& GetCandles();
 

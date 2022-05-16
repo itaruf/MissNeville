@@ -18,7 +18,7 @@ public:
 	Status status;
 
 	Enigme(Status status);
-	virtual ~Enigme() = default;
+	virtual ~Enigme();
 
 	Status GetStatus();
 	virtual bool IsCleared();

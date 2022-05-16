@@ -21,7 +21,7 @@ public:
 	Vector2D* offset;
 
 	Collision(ColliderType colliderType, float height, float width, Vector2D* offset = new Vector2D(0,0));
-	~Collision() {}
+	~Collision();
 
 	const float& GetHeight() const;
 	const float& GetWidth() const;

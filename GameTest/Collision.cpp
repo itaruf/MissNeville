@@ -6,6 +6,12 @@ Collision::Collision(ColliderType colliderType, float height, float width, Vecto
 {
 }
 
+Collision::~Collision()
+{
+	/*if (offset)
+		delete offset;*/
+}
+
 bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 {
 	if (x + offset->x - width < other->GetPosition()->x + other->GetCollider()->offset->x + other->GetCollider()->GetWidth() &&

@@ -5,6 +5,14 @@ CandleEnigme::CandleEnigme(Status status) : Enigme(status)
 {
 }
 
+CandleEnigme::~CandleEnigme()
+{
+	/*for (auto candle : candles)
+		if (candle)
+			delete candle;
+	candles.clear();*/
+}
+
 bool CandleEnigme::IsCleared()
 {
 	if (status == Status::CLEARED || status == Status::NOTSTARTED)
