@@ -12,10 +12,8 @@ GameState::GameState(std::vector<Room*>& rooms) : currentRoom{ nullptr }
 
 GameState::GameState(Room*& currentRoom, std::vector<Room*>& rooms) : currentRoom(std::move(currentRoom))
 {
-	for each (auto var in rooms)
-	{
-		this->rooms.emplace_back(std::move(var));
-	}
+	for (auto room : rooms)
+		this->rooms.emplace_back(std::move(room));
 }
 
 GameState::GameState(Room*& currentRoom) : currentRoom{ std::move(currentRoom) }

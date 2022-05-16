@@ -18,7 +18,7 @@ bool CandleEnigme::IsCleared()
 	if (status == Status::CLEARED || status == Status::NOTSTARTED)
 		return true;
 
-	for each (const auto& candle in candles)
+	for (const auto candle : candles)
 	{
 		if (!candle->isEnlighted())
 			return false;

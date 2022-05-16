@@ -28,17 +28,17 @@
 #include <map>
 #include <stdexcept> // std::length_error
 
-std::unique_ptr<GameState> gameState;
+std::shared_ptr<GameState> gameState;
 //------------------------------------------------------------------------
 // Called before first update. Do any initial setup here.
 //------------------------------------------------------------------------
 void Init()
 {
 	/*Instantiation du personnage*/
-	CSimpleSprite* playerSprite = App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4);
-	Vector2D* vector = new Vector2D{ 300.0f, 200.0f };
-	Collision* collider = new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10));
-	Character* player = new Character("Imane", playerSprite, vector, collider, nullptr, 20, 4);
+	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4) };
+	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
+	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
+	Character* player{ new Character("Imane", playerSprite, vector, collider, nullptr, 20, 4) };
 
 	/*Caractéristiques de bases*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -47,17 +47,12 @@ void Init()
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
 
-	gameState = std::make_unique<GameState>();
+	gameState = std::make_shared<GameState>();
 	gameState->AddPlayer(player);
 	gameState->currentRoom = new Entrance{ 0, nullptr }; 
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
 	gameState->currentRoom->Init();
-
-	/*player = nullptr;
-	vector = nullptr;
-	collider = nullptr;
-	playerSprite = nullptr;*/
 }
 
 template<
@@ -69,13 +64,9 @@ std::string GetChar(const T& var)
 	return std::to_string(var);
 }
 
-//------------------------------------------------------------------------
-// Update your simulation here. deltaTime is the elapsed time since the last update in ms.
-// This will be called at no greater frequency than the value of APP_MAX_FRAME_RATE
-//------------------------------------------------------------------------
 void Update(float deltaTime)
 {
-	auto player = gameState->GetPlayer();
+	auto player{ gameState->GetPlayer() };
 
 	if (player)
 	{
@@ -86,34 +77,29 @@ void Update(float deltaTime)
 	}
 
 	if (gameState->currentRoom)
-	{
 		gameState->currentRoom->Update(deltaTime);
-
-		for each (const auto & item in gameState->currentRoom->GetActors())
-		{
-			if (item)
-				item->GetSprite()->Update(deltaTime);
-		}
-	}
 }
-
-//------------------------------------------------------------------------
-// Add your display calls here (DrawLine,Print, DrawSprite.) 
-// See App.h 
-//------------------------------------------------------------------------
-
 
 void Render()
 {
-
 	/*std::string(*ptr)(int);
 	ptr = &returnInt;
 
 	App::Print(700, 500, (*ptr)(5).c_str());*/
+	
+	/*CURRENT ROOM RENDER*/
+	if (!gameState->currentRoom)
+		return;
+
+	gameState->currentRoom->Render();
+
+	if (gameState->currentRoom->IsRoomCleared())
+		App::Print(800, 700, "Room Cleared");
+	else
+		App::Print(800, 700, "Room Not Cleared");
 
 	/*PLAYER RENDER */
-
-	auto player = gameState->GetPlayer();
+	auto player{ gameState->GetPlayer() };
 
 	if (!player)
 		return;
@@ -121,8 +107,8 @@ void Render()
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
 
-	auto pos = player->GetPosition();
-	auto string = std::to_string(pos->x) + " " + std::to_string(pos->y);
+	auto pos{ player->GetPosition() };
+	auto string{ std::to_string(pos->x) + " " + std::to_string(pos->y) };
 
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
@@ -133,37 +119,20 @@ void Render()
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
 
-	if (!gameState->currentRoom)
-		return;
-
-	gameState->currentRoom->Render();
-
-	for each (const auto & item in gameState->currentRoom->GetActors())
-	{
-		item->GetSprite()->Draw();
-		item->GetCollider()->DrawCollision(item, 50, 50, 50);
-	}
-
-	if (gameState->currentRoom->IsRoomCleared())
-		App::Print(800, 700, "Room Cleared");
-	else
-		App::Print(800, 700, "Room Not Cleared");
 
 	// Horizontally
 	if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
 	{
-		float ms = player->GetMovementSpeed();
+		float ms{ player->GetMovementSpeed() };
 		if (player->GetDirection() == Direction::LEFT)
 			ms = -player->GetMovementSpeed();
-		auto actors = gameState->currentRoom->GetActors();
-		std::vector<Actor*> interactiveActors{};
-
+		auto actors{ gameState->currentRoom->GetActors()};
 		try
 		{
 			if (actors.size() != 0)
 			{
-
-				for each (auto & actor in actors)
+				std::vector<Actor*> interactiveActors{};
+				for (auto & actor : actors)
 					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
 						interactiveActors.emplace_back(actor);
 
@@ -192,17 +161,17 @@ void Render()
 	// Vertically
 	if (player->GetDirection() == Direction::UP || player->GetDirection() == Direction::DOWN)
 	{
-		float ms = player->GetMovementSpeed();
+		float ms{ player->GetMovementSpeed() };
 		if (player->GetDirection() == Direction::DOWN)
 			ms = -player->GetMovementSpeed();
-		auto actors = gameState->currentRoom->GetActors();
-		std::vector<Actor*> interactiveActors{};
+		auto actors{ gameState->currentRoom->GetActors() };
 
 		try
 		{
 			if (actors.size() != 0)
 			{
-				for each (auto & actor in actors)
+				std::vector<Actor*> interactiveActors{};
+				for (auto & actor : actors)
 					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
 						interactiveActors.emplace_back(actor);
 

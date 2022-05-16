@@ -106,16 +106,31 @@ void Entrance::Update(float deltaTime)
 		if (!candle)
 			candle->GetSprite()->Update(deltaTime);
 	}
+
+	for (const auto& item : actors)
+	{
+		if (item)
+			item->GetSprite()->Update(deltaTime);
+	}
 }
 
 void Entrance::Render()
 {
-	for (const auto& candle : candles)
+	for (const auto candle : candles)
 	{
 		if (!candle)
 		{
 			candle->GetSprite()->Draw();
 			candle->GetCollider()->DrawCollision(candle, 1, 1, 1);
+		}
+	}
+
+	for (const auto item : actors)
+	{
+		if (item)
+		{
+			item->GetSprite()->Draw();
+			item->GetCollider()->DrawCollision(item, 50, 50, 50);
 		}
 	}
 }

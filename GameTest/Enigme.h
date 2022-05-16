@@ -15,6 +15,7 @@ public:
 		PENDING,
 		CLEARED,
 	};
+
 	Status status;
 
 	Enigme(Status status);
