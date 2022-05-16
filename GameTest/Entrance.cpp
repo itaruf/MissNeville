@@ -15,13 +15,13 @@ Entrance::Entrance(int ID, CandleEnigme* candleEnigme) : Room(ID), candleEnigme{
 
 Entrance::~Entrance()
 {
-	/*if (candleEnigme)
+	if (candleEnigme)
 		delete candleEnigme;
 	
 	for (auto candle : candles)
 		if (candle)
 			delete candle;
-	candles.clear();*/
+	candles.clear();
 }
 
 void Entrance::Init()
@@ -122,7 +122,7 @@ void Entrance::Render()
 
 bool Entrance::IsRoomCleared()
 {
-	if (!candleEnigme)
+	if (candleEnigme)
 		return candleEnigme->IsCleared();
 	return false;
 }

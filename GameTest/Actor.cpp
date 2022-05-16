@@ -6,7 +6,7 @@ Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collis
 	SetPosition(position);
 }
 
-Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), mobility(actor->mobility), direction(actor->direction)
+Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), mobility(actor->mobility), direction(actor->direction), currentRoom(actor->currentRoom)
 {
 }
 

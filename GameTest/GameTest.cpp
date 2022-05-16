@@ -76,20 +76,24 @@ std::string GetChar(const T& var)
 void Update(float deltaTime)
 {
 	auto player = gameState->GetPlayer();
-	gameState->currentRoom->Update(deltaTime);
 
-	for each (const auto & item in gameState->currentRoom->GetActors())
-	{
-		if (item)
-			item->GetSprite()->Update(deltaTime);
-	}
-
-	if (!player)
+	if (player)
 	{
 		player->GetSprite()->Update(deltaTime);
 		player->isMoving();
 		player->MoveHorizontally();
 		player->MoveVertically();
+	}
+
+	if (gameState->currentRoom)
+	{
+		gameState->currentRoom->Update(deltaTime);
+
+		for each (const auto & item in gameState->currentRoom->GetActors())
+		{
+			if (item)
+				item->GetSprite()->Update(deltaTime);
+		}
 	}
 }
 
@@ -101,20 +105,18 @@ void Update(float deltaTime)
 
 void Render()
 {
-	auto player = gameState->GetPlayer();
 
 	/*std::string(*ptr)(int);
 	ptr = &returnInt;
 
 	App::Print(700, 500, (*ptr)(5).c_str());*/
 
-	gameState->currentRoom->Render();
+	/*PLAYER RENDER */
 
-	for each (const auto & item in gameState->currentRoom->GetActors())
-	{
-		item->GetSprite()->Draw();
-		item->GetCollider()->DrawCollision(item, 50, 50, 50);
-	}
+	auto player = gameState->GetPlayer();
+
+	if (!player)
+		return;
 
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
@@ -130,6 +132,17 @@ void Render()
 	App::Print(800, 575, ("Player Name: " + player->GetName()).c_str());
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
+
+	if (!gameState->currentRoom)
+		return;
+
+	gameState->currentRoom->Render();
+
+	for each (const auto & item in gameState->currentRoom->GetActors())
+	{
+		item->GetSprite()->Draw();
+		item->GetCollider()->DrawCollision(item, 50, 50, 50);
+	}
 
 	if (gameState->currentRoom->IsRoomCleared())
 		App::Print(800, 700, "Room Cleared");
