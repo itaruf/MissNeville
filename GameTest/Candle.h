@@ -10,7 +10,7 @@ private:
 protected:
 	bool enlighted = false;
 public:
-	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, Interactivity interactivity);
+	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, Interactivity interactivity);
 	~Candle() = default;
 
 	bool isEnlighted();

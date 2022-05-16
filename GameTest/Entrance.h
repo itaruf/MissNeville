@@ -8,7 +8,7 @@
 #include "GameState.h"
 
 class GameState;
-class Entrance : public Room
+class Entrance : public Room, std::enable_shared_from_this<Entrance>
 {
 private:
 	/*enum class Status
@@ -23,9 +23,9 @@ public:
 	CandleEnigme* candleEnigme;
 	std::vector<Candle*> candles;
 
-	Entrance(int ID, std::vector<Actor*> actors, CandleEnigme* candleEnigme);
-	Entrance(int ID, Actor* actor, CandleEnigme* candleEnigme);
-	Entrance(int ID, CandleEnigme* candleEnigme);
+	Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState> gameState, CandleEnigme* candleEnigme);
+	Entrance(int ID, Actor* actor, std::shared_ptr<GameState> gameState, CandleEnigme* candleEnigme);
+	Entrance(int ID, std::shared_ptr<GameState> gameState, CandleEnigme* candleEnigme);
 	~Entrance();
 
 	void Init() override;

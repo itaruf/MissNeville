@@ -22,9 +22,6 @@ GameState::GameState(Room*& currentRoom) : currentRoom{ std::move(currentRoom) }
 
 GameState::~GameState()
 {
-	if (currentRoom)
-		delete currentRoom;
-
 	if (player)
 		delete player;
 

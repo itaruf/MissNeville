@@ -1,11 +1,14 @@
 #include "stdafx.h"
 #include "Room.h"
 
-Room::Room(int ID, std::vector<Actor*> actors) : ID{ ID }, actors{ actors } {}
+Room::Room(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState> gameState) : ID{ ID }, actors{ actors }, gameState{ gameState } {}
 
-Room::Room(int ID, Actor* actor) : ID{ ID } { actors.emplace_back(actor); }
+Room::Room(int ID, Actor* actor, std::shared_ptr<GameState> gameState) : ID{ ID }, gameState{ gameState }
+{ 
+	actors.emplace_back(actor); 
+}
 
-Room::Room(int ID) : ID{ ID } {}
+Room::Room(int ID, std::shared_ptr<GameState> gameState) : ID{ ID }, gameState{ gameState } {}
 
 Room::~Room()
 {

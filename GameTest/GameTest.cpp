@@ -34,11 +34,14 @@ std::shared_ptr<GameState> gameState;
 //------------------------------------------------------------------------
 void Init()
 {
+	gameState = std::make_shared<GameState>();
+	gameState->currentRoom = std::make_shared<Entrance>(0, gameState, nullptr);
+
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
-	Character* player{ new Character("Imane", playerSprite, vector, collider, nullptr, 20, 4) };
+	Character* player{ new Character("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4) };
 
 	/*Caractéristiques de bases*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -47,9 +50,8 @@ void Init()
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
 
-	gameState = std::make_shared<GameState>();
 	gameState->AddPlayer(player);
-	gameState->currentRoom = new Entrance{ 0, nullptr }; 
+
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
 	gameState->currentRoom->Init();

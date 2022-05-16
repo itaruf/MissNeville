@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{ std::move(currentRoom)}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{currentRoom}
 {
 	SetPosition(position);
 }
@@ -84,12 +84,12 @@ void Actor::SetCollider(Collision* collider)
 	this->collider = collider;
 }
 
-Room* Actor::GetCurrentRoom()
+std::shared_ptr<Room> Actor::GetCurrentRoom()
 {
 	return currentRoom;
 }
 
-void Actor::SetCurrentRoom(Room* room)
+void Actor::SetCurrentRoom(std::shared_ptr<Room> room)
 {
 	this->currentRoom = room;
 }

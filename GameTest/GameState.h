@@ -16,7 +16,7 @@ private:
 protected:
 public:
 	int roomIndex{ 0 };
-	Room* currentRoom{ nullptr };
+	std::shared_ptr<Room> currentRoom{ nullptr };
 	std::vector<Room*> rooms{ nullptr };
 	Character* player{ nullptr };
 
