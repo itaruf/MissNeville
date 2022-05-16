@@ -7,10 +7,10 @@ CandleEnigme::CandleEnigme(Status status) : Enigme(status)
 
 CandleEnigme::~CandleEnigme()
 {
-	/*for (auto candle : candles)
+	for (auto candle : candles)
 		if (candle)
 			delete candle;
-	candles.clear();*/
+	candles.clear();
 }
 
 bool CandleEnigme::IsCleared()

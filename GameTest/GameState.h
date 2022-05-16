@@ -18,7 +18,6 @@ public:
 	int roomIndex{ 0 };
 	Room* currentRoom{ nullptr };
 	std::vector<Room*> rooms{ nullptr };
-	Entrance* entrance{ nullptr };
 	Character* player{ nullptr };
 
 	GameState() = default;

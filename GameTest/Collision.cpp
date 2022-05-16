@@ -8,8 +8,8 @@ Collision::Collision(ColliderType colliderType, float height, float width, Vecto
 
 Collision::~Collision()
 {
-	/*if (offset)
-		delete offset;*/
+	if (offset)
+		delete offset;
 }
 
 bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)

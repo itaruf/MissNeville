@@ -6,6 +6,7 @@
 class Collision;
 #include "Collision.h"
 #include "App/SimpleSprite.h"
+class Room;
 #include "Room.h"
 #include <memory>
 #include "EDirection.h"
@@ -14,8 +15,8 @@ class Collision;
 class Actor
 {
 protected:
-	static constexpr Mobility defaultMobility = Mobility::STATIC;
-	static constexpr Direction defaultDirection = Direction::STILL;
+	static constexpr Mobility defaultMobility{ Mobility::STATIC };
+	static constexpr Direction defaultDirection{ Direction::STILL };
 
 	std::string name;
 	CSimpleSprite* sprite;

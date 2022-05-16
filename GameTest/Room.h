@@ -5,9 +5,10 @@
 #include <algorithm>
 #include <vector>
 #include "Enigme.h"
+class Actor;
+#include "Actor.h"
 
 class GameState;
-class Actor;
 class Character;
 class Candle;
 
@@ -17,7 +18,6 @@ private:
 protected:
 	int ID;
 	std::vector<Actor*> actors;
-	Enigme* enigme;
 
 public:
 	Room(int ID, std::vector<Actor*> actors);
@@ -36,8 +36,6 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual bool IsRoomCleared();
-
-	GameState* gameState;
 };
 
 #endif

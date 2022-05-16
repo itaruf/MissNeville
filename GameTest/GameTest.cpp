@@ -49,12 +49,15 @@ void Init()
 
 	gameState = std::make_unique<GameState>();
 	gameState->AddPlayer(player);
-	gameState->entrance = new Entrance{ 0, nullptr }; 
-	gameState->currentRoom = gameState->entrance;
+	gameState->currentRoom = new Entrance{ 0, nullptr }; 
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
-	gameState->currentRoom->gameState = gameState.get();
-	gameState->entrance->Init();
+	gameState->currentRoom->Init();
+
+	/*player = nullptr;
+	vector = nullptr;
+	collider = nullptr;
+	playerSprite = nullptr;*/
 }
 
 template<
@@ -73,14 +76,15 @@ std::string GetChar(const T& var)
 void Update(float deltaTime)
 {
 	auto player = gameState->GetPlayer();
-	gameState->entrance->Update(deltaTime);
+	gameState->currentRoom->Update(deltaTime);
 
 	for each (const auto & item in gameState->currentRoom->GetActors())
 	{
-		item->GetSprite()->Update(deltaTime);
+		if (item)
+			item->GetSprite()->Update(deltaTime);
 	}
 
-	if (player != nullptr)
+	if (!player)
 	{
 		player->GetSprite()->Update(deltaTime);
 		player->isMoving();

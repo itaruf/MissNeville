@@ -14,7 +14,7 @@ Actor::~Actor()
 {
 	std::cout << "ACTOR DESTRUCTOR CALLED" << std::endl;
 
-	/*if (sprite)
+	if (sprite)
 		delete sprite;
 
 	if (position)
@@ -23,7 +23,7 @@ Actor::~Actor()
 	if (collider)
 		delete collider;
 
-	if (currentRoom)
+	/*if (currentRoom)
 		delete currentRoom;*/
 }
 

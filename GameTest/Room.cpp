@@ -9,16 +9,10 @@ Room::Room(int ID) : ID{ ID } {}
 
 Room::~Room()
 {
-	/*if (gameState)
-		delete gameState;
-
-	if (enigme)
-		delete enigme;
-
 	for (auto actor : actors)
 		if (actor)
 			delete actor;
-	actors.clear();*/
+	actors.clear();
 }
 
 void Room::AddActor(Actor* actor)
