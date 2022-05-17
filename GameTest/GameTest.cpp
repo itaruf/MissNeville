@@ -159,6 +159,8 @@ void Render()
 					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
 						interactiveActors.emplace_back(actor);
 
+				App::Print(100, 500, ("Items : " + GetChar(interactiveActors.size())).c_str());
+
 				std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
 					{
 						return 
@@ -170,41 +172,39 @@ void Render()
 				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
 				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
 				{
-					player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
-					auto item = static_cast<Page*>(interactiveActors[0]);
-					if (item)
+					player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
+
+					if (dynamic_cast<Page*>(interactiveActors[0]))
 					{
+						auto item{ dynamic_cast<Page*>(interactiveActors[0])};
+						interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), item));
+
+						App::Print(100, 300, ("ITEM HERE : " + item->GetName()).c_str());
+
 						if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 						{
+							if (!item)
+							{
+								delete item;
+								return;
+							}
+
+							if (!player->inventory)
+								return;
+
 							player->inventory->items[0].emplace_back(item->Collect());
 							if (gameState->currentRoom->RemoveActor(item))
 							{
-								App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
+								App::Print(100, 500, ("Removed: " + item->GetName()).c_str());
 							}
 						}
 					}
-					/*if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
-						App::Print(300, 300, (interactiveActors[0]->GetName() + " added").c_str());
-					else
-						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());*/
-				}
-
-				for (auto actor : interactiveActors)
-				{
-					actor = nullptr;
-					delete actor;
 				}
 			}
 		}
 		catch (const std::length_error& le)
 		{
 			App::Print(350, 450, le.what());
-		}
-
-		for (auto actor : actors)
-		{
-			actor = nullptr;
-			delete actor;
 		}
 	}
 

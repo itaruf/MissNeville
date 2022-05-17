@@ -67,7 +67,7 @@ bool Room::RemoveActor(Actor* actor)
 	{
 		actors.erase(it);
 		actor = nullptr;
-		delete actor;
+		/*delete actor;*/
 		return true;
 	}
 	return false;

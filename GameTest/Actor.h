@@ -28,7 +28,7 @@ protected:
 public:
 	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom);
 	Actor(Actor* actor);
-	~Actor();
+	virtual ~Actor();
 
 	const std::string& GetName() const;
 	CSimpleSprite* GetSprite();
