@@ -117,6 +117,15 @@ bool Character::UseLighter(Candle* candle)
 	return false;
 }
 
+bool Character::Collect(int ID, ICollectable* collectable)
+{
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	{
+		inventory->items[ID].emplace_back(collectable->Collect());
+		return true;
+	}
+	return false;
+}
 float Character::GetGrabRange()
 {
 	return grabRange;

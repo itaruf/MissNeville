@@ -124,8 +124,9 @@ void Render()
 		delete player;
 		return;
 	}
+
 	App::Print(100, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
-	App::Print(100, 300, GetChar(player->inventory->items[0].size()).c_str());
+	App::Print(100, 300, ("Paper collected : " + GetChar(player->inventory->items[0].size())).c_str());
 
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
@@ -142,130 +143,85 @@ void Render()
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
 
-
-	// Horizontally
-	if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
+	auto actors{ gameState->currentRoom->GetActors() };
+	if (actors.size() != 0)
 	{
-		float ms{ player->GetMovementSpeed() };
-		if (player->GetDirection() == Direction::LEFT)
-			ms = -player->GetMovementSpeed();
-		auto actors{ gameState->currentRoom->GetActors()};
-		try
+		std::vector<Actor*> interactiveActors{};
+		for (auto& actor : actors)
+			if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
+				interactiveActors.emplace_back(actor);
+
+		// Horizontally
+		if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
 		{
-			if (actors.size() != 0)
-			{
-				std::vector<Actor*> interactiveActors{};
-				for (auto & actor : actors)
-					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
-						interactiveActors.emplace_back(actor);
+			float ms{ player->GetMovementSpeed() };
+			if (player->GetDirection() == Direction::LEFT)
+				ms = -player->GetMovementSpeed();
 
-				App::Print(100, 500, ("Items : " + GetChar(interactiveActors.size())).c_str());
-
-				std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
-					{
-						return 
-							std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
-							< 
-							std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
-					});
-
-				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
-				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
+			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
 				{
-					player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
+					return
+						std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
+						<
+						std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
+				});
 
-					if (dynamic_cast<Page*>(interactiveActors[0]))
+			if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
+			{
+				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
+				player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
+				if (dynamic_cast<ICollectable*>(interactiveActors[0]))
+				{
+					auto item{ dynamic_cast<ICollectable*>(interactiveActors[0]) };
+					if (player->Collect(dynamic_cast<Item*>(interactiveActors[0])->ID, item))
 					{
-						auto item{ dynamic_cast<Page*>(interactiveActors[0])};
-						interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), item));
-
-						App::Print(100, 300, ("ITEM HERE : " + item->GetName()).c_str());
-
-						if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+						if (gameState->currentRoom->RemoveActor(interactiveActors[0]))
 						{
-							if (!item)
-							{
-								delete item;
-								return;
-							}
-
-							if (!player->inventory)
-								return;
-
-							player->inventory->items[0].emplace_back(item->Collect());
-							if (gameState->currentRoom->RemoveActor(item))
-							{
-								App::Print(100, 500, ("Removed: " + item->GetName()).c_str());
-							}
+							interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), interactiveActors[0]));
+							App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
 						}
 					}
 				}
 			}
 		}
-		catch (const std::length_error& le)
-		{
-			App::Print(350, 450, le.what());
-		}
-	}
 
-	// Vertically
-	if (player->GetDirection() == Direction::UP || player->GetDirection() == Direction::DOWN)
-	{
-		float ms{ player->GetMovementSpeed() };
-		if (player->GetDirection() == Direction::DOWN)
-			ms = -player->GetMovementSpeed();
-		auto actors{ gameState->currentRoom->GetActors() };
-
-		try
+		// Vertically
+		if (player->GetDirection() == Direction::UP || player->GetDirection() == Direction::DOWN)
 		{
-			if (actors.size() != 0)
+			float ms{ player->GetMovementSpeed() };
+			if (player->GetDirection() == Direction::DOWN)
+				ms = -player->GetMovementSpeed();
+			auto actors{ gameState->currentRoom->GetActors() };
+
+			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
+				{
+					return
+						std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
+						<
+						std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
+				});
+
+			if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
 			{
-				std::vector<Actor*> interactiveActors{};
-				for (auto & actor : actors)
-					if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
-						interactiveActors.emplace_back(actor);
-
-				std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
-					{
-						return
-							std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
-							<
-							std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
-					});
-
 				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
-				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
+				player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
+				if (dynamic_cast<ICollectable*>(interactiveActors[0]))
 				{
-					player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
-					/*if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
-						App::Print(300, 300, (interactiveActors[0]->GetName() + " added").c_str());
-					else
-						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());*/
-				}
-				for (auto actor : interactiveActors)
-				{
-					actor = nullptr;
-					delete actor;
+					auto item{ dynamic_cast<ICollectable*>(interactiveActors[0]) };
+					if (player->Collect(dynamic_cast<Item*>(interactiveActors[0])->ID, item))
+					{
+						if (gameState->currentRoom->RemoveActor(interactiveActors[0]))
+						{
+							interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), interactiveActors[0]));
+							App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
+						}
+					}
 				}
 			}
 		}
-		catch (const std::length_error& le)
-		{
-			App::Print(350, 450, le.what());
-		}
-
-		for (auto actor : actors)
-		{
-			actor = nullptr;
-			delete actor;
-		}
 	}
-
-	player = nullptr;
-	delete player;
-	pos = nullptr;
-	delete pos;
 }
+
 
 //------------------------------------------------------------------------
 // Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.

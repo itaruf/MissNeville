@@ -33,5 +33,6 @@ public:
 	void MoveVertically();
 	void MoveHorizontally();
 	bool UseLighter(Candle* candle);
+	bool Collect(int ID, ICollectable* collectable);
 };
 #endif

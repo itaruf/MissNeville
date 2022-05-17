@@ -11,7 +11,8 @@ private:
 protected:
 	Interactivity interactivity;
 public:
-	Item(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, Interactivity interactivity);
+	int ID;
+	Item(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, Interactivity interactivity, int ID = 0);
 	~Item() = default;
 	Interactivity GetInteractivity();
 };
