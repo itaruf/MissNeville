@@ -55,3 +55,20 @@ bool Room::IsRoomCleared()
 {
 	return false;
 }
+
+bool Room::RemoveActor(Actor* actor)
+{
+	if (!actor)
+		return false;
+
+	auto it = std::find(actors.begin(), actors.end(), actor);
+
+	if (it != actors.end())
+	{
+		actors.erase(it);
+		actor = nullptr;
+		delete actor;
+		return true;
+	}
+	return false;
+}

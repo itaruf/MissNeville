@@ -29,7 +29,7 @@ public:
 	Actor* GetActor(int index);
 	const int& GetID() const;
 	std::vector<Actor*>& GetActors();
-
+	bool RemoveActor(Actor* item);
 	void AddActor(Actor* actor);
 
 	virtual void Init();

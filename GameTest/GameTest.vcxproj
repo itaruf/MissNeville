@@ -115,6 +115,7 @@
     <ClInclude Include="Enigme.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="ICollectable.h" />
     <ClInclude Include="Interactivity.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />

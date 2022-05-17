@@ -85,6 +85,7 @@
     <ClInclude Include="Interactivity.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InvPage.h" />
+    <ClInclude Include="ICollectable.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -23,7 +23,8 @@ bool CandleEnigme::IsCleared()
 		if (!candle->isEnlighted())
 			return false;
 	}
-	return EndEnigme();
+	/*return EndEnigme();*/
+	return true;
 }
 
 std::vector<Candle*>& CandleEnigme::GetCandles()

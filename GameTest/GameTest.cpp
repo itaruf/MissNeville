@@ -124,7 +124,7 @@ void Render()
 		delete player;
 		return;
 	}
-
+	App::Print(100, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
 	App::Print(100, 300, GetChar(player->inventory->items[0].size()).c_str());
 
 	player->GetSprite()->Draw();
@@ -171,10 +171,22 @@ void Render()
 				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
 				{
 					player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
-					if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
+					auto item = static_cast<Page*>(interactiveActors[0]);
+					if (item)
+					{
+						if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+						{
+							player->inventory->items[0].emplace_back(item->Collect());
+							if (gameState->currentRoom->RemoveActor(item))
+							{
+								App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
+							}
+						}
+					}
+					/*if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
 						App::Print(300, 300, (interactiveActors[0]->GetName() + " added").c_str());
 					else
-						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());
+						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());*/
 				}
 
 				for (auto actor : interactiveActors)
@@ -225,10 +237,10 @@ void Render()
 				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
 				{
 					player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
-					if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
+					/*if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
 						App::Print(300, 300, (interactiveActors[0]->GetName() + " added").c_str());
 					else
-						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());
+						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());*/
 				}
 				for (auto actor : interactiveActors)
 				{

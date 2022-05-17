@@ -26,7 +26,7 @@ Entrance::~Entrance()
 
 void Entrance::Init()
 {
-	candleEnigme = new CandleEnigme(CandleEnigme::Status::NOTSTARTED);
+	candleEnigme = new CandleEnigme(CandleEnigme::Status::PENDING);
 
 	/*Background First*/
 	/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
@@ -137,8 +137,22 @@ void Entrance::Render()
 
 bool Entrance::IsRoomCleared()
 {
-	if (candleEnigme)
-		return candleEnigme->IsCleared();
+	if (candleEnigme) 
+	{
+		if (candleEnigme->IsCleared())
+		{
+			if (candleEnigme->status == Enigme::Status::PENDING)
+			{
+				auto page = new Page("Page", App::CreateSprite(".\\TestData\\Tiles-Props-pack\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, Interactivity::Interactive);
+				page->GetSprite()->SetFrame(0);
+				page->GetSprite()->SetScale(4);
+				actors.emplace_back(page);
+
+				candleEnigme->status = Enigme::Status::CLEARED;
+			}
+			return true;
+		}
+	}
 	return false;
 }
 
