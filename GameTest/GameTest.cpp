@@ -14,7 +14,7 @@
 #include "Item.h"
 #include "GameState.h"	
 #include "Entrance.h"
-
+#include "Inventory.h"
 //------------------------------------------------------------------------
 // Eample data....
 //------------------------------------------------------------------------
@@ -41,7 +41,8 @@ void Init()
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
-	Character* player{ new Character("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4) };
+	Inventory* inventory{ new Inventory() };
+	Character* player{ new Character("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4, inventory) };
 
 	/*Caractéristiques de bases*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -55,6 +56,18 @@ void Init()
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
 	gameState->currentRoom->Init();
+
+	playerSprite = nullptr;
+	vector = nullptr;
+	collider = nullptr;
+	inventory = nullptr;
+	player = nullptr;
+
+	delete playerSprite;
+	delete vector;
+	delete collider;
+	delete inventory;
+	delete player;
 }
 
 template<
@@ -80,6 +93,9 @@ void Update(float deltaTime)
 
 	if (gameState->currentRoom)
 		gameState->currentRoom->Update(deltaTime);
+
+	player = nullptr;
+	delete player;
 }
 
 void Render()
@@ -104,7 +120,12 @@ void Render()
 	auto player{ gameState->GetPlayer() };
 
 	if (!player)
+	{
+		delete player;
 		return;
+	}
+
+	App::Print(100, 300, GetChar(player->inventory->items[0].size()).c_str());
 
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
@@ -149,14 +170,29 @@ void Render()
 				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
 				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
 				{
-					if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-						player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
+					player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
+					if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
+						App::Print(300, 300, (interactiveActors[0]->GetName() + " added").c_str());
+					else
+						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());
+				}
+
+				for (auto actor : interactiveActors)
+				{
+					actor = nullptr;
+					delete actor;
 				}
 			}
 		}
 		catch (const std::length_error& le)
 		{
 			App::Print(350, 450, le.what());
+		}
+
+		for (auto actor : actors)
+		{
+			actor = nullptr;
+			delete actor;
 		}
 	}
 
@@ -188,8 +224,16 @@ void Render()
 				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
 				if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
 				{
-					if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-						player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
+					player->UseLighter(static_cast<Candle*>(interactiveActors[0]));
+					if (player->inventory->AddItem(new InventoryItem(InventoryItem::Usability::Unusable, 0)))
+						App::Print(300, 300, (interactiveActors[0]->GetName() + " added").c_str());
+					else
+						App::Print(300, 300, (interactiveActors[0]->GetName() + " not added").c_str());
+				}
+				for (auto actor : interactiveActors)
+				{
+					actor = nullptr;
+					delete actor;
 				}
 			}
 		}
@@ -197,7 +241,18 @@ void Render()
 		{
 			App::Print(350, 450, le.what());
 		}
+
+		for (auto actor : actors)
+		{
+			actor = nullptr;
+			delete actor;
+		}
 	}
+
+	player = nullptr;
+	delete player;
+	pos = nullptr;
+	delete pos;
 }
 
 //------------------------------------------------------------------------

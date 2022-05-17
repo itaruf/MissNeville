@@ -36,6 +36,8 @@
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CandleEnigme.cpp" />
     <ClCompile Include="Entrance.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
+    <ClCompile Include="InvPage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -81,6 +83,8 @@
     <ClInclude Include="CandleEnigme.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="Interactivity.h" />
+    <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="InvPage.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

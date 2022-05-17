@@ -6,6 +6,7 @@
 #include "app\app.h"
 #include "EDirection.h"
 #include "Candle.h"
+#include "Inventory.h"
 
 class Candle;
 class Character : public Actor
@@ -16,8 +17,10 @@ protected:
 	float movementSpeed;
 	float grabRange{ 500 };
 public:
-	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, float HP, float movementSpeed);
+	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, float HP, float movementSpeed, Inventory* inventory);
 	~Character() = default;
+
+	Inventory* inventory;
 
 	const float& GetMovementSpeed() const;
 	const float& GetHP() const;

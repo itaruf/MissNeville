@@ -24,7 +24,7 @@ public:
 	Room(int ID, Actor* actor, std::shared_ptr<GameState> gameState);
 	Room(int ID, std::shared_ptr<GameState> gameState);
 
-	~Room();
+	virtual ~Room();
 
 	Actor* GetActor(int index);
 	const int& GetID() const;

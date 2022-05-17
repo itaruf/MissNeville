@@ -117,6 +117,8 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Interactivity.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="InvPage.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Page.h" />
     <ClInclude Include="Room.h" />
@@ -141,6 +143,8 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
+    <ClCompile Include="InvPage.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Room.cpp" />
