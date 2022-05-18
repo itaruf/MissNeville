@@ -119,6 +119,9 @@ bool Character::UseLighter(Candle* candle)
 
 bool Character::Collect(int ID, ICollectable* collectable)
 {
+	if (!collectable)
+		return false;
+
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 	{
 		inventory->items[ID].emplace_back(collectable->Collect());

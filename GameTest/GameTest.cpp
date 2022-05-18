@@ -105,18 +105,15 @@ void Render()
 
 	App::Print(700, 500, (*ptr)(5).c_str());*/
 	
-	/*CURRENT ROOM RENDER*/
+	/*********CURRENT ROOM RENDER*********/
+
 	if (!gameState->currentRoom)
 		return;
 
 	gameState->currentRoom->Render();
 
-	if (gameState->currentRoom->IsRoomCleared())
-		App::Print(800, 700, "Room Cleared");
-	else
-		App::Print(800, 700, "Room Not Cleared");
+	/*********PLAYER RENDER*********/
 
-	/*PLAYER RENDER */
 	auto player{ gameState->GetPlayer() };
 
 	if (!player)
@@ -125,15 +122,19 @@ void Render()
 		return;
 	}
 
-	App::Print(100, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
-	App::Print(100, 300, ("Paper collected : " + GetChar(player->inventory->items[0].size())).c_str());
-
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
 
 	auto pos{ player->GetPosition() };
 	auto string{ std::to_string(pos->x) + " " + std::to_string(pos->y) };
 
+	/*SOME PRINT*/
+	if (gameState->currentRoom->IsRoomCleared())
+		App::Print(800, 700, "Room Cleared");
+	else
+		App::Print(800, 700, "Room Not Cleared");
+	App::Print(200, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
+	App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->items[0].size())).c_str());
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
 	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());
@@ -143,6 +144,9 @@ void Render()
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
 
+
+	/*********PLAYER'S INTERACTIONS*********/
+
 	auto actors{ gameState->currentRoom->GetActors() };
 	if (actors.size() != 0)
 	{
@@ -151,71 +155,49 @@ void Render()
 			if (static_cast<Item*>(actor)->GetInteractivity() == Interactivity::Interactive)
 				interactiveActors.emplace_back(actor);
 
-		// Horizontally
+		/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
+		std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
+			{
+				return
+					std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
+					<
+					std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
+			});
+
+
+		float ms{ player->GetMovementSpeed() };
+		if (player->GetDirection() == Direction::LEFT || player->GetDirection() == Direction::DOWN)
+			ms = -player->GetMovementSpeed();
+
+		float x{ 0 };
+		float y{ 0 };
+
 		if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
 		{
-			float ms{ player->GetMovementSpeed() };
-			if (player->GetDirection() == Direction::LEFT)
-				ms = -player->GetMovementSpeed();
-
-			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
-				{
-					return
-						std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
-						<
-						std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
-				});
-
-			if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x + ms, player->GetPosition()->y))
-			{
-				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
-				player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
-				if (dynamic_cast<ICollectable*>(interactiveActors[0]))
-				{
-					auto item{ dynamic_cast<ICollectable*>(interactiveActors[0]) };
-					if (player->Collect(dynamic_cast<Item*>(interactiveActors[0])->ID, item))
-					{
-						if (gameState->currentRoom->RemoveActor(interactiveActors[0]))
-						{
-							interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), interactiveActors[0]));
-							App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
-						}
-					}
-				}
-			}
+			x = player->GetPosition()->x + ms;
+			y = player->GetPosition()->y;
+		}
+		else
+		{
+			x = player->GetPosition()->x;
+			y = player->GetPosition()->y + ms;
 		}
 
-		// Vertically
-		if (player->GetDirection() == Direction::UP || player->GetDirection() == Direction::DOWN)
+		/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
+		if (player->GetCollider()->isColliding(player, interactiveActors[0], x, y))
 		{
-			float ms{ player->GetMovementSpeed() };
-			if (player->GetDirection() == Direction::DOWN)
-				ms = -player->GetMovementSpeed();
-			auto actors{ gameState->currentRoom->GetActors() };
+			App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
 
-			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [player](Actor* const& l, Actor* const& r)
-				{
-					return
-						std::sqrt(std::pow(player->GetPosition()->x - l->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - l->GetPosition()->y, 2))
-						<
-						std::sqrt(std::pow(player->GetPosition()->x - r->GetPosition()->x, 2) + std::pow(player->GetPosition()->y - r->GetPosition()->y, 2));
-				});
+			/*LIGHTER*/
+			player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
 
-			if (player->GetCollider()->isColliding(player, interactiveActors[0], player->GetPosition()->x, player->GetPosition()->y + ms))
+			/*COLLECT ITEMS*/
+			if (player->Collect(dynamic_cast<Item*>(interactiveActors[0])->ID, dynamic_cast<ICollectable*>(interactiveActors[0])))
 			{
-				App::Print(100, 600, ("Closest Interactive Item to Player : " + interactiveActors[0]->GetName()).c_str());
-				player->UseLighter(dynamic_cast<Candle*>(interactiveActors[0]));
-				if (dynamic_cast<ICollectable*>(interactiveActors[0]))
+				if (gameState->currentRoom->RemoveActor(interactiveActors[0]))
 				{
-					auto item{ dynamic_cast<ICollectable*>(interactiveActors[0]) };
-					if (player->Collect(dynamic_cast<Item*>(interactiveActors[0])->ID, item))
-					{
-						if (gameState->currentRoom->RemoveActor(interactiveActors[0]))
-						{
-							interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), interactiveActors[0]));
-							App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
-						}
-					}
+					interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), interactiveActors[0]));
+					App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
 				}
 			}
 		}
