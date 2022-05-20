@@ -22,8 +22,8 @@ public:
 
 	GameState() = default;
 	GameState(std::vector<Room*>& rooms);
-	GameState(Room*& currentRoom, std::vector<Room*>& rooms);
-	GameState(Room*& currentRoom);
+	GameState(Room* currentRoom, std::vector<Room*>& rooms);
+	GameState(Room* currentRoom);
 	~GameState();
 
 	Character* GetPlayer();

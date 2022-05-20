@@ -10,13 +10,13 @@ GameState::GameState(std::vector<Room*>& rooms) : currentRoom{ nullptr }
 	}
 }
 
-GameState::GameState(Room*& currentRoom, std::vector<Room*>& rooms) : currentRoom(std::move(currentRoom))
+GameState::GameState(Room* currentRoom, std::vector<Room*>& rooms) : currentRoom(std::move(currentRoom))
 {
-	for (auto room : rooms)
+	for (auto& room : rooms)
 		this->rooms.emplace_back(std::move(room));
 }
 
-GameState::GameState(Room*& currentRoom) : currentRoom{ std::move(currentRoom) }
+GameState::GameState(Room* currentRoom) : currentRoom{ std::move(currentRoom) }
 {
 }
 
@@ -34,6 +34,7 @@ GameState::~GameState()
 void GameState::AddPlayer(Character* player)
 {
 	this->player = player;
+	player = nullptr;
 }
 
 Character* GameState::GetPlayer()

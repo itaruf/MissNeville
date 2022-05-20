@@ -45,8 +45,14 @@ void Collision::SetWidth(float value)
 
 void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 {
-	if (colliderType == ColliderType::Overlap)
+	if (!actor)
 		return;
+
+	if (colliderType == ColliderType::Overlap)
+	{
+		actor = nullptr;
+		return;
+	}
 
 	// Middle Lines
 	/*App::DrawLine(
@@ -94,25 +100,35 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
 		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
 		r, g, b);
+
+	actor = nullptr;
 }
 
 Vector2D* Collision::GetDownLeftColPos(Actor* actor)
 {
-	return new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y - height);
+	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y - height) };
+	actor = nullptr;
+	return v;
 }
 
 Vector2D* Collision::GetDownRightColPos(Actor* actor)
 {
-	return new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y - height);
+	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y - height) };
+	actor = nullptr;
+	return v;
 
 }
 
 Vector2D* Collision::GetUpLeftColPos(Actor* actor)
 {
-	return new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y + height);
+	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y + height) };
+	actor = nullptr;
+	return v;
 }
 
 Vector2D* Collision::GetUpRightColPos(Actor* actor)
 {
-	return new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y + height);
+	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y + height) };
+	actor = nullptr;
+	return v;
 }

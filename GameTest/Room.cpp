@@ -21,6 +21,7 @@ Room::~Room()
 void Room::AddActor(Actor* actor)
 {
 	actors.emplace_back(actor);
+	actor = nullptr;
 }
 
 Actor* Room::GetActor(int index)
@@ -66,8 +67,7 @@ bool Room::RemoveActor(Actor* actor)
 	if (it != actors.end())
 	{
 		actors.erase(it);
-		actor = nullptr;
-		/*delete actor;*/
+		delete actor;
 		return true;
 	}
 	return false;

@@ -14,7 +14,7 @@ public:
 	~Candle() = default;
 
 	bool isEnlighted();
-	void SetEnlightenment(bool value);
+	void Enlight(bool value);
 };
 
 #endif

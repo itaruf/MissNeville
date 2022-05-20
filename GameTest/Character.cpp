@@ -109,11 +109,16 @@ bool Character::UseLighter(Candle* candle)
 			return false;
 
 		if (candle->isEnlighted())
+		{
+			candle = nullptr;
 			return false;
+		}
 
-		candle->SetEnlightenment(true);
+		candle->Enlight(true);
+		candle = nullptr;
 		return true;
 	}
+	candle = nullptr;
 	return false;
 }
 
@@ -122,11 +127,13 @@ bool Character::Collect(int ID, ICollectable* collectable)
 	if (!collectable)
 		return false;
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
 		inventory->items[ID].emplace_back(collectable->Collect());
+		collectable = nullptr;
 		return true;
 	}
+	collectable = nullptr;
 	return false;
 }
 float Character::GetGrabRange()

@@ -11,8 +11,8 @@ Inventory::Inventory(std::map<int, std::vector<InventoryItem*>>)
 
 Inventory::~Inventory()
 {
-	for (auto key : items)
-		for (auto item : key.second)
+	for (auto& key : items)
+		for (auto& item : key.second)
 			if (item)
 				delete item;
 }
@@ -42,6 +42,7 @@ bool Inventory::AddItem(InventoryItem* item)
 	if (items.find(item->ID) != items.end())
 	{
 		items[item->ID].emplace_back(item);
+		item = nullptr;
 		return true;
 	}
 
@@ -49,6 +50,7 @@ bool Inventory::AddItem(InventoryItem* item)
 	else 
 	{
 		items.insert(std::make_pair(item->ID, std::vector<InventoryItem*>({ item })));
+		item = nullptr;
 		return true;
 	}
 }

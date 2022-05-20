@@ -10,7 +10,7 @@ bool Candle::isEnlighted()
 	return enlighted;
 }
 
-void Candle::SetEnlightenment(bool value)
+void Candle::Enlight(bool value)
 {
 	if (!enlighted) 
 	{

@@ -56,18 +56,6 @@ void Init()
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
 	gameState->currentRoom->Init();
-
-	playerSprite = nullptr;
-	vector = nullptr;
-	collider = nullptr;
-	inventory = nullptr;
-	player = nullptr;
-
-	delete playerSprite;
-	delete vector;
-	delete collider;
-	delete inventory;
-	delete player;
 }
 
 template<
@@ -211,4 +199,5 @@ void Render()
 //------------------------------------------------------------------------
 void Shutdown()
 {
+	delete gameState.get();
 }
