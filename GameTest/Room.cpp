@@ -12,7 +12,7 @@ Room::Room(int ID, std::shared_ptr<GameState>& gameState) : ID{ ID }, gameState{
 
 Room::~Room()
 {
-	printf("ROOM DESTRUCTOR CALLED %d\n", (int) actors.size());
+	printf("ROOM DESTRUCTOR CALLED (%d items)\n", (int) actors.size());
 	for (auto& actor : actors)
 	{
 		if (actor)

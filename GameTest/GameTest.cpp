@@ -26,7 +26,6 @@
 #include <type_traits>
 #include <cmath>
 #include <map>
-#include <stdexcept> // std::length_error
 
 std::shared_ptr<GameState> gameState;
 //------------------------------------------------------------------------
@@ -56,6 +55,12 @@ void Init()
 	/*gameState->currentRoom->AddActor(player);*/
 	player->SetCurrentRoom(gameState->currentRoom);
 	gameState->currentRoom->Init();
+
+	player = nullptr;
+	vector = nullptr;
+	collider = nullptr;
+	inventory = nullptr;
+	playerSprite = nullptr;
 }
 
 template<
@@ -81,9 +86,6 @@ void Update(float deltaTime)
 
 	if (gameState->currentRoom)
 		gameState->currentRoom->Update(deltaTime);
-
-	player = nullptr;
-	delete player;
 }
 
 void Render()
@@ -105,11 +107,7 @@ void Render()
 	auto player{ gameState->GetPlayer() };
 
 	if (!player)
-	{
-		delete player;
-		player = nullptr;
 		return;
-	}
 
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);

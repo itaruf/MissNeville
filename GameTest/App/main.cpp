@@ -205,7 +205,8 @@ int main()
 
 		// And we are done.
 	}
-	getchar();
+	/*getchar();*/
+	return 0;
 }
 
 
