@@ -7,6 +7,7 @@ Enigme::Enigme(Status status) : status{ status }
 
 Enigme::~Enigme()
 {
+	printf("ENIGME DESTRUCTOR CALLED\n");
 }
 
 bool Enigme::IsCleared()

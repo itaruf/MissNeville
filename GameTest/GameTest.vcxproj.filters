@@ -38,6 +38,7 @@
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="InvPage.cpp" />
+    <ClCompile Include="ICollectable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">

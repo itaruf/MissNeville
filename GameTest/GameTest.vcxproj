@@ -64,7 +64,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>dxguid.lib;dsound.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -143,6 +143,7 @@
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTest.cpp" />
+    <ClCompile Include="ICollectable.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="InvPage.cpp" />

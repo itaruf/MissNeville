@@ -14,7 +14,7 @@ public:
 	int ID;
 
 	InventoryItem(Usability usability, int ID);
-	virtual ~InventoryItem() = default;
+	virtual ~InventoryItem();
 
 	virtual bool UseItem();
 };

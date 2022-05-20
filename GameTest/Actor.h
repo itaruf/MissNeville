@@ -22,11 +22,11 @@ protected:
 	CSimpleSprite* sprite;
 	Vector2D* position;
 	Collision* collider;
-	std::shared_ptr<Room> currentRoom;
+	Room* currentRoom;
 	Mobility mobility = defaultMobility;
 	Direction direction = defaultDirection;
 public:
-	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom);
+	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom);
 	Actor(Actor* actor);
 	virtual ~Actor();
 
@@ -34,7 +34,7 @@ public:
 	CSimpleSprite* GetSprite();
 	Vector2D* GetPosition();
 	Collision* GetCollider();
-	std::shared_ptr<Room> GetCurrentRoom();
+	Room* GetCurrentRoom();
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
 	Vector2D* GetForwardVector();
@@ -46,7 +46,7 @@ public:
 	void SetPosition(Vector2D* position);
 	void SetPosition(float x = 0, float y = 0);
 	void SetCollider(Collision* collider);
-	void SetCurrentRoom(std::shared_ptr<Room> room);
+	void SetCurrentRoom(Room* room);
 };
 
 #endif

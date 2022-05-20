@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------------
 #include "stdafx.h"
 //---------------------------------------------------------------------------------
+#include <conio.h>  
 #include <windows.h>  // for MS Windows
 #include <cstdio>
 #include <iostream>
@@ -152,8 +153,9 @@ void Idle()
 		}
 
 		if (App::IsKeyPressed(APP_QUIT_KEY))
-		{		
-			exit(0);
+		{	
+			// exit(0);
+			glutLeaveMainLoop(); // Instead of killing the program :(
 		}
 		gUpdateDeltaTime.Start();
 	}
@@ -165,46 +167,45 @@ void CheckMemCallback()
 {
 }
 
-
 //---------------------------------------------------------------------------------
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance, 	_In_opt_ HINSTANCE hPrevInstance,	_In_ LPWSTR    lpCmdLine, _In_ int       nCmdShow)
+int main()
 {	
-	int argc = 0;	char* argv = "";
+	{
+		int argc = 0;	char* argv = "";
 
-	// Exit handler to check memory on exit.
-	const int result_1 = std::atexit(CheckMemCallback);
+		// Exit handler to check memory on exit.
+		const int result_1 = std::atexit(CheckMemCallback);
 
-	// Setup glut.
-	glutInit(&argc, &argv);
-	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	glutInitWindowPosition(100, 100);
-	int glutWind = glutCreateWindow(APP_WINDOW_TITLE);	
-	HDC dc = wglGetCurrentDC();
-	MAIN_WINDOW_HANDLE = WindowFromDC(dc);
-	glutIdleFunc(Idle);
-	glutDisplayFunc(Display);       // Register callback handler for window re-paint event	
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
-	InitGL();                       // Our own OpenGL initialization
+		// Setup glut.
+		glutInit(&argc, &argv);
+		glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		glutInitWindowPosition(100, 100);
+		int glutWind = glutCreateWindow(APP_WINDOW_TITLE);
+		HDC dc = wglGetCurrentDC();
+		MAIN_WINDOW_HANDLE = WindowFromDC(dc);
+		glutIdleFunc(Idle);
+		glutDisplayFunc(Display);       // Register callback handler for window re-paint event	
+		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+		InitGL();                       // Our own OpenGL initialization
 
+		// Init sounds system.
+		CSimpleSound::GetInstance().Initialize(MAIN_WINDOW_HANDLE);
 
+		// Call user defined init.
+		Init();
 
-	// Init sounds system.
-	CSimpleSound::GetInstance().Initialize(MAIN_WINDOW_HANDLE);
-	
-	// Call user defined init.
-	Init();
+		// Enter glut the event-processing loop				
+		glutMainLoop();
 
-	// Enter glut the event-processing loop				
-	glutMainLoop();
-	
-	// Call user shutdown.
-	Shutdown();	
+		// Call user shutdown.
+		Shutdown();
 
-	// Shutdown sound system.
-	CSimpleSound::GetInstance().Shutdown();
+		// Shutdown sound system.
+		CSimpleSound::GetInstance().Shutdown();
 
-	// And we are done.
-	return 0;
+		// And we are done.
+	}
+	getchar();
 }
 
 

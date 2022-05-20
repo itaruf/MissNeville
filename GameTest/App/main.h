@@ -4,6 +4,9 @@
 #define _MAIN_H_
 
 #include <Windows.h>
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 extern int WINDOW_WIDTH;
 extern int WINDOW_HEIGHT;

@@ -17,8 +17,8 @@ protected:
 	float movementSpeed;
 	float grabRange{ 500 };
 public:
-	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, float HP, float movementSpeed, Inventory* inventory);
-	~Character() = default;
+	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, float HP, float movementSpeed, Inventory* inventory);
+	~Character();
 
 	Inventory* inventory;
 

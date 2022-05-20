@@ -7,9 +7,13 @@ CandleEnigme::CandleEnigme(Status status) : Enigme(status)
 
 CandleEnigme::~CandleEnigme()
 {
-	for (auto candle : candles)
+	printf("CANDLE ENIGME DESTRUCTOR CALLED\n");
+
+	/*for (auto& candle : candles)
+	{
 		if (candle)
 			delete candle;
+	}*/
 	candles.clear();
 }
 
@@ -18,7 +22,7 @@ bool CandleEnigme::IsCleared()
 	if (status == Status::CLEARED || status == Status::NOTSTARTED)
 		return true;
 
-	for (const auto candle : candles)
+	for (const auto& candle : candles)
 	{
 		if (!candle->isEnlighted())
 			return false;

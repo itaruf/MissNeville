@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{currentRoom}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentRoom{currentRoom}
 {
 	SetPosition(position);
 }
@@ -12,19 +12,30 @@ Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(
 
 Actor::~Actor()
 {
-	std::cout << "ACTOR DESTRUCTOR CALLED" << std::endl;
+	printf("ACTOR DESTRUCTOR CALLED\n");
 
 	if (sprite)
+	{
 		delete sprite;
+		sprite = nullptr;
+	}
 
 	if (position)
+	{
 		delete position;
+		position = nullptr;
+	}
 
 	if (collider)
+	{
 		delete collider;
+		collider = nullptr;
+	}
 
-	/*if (currentRoom)
-		delete currentRoom;*/
+	if (currentRoom)
+	{
+		currentRoom = nullptr;
+	}
 }
 
 const std::string& Actor::GetName() const
@@ -84,12 +95,12 @@ void Actor::SetCollider(Collision* collider)
 	this->collider = collider;
 }
 
-std::shared_ptr<Room> Actor::GetCurrentRoom()
+Room* Actor::GetCurrentRoom()
 {
 	return currentRoom;
 }
 
-void Actor::SetCurrentRoom(std::shared_ptr<Room> room)
+void Actor::SetCurrentRoom(Room* room)
 {
 	this->currentRoom = room;
 }

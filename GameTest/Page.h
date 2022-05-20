@@ -11,7 +11,7 @@ class Page : public Item, public ICollectable
 private:
 protected:
 public:
-	Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, Interactivity interactivity);
+	Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, Interactivity interactivity);
 	~Page();
 
 	InventoryItem* Collect() override;

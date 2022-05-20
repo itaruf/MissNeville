@@ -1,20 +1,26 @@
 #include "stdafx.h"
 #include "Room.h"
 
-Room::Room(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState> gameState) : ID{ ID }, actors{ actors }, gameState{ gameState } {}
+Room::Room(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState) : ID{ ID }, actors{ actors }, gameState{ gameState } {}
 
-Room::Room(int ID, Actor* actor, std::shared_ptr<GameState> gameState) : ID{ ID }, gameState{ gameState }
+Room::Room(int ID, Actor* actor, std::shared_ptr<GameState>& gameState) : ID{ ID }, gameState{ gameState }
 { 
 	actors.emplace_back(actor); 
 }
 
-Room::Room(int ID, std::shared_ptr<GameState> gameState) : ID{ ID }, gameState{ gameState } {}
+Room::Room(int ID, std::shared_ptr<GameState>& gameState) : ID{ ID }, gameState{ gameState } {}
 
 Room::~Room()
 {
-	for (auto actor : actors)
+	printf("ROOM DESTRUCTOR CALLED %d\n", (int) actors.size());
+	for (auto& actor : actors)
+	{
 		if (actor)
+		{
 			delete actor;
+			actor = nullptr;
+		}
+	}
 	actors.clear();
 }
 

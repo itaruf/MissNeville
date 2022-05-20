@@ -1,8 +1,14 @@
 #include "stdafx.h"
 #include "Candle.h"
 
-Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, Interactivity interactivity) : Item(name, sprite, position, collider, currentRoom, interactivity)
+Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, Interactivity interactivity) : Item(name, sprite, position, collider, currentRoom, interactivity)
 {
+}
+
+Candle::~Candle()
+{
+	printf("CANDLE DESTRUCTOR CALLED\n");
+
 }
 
 bool Candle::isEnlighted()

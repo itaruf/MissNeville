@@ -1,8 +1,15 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::shared_ptr<Room> currentRoom, float HP, float movementSpeed, Inventory* inventory) : Actor(name, sprite, position, collider, currentRoom), HP{ HP }, movementSpeed{ movementSpeed }, inventory{ inventory }
+Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, float HP, float movementSpeed, Inventory* inventory) : Actor(name, sprite, position, collider, currentRoom), HP{ HP }, movementSpeed{ movementSpeed }, inventory{ inventory }
 {
+}
+
+Character::~Character()
+{
+	printf("CHARACTER DESTRUCTOR CALLED\n");
+	delete inventory;
+	inventory = nullptr;
 }
 
 const float& Character::GetHP() const

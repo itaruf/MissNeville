@@ -11,9 +11,10 @@ Inventory::Inventory(std::map<int, std::vector<InventoryItem*>>)
 
 Inventory::~Inventory()
 {
+	printf("INVENTORY DESTRUCTOR CALLED\n");
+
 	for (auto& key : items)
 		for (auto& item : key.second)
-			if (item)
 				delete item;
 }
 

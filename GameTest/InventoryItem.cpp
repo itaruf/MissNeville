@@ -5,6 +5,11 @@ InventoryItem::InventoryItem(Usability usability, int ID) : usability{usability}
 {
 }
 
+InventoryItem::~InventoryItem()
+{
+	printf("INVENTORYITEM DESTRUCTOR CALLED\n");
+}
+
 bool InventoryItem::UseItem()
 {
 	return false;

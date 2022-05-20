@@ -8,6 +8,8 @@ Collision::Collision(ColliderType colliderType, float height, float width, Vecto
 
 Collision::~Collision()
 {
+	/*printf("COLLISION DESTRUCTOR CALLED\n");*/
+
 	if (offset)
 		delete offset;
 }

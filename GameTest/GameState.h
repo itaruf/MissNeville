@@ -16,11 +16,11 @@ private:
 protected:
 public:
 	int roomIndex{ 0 };
-	std::shared_ptr<Room> currentRoom{ nullptr };
-	std::vector<Room*> rooms{ nullptr };
+	Room* currentRoom;
+	std::vector<Room*> rooms;
 	Character* player{ nullptr };
 
-	GameState() = default;
+	GameState();
 	GameState(std::vector<Room*>& rooms);
 	GameState(Room* currentRoom, std::vector<Room*>& rooms);
 	GameState(Room* currentRoom);

@@ -1,26 +1,30 @@
 #include "stdafx.h"
 #include "Entrance.h"
 
-Entrance::Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState> gameState, CandleEnigme* candleEnigme) : Room(ID, actors, gameState), candleEnigme{std::move(candleEnigme)}
+Entrance::Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme) : Room(ID, actors, gameState), candleEnigme{std::move(candleEnigme)}
 {
 }
 
-Entrance::Entrance(int ID, Actor* actor, std::shared_ptr<GameState> gameState, CandleEnigme* candleEnigme) : Room(ID, actor, gameState), candleEnigme{ std::move(candleEnigme)}
+Entrance::Entrance(int ID, Actor* actor, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme) : Room(ID, actor, gameState), candleEnigme{ std::move(candleEnigme)}
 {
 }
 
-Entrance::Entrance(int ID, std::shared_ptr<GameState> gameState, CandleEnigme* candleEnigme) : Room(ID, gameState), candleEnigme{std::move(candleEnigme)}
+Entrance::Entrance(int ID, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme) : Room(ID, gameState), candleEnigme{std::move(candleEnigme)}
 {
 }
 
 Entrance::~Entrance()
 {
-	if (candleEnigme)
-		delete candleEnigme;
+	printf("ENTRANCE DESTRUCTOR CALLED\n");
+
+	delete candleEnigme;
+	candleEnigme = nullptr;
 	
-	for (auto candle : candles)
+	/*for (auto& candle : candles)
+	{
 		if (candle)
 			delete candle;
+	}*/
 	candles.clear();
 }
 
@@ -97,6 +101,8 @@ void Entrance::Init()
 
 	/*Start Enigme*/
 	candleEnigme->StartEnigme();
+
+	gameState.get()->rooms.emplace_back(this);
 }
 
 void Entrance::Update(float deltaTime)

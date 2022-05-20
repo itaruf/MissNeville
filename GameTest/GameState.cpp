@@ -3,7 +3,7 @@
 
 GameState::GameState(std::vector<Room*>& rooms) : currentRoom{ nullptr }
 {
-	for (auto room : rooms)
+	for (auto& room : rooms)
 	{
 		if (room)
 			this->rooms.emplace_back(std::move(room));
@@ -13,21 +13,47 @@ GameState::GameState(std::vector<Room*>& rooms) : currentRoom{ nullptr }
 GameState::GameState(Room* currentRoom, std::vector<Room*>& rooms) : currentRoom(std::move(currentRoom))
 {
 	for (auto& room : rooms)
-		this->rooms.emplace_back(std::move(room));
+	{
+		if (room)
+			this->rooms.emplace_back(std::move(room));
+	}
 }
 
 GameState::GameState(Room* currentRoom) : currentRoom{ std::move(currentRoom) }
 {
 }
 
+
+GameState::GameState() : currentRoom{ nullptr }
+{
+
+}
+
+
 GameState::~GameState()
 {
-	if (player)
-		delete player;
+	printf("GAME STATE DESTRUCTOR CALLED\n");
 
-	for (auto room : rooms)
+	if (player)
+	{
+		delete player;
+		nullptr;
+	}
+
+	/*if (currentRoom)
+	{
+		delete currentRoom;
+		currentRoom = nullptr;
+	}*/
+
+	for (auto& room : rooms) 
+	{
 		if (room)
+		{
 			delete room;
+			room = nullptr;
+		}
+	}
 	rooms.clear();
 }
 

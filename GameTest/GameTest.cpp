@@ -35,7 +35,7 @@ std::shared_ptr<GameState> gameState;
 void Init()
 {
 	gameState = std::make_shared<GameState>();
-	gameState->currentRoom = std::make_shared<Entrance>(0, gameState, nullptr);
+	gameState->currentRoom = new Entrance(0, gameState, nullptr);
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4) };
@@ -107,6 +107,7 @@ void Render()
 	if (!player)
 	{
 		delete player;
+		player = nullptr;
 		return;
 	}
 
@@ -192,12 +193,10 @@ void Render()
 	}
 }
 
-
 //------------------------------------------------------------------------
 // Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.
 // Just before the app exits.²
 //------------------------------------------------------------------------
 void Shutdown()
 {
-	delete gameState.get();
 }

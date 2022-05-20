@@ -9,6 +9,6 @@ class ICollectable
 public:
 	// pure virtual function
 	virtual InventoryItem* Collect() = 0;
-	virtual ~ICollectable() = default;
+	virtual ~ICollectable();
 };
 

@@ -18,11 +18,11 @@ private:
 protected:
 	int ID;
 	std::vector<Actor*> actors;
-	std::shared_ptr<GameState> gameState;
+	std::shared_ptr<GameState>& gameState;
 public:
-	Room(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState> gameState);
-	Room(int ID, Actor* actor, std::shared_ptr<GameState> gameState);
-	Room(int ID, std::shared_ptr<GameState> gameState);
+	Room(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState);
+	Room(int ID, Actor* actor, std::shared_ptr<GameState>& gameState);
+	Room(int ID, std::shared_ptr<GameState>& gameState);
 
 	virtual ~Room();
 
