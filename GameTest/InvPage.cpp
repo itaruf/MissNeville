@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "InvPage.h"
 
-InvPage::InvPage(Usability usability, int ID) : InventoryItem(usability, ID)
+InvPage::InvPage(Usability usability, int ID, std::string& description) : InventoryItem(usability, ID, description)
 {
 }
 

@@ -12,5 +12,6 @@ Page::~Page()
 
 InventoryItem* Page::Collect()
 {
-	return new InvPage(InventoryItem::Usability::Usable, 0);
+	std::string description{ "page" };
+	return new InvPage(InventoryItem::Usability::Usable, 0, description);
 }

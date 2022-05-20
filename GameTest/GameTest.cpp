@@ -184,7 +184,7 @@ void Render()
 				if (gameState->currentRoom->RemoveActor(interactiveActors[0]))
 				{
 					interactiveActors.erase(std::find(interactiveActors.begin(), interactiveActors.end(), interactiveActors[0]));
-					App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());
+					/*App::Print(100, 500, ("Removed: " + interactiveActors[0]->GetName()).c_str());*/
 				}
 			}
 		}

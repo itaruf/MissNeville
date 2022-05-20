@@ -12,8 +12,9 @@ public:
 
 	Usability usability;
 	int ID;
+	std::string description;
 
-	InventoryItem(Usability usability, int ID);
+	InventoryItem(Usability usability, int ID, std::string& description);
 	virtual ~InventoryItem();
 
 	virtual bool UseItem();
