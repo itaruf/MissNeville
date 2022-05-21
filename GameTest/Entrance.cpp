@@ -35,7 +35,7 @@ void Entrance::Init()
 	{ 
 		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
 		{
-			auto item = new Item("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this, Interactivity::Noninteractive);
+			auto item = new Collectable("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this, Interactivity::Noninteractive);
 			item->GetSprite()->SetFrame(1);
 			item->GetSprite()->SetScale(0.5);
 			AddActor(item);
@@ -46,63 +46,63 @@ void Entrance::Init()
 	candleEnigme = new CandleEnigme(CandleEnigme::Status::PENDING);
 
 	/*Initiating Props */
-	std::vector<Vector2D*> v{ new Vector2D(514,464), new Vector2D(446,428), new Vector2D(580,428), new Vector2D(460,356), new Vector2D(564,356) };
 
-	auto wall = new Item("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(64 * 2, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), gameState->currentRoom, Interactivity::Noninteractive);
+	auto wall = new Actor("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(64 * 2, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), gameState->currentRoom);
 	wall->GetSprite()->SetFrame(1);
 	wall->GetSprite()->SetScale(3);
 
 	AddActor(wall);
 
-	auto wall2 = new Item("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), gameState->currentRoom, Interactivity::Noninteractive);
+	auto wall2 = new Actor("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), gameState->currentRoom);
 	wall2->GetSprite()->SetFrame(1);
 	wall2->GetSprite()->SetScale(3);
 	AddActor(wall2);
 
-	auto wall3 = new Item("wall3", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), gameState->currentRoom, Interactivity::Noninteractive);
+	auto wall3 = new Actor("wall3", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), gameState->currentRoom);
 	wall3->GetSprite()->SetFrame(1);
 	wall3->GetSprite()->SetScale(3);
 	AddActor(wall3);
 
-	auto wall4 = new Item("wall4", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - 64 * 2, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), gameState->currentRoom, Interactivity::Noninteractive);
+	auto wall4 = new Actor("wall4", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - 64 * 2, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), gameState->currentRoom);
 	wall4->GetSprite()->SetFrame(1);
 	wall4->GetSprite()->SetScale(3);
 	AddActor(wall4);
 
-	auto carpet = new Item("Carpet", App::CreateSprite(".\\TestData\\TMW2\\carpet-b.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64), gameState->currentRoom, Interactivity::Noninteractive);
+	auto carpet = new Actor("Carpet", App::CreateSprite(".\\TestData\\TMW2\\carpet-b.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64), gameState->currentRoom);
 	carpet->GetSprite()->SetFrame(1);
 	carpet->GetSprite()->SetScale(3);
 	AddActor(carpet);
 
-	for (int i = 0; i < v.size(); i++)
+	std::vector<Vector2D*> v{ new Vector2D(514,466), new Vector2D(446,432), new Vector2D(580,432), new Vector2D(460,356), new Vector2D(564,356) };
+	for (int i = 0; i < v.size(); ++i)
 	{
-		candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10), gameState->currentRoom, Interactivity::Interactive));
+		candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10), gameState->currentRoom));
 		candles[i]->GetSprite()->SetFrame(0);
 		candles[i]->GetSprite()->SetScale(0.5);
 		AddActor(candles.at(i));
 		candleEnigme->GetCandles().emplace_back(candles[i]);
 	}
 
-	auto pentagramme = new Item("Pentagramme", App::CreateSprite(".\\TestData\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), gameState->currentRoom, Interactivity::Noninteractive);
+	auto pentagramme = new Actor("Pentagramme", App::CreateSprite(".\\TestData\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), gameState->currentRoom);
 	pentagramme->GetSprite()->SetFrame(0);
 	pentagramme->GetSprite()->SetScale(3);
 	AddActor(pentagramme);
 
-	auto bed = new Item("Bed", App::CreateSprite(".\\TestData\\TMW2\\bed-blue-b.bmp", 1, 1), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32), gameState->currentRoom, Interactivity::Noninteractive);
+	auto bed = new Actor("Bed", App::CreateSprite(".\\TestData\\TMW2\\bed-blue-b.bmp", 1, 1), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32), gameState->currentRoom);
 	bed->GetSprite()->SetFrame(0);
 	bed->GetSprite()->SetScale(2);
 	AddActor(bed);
 
-	auto  girl = new Item("Girl", App::CreateSprite(".\\TestData\\Enemy-08-1.bmp", 3, 4), new Vector2D(724, 464), new Collision(Collision::ColliderType::Block, 32, 32), gameState->currentRoom, Interactivity::Noninteractive);
+	auto  girl = new Actor("Girl", App::CreateSprite(".\\TestData\\Enemy-08-1.bmp", 3, 4), new Vector2D(724, 464), new Collision(Collision::ColliderType::Block, 32, 32), gameState->currentRoom);
 	girl->GetSprite()->SetFrame(1);
 	girl->GetSprite()->SetScale(3);
 	AddActor(girl);
 
+	/*Add this room to the collection of rooms*/
+	gameState.get()->rooms.emplace_back(this);
 
 	/*Start Enigme*/
 	candleEnigme->StartEnigme();
-
-	gameState.get()->rooms.emplace_back(this);
 }
 
 void Entrance::Update(float deltaTime)
@@ -149,7 +149,8 @@ bool Entrance::IsRoomCleared()
 		{
 			if (candleEnigme->status == Enigme::Status::PENDING)
 			{
-				auto page = new Page("Page", App::CreateSprite(".\\TestData\\Tiles-Props-pack\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, Interactivity::Interactive);
+				std::string description = "Page 1";
+				auto page = new Page("Page", App::CreateSprite(".\\TestData\\Tiles-Props-pack\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, new InventoryItem(InventoryItem::Usability::Usable, 0, description), 0);
 				page->GetSprite()->SetFrame(0);
 				page->GetSprite()->SetScale(4);
 				AddActor(page);

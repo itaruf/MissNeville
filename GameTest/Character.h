@@ -7,6 +7,7 @@
 #include "EDirection.h"
 #include "Candle.h"
 #include "Inventory.h"
+#include "ICollectable.h"
 
 class Candle;
 class Character : public Actor
@@ -32,7 +33,8 @@ public:
 
 	void MoveVertically();
 	void MoveHorizontally();
-	bool UseLighter(Candle* candle);
-	bool Collect(int ID, ICollectable* collectable);
+	/*bool UseLighter(Candle* candle);*/
+	bool Interact(int ID, IInteractive* actor);
+	bool Interact(int ID, ICollectable* collectable);
 };
 #endif

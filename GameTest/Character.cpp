@@ -108,28 +108,43 @@ void Character::MoveHorizontally()
 	}
 }
 
-bool Character::UseLighter(Candle* candle)
+//bool Character::UseLighter(Candle* candle)
+//{
+//	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+//	{
+//		if (!candle)
+//			return false;
+//
+//		if (candle->isEnlighted())
+//		{
+//			candle = nullptr;
+//			return false;
+//		}
+//
+//		candle->Enlight(true);
+//		candle = nullptr;
+//		return true;
+//	}
+//	candle = nullptr;
+//	return false;
+//}
+
+bool Character::Interact(int ID, IInteractive* actor)
 {
+	if (!actor)
+		return false;
+
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		if (!candle)
-			return false;
-
-		if (candle->isEnlighted())
-		{
-			candle = nullptr;
-			return false;
-		}
-
-		candle->Enlight(true);
-		candle = nullptr;
+		actor->Interact();
+		actor = nullptr;
 		return true;
 	}
-	candle = nullptr;
+	actor = nullptr;
 	return false;
 }
 
-bool Character::Collect(int ID, ICollectable* collectable)
+bool Character::Interact(int ID, ICollectable* collectable)
 {
 	if (!collectable)
 		return false;
@@ -137,12 +152,15 @@ bool Character::Collect(int ID, ICollectable* collectable)
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
 		inventory->items[ID].emplace_back(collectable->Collect());
+		currentRoom->RemoveActor(dynamic_cast<Actor*>(collectable));
 		collectable = nullptr;
 		return true;
 	}
 	collectable = nullptr;
 	return false;
 }
+
+
 float Character::GetGrabRange()
 {
 	return grabRange;

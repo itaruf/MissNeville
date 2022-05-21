@@ -5,10 +5,11 @@
 
 class InventoryItem;
 // Interface
-class ICollectable
+class IInteractive
 {
 public:
 	// pure virtual function
-	virtual InventoryItem* Collect() = 0;
-	virtual ~ICollectable();
+	virtual void Interact() = 0;
+	virtual ~IInteractive();
 };
+

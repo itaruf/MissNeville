@@ -29,7 +29,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Enigme.cpp" />
@@ -38,6 +38,7 @@
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="InvPage.cpp" />
+    <ClCompile Include="IInteractive.cpp" />
     <ClCompile Include="ICollectable.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +77,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="EDirection.h" />
     <ClInclude Include="EMobility.h" />
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="Collectable.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Page.h" />
     <ClInclude Include="Enigme.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="Interactivity.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InvPage.h" />
+    <ClInclude Include="IInteractive.h" />
     <ClInclude Include="ICollectable.h" />
   </ItemGroup>
   <ItemGroup>

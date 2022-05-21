@@ -2,7 +2,7 @@
 #ifndef INVENTORY_H_
 #define INVENTORY_H_
 
-#include "Item.h"
+#include "Collectable.h"
 #include "Page.h"
 #include <vector>
 #include "InventoryItem.h"
