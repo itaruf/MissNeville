@@ -11,8 +11,7 @@ Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(
 }
 
 Actor::~Actor()
-{
-	printf("ACTOR DESTRUCTOR CALLED\n");
+{	std::cout << "ACTOR DESTRUCTOR CALLED" << std::endl;
 
 	if (sprite)
 	{

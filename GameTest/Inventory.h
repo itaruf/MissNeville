@@ -7,22 +7,22 @@
 #include <vector>
 #include "InventoryItem.h"
 #include <map>
+#include <stdexcept>      // std::length_error
 
 class Inventory
 {
 private:
 protected:
 public:
-	std::map<int, std::vector<InventoryItem*>> items;
+	std::map<int, std::pair<bool, std::vector<InventoryItem*>>> bags;
 	Inventory();
 	Inventory(std::map<int, std::vector<InventoryItem*>>);
 	~Inventory();
 
 	bool AddItem(InventoryItem* item);
 	bool RemoveItem(InventoryItem* item);
-	bool RemoveItem(int ID);
-
-	InventoryItem* GetItem(int ID);
+	bool IsBagExist(int ID);
+	InventoryItem* GetItem(int ID, int slotNumber);
 };
 
 #endif

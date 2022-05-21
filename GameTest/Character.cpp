@@ -44,7 +44,7 @@ bool Character::isMoving()
 
 void Character::MoveVertically()
 {
-	if (App::GetController().GetLeftThumbStickY() > 0.5f)
+	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP) || App::GetController().GetLeftThumbStickY() > 0.5f)
 	{
 		direction = Direction::UP;
 		sprite->SetAnimation(sprite->ANIM_FORWARDS);
@@ -59,7 +59,7 @@ void Character::MoveVertically()
 		sprite->SetPosition(position->x, position->y + movementSpeed);
 	}
 
-	else if (App::GetController().GetLeftThumbStickY() < -0.5f)
+	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN) || App::GetController().GetLeftThumbStickY() < -0.5f)
 	{
 		direction = Direction::DOWN;
 		sprite->SetAnimation(sprite->ANIM_BACKWARDS);
@@ -77,7 +77,8 @@ void Character::MoveVertically()
 
 void Character::MoveHorizontally()
 {
-	if (App::GetController().GetLeftThumbStickX() > 0.5f)
+	// D or LeftThumbStick X
+	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().GetLeftThumbStickX() > 0.5f)
 	{
 		direction = Direction::RIGHT;
 		sprite->SetAnimation(sprite->ANIM_RIGHT);
@@ -92,7 +93,8 @@ void Character::MoveHorizontally()
 		sprite->SetPosition(position->x + movementSpeed, position->y);
 	}
 
-	else if (App::GetController().GetLeftThumbStickX() < -0.5f)
+	// Q or LeftThumbStick X
+	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().GetLeftThumbStickX() < -0.5f)
 	{
 		direction = Direction::LEFT;
 		sprite->SetAnimation(sprite->ANIM_LEFT);
@@ -134,7 +136,7 @@ bool Character::Interact(int ID, IInteractive* actor)
 	if (!actor)
 		return false;
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
 		actor->Interact();
 		actor = nullptr;
@@ -144,20 +146,66 @@ bool Character::Interact(int ID, IInteractive* actor)
 	return false;
 }
 
-bool Character::Interact(int ID, ICollectable* collectable)
+bool Character::Interact(Collectable* collectable)
 {
 	if (!collectable)
 		return false;
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		inventory->items[ID].emplace_back(collectable->Collect());
-		currentRoom->RemoveActor(dynamic_cast<Actor*>(collectable));
+		inventory->bags[collectable->ID].second.emplace_back(collectable->Collect());
+		currentRoom->RemoveActor(collectable);
 		collectable = nullptr;
 		return true;
 	}
 	collectable = nullptr;
 	return false;
+}
+
+void Character::OpenInventory(int ID)
+{
+	if (!inventory->IsBagExist(ID))
+		return;
+
+	if (isBagOpened(ID))
+		CloseInventory(ID);
+
+	else
+	{
+		// the inventory at ID is now considered opened
+		inventory->bags[ID].first = true;
+		printf("Bag %d is now opened", ID);
+	}
+}
+
+void Character::CloseInventory(int ID)
+{
+	if (!inventory->IsBagExist(ID))
+		return;
+
+	if (!isBagOpened(ID))
+		return;
+
+	// the inventory at ID is now considered closed
+	inventory->bags[ID].first = false;
+	printf("Bag %d is now closed", ID);
+}
+
+bool Character::isBagOpened(int ID)
+{
+	if (inventory->IsBagExist(ID))
+	{
+		return inventory->bags[ID].first;
+	}
+	return false;
+}
+
+void Character::GoToBagSlot(int ID, int slotNumber)
+{
+	if (isBagOpened(ID))
+	{
+		std::cout << inventory->GetItem(ID, slotNumber)->description << std::endl;
+	}
 }
 
 

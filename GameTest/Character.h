@@ -35,6 +35,10 @@ public:
 	void MoveHorizontally();
 	/*bool UseLighter(Candle* candle);*/
 	bool Interact(int ID, IInteractive* actor);
-	bool Interact(int ID, ICollectable* collectable);
+	bool Interact(Collectable* collectable);
+	void OpenInventory(int ID);
+	void CloseInventory(int ID);
+	bool isBagOpened(int ID);
+	void GoToBagSlot(int ID, int slotNumber);
 };
 #endif

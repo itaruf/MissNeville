@@ -82,6 +82,21 @@ void Update(float deltaTime)
 		player->isMoving();
 		player->MoveHorizontally();
 		player->MoveVertically();
+
+		if (App::IsKeyPressed(0x31) || App::GetController().CheckButton(XINPUT_GAMEPAD_RIGHT_SHOULDER, true))
+			player->OpenInventory(0);
+
+		if (player->isBagOpened(0))
+		{
+			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
+				player->GoToBagSlot(0, 0);
+			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
+				player->GoToBagSlot(0, 1);
+			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+				player->GoToBagSlot(0, 2);
+			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+				player->GoToBagSlot(0, 3);
+		}
 	}
 
 	if (gameState->currentRoom)
@@ -122,7 +137,7 @@ void Render()
 		App::Print(800, 700, "Room Not Cleared");
 
 	App::Print(200, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
-	App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->items[0].size())).c_str());
+	App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
 	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());
@@ -132,7 +147,6 @@ void Render()
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
 
-
 	/*********PLAYER'S INTERACTIONS*********/
 
 	auto actors{ gameState->currentRoom->GetActors() };
@@ -140,7 +154,7 @@ void Render()
 	{
 		std::vector<Actor*> interactiveActors{};
 		for (auto& actor : actors)
-			if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
+			if (dynamic_cast<Collectable*>(actor) || dynamic_cast<IInteractive*>(actor))
 				interactiveActors.emplace_back(actor);
 
 		if (interactiveActors.size() > 0) 
@@ -182,19 +196,18 @@ void Render()
 			if (player->GetCollider()->isColliding(player, closestActor, x, y))
 			{
 			
-				/*INTERACT WITH ITEMS*/
+				/*INTERACT WITH NON COLLECTIBLE ITEMS*/
 				auto tmp = dynamic_cast<IInteractive*>(closestActor);
 				if (tmp)
 				{
 					player->Interact(0, tmp);
 					return;
 				}
-				
 				/*COLLECT ITEMS*/
-				auto tmp2 = dynamic_cast<ICollectable*>(closestActor);
+				auto tmp2 = dynamic_cast<Collectable*>(closestActor);
 				if (tmp2)
 				{
-					player->Interact(dynamic_cast<Collectable*>(closestActor)->ID, tmp2);
+					player->Interact(tmp2);
 					return;
 				}
 			}
