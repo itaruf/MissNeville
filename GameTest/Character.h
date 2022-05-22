@@ -34,11 +34,10 @@ public:
 	void MoveVertically();
 	void MoveHorizontally();
 	/*bool UseLighter(Candle* candle);*/
-	bool Interact(int ID, IInteractive* actor);
+	bool Interact(IInteractive* actor);
 	bool Interact(Collectable* collectable);
 	void OpenInventory(int ID);
 	void CloseInventory(int ID);
-	bool isBagOpened(int ID);
 	void GoToBagSlot(int ID, int slotNumber);
 };
 #endif

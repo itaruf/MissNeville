@@ -25,6 +25,8 @@ public:
 	bool AddItem(InventoryItem* item);
 	bool RemoveItem(InventoryItem* item);
 	bool IsBagExist(int ID);
+	bool IsBagOpened(int ID);
+	bool IsAnyBagAlreadyOpened();
 	InventoryItem* GetItem(int ID, int slotNumber);
 };
 

@@ -13,9 +13,12 @@ Inventory::~Inventory()
 {
 	printf("INVENTORY DESTRUCTOR CALLED\n");
 
-	for (auto& key : bags)
-		for (auto& item : key.second.second)
-				delete item;
+	for (auto& bag : bags)
+		for (auto& item : bag.second.second)
+		{
+			delete item;
+			item = nullptr;
+		}
 }
 
 InventoryItem* Inventory::GetItem(int ID, int slotNumber)
@@ -51,6 +54,28 @@ bool Inventory::IsBagExist(int ID)
 	return false;
 }
 
+bool Inventory::IsBagOpened(int ID)
+{
+	if (!IsBagExist(ID))
+		return false;
+
+	if (bags[ID].first)
+		return true;
+
+	return false;
+}
+
+bool Inventory::IsAnyBagAlreadyOpened()
+{
+	for (auto i = 0; i < nbBags; ++i)
+	{
+		if (IsBagOpened(i))
+			return true;
+	}
+
+	return false;
+}
+
 bool Inventory::AddItem(InventoryItem* item)
 {
 	if (!item)
@@ -64,21 +89,17 @@ bool Inventory::AddItem(InventoryItem* item)
 		{
 			if (!bagSlot)
 			{
-				bagSlot = item;;
+				std::cout << "item ID : " << item->ID << " added to the inventory" << std::endl;
+				bagSlot = item;
 				item = nullptr;
 				return true;
 			}
 		}
 	}
 
+	std::cout << "item ID : " << item->ID << " couldn't be added to the inventory" << std::endl;
 	item = nullptr;
 	return false;
-	// Create a key if it doesnt exist
-	/*else 
-	{
-		bags.insert(std::make_pair(item->ID, std::make_pair(false, std::vector<InventoryItem*>({ item }))));
-		item = nullptr;
-		return true;
-	}*/
 }
+
 

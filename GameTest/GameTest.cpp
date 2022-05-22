@@ -73,7 +73,7 @@ std::string GetChar(const T& var)
 }
 
 void Update(float deltaTime)
-{
+{ 
 	auto player{ gameState->GetPlayer() };
 
 	if (player)
@@ -82,20 +82,41 @@ void Update(float deltaTime)
 		player->isMoving();
 		player->MoveHorizontally();
 		player->MoveVertically();
-
-		if (App::IsKeyPressed(0x31) || App::GetController().CheckButton(XINPUT_GAMEPAD_RIGHT_SHOULDER, true))
+		
+		// BAG 0
+		if (App::IsKeyPressed('1') && !player->inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !player->inventory->IsBagOpened(0))
 			player->OpenInventory(0);
 
-		if (player->isBagOpened(0))
+		else if (player->inventory->IsBagOpened(0))
 		{
-			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
+			if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+				player->CloseInventory(0);
+			else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
 				player->GoToBagSlot(0, 0);
-			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
+			else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
 				player->GoToBagSlot(0, 1);
-			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+			else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
 				player->GoToBagSlot(0, 2);
-			if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+			else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
 				player->GoToBagSlot(0, 3);
+		}
+
+		// BAG 1
+		if (App::IsKeyPressed('1') && !player->inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !player->inventory->IsBagOpened(1))
+			player->OpenInventory(1);
+
+		else if (player->inventory->IsBagOpened(1))
+		{
+			if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+				player->CloseInventory(1);
+			else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
+				player->GoToBagSlot(1, 0);
+			else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+				player->GoToBagSlot(1, 1);
+			else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
+				player->GoToBagSlot(1, 2);
+			else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+				player->GoToBagSlot(1, 3);
 		}
 	}
 
@@ -200,7 +221,7 @@ void Render()
 				auto tmp = dynamic_cast<IInteractive*>(closestActor);
 				if (tmp)
 				{
-					player->Interact(0, tmp);
+					player->Interact(tmp);
 					return;
 				}
 				/*COLLECT ITEMS*/

@@ -118,6 +118,24 @@ void Entrance::Update(float deltaTime)
 		if (item)
 			item->GetSprite()->Update(deltaTime);
 	}
+
+	/*if (App::GetController().CheckButton(XINPUT_GAMEPAD_LEFT_SHOULDER, true))
+	{
+		std::string description = "Page 2";
+		auto page = new Page("Page", App::CreateSprite(".\\TestData\\Tiles-Props-pack\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, new InventoryItem(InventoryItem::Usability::Usable, 0, description), 0);
+		page->GetSprite()->SetFrame(0);
+		page->GetSprite()->SetScale(4);
+		AddActor(page);
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	{
+		std::string description = "Page 3";
+		auto page = new Page("Page", App::CreateSprite(".\\TestData\\Tiles-Props-pack\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, new InventoryItem(InventoryItem::Usability::Usable, 0, description), 0);
+		page->GetSprite()->SetFrame(0);
+		page->GetSprite()->SetScale(4);
+		AddActor(page);
+	}*/
 }
 
 void Entrance::Render()

@@ -140,7 +140,7 @@ void Character::MoveHorizontally()
 //	return false;
 //}
 
-bool Character::Interact(int ID, IInteractive* actor)
+bool Character::Interact(IInteractive* actor)
 {
 	if (!actor)
 		return false;
@@ -162,46 +162,44 @@ bool Character::Interact(Collectable* collectable)
 
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		for (auto& bagSlot : inventory->bags[collectable->ID].second)
+		for (auto i = 0; i < inventory->bags[i].second.size(); ++i)
 		{
-			if (!bagSlot)
+			if (!inventory->bags[collectable->ID].second[i])
 			{
 				// Stock the collected object in an empty bag slot
-				bagSlot = collectable->Collect();
+				inventory->bags[collectable->ID].second[i] = collectable->Collect();
+				std::cout << collectable->GetName() << " added in bag " << 1 << " at slot " << i << std::endl;
 				currentRoom->RemoveActor(collectable);
-				break;
+				collectable = nullptr;
+				return true;
 			}
 		}
-
-		collectable = nullptr;
-		return true;
+		std::cout << collectable->GetName() << " couldn't be added" << std::endl;
 	}
+
 	collectable = nullptr;
 	return false;
 }
 
 void Character::OpenInventory(int ID)
 {
-	if (!inventory->IsBagExist(ID))
+	if (inventory->IsAnyBagAlreadyOpened())
 		return;
 
-	if (isBagOpened(ID))
-		CloseInventory(ID);
-
-	else
+	if (inventory->IsBagOpened(ID))
 	{
-		// the bag is now considered opened
-		inventory->bags[ID].first = true;
-		std::cout << "Bag " << ID << " is now opened" << std::endl;
+		std::cout << "Bag " << ID << " is aleady opened" << std::endl;
+		return;
 	}
+	
+	// the bag is now considered opened
+	inventory->bags[ID].first = true;
+	std::cout << "Bag " << ID << " is now opened" << std::endl;
 }
 
 void Character::CloseInventory(int ID)
 {
-	if (!inventory->IsBagExist(ID))
-		return;
-
-	if (!isBagOpened(ID))
+	if (!inventory->IsBagOpened(ID))
 		return;
 
 	// the bag is now considered closed
@@ -209,23 +207,16 @@ void Character::CloseInventory(int ID)
 	std::cout << "Bag " << ID << " is now closed" << std::endl;
 }
 
-bool Character::isBagOpened(int ID)
-{
-	if (inventory->IsBagExist(ID))
-	{
-		return inventory->bags[ID].first;
-	}
-	return false;
-}
-
 void Character::GoToBagSlot(int ID, int slotNumber)
 {
 	if (inventory->IsBagExist(ID))
 	{
-		if (isBagOpened(ID))
+		if (inventory->IsBagOpened(ID))
 		{
 			if (inventory->GetItem(ID, slotNumber))
 				std::cout << inventory->GetItem(ID, slotNumber)->description << std::endl;
+			else 
+				std::cout << "not item found at slot " << slotNumber << std::endl;
 		}
 	}
 }
