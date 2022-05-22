@@ -9,7 +9,7 @@ class Actor;
 #include "Actor.h"
 
 class GameState;
-class Character;
+class Player;
 class Candle;
 
 class Room

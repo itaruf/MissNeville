@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef INVENTORYITEM_H_
+#define INVENTORYITEM_H_
+
 class InventoryItem
 {
 private:
@@ -20,3 +24,4 @@ public:
 	virtual bool UseItem();
 };
 
+#endif

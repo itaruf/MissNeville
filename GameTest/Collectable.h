@@ -1,9 +1,8 @@
 #pragma once
-#ifndef ITEM_H_
-#define ITEM_H_
+#ifndef COLLECTABLE_H_
+#define COLLECTABLE_H_
 
 #include "Actor.h"
-#include "Interactivity.h"
 #include "ICollectable.h"
 #include "InventoryItem.h"
 

@@ -35,10 +35,10 @@ void Entrance::Init()
 	{ 
 		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
 		{
-			auto item = new Collectable("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this, Interactivity::Noninteractive);
-			item->GetSprite()->SetFrame(1);
-			item->GetSprite()->SetScale(0.5);
-			AddActor(item);
+			auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3-b.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this);
+			ground->GetSprite()->SetFrame(1);
+			ground->GetSprite()->SetScale(0.5);
+			AddActor(ground);
 		}
 	}*/
 

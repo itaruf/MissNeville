@@ -13,10 +13,10 @@ class Inventory
 {
 private:
 	static constexpr int nbBags{ 4 };
-	static constexpr int nbSlotBag{ 6 };
+	static constexpr int nbSlotBag{ 4 };
 protected:
 public:
-	friend class Character;
+	friend class Player;
 	std::map<int, std::pair<bool, std::vector<InventoryItem*>>> bags;
 	Inventory();
 	Inventory(std::map<int, std::vector<InventoryItem*>>);

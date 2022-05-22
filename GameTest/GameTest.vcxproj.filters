@@ -23,7 +23,7 @@
     <ClCompile Include="App\TextureLoader.cpp">
       <Filter>API</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Actor.cpp" />
@@ -40,6 +40,8 @@
     <ClCompile Include="InvPage.cpp" />
     <ClCompile Include="IInteractive.cpp" />
     <ClCompile Include="ICollectable.cpp" />
+    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="Character.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -69,7 +71,7 @@
     <ClInclude Include="App\TextureLoader.h">
       <Filter>API</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Actor.h" />
@@ -84,11 +86,12 @@
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CandleEnigme.h" />
     <ClInclude Include="Entrance.h" />
-    <ClInclude Include="Interactivity.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InvPage.h" />
     <ClInclude Include="IInteractive.h" />
     <ClInclude Include="ICollectable.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="Character.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -98,5 +101,8 @@
     <Filter Include="API">
       <UniqueIdentifier>{3e1485bf-3449-4966-8760-976ee866544b}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "IInteractive.h"
 #include "InventoryItem.h"
+#include <combaseapi.h>
 
 class InventoryItem;
 // Interface
-class ICollectable
+interface ICollectable
 {
 public:
 	// pure virtual function

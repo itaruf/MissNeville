@@ -57,13 +57,13 @@ GameState::~GameState()
 	rooms.clear();
 }
 
-void GameState::AddPlayer(Character* player)
+void GameState::AddPlayer(Player* player)
 {
 	this->player = player;
 	player = nullptr;
 }
 
-Character* GameState::GetPlayer()
+Player* GameState::GetPlayer()
 {
 	return player;
 }

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------
 //#include "app\app.h"
 //------------------------------------------------------------------------
-#include "Character.h"
+#include "Player.h"
 #include "Room.h"
 #include "Collision.h"
 #include "Collectable.h"
@@ -28,9 +28,7 @@
 #include <map>
 
 std::shared_ptr<GameState> gameState;
-//------------------------------------------------------------------------
-// Called before first update. Do any initial setup here.
-//------------------------------------------------------------------------
+
 void Init()
 {
 	gameState = std::make_shared<GameState>();
@@ -40,8 +38,7 @@ void Init()
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
-	Inventory* inventory{ new Inventory() };
-	Character* player{ new Character("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4, inventory) };
+	Player* player{ new Player("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4, new Inventory()) };
 
 	/*Caractéristiques de bases*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -59,7 +56,6 @@ void Init()
 	player = nullptr;
 	vector = nullptr;
 	collider = nullptr;
-	inventory = nullptr;
 	playerSprite = nullptr;
 }
 

@@ -4,11 +4,11 @@
 
 #include "Room.h"
 #include "Entrance.h"
-#include "Character.h"
+#include "Player.h"
 
 class Room;
 class Entrance;
-class Character;
+class Player;
 
 class GameState
 {
@@ -18,7 +18,7 @@ public:
 	int roomIndex{ 0 };
 	Room* currentRoom;
 	std::vector<Room*> rooms;
-	Character* player{ nullptr };
+	Player* player{ nullptr };
 
 	GameState();
 	GameState(std::vector<Room*>& rooms);
@@ -26,9 +26,9 @@ public:
 	GameState(Room* currentRoom);
 	~GameState();
 
-	Character* GetPlayer();
+	Player* GetPlayer();
 
-	void AddPlayer(Character* player);
+	void AddPlayer(Player* player);
 };
 
 #endif
