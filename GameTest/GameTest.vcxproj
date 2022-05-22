@@ -109,6 +109,7 @@
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CandleEnigme.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="IDialogue.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Collision.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CandleEnigme.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="IDialogue.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Collision.cpp" />

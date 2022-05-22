@@ -13,6 +13,10 @@ Room::Room(int ID, std::shared_ptr<GameState>& gameState) : ID{ ID }, gameState{
 Room::~Room()
 {
 	printf("ROOM DESTRUCTOR CALLED (%d bags)\n", (int) actors.size());
+
+	if (background)
+		delete background;
+
 	for (auto& actor : actors)
 	{
 		if (actor)
@@ -52,6 +56,8 @@ void Room::Init()
 
 void Room::Update(float deltaTime)
 {
+	if (background)
+		background->Draw();
 }
 
 void Room::Render()

@@ -35,7 +35,7 @@ void Init()
 	gameState->currentRoom = new Entrance(0, gameState, nullptr);
 
 	/*Instantiation du personnage*/
-	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Skeleton.bmp", 9, 4) };
+	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4, new Inventory()) };
@@ -214,17 +214,17 @@ void Render()
 			{
 			
 				/*INTERACT WITH NON COLLECTIBLE ITEMS*/
-				auto tmp = dynamic_cast<IInteractive*>(closestActor);
-				if (tmp)
+				auto interactable = dynamic_cast<IInteractive*>(closestActor);
+				if (interactable)
 				{
-					player->Interact(tmp);
+					player->Interact(interactable);
 					return;
 				}
 				/*COLLECT ITEMS*/
-				auto tmp2 = dynamic_cast<Collectable*>(closestActor);
-				if (tmp2)
+				auto collectable = dynamic_cast<Collectable*>(closestActor);
+				if (collectable)
 				{
-					player->Interact(tmp2);
+					player->Interact(collectable);
 					return;
 				}
 			}

@@ -41,6 +41,9 @@ void Entrance::Init()
 			AddActor(ground);
 		}
 	}*/
+	background = App::CreateSprite(".\\TestData\\Backgrouds\\night.bmp", 1, 1);
+	background->SetScale(2.0f);
+	background->SetAnimation(0);
 
 	/*Initiating Enigmes*/
 	candleEnigme = new CandleEnigme(CandleEnigme::Status::PENDING);
@@ -68,7 +71,7 @@ void Entrance::Init()
 	wall4->GetSprite()->SetScale(3);
 	AddActor(wall4);
 
-	auto carpet = new Actor("Carpet", App::CreateSprite(".\\TestData\\TMW2\\carpet-b.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64), gameState->currentRoom);
+	auto carpet = new Actor("Carpet", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64), gameState->currentRoom);
 	carpet->GetSprite()->SetFrame(1);
 	carpet->GetSprite()->SetScale(3);
 	AddActor(carpet);
@@ -76,27 +79,34 @@ void Entrance::Init()
 	std::vector<Vector2D*> v{ new Vector2D(514,466), new Vector2D(446,432), new Vector2D(580,432), new Vector2D(460,356), new Vector2D(564,356) };
 	for (int i = 0; i < v.size(); ++i)
 	{
-		candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10), gameState->currentRoom));
+		candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10), gameState->currentRoom));
 		candles[i]->GetSprite()->SetFrame(0);
 		candles[i]->GetSprite()->SetScale(0.5);
 		AddActor(candles.at(i));
 		candleEnigme->GetCandles().emplace_back(candles[i]);
 	}
 
-	auto pentagramme = new Actor("Pentagramme", App::CreateSprite(".\\TestData\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), gameState->currentRoom);
+	auto pentagramme = new Actor("Pentagramme", App::CreateSprite(".\\TestData\\Props\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), gameState->currentRoom);
 	pentagramme->GetSprite()->SetFrame(0);
 	pentagramme->GetSprite()->SetScale(3);
 	AddActor(pentagramme);
 
-	auto bed = new Actor("Bed", App::CreateSprite(".\\TestData\\TMW2\\bed-blue-b.bmp", 1, 1), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32), gameState->currentRoom);
+	auto bed = new Actor("Bed", App::CreateSprite(".\\TestData\\Props\\bed-blue-b.bmp", 1, 1), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32), gameState->currentRoom);
 	bed->GetSprite()->SetFrame(0);
 	bed->GetSprite()->SetScale(2);
 	AddActor(bed);
 
-	auto  girl = new Actor("Girl", App::CreateSprite(".\\TestData\\Enemy-08-1.bmp", 3, 4), new Vector2D(724, 464), new Collision(Collision::ColliderType::Block, 32, 32), gameState->currentRoom);
-	girl->GetSprite()->SetFrame(1);
-	girl->GetSprite()->SetScale(3);
-	AddActor(girl);
+	auto charlotte = new NPC("Charlotte", App::CreateSprite(".\\TestData\\Characters\\charlotte.bmp", 3, 4), new Vector2D(724, 464), new Collision(Collision::ColliderType::Block, 32, 32), gameState->currentRoom, 0, 0);
+	charlotte->GetSprite()->SetFrame(1);
+	charlotte->GetSprite()->SetScale(3);
+	AddActor(charlotte);
+	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal should be around.. But it's so dark here ! Well, it always has been...")));
+
+	auto sprite  = new Actor("Question", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(724, 518), new Collision(Collision::ColliderType::Overlap, 0, 0), gameState->currentRoom);
+	sprite->GetSprite()->SetFrame(0);
+	sprite->GetSprite()->SetScale(2);
+	AddActor(sprite);
+
 
 	/*Add this room to the collection of rooms*/
 	gameState.get()->rooms.emplace_back(this);
@@ -107,6 +117,8 @@ void Entrance::Init()
 
 void Entrance::Update(float deltaTime)
 {
+	Room::Update(deltaTime);
+
 	for (const auto & candle : candles)
 	{
 		if (!candle)
@@ -168,7 +180,7 @@ bool Entrance::IsRoomCleared()
 			if (candleEnigme->status == Enigme::Status::PENDING)
 			{
 				std::string description = "Page 1";
-				auto page = new Page("Page", App::CreateSprite(".\\TestData\\Tiles-Props-pack\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, new InventoryItem(InventoryItem::Usability::Usable, 0, description), 0);
+				auto page = new Page("Page", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentRoom, new InventoryItem(InventoryItem::Usability::Usable, 0, description), 0);
 				page->GetSprite()->SetFrame(0);
 				page->GetSprite()->SetScale(4);
 				AddActor(page);

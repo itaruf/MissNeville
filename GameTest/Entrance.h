@@ -6,6 +6,7 @@
 #include "CandleEnigme.h"
 #include "Candle.h"
 #include "GameState.h"
+#include "NPC.h"
 
 class GameState;
 class Entrance : public Room, std::enable_shared_from_this<Entrance>

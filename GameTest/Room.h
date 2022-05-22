@@ -7,6 +7,7 @@
 #include "Enigme.h"
 class Actor;
 #include "Actor.h"
+#include "App/app.h"
 
 class GameState;
 class Player;
@@ -17,6 +18,7 @@ class Room
 private:
 protected:
 	int ID;
+	CSimpleSprite* background{ nullptr };
 	std::vector<Actor*> actors;
 	std::shared_ptr<GameState>& gameState;
 public:

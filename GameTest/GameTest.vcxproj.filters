@@ -42,6 +42,7 @@
     <ClCompile Include="ICollectable.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="IDialogue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -92,6 +93,7 @@
     <ClInclude Include="ICollectable.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="IDialogue.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

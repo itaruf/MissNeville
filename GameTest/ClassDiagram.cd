@@ -24,9 +24,10 @@
   <Class Name="NPC" Collapsed="true">
     <Position X="10" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AABAAACAAAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAABA=</HashCode>
       <FileName>NPC.h</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Player" Collapsed="true">
     <Position X="6.5" Y="3" Width="1.5" />
@@ -83,6 +84,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEYAAAAAAAAEAAAEAAAAA=</HashCode>
       <FileName>Candle.h</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="InventoryItem" Collapsed="true">
     <Position X="1" Y="1" Width="1.5" />

@@ -9,3 +9,23 @@ NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision*
 NPC::~NPC()
 {
 }
+
+void NPC::PlayDialogue(int dialogueID)
+{
+	if (!dialogues[dialogueID].first)
+	{
+		dialogues[dialogueID].first = true;
+		std::cout << "[" <<  GetName() << "] says : " << dialogues[dialogueID].second << std::endl;
+	}
+}
+
+void NPC::StopDialogue(int dialogueID)
+{
+	if (dialogues[dialogueID].first)
+		dialogues[dialogueID].first = false;
+}
+
+void NPC::Interact()
+{
+	PlayDialogue(0);
+}

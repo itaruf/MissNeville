@@ -1,3 +1,11 @@
+Codes: 
+
 https://levelup.gitconnected.com/2d-collision-detection-8e50b6b8b5c0
 https://stackoverflow.com/questions/29676147/sorting-a-vector-of-classes-based-on-a-variable-in-the-class
+
+
+
+
+Assets: 
 https://gitlab.com/TMW2/clientdata/-/tree/master/
+https://opengameart.org/content/animated-emote-bubbles
