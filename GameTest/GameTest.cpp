@@ -137,7 +137,7 @@ void Render()
 		App::Print(800, 700, "Room Not Cleared");
 
 	App::Print(200, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
-	App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());
+	/*App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());*/
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
 	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());

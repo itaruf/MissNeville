@@ -23,10 +23,7 @@ InventoryItem* Inventory::GetItem(int ID, int slotNumber)
 	if (!IsBagExist(ID))
 		return nullptr;
 
-	if (bags[ID].second.size() - 1 >= slotNumber)
-		return bags[ID].second[slotNumber];
-	else 
-		return nullptr;
+	return bags[ID].second[slotNumber];
 }
 
 
@@ -40,6 +37,7 @@ bool Inventory::RemoveItem(InventoryItem* item)
 			bags[item->ID].second.erase(it);
 			delete item;
 			item = nullptr;
+			return true;
 		}
 	}
 	item = nullptr;
@@ -61,17 +59,26 @@ bool Inventory::AddItem(InventoryItem* item)
 	// Check if key exists
 	if (IsBagExist(item->ID))
 	{
-		bags[item->ID].second.emplace_back(item);
-		item = nullptr;
-		return true;
+
+		for (auto& bagSlot : bags[item->ID].second)
+		{
+			if (!bagSlot)
+			{
+				bagSlot = item;;
+				item = nullptr;
+				return true;
+			}
+		}
 	}
 
+	item = nullptr;
+	return false;
 	// Create a key if it doesnt exist
-	else 
+	/*else 
 	{
 		bags.insert(std::make_pair(item->ID, std::make_pair(false, std::vector<InventoryItem*>({ item }))));
 		item = nullptr;
 		return true;
-	}
+	}*/
 }
 
