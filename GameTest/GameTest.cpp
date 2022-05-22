@@ -102,7 +102,7 @@ void Update(float deltaTime)
 		}
 
 		// BAG 1
-		if (App::IsKeyPressed('1') && !player->inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !player->inventory->IsBagOpened(1))
+		if (App::IsKeyPressed('2') && !player->inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !player->inventory->IsBagOpened(1))
 			player->OpenInventory(1);
 
 		else if (player->inventory->IsBagOpened(1))
