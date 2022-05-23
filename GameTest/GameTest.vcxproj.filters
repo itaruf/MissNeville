@@ -102,7 +102,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="Test.csv" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
