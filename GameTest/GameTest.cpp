@@ -26,11 +26,21 @@
 #include <type_traits>
 #include <cmath>
 #include <map>
+#include "csv.h"
 
 std::shared_ptr<GameState> gameState;
 
 void Init()
 {
+	io::CSVReader<3> in("Test.csv");
+
+	in.read_header(io::ignore_extra_column, "Class", "Actor", "NPC");
+	std::string clas; std::string classType; std::string speed;
+	while (in.read_row(clas, classType, speed))
+	{
+		std::cout << clas << " " << classType << " " << speed << std::endl;
+	}
+
 	gameState = std::make_shared<GameState>();
 	gameState->currentScene = new Entrance(0, gameState, nullptr);
 
