@@ -5,3 +5,4 @@
 # Don't forget to check :
 - Keybindings.txt
 - Sources.txt
+- ClassDiagram.cd
