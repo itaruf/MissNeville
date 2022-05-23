@@ -21,6 +21,7 @@ public:
 	InventoryItem(Usability usability, int ID, std::string& description);
 	virtual ~InventoryItem();
 
+	// Each item will have its own treatment
 	virtual bool UseItem();
 };
 

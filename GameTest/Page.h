@@ -11,7 +11,7 @@ class Page : public Collectable
 private:
 protected:
 public:
-	Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, InventoryItem* invItem, int ID = 0);
+	Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, InventoryItem* invItem, int ID = 0);
 	~Page();
 
 	InventoryItem* Collect() override;

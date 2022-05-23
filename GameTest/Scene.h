@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ROOM_H_
-#define ROOM_H_
+#ifndef SCENE_H_
+#define SCENE_H_
 
 #include <algorithm>
 #include <vector>
@@ -13,7 +13,7 @@ class GameState;
 class Player;
 class Candle;
 
-class Room
+class Scene
 {
 private:
 protected:
@@ -22,11 +22,10 @@ protected:
 	std::vector<Actor*> actors;
 	std::shared_ptr<GameState>& gameState;
 public:
-	Room(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState);
-	Room(int ID, Actor* actor, std::shared_ptr<GameState>& gameState);
-	Room(int ID, std::shared_ptr<GameState>& gameState);
+	Scene(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState);
+	Scene(int ID, std::shared_ptr<GameState>& gameState);
 
-	virtual ~Room();
+	virtual ~Scene();
 
 	Actor* GetActor(int index);
 	const int& GetID() const;
@@ -34,10 +33,10 @@ public:
 	bool RemoveActor(Actor* item);
 	void AddActor(Actor* actor);
 
-	virtual void Init();
+	virtual void Init() = 0;
 	virtual void Update(float deltaTime);
-	virtual void Render();
-	virtual bool IsRoomCleared();
+	virtual void Render() = 0;
+	virtual bool IsRoomCleared() = 0;
 };
 
 #endif

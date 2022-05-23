@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameState.h"
 
-GameState::GameState(std::vector<Room*>& rooms) : currentRoom{ nullptr }
+GameState::GameState(std::vector<Scene*>& rooms) : currentScene{ nullptr }
 {
 	for (auto& room : rooms)
 	{
@@ -10,7 +10,7 @@ GameState::GameState(std::vector<Room*>& rooms) : currentRoom{ nullptr }
 	}
 }
 
-GameState::GameState(Room* currentRoom, std::vector<Room*>& rooms) : currentRoom(std::move(currentRoom))
+GameState::GameState(Scene* currentScene, std::vector<Scene*>& rooms) : currentScene(std::move(currentScene))
 {
 	for (auto& room : rooms)
 	{
@@ -19,12 +19,12 @@ GameState::GameState(Room* currentRoom, std::vector<Room*>& rooms) : currentRoom
 	}
 }
 
-GameState::GameState(Room* currentRoom) : currentRoom{ std::move(currentRoom) }
+GameState::GameState(Scene* currentScene) : currentScene{ std::move(currentScene) }
 {
 }
 
 
-GameState::GameState() : currentRoom{ nullptr }
+GameState::GameState() : currentScene{ nullptr }
 {
 
 }
@@ -40,10 +40,10 @@ GameState::~GameState()
 		nullptr;
 	}
 
-	/*if (currentRoom)
+	/*if (currentScene)
 	{
-		delete currentRoom;
-		currentRoom = nullptr;
+		delete currentScene;
+		currentScene = nullptr;
 	}*/
 
 	for (auto& room : rooms) 

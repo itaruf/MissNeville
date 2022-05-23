@@ -96,6 +96,7 @@
   <ItemGroup>
     <Text Include="ReadMe.txt" />
     <Text Include="Sources.txt" />
+    <Text Include="Keybidings.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -125,7 +126,7 @@
     <ClInclude Include="InvPage.h" />
     <ClInclude Include="Collectable.h" />
     <ClInclude Include="Page.h" />
-    <ClInclude Include="Room.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Vector2D.h" />
@@ -156,7 +157,7 @@
     <ClCompile Include="InvPage.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Page.cpp" />
-    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

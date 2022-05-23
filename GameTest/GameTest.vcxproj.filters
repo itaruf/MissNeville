@@ -27,7 +27,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -76,7 +76,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="Room.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="EDirection.h" />
     <ClInclude Include="EMobility.h" />
@@ -98,6 +98,7 @@
   <ItemGroup>
     <Text Include="ReadMe.txt" />
     <Text Include="Sources.txt" />
+    <Text Include="Keybidings.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

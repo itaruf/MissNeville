@@ -5,6 +5,7 @@
 
 #include "Actor.h"
 
+// Class for entities which will be either playable or non-playable such as NPCs
 class Character : public Actor
 {
 private:
@@ -12,7 +13,7 @@ protected:
 	float HP;
 	float movementSpeed;
 public:
-	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Room* currentRoom, float HP, float movementSpeed);
+	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed);
 	~Character();
 
 	const float& GetMovementSpeed() const;

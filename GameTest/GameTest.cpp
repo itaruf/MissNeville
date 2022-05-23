@@ -9,7 +9,7 @@
 //#include "app\app.h"
 //------------------------------------------------------------------------
 #include "Player.h"
-#include "Room.h"
+#include "Scene.h"
 #include "Collision.h"
 #include "Collectable.h"
 #include "GameState.h"	
@@ -32,13 +32,13 @@ std::shared_ptr<GameState> gameState;
 void Init()
 {
 	gameState = std::make_shared<GameState>();
-	gameState->currentRoom = new Entrance(0, gameState, nullptr);
+	gameState->currentScene = new Entrance(0, gameState, nullptr);
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
-	Player* player{ new Player("Imane", playerSprite, vector, collider, gameState->currentRoom, 20, 4, new Inventory()) };
+	Player* player{ new Player("Imane", playerSprite, vector, collider, gameState->currentScene, 20, 4, new Inventory()) };
 
 	/*Caractéristiques de bases*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -49,9 +49,9 @@ void Init()
 
 	gameState->AddPlayer(player);
 
-	/*gameState->currentRoom->AddActor(player);*/
-	player->SetCurrentRoom(gameState->currentRoom);
-	gameState->currentRoom->Init();
+	/*gameState->currentScene->AddActor(player);*/
+	player->SetCurrentRoom(gameState->currentScene);
+	gameState->currentScene->Init();
 
 	player = nullptr;
 	vector = nullptr;
@@ -81,12 +81,12 @@ void Update(float deltaTime)
 		
 		// BAG 0
 		if (App::IsKeyPressed('1') && !player->inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !player->inventory->IsBagOpened(0))
-			player->OpenInventory(0);
+			player->OpenBag(0);
 
 		else if (player->inventory->IsBagOpened(0))
 		{
 			if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-				player->CloseInventory(0);
+				player->CloseBag(0);
 			else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
 				player->GoToBagSlot(0, 0);
 			else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
@@ -99,12 +99,12 @@ void Update(float deltaTime)
 
 		// BAG 1
 		if (App::IsKeyPressed('2') && !player->inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !player->inventory->IsBagOpened(1))
-			player->OpenInventory(1);
+			player->OpenBag(1);
 
 		else if (player->inventory->IsBagOpened(1))
 		{
 			if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-				player->CloseInventory(1);
+				player->CloseBag(1);
 			else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
 				player->GoToBagSlot(1, 0);
 			else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
@@ -116,8 +116,8 @@ void Update(float deltaTime)
 		}
 	}
 
-	if (gameState->currentRoom)
-		gameState->currentRoom->Update(deltaTime);
+	if (gameState->currentScene)
+		gameState->currentScene->Update(deltaTime);
 }
 
 void Render()
@@ -129,10 +129,10 @@ void Render()
 	
 	/*********CURRENT ROOM RENDER*********/
 
-	if (!gameState->currentRoom)
+	if (!gameState->currentScene)
 		return;
 
-	gameState->currentRoom->Render();
+	gameState->currentScene->Render();
 
 	/*********PLAYER RENDER*********/
 
@@ -148,12 +148,12 @@ void Render()
 	auto string{ std::to_string(pos->x) + " " + std::to_string(pos->y) };
 
 	/*SOME PRINTS*/
-	if (gameState->currentRoom->IsRoomCleared())
-		App::Print(800, 700, "Room Cleared");
+	if (gameState->currentScene->IsRoomCleared())
+		App::Print(800, 700, "Scene Cleared");
 	else
-		App::Print(800, 700, "Room Not Cleared");
+		App::Print(800, 700, "Scene Not Cleared");
 
-	App::Print(200, 400, ("Items : " + GetChar(gameState->currentRoom->GetActors().size())).c_str());
+	App::Print(200, 400, ("Items : " + GetChar(gameState->currentScene->GetActors().size())).c_str());
 	/*App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());*/
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
@@ -166,7 +166,7 @@ void Render()
 
 	/*********PLAYER'S INTERACTIONS*********/
 
-	auto actors{ gameState->currentRoom->GetActors() };
+	auto actors{ gameState->currentScene->GetActors() };
 	if (actors.size() != 0)
 	{
 		std::vector<Actor*> interactiveActors{};

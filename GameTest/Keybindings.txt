@@ -1,0 +1,21 @@
+ACTIONS						GAMEPAD								KEYBOARD
+
+Move Left				-   Left Thumbstick LEFT			-	Q
+Move Right				-   Left Thumbstick RIGHT			-	D
+Move Forwards			-   Left Thumbstick UP				-	Z
+Move Backwards			-   Left Thumbstick DOWN			-	S
+Interact with			-	Face Button DOWN				-	SPACE BAR
+Open Bag (id 0)			-   D-Pad UP						-	1
+Open Bag (id 1)			-	D-Pad RIGHT						-	2
+Open Bag (id 2)			-	D-Pad DOWN						-	3
+Open Bag (id 3)			-	D-Pad LEFT						-	4
+Close Bag (any)			-	Face Button Right				-	B
+Go to Slot (id 0)		-	D-Pad UP						-	1
+Go to Slot (id 1)		-	D-Pad RIGHT						-	2
+Go to Slot (id 2)		-	D-Pad DOWN						-	3
+Go to Slot (id 3)		-	D-Pad LEFT						-	4
+
+Notes : 
+
+- To go to a specific slot, a bag must be opened beforehands
+- You can't open multiple bag at the same time : close one to open another

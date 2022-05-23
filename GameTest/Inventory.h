@@ -7,8 +7,8 @@
 #include <vector>
 #include "InventoryItem.h"
 #include <map>
-#include <stdexcept>      // std::length_error
 
+// Class to define an inventory with bags and slots
 class Inventory
 {
 private:
@@ -16,6 +16,7 @@ private:
 	static constexpr int nbSlotBag{ 4 };
 protected:
 public:
+	// Allow the Player class to access Inventory members
 	friend class Player;
 	std::map<int, std::pair<bool, std::vector<InventoryItem*>>> bags;
 	Inventory();
