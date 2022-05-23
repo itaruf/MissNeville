@@ -71,6 +71,9 @@ void Init()
 	vector = nullptr;
 	collider = nullptr;
 	playerSprite = nullptr;
+
+	// Test ambiance WIP (need to create a sound manager)
+	App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);
 }
 
 template<
@@ -142,7 +145,7 @@ void Render()
 	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());*/
 
 	/*********PLAYER'S INTERACTIONS*********/
-
+	/*TEST WIP*/
 	auto actors{ gameState->currentScene->GetActors() };
 	if (actors.size() != 0)
 	{

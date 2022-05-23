@@ -5,5 +5,9 @@ https://stackoverflow.com/questions/29676147/sorting-a-vector-of-classes-based-o
 
 
 Assets: 
+
 https://gitlab.com/TMW2/clientdata/-/tree/master/
 https://opengameart.org/content/animated-emote-bubbles
+https://www.strofe.com/library
+https://pipoya.itch.io/pipoya-free-rpg-character-sprites-32x32
+https://kartoy.itch.io/32x32sandstone-dungeon-and-character-pack

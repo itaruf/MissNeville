@@ -1,115 +1,204 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="Page" Collapsed="true">
-    <Position X="1" Y="5.5" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Physical entities&#xD;&#xA;">
+    <Position X="3.38" Y="0.625" Height="0.31" Width="1.157" />
+  </Comment>
+  <Comment CommentText="Puzzle to solve">
+    <Position X="4.745" Y="4.874" Height="0.31" Width="1.007" />
+  </Comment>
+  <Comment CommentText="Scene to display">
+    <Position X="1.661" Y="2.97" Height="0.31" Width="1.157" />
+  </Comment>
+  <Comment CommentText="Item stored in the inventory">
+    <Position X="1.5" Y="6.25" Height="0.432" Width="1.485" />
+  </Comment>
+  <Class Name="Actor" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Page.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="CandlePuzzle" Collapsed="true">
-    <Position X="4" Y="5.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAQKAAAAAAAA=</HashCode>
-      <FileName>CandlePuzzle.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Puzzle" Collapsed="true">
-    <Position X="4" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQACAAAABAAAAAAAAAAAAAEAAAAAAKAAQAAAAAAAAA=</HashCode>
-      <FileName>Puzzle.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="NPC" Collapsed="true">
-    <Position X="10" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AABAAACAAAAAAAAAAAAEAAAAMAAABAQAAAAAAAAgABA=</HashCode>
-      <FileName>NPC.h</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Player" Collapsed="true">
-    <Position X="6.5" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIgAAACEAAAAAAAAEAIQAAAAACAAAAAQAAABA=</HashCode>
-      <FileName>Player.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Collectable" Collapsed="true">
-    <Position X="1" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAABAAACAAAAggAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
-      <FileName>Collectable.h</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Room" Collapsed="true">
-    <Position X="4" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>gAQABAAAAAAAgAAAAJAAgAAAAAAAAUCAABAiAAAAAAA=</HashCode>
-      <FileName>Room.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Entrance" Collapsed="true">
-    <Position X="4" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAAAAQAAABACAAAEADA=</HashCode>
-      <FileName>Entrance.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="GameState" Collapsed="true">
-    <Position X="10" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgAAAMAAAAAAAgAAAABAAgAAAAAIAA=</HashCode>
-      <FileName>GameState.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Collision" Collapsed="true">
-    <Position X="8.25" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgCAAAAAAICAAAQAQAAAAABAAAQAAAAAAAAACEAAABQ=</HashCode>
-      <FileName>Collision.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Inventory" Collapsed="true">
-    <Position X="8.25" Y="2" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAEAAABAAAAAEBAQAAAAAAAgACAAAAEAAAAAgABQAA=</HashCode>
-      <FileName>Inventory.h</FileName>
+      <HashCode>AAAIAIEgASAJsAgEAAAQIAAQABAEAgAAAAAAUAABBAA=</HashCode>
+      <FileName>Actor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Candle" Collapsed="true">
-    <Position X="6.5" Y="1" Width="1.5" />
+    <Position X="1.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEYAAAAAAAAEAAAEAAAAA=</HashCode>
       <FileName>Candle.h</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="CandlePuzzle" Collapsed="true">
+    <Position X="4.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAQKAAAAAAAA=</HashCode>
+      <FileName>CandlePuzzle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CController" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAQAAAABAEAAAEAAAAAAAABgAABAAAAAAAAIIgA=</HashCode>
+      <FileName>App\SimpleController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABAAAAAAAAAAAAAAAQgAAAAEIQAAAAAAAKAA=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collectable" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAACAAAAggAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Collectable.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Collision" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAAAAAAICAAAQAQAAAAABAAAQAAAAAAAAACEAAABQ=</HashCode>
+      <FileName>Collision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CProfiler" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAggCAAAAAAAAAAAAAAAAAAAAAAIAAAAAAEAAA=</HashCode>
+      <FileName>App\main.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSimpleControllers" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAAAAAAAAAAAEABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App\SimpleController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSimpleSound" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAASAAAAAARAAAAAAAQgARAQAAAAAAAACABABQAA=</HashCode>
+      <FileName>App\SimpleSound.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSimpleSprite" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQEEyEAEyAAEiAJgABAAEBCABAAggiAKEghBmBgAgg=</HashCode>
+      <FileName>App\SimpleSprite.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entrance" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAAAAQAAABACAAAEADA=</HashCode>
+      <FileName>Entrance.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameState" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAMAAAAAAAgAAAABAAgAAAAAIAA=</HashCode>
+      <FileName>GameState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inventory" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAABAAAAAEBAQAAAAAAAgACAAAAEAAAAAgABQAA=</HashCode>
+      <FileName>Inventory.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="InventoryItem" Collapsed="true">
-    <Position X="1" Y="1" Width="1.5" />
+    <Position X="1.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAQAAAAAgAAAIAAAAACAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>InventoryItem.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InvPage" Collapsed="true">
-    <Position X="1" Y="2.25" Width="1.5" />
+    <Position X="1.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>InvPage.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="NPC" Collapsed="true">
+    <Position X="6.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAACAAAAAAAAAAAAEAAAAMAAABAQAAAAAAAAgABA=</HashCode>
+      <FileName>NPC.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Page" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Page.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIgAAACEAAAAAAAAEAIQAAAAACAAAAAQAAABA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle" Collapsed="true">
+    <Position X="4.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAABAAAAAAAAAAAAAEAAAAAAKAAQAAAAAAAAA=</HashCode>
+      <FileName>Puzzle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQABAAAAAAAgAAAgIAAgAAAQAAAAQCAABAiAAAAIAA=</HashCode>
+      <FileName>Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector2D" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAEAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Vector2D.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ICollectable" Collapsed="true">
+    <Position X="11" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICollectable.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IDialogue" Collapsed="true">
+    <Position X="12.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAgABA=</HashCode>
+      <FileName>IDialogue.h</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IInteractive" Collapsed="true">
+    <Position X="14.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>IInteractive.h</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="Direction" Collapsed="true">
-    <Position X="6.5" Y="4.25" Width="1.5" />
+    <Position X="11" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAICCAAgAAAAAAAAAAA=</HashCode>
       <FileName>EDirection.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Mobility" Collapsed="true">
-    <Position X="8.25" Y="4.25" Width="1.5" />
+    <Position X="12.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>EMobility.h</FileName>
