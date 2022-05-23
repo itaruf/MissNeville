@@ -147,8 +147,9 @@ void Render()
 	if (actors.size() != 0)
 	{
 		std::vector<Actor*> interactiveActors{};
+		// Select all Collectable or Interactive actors
 		for (auto& actor : actors)
-			if (dynamic_cast<Collectable*>(actor) || dynamic_cast<IInteractive*>(actor))
+			if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
 				interactiveActors.emplace_back(actor);
 
 		if (interactiveActors.size() > 0) 

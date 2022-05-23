@@ -32,7 +32,7 @@
   <Class Name="Player" Collapsed="true">
     <Position X="6.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAACEAAAAAAAAEAIQAAAAACAAAAAQAAABA=</HashCode>
+      <HashCode>AAAAAAAIgAAACEAAAAAAAAEAIQAAAAACAAAAAQAAABA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -42,6 +42,7 @@
       <HashCode>AAABAAACAAAAggAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Collectable.h</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Room" Collapsed="true">
     <Position X="4" Y="1" Width="1.5" />
@@ -67,7 +68,7 @@
   <Class Name="Collision" Collapsed="true">
     <Position X="8.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgCAAAAAAIiABAQAQAACAABAAAQAAIAAAAAACEAAABQ=</HashCode>
+      <HashCode>AgCAAAAAAICAAAQAQAAAAABAAAQAAAAAAAAACEAAABQ=</HashCode>
       <FileName>Collision.h</FileName>
     </TypeIdentifier>
   </Class>

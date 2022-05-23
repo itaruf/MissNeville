@@ -7,7 +7,7 @@
 #include "InventoryItem.h"
 
 // Actor which can be collected by the player and itemized
-class Collectable : public Actor
+class Collectable : public Actor, public ICollectable
 {
 private:
 protected:
