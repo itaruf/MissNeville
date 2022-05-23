@@ -1,4 +1,8 @@
 #pragma once
+#ifndef VECTOR2D_H_
+#define VECTOR2D_H_
+
+// Class which defines the x and y position of an actor 
 class Vector2D
 {
 public:
@@ -9,3 +13,4 @@ public:
 	~Vector2D() = default;
 };
 
+#endif

@@ -3,6 +3,7 @@
 
 #include <combaseapi.h>
 
+// Set of functions to manage dialogues
 interface IDialogue
 {
 public:

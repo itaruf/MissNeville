@@ -1,12 +1,12 @@
 ﻿#include "stdafx.h"
 #include "Entrance.h"
 
-Entrance::Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme) : Scene(ID, actors, gameState), candleEnigme{std::move(candleEnigme)}
+Entrance::Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState, CandlePuzzle* candlePuzzle) : Scene(ID, actors, gameState), candlePuzzle{std::move(candlePuzzle)}
 {
 }
 
 
-Entrance::Entrance(int ID, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme) : Scene(ID, gameState), candleEnigme{std::move(candleEnigme)}
+Entrance::Entrance(int ID, std::shared_ptr<GameState>& gameState, CandlePuzzle* candlePuzzle) : Scene(ID, gameState), candlePuzzle{std::move(candlePuzzle)}
 {
 }
 
@@ -14,8 +14,9 @@ Entrance::~Entrance()
 {
 	printf("ENTRANCE DESTRUCTOR CALLED\n");
 
-	delete candleEnigme;
-	candleEnigme = nullptr;
+	// Freeing all the memory allocated on the heap
+	delete candlePuzzle;
+	candlePuzzle = nullptr;
 	
 	/*for (auto& candle : candles)
 	{
@@ -25,6 +26,7 @@ Entrance::~Entrance()
 	candles.clear();
 }
 
+// WIP - Initialization of the entrance scene 
 void Entrance::Init()
 {
 	/*Background First*/
@@ -39,12 +41,12 @@ void Entrance::Init()
 		}
 	}*/
 
-	background = App::CreateSprite(".\\TestData\\Backgrounds\\night.bmp", 1, 1);
+	/*background = App::CreateSprite(".\\TestData\\Backgrounds\\night.bmp", 1, 1);
 	background->SetScale(2.0f);
-	background->SetAnimation(0);
+	background->SetAnimation(0);*/
 
-	/*Initiating Enigmes*/
-	candleEnigme = new CandleEnigme(CandleEnigme::Status::PENDING);
+	/*Initiating Puzzles*/
+	candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
 	/*Initiating Props */
 
@@ -80,7 +82,7 @@ void Entrance::Init()
 		candles[i]->GetSprite()->SetFrame(0);
 		candles[i]->GetSprite()->SetScale(0.5);
 		AddActor(candles.at(i));
-		candleEnigme->GetCandles().emplace_back(candles[i]);
+		candlePuzzle->GetCandles().emplace_back(candles[i]);
 	}
 
 	auto pentagramme = new Actor("Pentagramme", App::CreateSprite(".\\TestData\\Props\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32), gameState->currentScene);
@@ -111,14 +113,15 @@ void Entrance::Init()
 	/*Add this room to the collection of rooms*/
 	gameState.get()->rooms.emplace_back(this);
 
-	/*Start Enigme*/
-	candleEnigme->StartEnigme();
+	/*Start Puzzle*/
+	candlePuzzle->StartPuzzle();
 }
 
 void Entrance::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
 
+	// Updating the sprites of all the actors present in the scene
 	for (const auto& item : actors)
 	{
 		if (item)
@@ -132,7 +135,9 @@ void Entrance::Render()
 	{
 		if (item)
 		{
+			// Updating the sprites
 			item->GetSprite()->Draw();
+			// Updating the colliders
 			item->GetCollider()->DrawCollision(item, 50, 50, 50);
 		}
 	}
@@ -140,11 +145,11 @@ void Entrance::Render()
 
 bool Entrance::IsRoomCleared()
 {
-	if (candleEnigme) 
+	if (candlePuzzle) 
 	{
-		if (candleEnigme->IsCleared())
+		if (candlePuzzle->IsCleared())
 		{
-			if (candleEnigme->status == Enigme::Status::PENDING)
+			if (candlePuzzle->status == Puzzle::Status::PENDING)
 			{
 				std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Miss Smith better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
 
@@ -164,7 +169,7 @@ bool Entrance::IsRoomCleared()
 				{
 					dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 				}
-				candleEnigme->status = Enigme::Status::CLEARED;
+				candlePuzzle->status = Puzzle::Status::CLEARED;
 
 			}
 			return true;

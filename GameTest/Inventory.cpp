@@ -13,6 +13,7 @@ Inventory::~Inventory()
 {
 	printf("INVENTORY DESTRUCTOR CALLED\n");
 
+	//Freeing the memory allocated on the heap
 	for (auto& bag : bags)
 		for (auto& item : bag.second.second)
 		{

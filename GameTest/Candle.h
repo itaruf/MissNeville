@@ -5,6 +5,7 @@
 #include "Collectable.h"
 #include "IInteractive.h"
 
+// Class defining a candle which has a specific interaction
 class Candle : public Actor, public IInteractive
 {
 private:
@@ -15,7 +16,6 @@ public:
 	~Candle();
 
 	bool isEnlighted();
-	/*void Enlight(bool value);*/
 	void Interact() override;
 };
 

@@ -3,7 +3,7 @@
 #define ENTRANCE_H_
 
 #include "Scene.h"
-#include "CandleEnigme.h"
+#include "CandlePuzzle.h"
 #include "Candle.h"
 #include "GameState.h"
 #include "NPC.h"
@@ -15,11 +15,11 @@ class Entrance : public Scene, std::enable_shared_from_this<Entrance>
 private:
 protected:
 public:
-	CandleEnigme* candleEnigme;
+	CandlePuzzle* candlePuzzle;
 	std::vector<Candle*> candles;
 
-	Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme);
-	Entrance(int ID, std::shared_ptr<GameState>& gameState, CandleEnigme* candleEnigme);
+	Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState, CandlePuzzle* candlePuzzle);
+	Entrance(int ID, std::shared_ptr<GameState>& gameState, CandlePuzzle* candlePuzzle);
 	~Entrance();
 
 	void Init() override;

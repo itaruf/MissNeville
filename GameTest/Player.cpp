@@ -18,6 +18,8 @@ Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Coll
 Player::~Player()
 {
 	printf("CHARACTER DESTRUCTOR CALLED\n");
+
+	// Freeing the memory allocated on the heap
 	delete inventory;
 	inventory = nullptr;
 }
@@ -188,7 +190,7 @@ void Player::GoToBagSlot(int ID, int slotNumber)
 			if (inventory->GetItem(ID, slotNumber))
 				std::cout << inventory->GetItem(ID, slotNumber)->description << std::endl;
 			else 
-				std::cout << "not item found at slot " << slotNumber << std::endl;
+				std::cout << "No item found at slot " << slotNumber << std::endl;
 		}
 	}
 }

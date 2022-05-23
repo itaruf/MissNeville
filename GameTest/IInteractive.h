@@ -4,12 +4,12 @@
 #include <combaseapi.h>
 
 class InventoryItem;
-// Interface
+
+// Set of functions to manage the interaction between the player and the target
 interface IInteractive
 {
 public:
-	// pure virtual function
 	virtual void Interact() = 0;
-	virtual ~IInteractive();
+	virtual ~IInteractive() = default;
 };
 

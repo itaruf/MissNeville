@@ -48,6 +48,7 @@ std::vector<Actor*>& Scene::GetActors()
 	return actors;
 }
 
+// If we want to setup a background
 void Scene::Update(float deltaTime)
 {
 	if (background)
@@ -65,6 +66,7 @@ bool Scene::RemoveActor(Actor* actor)
 
 	if (it != actors.end())
 	{
+		// Deleting the actor
 		actors.erase(it);
 		std::cout << actor->GetName() << " removed" << std::endl;
 		delete actor;

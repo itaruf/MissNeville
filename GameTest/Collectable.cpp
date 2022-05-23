@@ -8,4 +8,8 @@ Collectable::Collectable(std::string name, CSimpleSprite* sprite, Vector2D* posi
 Collectable::~Collectable()
 {
 	printf("ITEM DESTRUCTOR CALLED\n");
+
+	// Freeing all the memory allocated on the heap
+	/*delete invItem;
+	invItem = nullptr;*/
 }

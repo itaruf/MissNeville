@@ -11,11 +11,13 @@ Candle::~Candle()
 
 }
 
+// Get the current enlightnement of the candle
 bool Candle::isEnlighted()
 {
 	return enlighted;
 }
 
+// Changing candle's animation when being interacteed with
 void Candle::Interact()
 {
 	if (!enlighted)

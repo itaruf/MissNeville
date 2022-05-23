@@ -7,13 +7,12 @@
 #include "IInteractive.h"
 #include <unordered_map>
 
-// Class for non-playable entities
+// Class for non-playable entities (very WIP)
 class NPC : public Character, public IDialogue, public IInteractive
 {
 private:
 protected:
 public:
-	static int dialogueID;
 	std::string currentDialogue;
 	std::unordered_map<int, std::pair<bool, std::string>> dialogues;
 

@@ -4,7 +4,7 @@
 
 #include <algorithm>
 #include <vector>
-#include "Enigme.h"
+#include "Puzzle.h"
 class Actor;
 #include "Actor.h"
 #include "App/app.h"
@@ -13,6 +13,7 @@ class GameState;
 class Player;
 class Candle;
 
+// Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene
 {
 private:

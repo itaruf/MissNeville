@@ -27,19 +27,21 @@ void NPC::PlayDialogue(int dialogueID)
 	}
 }
 
-// Stop a dialogue
+// Stop a specific dialogue
 void NPC::StopDialogue(int dialogueID)
 {
 	if (dialogues[dialogueID].first)
 		dialogues[dialogueID].first = false;
 }
 
+// Enable of a specific dialogue 
 void NPC::EnableDialogue(int dialogueID)
 {
 	if (!dialogues[dialogueID].first)
 		dialogues[dialogueID].first = true;
 }
 
+// Set the current dialogue with another dialogue
 void NPC::SetCurrentDialogue(int dialogueID)
 {
 	if (dialogues.find(dialogueID) != dialogues.end())

@@ -7,24 +7,24 @@
       <FileName>Page.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CandleEnigme" Collapsed="true">
+  <Class Name="CandlePuzzle" Collapsed="true">
     <Position X="4" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAAAQAAAAAAAAAAACAAAAAAAAAQIAAAAAAAA=</HashCode>
-      <FileName>CandleEnigme.h</FileName>
+      <HashCode>AAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAQKAAAAAAAA=</HashCode>
+      <FileName>CandlePuzzle.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Enigme" Collapsed="true">
+  <Class Name="Puzzle" Collapsed="true">
     <Position X="4" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAACAAQAAAEAAAAAAAAAAEAAAAAAAAQQAAAAAAAAA=</HashCode>
-      <FileName>Enigme.h</FileName>
+      <HashCode>AAQACAAAABAAAAAAAAAAAAAEAAAAAAKAAQAAAAAAAAA=</HashCode>
+      <FileName>Puzzle.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NPC" Collapsed="true">
     <Position X="10" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAACAAAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAABA=</HashCode>
+      <HashCode>AABAAACAAAAAAAAAAAAEAAAAMAAABAQAAAAAAAAgABA=</HashCode>
       <FileName>NPC.h</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -32,7 +32,7 @@
   <Class Name="Player" Collapsed="true">
     <Position X="6.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAEAAAAAACAAAAEAIQAAEAACQAABAQAAABA=</HashCode>
+      <HashCode>AAAAAAAIAAAACEAAAAAAAAEAIQAAAAACAAAAAQAAABA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -53,14 +53,14 @@
   <Class Name="Entrance" Collapsed="true">
     <Position X="4" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAAAAwAAABACAAAEABA=</HashCode>
+      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAAAAQAAABACAAAEADA=</HashCode>
       <FileName>Entrance.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameState" Collapsed="true">
     <Position X="10" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAMAAAAAABgAAAABAAgAAAIAIAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAgAAAMAAAAAAAgAAAABAAgAAAAAIAA=</HashCode>
       <FileName>GameState.h</FileName>
     </TypeIdentifier>
   </Class>

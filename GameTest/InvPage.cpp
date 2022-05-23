@@ -10,6 +10,7 @@ InvPage::~InvPage()
 	printf("INVPAGE DESTRUCTOR CALLED\n");
 }
 
+// WIP 
 bool InvPage::UseItem()
 {
 	return false;

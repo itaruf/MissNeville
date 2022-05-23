@@ -6,6 +6,7 @@
 #include "IInteractive.h"
 #include "InvPage.h"
 
+// Class which represents a page which has a specific interaction
 class Page : public Collectable
 {
 private:

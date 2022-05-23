@@ -10,6 +10,7 @@ Page::~Page()
 	printf("PAGE DESTRUCTOR CALLED\n");
 }
 
+// return the associated item
 InventoryItem* Page::Collect()
 {
 	/*std::string description{ "page" };*/

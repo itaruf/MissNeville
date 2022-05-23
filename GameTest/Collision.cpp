@@ -14,6 +14,7 @@ Collision::~Collision()
 		delete offset;
 }
 
+// Check if an actor is colliding with another by projecting their future move
 bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 {
 	if (x + offset->x - width < other->GetPosition()->x + other->GetCollider()->offset->x + other->GetCollider()->GetWidth() &&
@@ -24,27 +25,31 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 	return false;
 }
 
-
+// Get the height of the collider
 const float& Collision::GetHeight() const
 {
 	return height;
 }
 
+// Set the height of the collider
 void Collision::SetHeight(float value)
 {
 	height = value;
 }
 
+// Get the width of the collider
 const float& Collision::GetWidth() const
 {
 	return width;
 }
 
+// Set the width of the collider
 void Collision::SetWidth(float value)
 {
 	width = value;
 }
 
+// DEBUG : Draw the collider with the actor pos in the center
 void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 {
 	if (!actor)
@@ -106,31 +111,31 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 	actor = nullptr;
 }
 
-Vector2D* Collision::GetDownLeftColPos(Actor* actor)
-{
-	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y - height) };
-	actor = nullptr;
-	return v;
-}
-
-Vector2D* Collision::GetDownRightColPos(Actor* actor)
-{
-	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y - height) };
-	actor = nullptr;
-	return v;
-
-}
-
-Vector2D* Collision::GetUpLeftColPos(Actor* actor)
-{
-	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y + height) };
-	actor = nullptr;
-	return v;
-}
-
-Vector2D* Collision::GetUpRightColPos(Actor* actor)
-{
-	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y + height) };
-	actor = nullptr;
-	return v;
-}
+//Vector2D* Collision::GetDownLeftColPos(Actor* actor)
+//{
+//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y - height) };
+//	actor = nullptr;
+//	return v;
+//}
+//
+//Vector2D* Collision::GetDownRightColPos(Actor* actor)
+//{
+//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y - height) };
+//	actor = nullptr;
+//	return v;
+//
+//}
+//
+//Vector2D* Collision::GetUpLeftColPos(Actor* actor)
+//{
+//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y + height) };
+//	actor = nullptr;
+//	return v;
+//}
+//
+//Vector2D* Collision::GetUpRightColPos(Actor* actor)
+//{
+//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y + height) };
+//	actor = nullptr;
+//	return v;
+//}

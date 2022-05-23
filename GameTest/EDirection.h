@@ -1,4 +1,7 @@
 #pragma once
+#ifndef EDIRECTION_H_
+#define EDIRECTION_H_
+
 enum class Direction {
 	STILL,
 	UP,
@@ -6,3 +9,5 @@ enum class Direction {
 	LEFT,
 	RIGHT,
 };
+
+#endif

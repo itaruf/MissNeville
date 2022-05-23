@@ -96,7 +96,6 @@
   <ItemGroup>
     <Text Include="ReadMe.txt" />
     <Text Include="Sources.txt" />
-    <Text Include="Keybidings.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -108,7 +107,7 @@
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\TextureLoader.h" />
     <ClInclude Include="Candle.h" />
-    <ClInclude Include="CandleEnigme.h" />
+    <ClInclude Include="CandlePuzzle.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="IDialogue.h" />
     <ClInclude Include="NPC.h" />
@@ -116,7 +115,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="EMobility.h" />
     <ClInclude Include="EDirection.h" />
-    <ClInclude Include="Enigme.h" />
+    <ClInclude Include="Puzzle.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="ICollectable.h" />
@@ -140,18 +139,15 @@
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\TextureLoader.cpp" />
     <ClCompile Include="Candle.cpp" />
-    <ClCompile Include="CandleEnigme.cpp" />
+    <ClCompile Include="CandlePuzzle.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="IDialogue.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Enigme.cpp" />
+    <ClCompile Include="Puzzle.cpp" />
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTest.cpp" />
-    <ClCompile Include="ICollectable.cpp" />
-    <ClCompile Include="IInteractive.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="InvPage.cpp" />
@@ -166,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Test.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

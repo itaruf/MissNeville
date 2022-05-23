@@ -2,6 +2,7 @@
 
 #include "InventoryItem.h"
 
+// Class which represents a page in the inventory
 class InvPage : public InventoryItem
 {
 private:

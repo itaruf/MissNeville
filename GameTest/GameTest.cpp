@@ -26,23 +26,27 @@
 #include <type_traits>
 #include <cmath>
 #include <map>
-#include "csv.h"
+//#include "csv.h"
 
 std::shared_ptr<GameState> gameState;
 
 void Init()
 {
-	io::CSVReader<3> in("Test.csv");
+	/*io::CSVReader<3, io::trim_chars<' ', '\t'>, io::no_quote_escape<';'>> in("Test.csv");
 
 	in.read_header(io::ignore_extra_column, "Class", "Actor", "NPC");
 	std::string clas; std::string classType; std::string speed;
 	while (in.read_row(clas, classType, speed))
 	{
 		std::cout << clas << " " << classType << " " << speed << std::endl;
-	}
+	}*/
 
+	/*Instantiate the gamestate which will be persistent across all scenes*/
 	gameState = std::make_shared<GameState>();
+
+	/*Setting up the first scene*/
 	gameState->currentScene = new Entrance(0, gameState, nullptr);
+	gameState->currentScene->Init();
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
@@ -50,18 +54,18 @@ void Init()
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, gameState->currentScene, 20, 4, new Inventory()) };
 
-	/*Caractéristiques de bases*/
+	/*Player base stats and configs*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_LEFT, 1.0f / 15.0f, { 9,10,11,12,13,14,15,16,17 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 18,19,20,21,22,23,24,25,26 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
 
+	/*Adding the player to the gamestate*/
 	gameState->AddPlayer(player);
 
-	/*gameState->currentScene->AddActor(player);*/
+	/*Setting up the player's first scene*/
 	player->SetCurrentRoom(gameState->currentScene);
-	gameState->currentScene->Init();
 
 	player = nullptr;
 	vector = nullptr;
