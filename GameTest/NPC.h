@@ -5,6 +5,7 @@
 #include "Character.h"
 #include "IDialogue.h"
 #include "IInteractive.h"
+#include <unordered_map>
 
 // Class for non-playable entities
 class NPC : public Character, public IDialogue, public IInteractive
@@ -14,7 +15,7 @@ protected:
 public:
 	static int dialogueID;
 	std::string currentDialogue;
-	std::map<int, std::pair<bool, std::string>> dialogues;
+	std::unordered_map<int, std::pair<bool, std::string>> dialogues;
 
 	NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed);
 	~NPC();

@@ -6,7 +6,7 @@
 #include "Page.h"
 #include <vector>
 #include "InventoryItem.h"
-#include <map>
+#include <unordered_map>
 
 // Class to define an inventory with bags and slots
 class Inventory
@@ -18,7 +18,7 @@ protected:
 public:
 	// Allow the Player class to access Inventory members
 	friend class Player;
-	std::map<int, std::pair<bool, std::vector<InventoryItem*>>> bags;
+	std::unordered_map<int, std::pair<bool, std::vector<InventoryItem*>>> bags;
 	Inventory();
 	Inventory(std::map<int, std::vector<InventoryItem*>>);
 	~Inventory();

@@ -32,14 +32,14 @@ void Entrance::Init()
 	{ 
 		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
 		{
-			auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\wood-plank3-b.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this);
+			auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Backgrounds\\wood-plank3-b.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this);
 			ground->GetSprite()->SetFrame(1);
 			ground->GetSprite()->SetScale(0.5);
 			AddActor(ground);
 		}
 	}*/
 
-	background = App::CreateSprite(".\\TestData\\Backgrouds\\night.bmp", 1, 1);
+	background = App::CreateSprite(".\\TestData\\Backgrounds\\night.bmp", 1, 1);
 	background->SetScale(2.0f);
 	background->SetAnimation(0);
 
