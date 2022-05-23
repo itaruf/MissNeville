@@ -38,6 +38,7 @@ void Entrance::Init()
 			AddActor(ground);
 		}
 	}*/
+
 	background = App::CreateSprite(".\\TestData\\Backgrouds\\night.bmp", 1, 1);
 	background->SetScale(2.0f);
 	background->SetAnimation(0);
@@ -50,7 +51,6 @@ void Entrance::Init()
 	auto wall = new Actor("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(64 * 2, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2), gameState->currentScene);
 	wall->GetSprite()->SetFrame(1);
 	wall->GetSprite()->SetScale(3);
-
 	AddActor(wall);
 
 	auto wall2 = new Actor("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH), gameState->currentScene);
@@ -93,17 +93,32 @@ void Entrance::Init()
 	bed->GetSprite()->SetScale(2);
 	AddActor(bed);
 
+	auto smith = new NPC("Smith", App::CreateSprite(".\\TestData\\Characters\\family.bmp", 3, 4), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 32, 32), gameState->currentScene, 0, 0);
+	smith->GetSprite()->SetFrame(1);
+	smith->GetSprite()->SetScale(3.5);
+	AddActor(smith);
+	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not lighten your path or else the false angel shall be your doom !")));
+
 	auto charlotte = new NPC("Charlotte", App::CreateSprite(".\\TestData\\Characters\\charlotte.bmp", 3, 4), new Vector2D(724, 464), new Collision(Collision::ColliderType::Block, 32, 32), gameState->currentScene, 0, 0);
 	charlotte->GetSprite()->SetFrame(1);
 	charlotte->GetSprite()->SetScale(3);
 	AddActor(charlotte);
 	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal should be around.. But it's so dark here ! Well, it always has been...")));
 
-	auto sprite  = new Actor("Question", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(724, 518), new Collision(Collision::ColliderType::Overlap, 0, 0), gameState->currentScene);
-	sprite->GetSprite()->SetFrame(0);
-	sprite->GetSprite()->SetScale(2);
-	AddActor(sprite);
+	auto question = new Actor("Question", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(724, 518), new Collision(Collision::ColliderType::Overlap, 0, 0), gameState->currentScene);
+	question->GetSprite()->SetFrame(0);
+	question->GetSprite()->SetScale(2);
+	AddActor(question);
 
+	/*auto picture = new Actor("Picture", App::CreateSprite(".\\TestData\\Props\\picture.bmp", 1, 1), new Vector2D(300, 300), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentScene);
+	picture->GetSprite()->SetFrame(0);
+	picture->GetSprite()->SetScale(3);
+	AddActor(picture);
+
+	auto picture2 = new Actor("Picture2", App::CreateSprite(".\\TestData\\Props\\picture2.bmp", 1, 1), new Vector2D(364, 300), new Collision(Collision::ColliderType::Block, 16, 16), gameState->currentScene);
+	picture2->GetSprite()->SetFrame(0);
+	picture2->GetSprite()->SetScale(3);
+	AddActor(picture2);*/
 
 	/*Add this room to the collection of rooms*/
 	gameState.get()->rooms.emplace_back(this);
@@ -149,14 +164,20 @@ bool Entrance::IsRoomCleared()
 		{
 			if (candleEnigme->status == Enigme::Status::PENDING)
 			{
-				std::string description = "[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Miss Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so raging !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Miss Smith better not read this or she is going to grunt with her pig nose wide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
+				std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Miss Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Miss Smith better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
 
 				auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 8, 8), gameState->currentScene, new InventoryItem(InventoryItem::Usability::Usable, 0, description), 0);
 				page->GetSprite()->SetFrame(0);
 				page->GetSprite()->SetScale(3);
 				AddActor(page);
 
+				auto it = std::find_if(actors.begin(), actors.end(), [](Actor* actor) { return actor->GetName() == "Smith"; });
+				if (it != actors.end())
+				{
+					RemoveActor(*it);
+				}
 				candleEnigme->status = Enigme::Status::CLEARED;
+
 			}
 			return true;
 		}
