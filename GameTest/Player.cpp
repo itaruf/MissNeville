@@ -100,6 +100,45 @@ void Player::MoveHorizontally()
 	}
 }
 
+void Player::BagAction()
+{
+	// BAG 0
+	if (App::IsKeyPressed('1') && !inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !inventory->IsBagOpened(0))
+		OpenBag(0);
+
+	else if (inventory->IsBagOpened(0))
+	{
+		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+			CloseBag(0);
+		else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
+			GoToBagSlot(0, 0);
+		else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+			GoToBagSlot(0, 1);
+		else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
+			GoToBagSlot(0, 2);
+		else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+			GoToBagSlot(0, 3);
+	}
+
+	// BAG 1
+	if (App::IsKeyPressed('2') && !inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !inventory->IsBagOpened(1))
+		OpenBag(1);
+
+	else if (inventory->IsBagOpened(1))
+	{
+		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+			CloseBag(1);
+		else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
+			GoToBagSlot(1, 0);
+		else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+			GoToBagSlot(1, 1);
+		else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
+			GoToBagSlot(1, 2);
+		else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+			GoToBagSlot(1, 3);
+	}
+}
+
 // Player's main function to interact with other actors and trigger their response to the interaction
 bool Player::Interact(IInteractive* actor)
 {

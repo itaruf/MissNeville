@@ -36,7 +36,7 @@ void Character::SetMovementSpeed(float value)
 }
 
 // Check if the character is currently moving or not
-bool Character::isMoving()
+bool Character::IsMoving()
 {
 	if (App::GetController().GetLeftThumbStickY() == 0.f && App::GetController().GetLeftThumbStickX() == 0.f)
 	{

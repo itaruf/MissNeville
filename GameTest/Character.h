@@ -18,7 +18,7 @@ public:
 
 	const float& GetMovementSpeed() const;
 	const float& GetHP() const;
-	bool isMoving();
+	bool IsMoving();
 
 	void SetHP(float value);
 	void SetMovementSpeed(float value);

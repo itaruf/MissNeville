@@ -84,54 +84,19 @@ std::string GetChar(const T& var)
 
 void Update(float deltaTime)
 { 
+	if (gameState->currentScene)
+		gameState->currentScene->Update(deltaTime);
+
 	auto player{ gameState->GetPlayer() };
 
 	if (player)
 	{
 		player->GetSprite()->Update(deltaTime);
-		player->isMoving();
+		player->IsMoving();
 		player->MoveHorizontally();
 		player->MoveVertically();
-		
-		// BAG 0
-		if (App::IsKeyPressed('1') && !player->inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !player->inventory->IsBagOpened(0))
-			player->OpenBag(0);
-
-		else if (player->inventory->IsBagOpened(0))
-		{
-			if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-				player->CloseBag(0);
-			else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
-				player->GoToBagSlot(0, 0);
-			else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
-				player->GoToBagSlot(0, 1);
-			else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
-				player->GoToBagSlot(0, 2);
-			else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
-				player->GoToBagSlot(0, 3);
-		}
-
-		// BAG 1
-		if (App::IsKeyPressed('2') && !player->inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !player->inventory->IsBagOpened(1))
-			player->OpenBag(1);
-
-		else if (player->inventory->IsBagOpened(1))
-		{
-			if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-				player->CloseBag(1);
-			else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
-				player->GoToBagSlot(1, 0);
-			else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
-				player->GoToBagSlot(1, 1);
-			else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
-				player->GoToBagSlot(1, 2);
-			else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
-				player->GoToBagSlot(1, 3);
-		}
+		player->BagAction();
 	}
-
-	if (gameState->currentScene)
-		gameState->currentScene->Update(deltaTime);
 }
 
 void Render()
@@ -142,14 +107,12 @@ void Render()
 	App::Print(700, 500, (*ptr)(5).c_str());*/
 	
 	/*********CURRENT ROOM RENDER*********/
-
 	if (!gameState->currentScene)
 		return;
 
 	gameState->currentScene->Render();
 
 	/*********PLAYER RENDER*********/
-
 	auto player{ gameState->GetPlayer() };
 
 	if (!player)
@@ -167,8 +130,8 @@ void Render()
 	else
 		App::Print(800, 700, "Scene Not Cleared");
 
-	App::Print(200, 400, ("Nb of actors : " + GetChar(gameState->currentScene->GetActors().size())).c_str());
-	/*App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());*/
+	/*App::Print(200, 400, ("Nb of actors : " + GetChar(gameState->currentScene->GetActors().size())).c_str());
+	App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());
 	App::Print(100, 20, ("Player Pos: " + string).c_str());
 	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
 	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());
@@ -176,7 +139,7 @@ void Render()
 	App::Print(800, 600, ("Player W (Col): " + std::to_string(player->GetCollider()->GetWidth())).c_str());
 	App::Print(800, 575, ("Player Name: " + player->GetName()).c_str());
 	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
-	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());
+	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());*/
 
 	/*********PLAYER'S INTERACTIONS*********/
 
@@ -221,7 +184,7 @@ void Render()
 			
 			auto closestActor = interactiveActors[0];
 
-			App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());
+			/*App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());*/
 
 			/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
 			if (player->GetCollider()->isColliding(player, closestActor, x, y))

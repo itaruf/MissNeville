@@ -24,6 +24,7 @@ public:
 
 	void MoveVertically();
 	void MoveHorizontally();
+	void BagAction();
 	bool Interact(IInteractive* actor);
 	bool Interact(Collectable* collectable);
 	void OpenBag(int ID);
