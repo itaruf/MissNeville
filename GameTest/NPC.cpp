@@ -10,13 +10,18 @@ NPC::~NPC()
 {
 }
 
+// Play a dialogue
+void NPC::PlayDialogue()
+{
+	std::cout << "[" << GetName() << "] says : " << currentDialogue << std::endl;
+}
 
 // Play a dialogue
 void NPC::PlayDialogue(int dialogueID)
 {
-	if (!dialogues[dialogueID].first)
+	if (dialogues[dialogueID].first)
 	{
-		dialogues[dialogueID].first = true;
+		dialogueID++;
 		std::cout << "[" <<  GetName() << "] says : " << dialogues[dialogueID].second << std::endl;
 	}
 }
@@ -28,9 +33,21 @@ void NPC::StopDialogue(int dialogueID)
 		dialogues[dialogueID].first = false;
 }
 
+void NPC::EnableDialogue(int dialogueID)
+{
+	if (!dialogues[dialogueID].first)
+		dialogues[dialogueID].first = true;
+}
+
+void NPC::SetCurrentDialogue(int dialogueID)
+{
+	if (dialogues.find(dialogueID) != dialogues.end());
+		currentDialogue = dialogues[dialogueID].second;
+}
+
 // Executing instructions when the NPC is being interacted with
 void NPC::Interact()
 {
 	// Dialogue to play
-	PlayDialogue(0);
+	PlayDialogue();
 }

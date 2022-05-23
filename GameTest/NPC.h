@@ -19,8 +19,11 @@ public:
 	NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed);
 	~NPC();
 
+	void PlayDialogue() override;
 	void PlayDialogue(int dialogueID) override;
 	void StopDialogue(int dialogueID) override;
+	void EnableDialogue(int dialogueID) override;
+	void SetCurrentDialogue(int dialogueID) override;
 	void Interact() override;
 };
 
