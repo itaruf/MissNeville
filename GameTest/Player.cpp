@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed, Inventory* inventory) : Character(name, sprite, position, collider, currentScene, HP, movementSpeed), inventory{ inventory }
+Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Inventory* inventory) : Character(name, sprite, position, collider, HP, movementSpeed), inventory{ inventory }
 {
 	// Instantiating all the bags and slots of the inventory
 	for (auto i = 0; i < Inventory::nbBags; ++i)
@@ -32,7 +32,7 @@ void Player::MoveVertically()
 		// Setting up the data to match the FORWARDS direction
 		direction = Direction::UP;
 		sprite->SetAnimation(sprite->ANIM_FORWARDS);
-		for (const auto& actor : currentScene->GetActors())
+		for (const auto& actor : GameState::currentScene->GetActors())
 		{
 			// Preventing the player to collide with themselves
 			if (actor == this)
@@ -51,7 +51,7 @@ void Player::MoveVertically()
 		// Setting up the data to match the BACKWARDS direction
 		direction = Direction::DOWN;
 		sprite->SetAnimation(sprite->ANIM_BACKWARDS);
-		for (const auto& actor : currentScene->GetActors())
+		for (const auto& actor : GameState::currentScene->GetActors())
 		{
 			if (actor == this)
 				continue;
@@ -71,7 +71,7 @@ void Player::MoveHorizontally()
 		// Setting up the data to match the RIGHT direction
 		direction = Direction::RIGHT;
 		sprite->SetAnimation(sprite->ANIM_RIGHT);
-		for (const auto& actor : currentScene->GetActors())
+		for (const auto& actor : GameState::currentScene->GetActors())
 		{
 			if (actor == this)
 				continue;
@@ -87,7 +87,7 @@ void Player::MoveHorizontally()
 		// Setting up the data to match the LEFT direction
 		direction = Direction::LEFT;
 		sprite->SetAnimation(sprite->ANIM_LEFT);
-		for (const auto& actor : currentScene->GetActors())
+		for (const auto& actor : GameState::currentScene->GetActors())
 		{
 			if (actor == this)
 				continue;
@@ -172,7 +172,7 @@ bool Player::Interact(Collectable* collectable)
 				inventory->bags[collectable->ID].second[i] = collectable->Collect();
 				std::cout << collectable->GetName() << " added in bag " << collectable->ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
-				currentScene->RemoveActor(collectable);
+				GameState::currentScene->RemoveActor(collectable);
 				collectable = nullptr;
 				return true;
 			}

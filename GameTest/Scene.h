@@ -21,10 +21,9 @@ protected:
 	int ID;
 	CSimpleSprite* background{ nullptr };
 	std::vector<Actor*> actors;
-	std::shared_ptr<GameState>& gameState;
 public:
-	Scene(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState);
-	Scene(int ID, std::shared_ptr<GameState>& gameState);
+	Scene(int ID, std::vector<Actor*> actors);
+	Scene(int ID);
 
 	virtual ~Scene();
 

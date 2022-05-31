@@ -16,14 +16,11 @@ class GameState
 private:
 protected:
 public:
-	Scene* currentScene;
-	std::vector<Scene*> rooms;
-	Player* player{ nullptr };
+	static Scene* currentScene;
+	static std::vector<Scene*> rooms;
+	static Player* player;
 
 	GameState();
-	GameState(std::vector<Scene*>& rooms);
-	GameState(Scene* currentScene, std::vector<Scene*>& rooms);
-	GameState(Scene* currentScene);
 	~GameState();
 
 	Player* GetPlayer();

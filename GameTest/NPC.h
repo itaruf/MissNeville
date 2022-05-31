@@ -16,7 +16,7 @@ public:
 	std::string currentDialogue;
 	std::unordered_map<int, std::pair<bool, std::string>> dialogues;
 
-	NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed);
+	NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed);
 	~NPC();
 
 	void PlayDialogue() override;

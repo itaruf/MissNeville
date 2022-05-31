@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Scene.h"
 
-Scene::Scene(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState) : ID{ ID }, actors{ actors }, gameState{ gameState } {}
+Scene::Scene(int ID, std::vector<Actor*> actors) : ID{ ID }, actors{ actors } {}
 
-Scene::Scene(int ID, std::shared_ptr<GameState>& gameState) : ID{ ID }, gameState{ gameState } {}
+Scene::Scene(int ID) : ID{ ID } {}
 
 Scene::~Scene()
 {

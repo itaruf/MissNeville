@@ -23,11 +23,10 @@ protected:
 	CSimpleSprite* sprite;
 	Vector2D* position;
 	Collision* collider;
-	Scene* currentScene;
 	Mobility mobility = defaultMobility;
 	Direction direction = defaultDirection;
 public:
-	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene);
+	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	Actor(Actor* actor);
 	virtual ~Actor();
 
@@ -35,7 +34,6 @@ public:
 	CSimpleSprite* GetSprite();
 	Vector2D* GetPosition();
 	Collision* GetCollider();
-	Scene* GetCurrentRoom();
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
 
@@ -45,7 +43,6 @@ public:
 	void SetPosition(Vector2D* position);
 	void SetPosition(float x = 0, float y = 0);
 	void SetCollider(Collision* collider);
-	void SetCurrentRoom(Scene* room);
 };
 
 #endif

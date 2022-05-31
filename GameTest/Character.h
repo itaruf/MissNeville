@@ -13,7 +13,7 @@ protected:
 	float HP;
 	float movementSpeed;
 public:
-	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed);
+	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed);
 	~Character();
 
 	const float& GetMovementSpeed() const;

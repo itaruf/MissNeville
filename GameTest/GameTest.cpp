@@ -12,6 +12,7 @@
 #include "Scene.h"
 #include "Collision.h"
 #include "Collectable.h"
+class GameState;
 #include "GameState.h"	
 #include "Entrance.h"
 #include "Inventory.h"
@@ -26,10 +27,10 @@
 #include <type_traits>
 #include <cmath>
 #include <map>
+#include "GameStateController.h"
 //#include "csv.h"
 
 std::shared_ptr<GameState> gameState;
-
 void Init()
 {
 	/*io::CSVReader<3, io::trim_chars<' ', '\t'>, io::no_quote_escape<';'>> in("Test.csv");
@@ -45,14 +46,14 @@ void Init()
 	gameState = std::make_shared<GameState>();
 
 	/*Setting up the first scene*/
-	gameState->currentScene = new Entrance(0, gameState, nullptr);
+	gameState->currentScene = new Entrance(0, nullptr);
 	gameState->currentScene->Init();
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
-	Player* player{ new Player("Imane", playerSprite, vector, collider, gameState->currentScene, 20, 4, new Inventory()) };
+	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, new Inventory()) };
 
 	/*Player base stats and configs*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -64,16 +65,13 @@ void Init()
 	/*Adding the player to the gamestate*/
 	gameState->AddPlayer(player);
 
-	/*Setting up the player's first scene*/
-	player->SetCurrentRoom(gameState->currentScene);
-
 	player = nullptr;
 	vector = nullptr;
 	collider = nullptr;
 	playerSprite = nullptr;
 
 	// Test ambiance WIP (need to create a sound manager)
-	App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);
+	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
 }
 
 template<

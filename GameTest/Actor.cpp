@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider) }, currentScene{currentScene}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider)}
 {
 
 	// Immediately Set the position of the actor 
 	SetPosition(position);
 }
 
-Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), mobility(actor->mobility), direction(actor->direction), currentScene(actor->currentScene)
+Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), mobility(actor->mobility), direction(actor->direction)
 {
 }
 
@@ -33,11 +33,6 @@ Actor::~Actor()
 	{
 		delete collider;
 		collider = nullptr;
-	}
-
-	if (currentScene)
-	{
-		currentScene = nullptr;
 	}
 }
 
@@ -108,18 +103,6 @@ Collision* Actor::GetCollider()
 void Actor::SetCollider(Collision* collider)
 {
 	this->collider = collider;
-}
-
-// Get the current room in which the actor is
-Scene* Actor::GetCurrentRoom()
-{
-	return currentScene;
-}
-
-// Set the current room in which the actor is
-void Actor::SetCurrentRoom(Scene* room)
-{
-	this->currentScene = room;
 }
 
 // Get the mobility of the actor (STATIC, MOVABLE)

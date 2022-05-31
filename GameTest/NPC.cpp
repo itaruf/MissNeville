@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "NPC.h"
 
-NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed) 
-	: Character(name, sprite, position, collider, currentScene, HP, movementSpeed)
+NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) 
+	: Character(name, sprite, position, collider, HP, movementSpeed)
 {
 }
 

@@ -12,7 +12,7 @@ private:
 protected:
 	bool enlighted = false;
 public:
-	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene);
+	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	~Candle();
 
 	bool isEnlighted();

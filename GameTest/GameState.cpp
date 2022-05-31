@@ -1,32 +1,12 @@
 #include "stdafx.h"
 #include "GameState.h"
 
-GameState::GameState(std::vector<Scene*>& rooms) : currentScene{ nullptr }
+Scene* GameState::currentScene;
+std::vector<Scene*> GameState::rooms;
+Player* GameState::player;
+
+GameState::GameState()
 {
-	for (auto& room : rooms)
-	{
-		if (room)
-			this->rooms.emplace_back(std::move(room));
-	}
-}
-
-GameState::GameState(Scene* currentScene, std::vector<Scene*>& rooms) : currentScene(std::move(currentScene))
-{
-	for (auto& room : rooms)
-	{
-		if (room)
-			this->rooms.emplace_back(std::move(room));
-	}
-}
-
-GameState::GameState(Scene* currentScene) : currentScene{ std::move(currentScene) }
-{
-}
-
-
-GameState::GameState() : currentScene{ nullptr }
-{
-
 }
 
 

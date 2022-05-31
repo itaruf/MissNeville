@@ -18,8 +18,8 @@ public:
 	CandlePuzzle* candlePuzzle;
 	std::vector<Candle*> candles;
 
-	Entrance(int ID, std::vector<Actor*> actors, std::shared_ptr<GameState>& gameState, CandlePuzzle* candlePuzzle);
-	Entrance(int ID, std::shared_ptr<GameState>& gameState, CandlePuzzle* candlePuzzle);
+	Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle);
+	Entrance(int ID, CandlePuzzle* candlePuzzle);
 	~Entrance();
 
 	void Init() override;

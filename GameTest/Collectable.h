@@ -14,7 +14,7 @@ protected:
 	InventoryItem* invItem;
 public:
 	int ID;
-	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, InventoryItem* invItem, int ID = 0);
+	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, InventoryItem* invItem, int ID = 0);
 	~Collectable();
 
 	// Each Collectable will have its own treatment

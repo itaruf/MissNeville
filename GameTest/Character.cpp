@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, float HP, float movementSpeed) : Actor(name, sprite, position, collider, currentScene), HP{ HP }, movementSpeed{ movementSpeed }
+Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) : Actor(name, sprite, position, collider), HP{ HP }, movementSpeed{ movementSpeed }
 {
 	/*std::cout << "CHARACTER CONSTRUCTOR CALLED" << std::endl;*/
 }

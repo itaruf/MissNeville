@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Page.h"
 
-Page::Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* currentScene, InventoryItem* invItem, int ID) : Collectable(name, sprite, position, collider, currentScene, invItem, ID)
+Page::Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, InventoryItem* invItem, int ID) : Collectable(name, sprite, position, collider, invItem, ID)
 {
 }
 
