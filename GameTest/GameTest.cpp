@@ -153,40 +153,41 @@ void Render()
 			if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
 				interactiveActors.emplace_back(actor);
 
+		float ms{ player->GetMovementSpeed() };
+
+		if (player->GetDirection() == Direction::LEFT || player->GetDirection() == Direction::DOWN)
+			ms = -player->GetMovementSpeed();
+
+		float x{ 0 };
+		float y{ 0 };
+
+		if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
+		{
+			x = pos->x + ms;
+			y = pos->y;
+		}
+		else
+		{
+			x = pos->x;
+			y = pos->y + ms;
+		}
+
 		if (interactiveActors.size() > 0) 
 		{
 			/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
-			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [pos](Actor* const& l, Actor* const& r)
+			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [pos, ms](Actor* const& l, Actor* const& r)
 				{
 					return
-						std::sqrt(std::pow(pos->x - l->GetPosition()->x, 2) + std::pow(pos->y - l->GetPosition()->y, 2))
+						std::abs(pos->x + ms - l->GetPosition()->x + ms) + std::abs(pos->y + ms - l->GetPosition()->y + ms)
 						<
-						std::sqrt(std::pow(pos->x - r->GetPosition()->x, 2) + std::pow(pos->y - r->GetPosition()->y, 2));
+						std::abs(pos->x + ms - r->GetPosition()->x + ms) + std::abs(pos->y + ms - r->GetPosition()->y + ms);
 				});
 
 
-			float ms{ player->GetMovementSpeed() };
-
-			if (player->GetDirection() == Direction::LEFT || player->GetDirection() == Direction::DOWN)
-				ms = -player->GetMovementSpeed();
-
-			float x{ 0 };
-			float y{ 0 };
-
-			if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
-			{
-				x = pos->x + ms;
-				y = pos->y;
-			}
-			else
-			{
-				x = pos->x;
-				y = pos->y + ms;
-			}
 			
 			auto closestActor = interactiveActors[0];
 
-			/*App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());*/
+			App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());
 
 			/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
 			if (player->GetCollider()->isColliding(player, closestActor, x, y))
