@@ -1,3 +1,4 @@
+
 #pragma once
 #ifndef VECTOR2D_H_
 #define VECTOR2D_H_
@@ -9,7 +10,7 @@ public:
 	float x;
 	float y;
 
-	Vector2D(float x, float y);
+	Vector2D(float x = 0, float y = 0);
 	~Vector2D() = default;
 };
 

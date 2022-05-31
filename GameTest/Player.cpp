@@ -12,7 +12,6 @@ Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Coll
 			inventory->bags[i].second.emplace_back(nullptr);
 		}
 	}
-
 }
 
 Player::~Player()

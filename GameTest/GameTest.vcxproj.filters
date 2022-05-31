@@ -32,14 +32,18 @@
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Page.cpp" />
-    <ClCompile Include="Puzzle.cpp" />
     <ClCompile Include="Candle.cpp" />
-    <ClCompile Include="CandlePuzzle.cpp" />
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="InvPage.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CandlePuzzle.cpp">
+      <Filter>Puzzles</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle.cpp">
+      <Filter>Puzzles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -80,9 +84,7 @@
     <ClInclude Include="Collectable.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Page.h" />
-    <ClInclude Include="Puzzle.h" />
     <ClInclude Include="Candle.h" />
-    <ClInclude Include="CandlePuzzle.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InvPage.h" />
@@ -91,6 +93,12 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="IDialogue.h" />
+    <ClInclude Include="CandlePuzzle.h">
+      <Filter>Puzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle.h">
+      <Filter>Puzzles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -99,6 +107,9 @@
   <ItemGroup>
     <Filter Include="API">
       <UniqueIdentifier>{3e1485bf-3449-4966-8760-976ee866544b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Puzzles">
+      <UniqueIdentifier>{70f5b63f-2ba3-474f-8e1a-005d4ece3c9f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
