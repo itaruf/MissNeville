@@ -58,11 +58,16 @@ void Init()
 
 	/*Instantiate the gamestate which will be persistent across all scenes*/
 	gameState = std::make_shared<GameState>();
+	gameState->_state = State::REGULAR;
 
-	gameState->state = State::REGULAR;
 	/*Setting up the first scene*/
-	gameState->currentScene = new Entrance(0, nullptr);
-	gameState->currentScene->Init();
+	gameState->_currentScene = new Entrance(0, nullptr);
+	gameState->_currentScene->Init();
+
+	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
+	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
+	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
+	gameState->currentState = stateRegular;
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
@@ -79,16 +84,10 @@ void Init()
 
 	/*Adding the player to the gamestate*/
 	gameState->AddPlayer(player);
-
 	stateRegular->player = player;
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
-
-	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
-	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
-	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
-	gameState->currentState = stateRegular;
 }
 
 template<
@@ -102,13 +101,12 @@ std::string GetChar(const T& var)
 
 void Update(float deltaTime)
 { 
-	if (gameState->player)
-		gameState->currentState->Update();
 
-	if (gameState->currentScene)
+	if (gameState->_currentScene)
 	{
 		gameState->SwitchState();
-		gameState->currentScene->Update(deltaTime);
+		gameState->_currentScene->Update(deltaTime);
+		gameState->currentState->Update();
 	}
 
 	auto player{ gameState->GetPlayer() };
@@ -121,16 +119,11 @@ void Update(float deltaTime)
 
 void Render()
 {
-	/*std::string(*ptr)(int);
-	ptr = &returnInt;
-
-	App::Print(700, 500, (*ptr)(5).c_str());*/
-	
 	/*********CURRENT ROOM RENDER*********/
-	if (!gameState->currentScene)
+	if (!gameState->_currentScene)
 		return;
 
-	gameState->currentScene->Render();
+	gameState->_currentScene->Render();
 	App::Print(800, 600, ("State : " + gameState->PrintState()).c_str());
 
 	/*********PLAYER RENDER*********/
@@ -146,25 +139,14 @@ void Render()
 	auto string{ std::to_string(pos->x) + " " + std::to_string(pos->y) };
 
 	/*SOME PRINTS*/
-	if (gameState->currentScene->IsRoomCleared())
+	if (gameState->_currentScene->IsRoomCleared())
 		App::Print(800, 700, "Scene Cleared");
 	else
 		App::Print(800, 700, "Scene Not Cleared");
 
-	/*App::Print(200, 400, ("Nb of actors : " + GetChar(gameState->currentScene->GetActors().size())).c_str());
-	App::Print(200, 300, ("Page collected : " + GetChar(player->inventory->bags[0].second.size())).c_str());
-	App::Print(100, 20, ("Player Pos: " + string).c_str());
-	App::Print(800, 650, ("Player H (Spr): " + std::to_string(player->GetSprite()->GetHeight())).c_str());
-	App::Print(800, 675, ("Player W (Spr): " + std::to_string(player->GetSprite()->GetWidth())).c_str());
-	App::Print(800, 625, ("Player H (Col): " + std::to_string(player->GetCollider()->GetHeight())).c_str());
-	App::Print(800, 600, ("Player W (Col): " + std::to_string(player->GetCollider()->GetWidth())).c_str());
-	App::Print(800, 575, ("Player Name: " + player->GetName()).c_str());
-	App::Print(900, 500, std::to_string(App::GetController().GetLeftThumbStickY()).c_str());
-	App::Print(900, 450, std::to_string(App::GetController().GetLeftThumbStickX()).c_str());*/
-
 	/*********PLAYER'S INTERACTIONS*********/
 	/*TEST WIP*/
-	auto actors{ gameState->currentScene->GetActors() };
+	auto actors{ gameState->_currentScene->GetActors() };
 	if (actors.size() != 0)
 	{
 		std::vector<Actor*> interactiveActors{};

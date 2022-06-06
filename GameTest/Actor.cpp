@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : name{ std::move(name) }, sprite(std::move(sprite)), position{ position }, collider{ std::move(collider)}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : _name{ std::move(name) }, _sprite(std::move(sprite)), _position{ position }, _collider{ std::move(collider)}
 {
 
 	// Immediately Set the position of the actor 
 	SetPosition(position);
 }
 
-Actor::Actor(Actor* actor) : name(actor->name), sprite(actor->sprite), position(actor->position), collider(actor->collider), mobility(actor->mobility), direction(actor->direction)
+Actor::Actor(Actor* actor) : _name(actor->_name), _sprite(actor->_sprite), _position(actor->_position), _collider(actor->_collider), _mobility(actor->_mobility), _direction(actor->_direction)
 {
 }
 
@@ -17,102 +17,102 @@ Actor::~Actor()
 
 	// Freeing all the memory allocated on the heap
 
-	if (sprite)
+	if (_sprite)
 	{
-		delete sprite;
-		sprite = nullptr;
+		delete _sprite;
+		_sprite = nullptr;
 	}
 
-	if (position)
+	if (_position)
 	{
-		delete position;
-		position = nullptr;
+		delete _position;
+		_position = nullptr;
 	}
 
-	if (collider)
+	if (_collider)
 	{
-		delete collider;
-		collider = nullptr;
+		delete _collider;
+		_collider = nullptr;
 	}
 }
 
 // Get the current name of the actor
 const std::string& Actor::GetName() const
 {
-	return name;
+	return _name;
 }
 
 // Set the name of the actor
 void Actor::SetName(std::string name)
 {
-	this->name = name;
+	_name = name;
 }
 
 // Get the sprite of the actor
 CSimpleSprite* Actor::GetSprite()
 {
-	return sprite;
+	return _sprite;
 }
 
 // Set the sprite of the actor
 void Actor::SetSprite(CSimpleSprite* sprite)
 {
-	this->sprite = sprite;
+	_sprite = sprite;
 	// Immediately Set the position of the sprite and thus, of the actor
-	this->sprite->SetPosition(position->x, position->y);
+	_sprite->SetPosition(_position->x, _position->y);
 }
 
 // Set the sprite of the actor
 void Actor::SetSprite(CSimpleSprite& sprite)
 {
-	*(this->sprite) = sprite;
+	*(_sprite) = sprite;
 	// Immediately Set the position of the sprite and thus, of the actor
-	this->sprite->SetPosition(position->x, position->y);
+	_sprite->SetPosition(_position->x, _position->y);
 }
 
 // Get the current position of the actor
 Vector2D* Actor::GetPosition()
 {
 	// The sprite of the actor manages its position
-	sprite->GetPosition(position->x, position->y);
-	return position;
+	_sprite->GetPosition(_position->x, _position->y);
+	return _position;
 }
 
 // Set the position of the actor
 void Actor::SetPosition(Vector2D* position)
 {
-	sprite->SetPosition(position->x, position->y);
-	this->position = GetPosition();
+	_sprite->SetPosition(_position->x, _position->y);
+	_position = GetPosition();
 }
 
 // Set the position of the actor
 void Actor::SetPosition(float x, float y)
 {
-	sprite->SetPosition(x, y);
-	position->x = x;
-	position->y = y;
+	_sprite->SetPosition(x, y);
+	_position->x = x;
+	_position->y = y;
 }
 
 // Return the collider of the actor
 Collision* Actor::GetCollider()
 {
-	return collider;
+	return _collider;
 }
 
 // Set the collider of the actor
 void Actor::SetCollider(Collision* collider)
 {
-	this->collider = collider;
+	_collider = collider;
 }
 
 // Get the mobility of the actor (STATIC, MOVABLE)
 const Mobility& Actor::GetMobility()
 {
-	return mobility;
+	return _mobility;
 }
 
 // Get the current direction of the actor (STILL, FW, BW, LEFT, RIGHT)
 const Direction& Actor::GetDirection()
 {
-	return direction;
+	return _direction;
 }

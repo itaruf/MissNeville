@@ -23,11 +23,11 @@ void Candle::Interact()
 	if (!enlighted)
 	{
 		enlighted = true;
-		sprite->SetFrame(1);
+		_sprite->SetFrame(1);
 	}
 	/*else
 	{
 		enlighted = false;
-		sprite->SetFrame(0);
+		_sprite->SetFrame(0);
 	}*/
 }

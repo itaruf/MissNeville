@@ -40,7 +40,7 @@ bool Character::IsMoving()
 {
 	if (App::GetController().GetLeftThumbStickY() == 0.f && App::GetController().GetLeftThumbStickX() == 0.f)
 	{
-		sprite->SetAnimation(-1);
+		_sprite->SetAnimation(-1);
 		return false;
 	}
 	return true;

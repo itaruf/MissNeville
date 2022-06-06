@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "GameState.h"
 
-Scene* GameState::currentScene;
+Scene* GameState::_currentScene;
 std::vector<Scene*> GameState::rooms;
 Player* GameState::player;
-State GameState::state;
+State GameState::_state;
 std::vector<GameStateController*> GameState::gameStates;
 GameStateController* GameState::currentState;
 
@@ -23,10 +23,10 @@ GameState::~GameState()
 		nullptr;
 	}
 
-	/*if (currentScene)
+	/*if (_currentScene)
 	{
-		delete currentScene;
-		currentScene = nullptr;
+		delete _currentScene;
+		_currentScene = nullptr;
 	}*/
 
 	for (auto& room : rooms) 
@@ -54,20 +54,25 @@ void GameState::AddPlayer(Player* player)
 
 void GameState::SwitchState()
 {
-	switch (state)
+	switch (_state)
 	{
 	case State::REGULAR:
 		// Start button to open the inventory / change the state back to INVENTORY
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
 		{
 			std::cout << "Inventory State" << std::endl;
-			state = State::INVENTORY;
+			_state = State::INVENTORY;
 			currentState = gameStates[1];
 		}
 		break;
 
 	case State::DIALOGUE:
-
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+		{
+			std::cout << "Regular State" << std::endl;
+			_state = State::REGULAR;
+			currentState = gameStates[0];
+		}
 		break;
 
 	case State::INVENTORY:
@@ -75,7 +80,7 @@ void GameState::SwitchState()
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 		{
 			std::cout << "Regular State" << std::endl;
-			state = State::REGULAR;
+			_state = State::REGULAR;
 			currentState = gameStates[0];
 		}
 		break;
@@ -91,7 +96,7 @@ Player* GameState::GetPlayer()
 
 std::string GameState::PrintState()
 {
-	switch (state)
+	switch (_state)
 	{
 	case State::REGULAR:
 		return "REGULAR";
@@ -106,4 +111,5 @@ std::string GameState::PrintState()
 		break;
 	}
 	return "NO STATE FOUND";
+
 }

@@ -23,8 +23,8 @@ class GameState
 private:
 protected:
 public:
-	static State state;
-	static Scene* currentScene;
+	static State _state;
+	static Scene* _currentScene;
 	static std::vector<Scene*> rooms;
 	static Player* player;
 	static std::vector<GameStateController*> gameStates;
@@ -38,9 +38,26 @@ public:
 	void SwitchState();
 	std::string PrintState();
 
-	static void SetState(State mstate)
+	static void GameState::SetState(State state)
 	{
-		state = mstate;
+		_state = state;
+		switch (state)
+		{
+		case State::REGULAR:
+			currentState = gameStates[0];
+			break;
+
+		case State::INVENTORY:
+			currentState = gameStates[1];
+			break;
+
+		case State::DIALOGUE:
+			currentState = gameStates[2];
+			break;
+
+		default:
+			break;
+		}
 	}
 };
 
