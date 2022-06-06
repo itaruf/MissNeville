@@ -8,6 +8,8 @@
 class Player;
 #include "Player.h"
 
+#include "Utilities.h"
+
 class GameStateController
 {
 public:

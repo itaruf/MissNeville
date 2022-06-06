@@ -102,7 +102,7 @@ void Entrance::Init()
 	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your path.. the false angel.. shall be your doom ..!")));
 	smith->SetCurrentDialogue(0);
 
-	auto charlotte = new NPC("Charlotte", App::CreateSprite(".\\TestData\\Characters\\charlotte.bmp", 3, 4), new Vector2D(300, 300), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
+	auto charlotte = new NPC("Charlotte Neville", App::CreateSprite(".\\TestData\\Characters\\charlotte.bmp", 3, 4), new Vector2D(300, 300), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
 	charlotte->GetSprite()->SetFrame(1);
 	charlotte->GetSprite()->SetScale(3);
 	AddActor(charlotte);

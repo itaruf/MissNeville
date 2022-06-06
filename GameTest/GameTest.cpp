@@ -53,7 +53,8 @@ std::shared_ptr<GameState> gameState;
 void Init()
 {
 	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
-
+	dialBox->SetPosition(APP_VIRTUAL_WIDTH / 2, 100);
+	dialBox->SetScale(7);
 	/*GameStates*/
 	StateRegular* stateRegular = new StateRegular();
 	StateInventory* stateInventory = new StateInventory();
