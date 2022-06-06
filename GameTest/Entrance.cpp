@@ -1,12 +1,12 @@
 ﻿#include "stdafx.h"
 #include "Entrance.h"
 
-Entrance::Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), candlePuzzle{std::move(candlePuzzle)}
+Entrance::Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), _candlePuzzle{std::move(candlePuzzle)}
 {
 }
 
 
-Entrance::Entrance(int ID, CandlePuzzle* candlePuzzle) : Scene(ID), candlePuzzle{std::move(candlePuzzle)}
+Entrance::Entrance(int ID, CandlePuzzle* candlePuzzle) : Scene(ID), _candlePuzzle{std::move(_candlePuzzle)}
 {
 }
 
@@ -15,15 +15,15 @@ Entrance::~Entrance()
 	printf("ENTRANCE DESTRUCTOR CALLED\n");
 
 	// Freeing all the memory allocated on the heap
-	delete candlePuzzle;
-	candlePuzzle = nullptr;
+	delete _candlePuzzle;
+	_candlePuzzle = nullptr;
 	
-	/*for (auto& candle : candles)
+	/*for (auto& candle : _candles)
 	{
 		if (candle)
 			delete candle;
 	}*/
-	candles.clear();
+	_candles.clear();
 }
 
 // WIP - Initialization of the entrance scene 
@@ -46,7 +46,7 @@ void Entrance::Init()
 	background->SetAnimation(0);*/
 
 	/*Initiating Puzzles*/
-	candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
+	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
 	/*Initiating Props */
 
@@ -78,11 +78,11 @@ void Entrance::Init()
 	std::vector<Vector2D*> v{ new Vector2D(514,466), new Vector2D(446,432), new Vector2D(580,432), new Vector2D(460,356), new Vector2D(564,356) };
 	for (int i = 0; i < v.size(); ++i)
 	{
-		candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10)));
-		candles[i]->GetSprite()->SetFrame(0);
-		candles[i]->GetSprite()->SetScale(0.5);
-		AddActor(candles.at(i));
-		candlePuzzle->GetCandles().emplace_back(candles[i]);
+		_candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10)));
+		_candles[i]->GetSprite()->SetFrame(0);
+		_candles[i]->GetSprite()->SetScale(0.5);
+		AddActor(_candles.at(i));
+		_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
 
 	auto pentagramme = new Actor("Pentagramme", App::CreateSprite(".\\TestData\\Props\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32));
@@ -111,7 +111,7 @@ void Entrance::Init()
 	charlotte->SetCurrentDialogue(0);
 
 	/*Start Puzzle*/
-	candlePuzzle->StartPuzzle();
+	_candlePuzzle->StartPuzzle();
 }
 
 void Entrance::Update(float deltaTime)
@@ -142,11 +142,11 @@ void Entrance::Render()
 
 bool Entrance::IsRoomCleared()
 {
-	if (candlePuzzle) 
+	if (_candlePuzzle) 
 	{
-		if (candlePuzzle->IsCleared())
+		if (_candlePuzzle->IsCleared())
 		{
-			if (candlePuzzle->status == Puzzle::Status::PENDING)
+			if (_candlePuzzle->status == Puzzle::Status::PENDING)
 			{
 				std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
 
@@ -166,7 +166,7 @@ bool Entrance::IsRoomCleared()
 				{
 					dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 				}
-				candlePuzzle->status = Puzzle::Status::CLEARED;
+				_candlePuzzle->status = Puzzle::Status::CLEARED;
 
 			}
 			return true;

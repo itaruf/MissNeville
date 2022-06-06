@@ -16,10 +16,10 @@ public:
 		Overlap,
 	};
 
-	ColliderType colliderType;
-	float height;
-	float width;
-	Vector2D* offset;
+	ColliderType _colliderType;
+	float _height;
+	float _width;
+	Vector2D* _offset;
 
 	Collision(ColliderType colliderType, float height, float width, Vector2D* offset = new Vector2D(0,0));
 	~Collision();

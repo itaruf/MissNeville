@@ -2,7 +2,7 @@
 #include "Collision.h"
 
 Collision::Collision(ColliderType colliderType, float height, float width, Vector2D* offset)
-	: colliderType{ colliderType }, height{ height }, width{ width }, offset{std::move(offset)}
+	: _colliderType{ colliderType }, _height{ height }, _width{ width }, _offset{std::move(offset)}
 {
 }
 
@@ -10,17 +10,17 @@ Collision::~Collision()
 {
 	/*printf("COLLISION DESTRUCTOR CALLED\n");*/
 
-	if (offset)
-		delete offset;
+	if (_offset)
+		delete _offset;
 }
 
 // Check if an actor is colliding with another by projecting their future move
 bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 {
-	if (x + offset->x - width < other->GetPosition()->x + other->GetCollider()->offset->x + other->GetCollider()->GetWidth() &&
-		x + offset->x + width > other->GetPosition()->x + other->GetCollider()->offset->x - other->GetCollider()->GetWidth() &&
-		y + offset->y - height < other->GetPosition()->y + other->GetCollider()->offset->y + other->GetCollider()->GetHeight() &&
-		y + offset->y + height > other->GetPosition()->y + other->GetCollider()->offset->y - other->GetCollider()->GetHeight())
+	if (x + _offset->_x - _width < other->GetPosition()->_x + other->GetCollider()->_offset->_x + other->GetCollider()->GetWidth() &&
+		x + _offset->_x + _width > other->GetPosition()->_x + other->GetCollider()->_offset->_x - other->GetCollider()->GetWidth() &&
+		y + _offset->_y - _height < other->GetPosition()->_y + other->GetCollider()->_offset->_y + other->GetCollider()->GetHeight() &&
+		y + _offset->_y + _height > other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight())
 		return true;
 	return false;
 }
@@ -28,25 +28,25 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 // Get the height of the collider
 const float& Collision::GetHeight() const
 {
-	return height;
+	return _height;
 }
 
 // Set the height of the collider
 void Collision::SetHeight(float value)
 {
-	height = value;
+	_height = value;
 }
 
 // Get the width of the collider
 const float& Collision::GetWidth() const
 {
-	return width;
+	return _width;
 }
 
 // Set the width of the collider
 void Collision::SetWidth(float value)
 {
-	width = value;
+	_width = value;
 }
 
 // DEBUG : Draw the collider with the actor pos in the center
@@ -57,7 +57,7 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 	if (!actor)
 		return;
 
-	if (colliderType == ColliderType::Overlap)
+	if (_colliderType == ColliderType::Overlap)
 	{
 		actor = nullptr;
 		return;
@@ -65,49 +65,49 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 
 	// Middle Lines
 	/*App::DrawLine(
-		actor->GetPosition()->x - width,
-		actor->GetPosition()->y,
-		actor->GetPosition()->x + width,
-		actor->GetPosition()->y,
+		actor->GetPosition()->_x - _width,
+		actor->GetPosition()->_y,
+		actor->GetPosition()->_x + _width,
+		actor->GetPosition()->_y,
 		r, g, b);
 
 	App::DrawLine(
-		actor->GetPosition()->x,
-		actor->GetPosition()->y - height,
-		actor->GetPosition()->x,
-		actor->GetPosition()->y + height,
+		actor->GetPosition()->_x,
+		actor->GetPosition()->_y - _height,
+		actor->GetPosition()->_x,
+		actor->GetPosition()->_y + _height,
 		r, g, b);*/
 
 	// Upper Bound
 	App::DrawLine(
-		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
-		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
 		r, g, b);
 
 	// Bottom Bound
 	App::DrawLine(
-		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
-		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
 		r, g, b);
 
 	// Left Bound
 	App::DrawLine(
-		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
-		actor->GetPosition()->x + actor->GetCollider()->offset->x - width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
 		r, g, b);
 
 	// Right Bound
 	App::DrawLine(
-		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y - height,
-		actor->GetPosition()->x + actor->GetCollider()->offset->x + width,
-		actor->GetPosition()->y + actor->GetCollider()->offset->y + height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
+		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
+		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
 		r, g, b);
 
 	actor = nullptr;
@@ -115,14 +115,14 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 
 //Vector2D* Collision::GetDownLeftColPos(Actor* actor)
 //{
-//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y - height) };
+//	auto v{ new Vector2D(actor->GetPosition()->_x + _offset->_x - _width, actor->GetPosition()->_y + _offset->_y - _height) };
 //	actor = nullptr;
 //	return v;
 //}
 //
 //Vector2D* Collision::GetDownRightColPos(Actor* actor)
 //{
-//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y - height) };
+//	auto v{ new Vector2D(actor->GetPosition()->_x + _offset->_x + _width, actor->GetPosition()->_y + _offset->_y - _height) };
 //	actor = nullptr;
 //	return v;
 //
@@ -130,14 +130,14 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 //
 //Vector2D* Collision::GetUpLeftColPos(Actor* actor)
 //{
-//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x - width, actor->GetPosition()->y + offset->y + height) };
+//	auto v{ new Vector2D(actor->GetPosition()->_x + _offset->_x - _width, actor->GetPosition()->_y + _offset->_y + _height) };
 //	actor = nullptr;
 //	return v;
 //}
 //
 //Vector2D* Collision::GetUpRightColPos(Actor* actor)
 //{
-//	auto v{ new Vector2D(actor->GetPosition()->x + offset->x + width, actor->GetPosition()->y + offset->y + height) };
+//	auto v{ new Vector2D(actor->GetPosition()->_x + _offset->_x + _width, actor->GetPosition()->_y + _offset->_y + _height) };
 //	actor = nullptr;
 //	return v;
 //}

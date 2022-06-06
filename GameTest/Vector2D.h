@@ -7,8 +7,8 @@
 class Vector2D
 {
 public:
-	float x;
-	float y;
+	float _x;
+	float _y;
 
 	Vector2D(float x = 0, float y = 0);
 	~Vector2D() = default;

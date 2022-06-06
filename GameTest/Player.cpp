@@ -38,12 +38,12 @@ void Player::MoveVertically()
 			if (actor == this)
 				continue;
 			// if the player is about to collide with an actor, then the player doesn't move
-			if (_collider->isColliding(this, actor, _position->x, _position->y + _movementSpeed))
-				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
+			if (_collider->isColliding(this, actor, _position->_x, _position->_y + _movementSpeed))
+				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
 					return;
 		}
 		// else the player can move
-		_sprite->SetPosition(_position->x, _position->y + _movementSpeed);
+		_sprite->SetPosition(_position->_x, _position->_y + _movementSpeed);
 	}
 
 	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN) || App::GetController().GetLeftThumbStickY() < -0.5f)
@@ -55,11 +55,11 @@ void Player::MoveVertically()
 		{
 			if (actor == this)
 				continue;
-			if (_collider->isColliding(this, actor, _position->x, _position->y - _movementSpeed))
-				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
+			if (_collider->isColliding(this, actor, _position->_x, _position->_y - _movementSpeed))
+				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
 					return;
 		}
-		_sprite->SetPosition(_position->x, _position->y - _movementSpeed);
+		_sprite->SetPosition(_position->_x, _position->_y - _movementSpeed);
 	}
 }
 
@@ -75,11 +75,11 @@ void Player::MoveHorizontally()
 		{
 			if (actor == this)
 				continue;
-			if (_collider->isColliding(this, actor, _position->x + _movementSpeed, _position->y))
-				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
+			if (_collider->isColliding(this, actor, _position->_x + _movementSpeed, _position->_y))
+				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
 					return;
 		}
-		_sprite->SetPosition(_position->x + _movementSpeed, _position->y);
+		_sprite->SetPosition(_position->_x + _movementSpeed, _position->_y);
 	}
 
 	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().GetLeftThumbStickX() < -0.5f)
@@ -91,11 +91,11 @@ void Player::MoveHorizontally()
 		{
 			if (actor == this)
 				continue;
-			if (_collider->isColliding(this, actor, _position->x - _movementSpeed, _position->y))
-				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
+			if (_collider->isColliding(this, actor, _position->_x - _movementSpeed, _position->_y))
+				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
 					return;
 		}
-		_sprite->SetPosition(_position->x - _movementSpeed, _position->y);
+		_sprite->SetPosition(_position->_x - _movementSpeed, _position->_y);
 	}
 }
 
@@ -173,11 +173,11 @@ bool Player::Interact(Collectable* collectable)
 		for (auto i = 0; i < _inventory->bags[i].second.size(); ++i)
 		{
 			// Looking for the first empty slot
-			if (!_inventory->bags[collectable->ID].second[i])
+			if (!_inventory->bags[collectable->_ID].second[i])
 			{
 				// Stock the collected object in an empty bag slot
-				_inventory->bags[collectable->ID].second[i] = collectable->Collect();
-				std::cout << collectable->GetName() << " added in bag " << collectable->ID << " at slot " << i << std::endl;
+				_inventory->bags[collectable->_ID].second[i] = collectable->Collect();
+				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
 				GameState::_currentScene->RemoveActor(collectable);
 				collectable = nullptr;

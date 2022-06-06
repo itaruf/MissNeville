@@ -33,14 +33,14 @@ InventoryItem* Inventory::GetItem(int ID, int slotNumber)
 bool Inventory::RemoveItem(InventoryItem* item)
 {
 	// Check if the corresponding bag exists
-	if (IsBagExist(item->ID))
+	if (IsBagExist(item->_ID))
 	{
 		// Go through the bag slots to find the item
-		auto it = std::find(bags[item->ID].second.begin(), bags[item->ID].second.end(), item);
-		if (it != bags[item->ID].second.end())
+		auto it = std::find(bags[item->_ID].second.begin(), bags[item->_ID].second.end(), item);
+		if (it != bags[item->_ID].second.end())
 		{
 			// delete the item when found
-			bags[item->ID].second.erase(it);
+			bags[item->_ID].second.erase(it);
 			delete item;
 			item = nullptr;
 			return true;
@@ -85,15 +85,15 @@ bool Inventory::AddItem(InventoryItem* item)
 		return false;
 
 	// Check if bag exists
-	if (IsBagExist(item->ID))
+	if (IsBagExist(item->_ID))
 	{
 		// Looking for an empty slot
-		for (auto& bagSlot : bags[item->ID].second)
+		for (auto& bagSlot : bags[item->_ID].second)
 		{
 			if (!bagSlot)
 			{
 				// Add the item at first empty slot found
-				std::cout << "item ID : " << item->ID << " added to the inventory" << std::endl;
+				std::cout << "item ID : " << item->_ID << " added to the inventory" << std::endl;
 				bagSlot = item;
 				item = nullptr;
 				return true;
@@ -102,7 +102,7 @@ bool Inventory::AddItem(InventoryItem* item)
 	}
 
 	// No free slot found
-	std::cout << "item ID : " << item->ID << " couldn't be added to the inventory" << std::endl;
+	std::cout << "item ID : " << item->_ID << " couldn't be added to the inventory" << std::endl;
 	item = nullptr;
 	return false;
 }

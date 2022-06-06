@@ -136,7 +136,7 @@ void Render()
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
 
 	auto pos{ player->GetPosition() };
-	auto string{ std::to_string(pos->x) + " " + std::to_string(pos->y) };
+	auto string{ std::to_string(pos->_x) + " " + std::to_string(pos->_y) };
 
 	/*SOME PRINTS*/
 	if (gameState->_currentScene->IsRoomCleared())
@@ -165,13 +165,13 @@ void Render()
 
 		if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
 		{
-			x = pos->x + ms;
-			y = pos->y;
+			x = pos->_x + ms;
+			y = pos->_y;
 		}
 		else
 		{
-			x = pos->x;
-			y = pos->y + ms;
+			x = pos->_x;
+			y = pos->_y + ms;
 		}
 
 		if (interactiveActors.size() > 0) 
@@ -180,9 +180,9 @@ void Render()
 			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [pos, ms](Actor* const& l, Actor* const& r)
 				{
 					return
-						std::abs(pos->x + ms - l->GetPosition()->x + ms) + std::abs(pos->y + ms - l->GetPosition()->y + ms)
+						std::abs(pos->_x + ms - l->GetPosition()->_x + ms) + std::abs(pos->_y + ms - l->GetPosition()->_y + ms)
 						<
-						std::abs(pos->x + ms - r->GetPosition()->x + ms) + std::abs(pos->y + ms - r->GetPosition()->y + ms);
+						std::abs(pos->_x + ms - r->GetPosition()->_x + ms) + std::abs(pos->_y + ms - r->GetPosition()->_y + ms);
 				});
 
 

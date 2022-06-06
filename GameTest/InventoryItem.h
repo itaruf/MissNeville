@@ -17,7 +17,7 @@ public:
 	};
 
 	Usability usability;
-	int ID;
+	int _ID;
 	std::string description;
 
 	InventoryItem(Usability usability, int ID, std::string& description);

@@ -15,8 +15,8 @@ class Entrance : public Scene, std::enable_shared_from_this<Entrance>
 private:
 protected:
 public:
-	CandlePuzzle* candlePuzzle;
-	std::vector<Candle*> candles;
+	CandlePuzzle* _candlePuzzle;
+	std::vector<Candle*> _candles;
 
 	Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle);
 	Entrance(int ID, CandlePuzzle* candlePuzzle);

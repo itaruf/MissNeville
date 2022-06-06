@@ -13,7 +13,7 @@ private:
 protected:
 	InventoryItem* _invItem;
 public:
-	int ID;
+	int _ID;
 	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, InventoryItem* invItem, int ID = 0);
 	~Collectable();
 

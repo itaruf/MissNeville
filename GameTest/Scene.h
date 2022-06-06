@@ -18,7 +18,7 @@ class Scene
 {
 private:
 protected:
-	int ID;
+	int _ID;
 	CSimpleSprite* background{ nullptr };
 	std::vector<Actor*> actors;
 public:

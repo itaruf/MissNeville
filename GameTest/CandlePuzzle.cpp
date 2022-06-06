@@ -9,12 +9,12 @@ CandlePuzzle::~CandlePuzzle()
 {
 	printf("CANDLE Puzzle DESTRUCTOR CALLED\n");
 
-	/*for (auto& candle : candles)
+	/*for (auto& candle : _candles)
 	{
 		if (candle)
 			delete candle;
 	}*/
-	candles.clear();
+	_candles.clear();
 }
 
 // Check if the candle puzzle is cleared
@@ -24,7 +24,7 @@ bool CandlePuzzle::IsCleared()
 		return true;
 
 	// The condition for success is lightening all the involved candles
-	for (const auto& candle : candles)
+	for (const auto& candle : _candles)
 	{
 		if (!candle->isEnlighted())
 			return false;
@@ -36,5 +36,5 @@ bool CandlePuzzle::IsCleared()
 // Get the involved candles of the puzzle
 std::vector<Candle*>& CandlePuzzle::GetCandles()
 {
-	return candles;
+	return _candles;
 }

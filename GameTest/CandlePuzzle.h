@@ -9,7 +9,7 @@ class CandlePuzzle : public Puzzle
 {
 private:
 protected:
-	std::vector<Candle*> candles;
+	std::vector<Candle*> _candles;
 public:
 	CandlePuzzle(Status status);
 	~CandlePuzzle();

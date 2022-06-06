@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Scene.h"
 
-Scene::Scene(int ID, std::vector<Actor*> actors) : ID{ ID }, actors{ actors } {}
+Scene::Scene(int ID, std::vector<Actor*> actors) : _ID{ ID }, actors{ actors } {}
 
-Scene::Scene(int ID) : ID{ ID } {}
+Scene::Scene(int ID) : _ID{ ID } {}
 
 Scene::~Scene()
 {
@@ -39,7 +39,7 @@ Actor* Scene::GetActor(int index)
 // Get the scene ID
 const int& Scene::GetID() const
 {
-	return ID;
+	return _ID;
 }
 
 // Get all actors of the scene
