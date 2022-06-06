@@ -25,10 +25,10 @@ protected:
 public:
 	static State _state;
 	static Scene* _currentScene;
-	static std::vector<Scene*> rooms;
-	static Player* player;
-	static std::vector<GameStateController*> gameStates;
-	static GameStateController* currentState;
+	static std::vector<Scene*> _rooms;
+	static Player* _player;
+	static std::vector<GameStateController*> _gameStates;
+	static GameStateController* _currentState;
 
 	GameState();
 	~GameState();
@@ -44,15 +44,15 @@ public:
 		switch (state)
 		{
 		case State::REGULAR:
-			currentState = gameStates[0];
+			_currentState = _gameStates[0];
 			break;
 
 		case State::INVENTORY:
-			currentState = gameStates[1];
+			_currentState = _gameStates[1];
 			break;
 
 		case State::DIALOGUE:
-			currentState = gameStates[2];
+			_currentState = _gameStates[2];
 			break;
 
 		default:

@@ -12,13 +12,13 @@
 class Inventory
 {
 private:
-	static constexpr int nbBags{ 4 };
-	static constexpr int nbSlotBag{ 4 };
+	static constexpr int _nbBags{ 4 };
+	static constexpr int _nbSlotBag{ 4 };
 protected:
 public:
 	// Allow the Player class to access Inventory members
 	friend class Player;
-	std::unordered_map<int, std::pair<bool, std::vector<InventoryItem*>>> bags;
+	std::unordered_map<int, std::pair<bool, std::vector<InventoryItem*>>> _bags;
 	Inventory();
 	Inventory(std::map<int, std::vector<InventoryItem*>>);
 	~Inventory();

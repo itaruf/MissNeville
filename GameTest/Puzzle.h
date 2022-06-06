@@ -19,7 +19,7 @@ public:
 		CLEARED,
 	};
 
-	Status status;
+	Status _status;
 
 	Puzzle(Status status);
 	virtual ~Puzzle();

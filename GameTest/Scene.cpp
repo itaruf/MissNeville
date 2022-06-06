@@ -1,18 +1,18 @@
 #include "stdafx.h"
 #include "Scene.h"
 
-Scene::Scene(int ID, std::vector<Actor*> actors) : _ID{ ID }, actors{ actors } {}
+Scene::Scene(int ID, std::vector<Actor*> actors) : _ID{ ID }, _actors{ actors } {}
 
 Scene::Scene(int ID) : _ID{ ID } {}
 
 Scene::~Scene()
 {
-	std::cout << "ROOM DESTRUCTOR CALLED : " << (int) actors.size() << std::endl;
+	std::cout << "ROOM DESTRUCTOR CALLED : " << (int) _actors.size() << std::endl;
 
-	if (background)
-		delete background;
+	if (_background)
+		delete _background;
 
-	for (auto& actor : actors)
+	for (auto& actor : _actors)
 	{
 		if (actor)
 		{
@@ -20,20 +20,20 @@ Scene::~Scene()
 			actor = nullptr;
 		}
 	}
-	actors.clear();
+	_actors.clear();
 }
 
 // Add an actor among all actors of the scene
 void Scene::AddActor(Actor* actor)
 {
-	actors.emplace_back(actor);
+	_actors.emplace_back(actor);
 	actor = nullptr;
 }
 
 // Get a specific actor among all actors of the scene
 Actor* Scene::GetActor(int index)
 {
-	return actors[index];
+	return _actors[index];
 }
 
 // Get the scene ID
@@ -45,14 +45,14 @@ const int& Scene::GetID() const
 // Get all actors of the scene
 std::vector<Actor*>& Scene::GetActors()
 {
-	return actors;
+	return _actors;
 }
 
 // If we want to setup a background
 void Scene::Update(float deltaTime)
 {
-	if (background)
-		background->Draw();
+	if (_background)
+		_background->Draw();
 }
 
 // Remove an actor from the scene
@@ -62,12 +62,12 @@ bool Scene::RemoveActor(Actor* actor)
 		return false;
 
 	// Looking for the actor to delete
-	auto it = std::find(actors.begin(), actors.end(), actor);
+	auto it = std::find(_actors.begin(), _actors.end(), actor);
 
-	if (it != actors.end())
+	if (it != _actors.end())
 	{
 		// Deleting the actor
-		actors.erase(it);
+		_actors.erase(it);
 		std::cout << actor->GetName() << " removed" << std::endl;
 		delete actor;
 		return true;

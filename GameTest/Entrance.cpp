@@ -41,9 +41,9 @@ void Entrance::Init()
 		}
 	}*/
 
-	/*background = App::CreateSprite(".\\TestData\\Backgrounds\\night.bmp", 1, 1);
-	background->SetScale(2.0f);
-	background->SetAnimation(0);*/
+	/*_background = App::CreateSprite(".\\TestData\\Backgrounds\\night.bmp", 1, 1);
+	_background->SetScale(2.0f);
+	_background->SetAnimation(0);*/
 
 	/*Initiating Puzzles*/
 	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
@@ -119,7 +119,7 @@ void Entrance::Update(float deltaTime)
 	Scene::Update(deltaTime);
 
 	// Updating the sprites of all the actors present in the scene
-	for (const auto& item : actors)
+	for (const auto& item : _actors)
 	{
 		if (item)
 			item->GetSprite()->Update(deltaTime);
@@ -128,7 +128,7 @@ void Entrance::Update(float deltaTime)
 
 void Entrance::Render()
 {
-	for (const auto& item : actors)
+	for (const auto& item : _actors)
 	{
 		if (item)
 		{
@@ -146,7 +146,7 @@ bool Entrance::IsRoomCleared()
 	{
 		if (_candlePuzzle->IsCleared())
 		{
-			if (_candlePuzzle->status == Puzzle::Status::PENDING)
+			if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 			{
 				std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
 
@@ -155,18 +155,18 @@ bool Entrance::IsRoomCleared()
 				page->GetSprite()->SetScale(3);
 				AddActor(page);
 
-				auto it = std::find_if(actors.begin(), actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
-				if (it != actors.end())
+				auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
+				if (it != _actors.end())
 				{
 					RemoveActor(*it);
 				}
 
-				auto npc = std::find_if(actors.begin(), actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; });
-				if (npc != actors.end())
+				auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; });
+				if (npc != _actors.end())
 				{
 					dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 				}
-				_candlePuzzle->status = Puzzle::Status::CLEARED;
+				_candlePuzzle->_status = Puzzle::Status::CLEARED;
 
 			}
 			return true;

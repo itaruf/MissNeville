@@ -11,7 +11,7 @@ class Player;
 class GameStateController
 {
 public:
-	Player* player;
+	Player* _player;
 	virtual ~GameStateController();
 	
 	virtual void Enter() = 0;

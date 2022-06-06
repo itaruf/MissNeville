@@ -16,9 +16,9 @@ public:
 		Unusable,
 	};
 
-	Usability usability;
+	Usability _usability;
 	int _ID;
-	std::string description;
+	std::string _description;
 
 	InventoryItem(Usability usability, int ID, std::string& description);
 	virtual ~InventoryItem();

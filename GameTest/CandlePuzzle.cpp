@@ -20,7 +20,7 @@ CandlePuzzle::~CandlePuzzle()
 // Check if the candle puzzle is cleared
 bool CandlePuzzle::IsCleared()
 {
-	if (status == Status::CLEARED || status == Status::NOTSTARTED)
+	if (_status == Status::CLEARED || _status == Status::NOTSTARTED)
 		return true;
 
 	// The condition for success is lightening all the involved candles

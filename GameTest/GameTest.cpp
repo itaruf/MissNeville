@@ -64,10 +64,10 @@ void Init()
 	gameState->_currentScene = new Entrance(0, nullptr);
 	gameState->_currentScene->Init();
 
-	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
-	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
-	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
-	gameState->currentState = stateRegular;
+	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
+	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
+	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
+	gameState->_currentState = stateRegular;
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
@@ -84,7 +84,7 @@ void Init()
 
 	/*Adding the player to the gamestate*/
 	gameState->AddPlayer(player);
-	stateRegular->player = player;
+	stateRegular->_player = player;
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
@@ -106,7 +106,7 @@ void Update(float deltaTime)
 	{
 		gameState->SwitchState();
 		gameState->_currentScene->Update(deltaTime);
-		gameState->currentState->Update();
+		gameState->_currentState->Update();
 	}
 
 	auto player{ gameState->GetPlayer() };

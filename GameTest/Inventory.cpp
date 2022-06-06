@@ -14,7 +14,7 @@ Inventory::~Inventory()
 	printf("INVENTORY DESTRUCTOR CALLED\n");
 
 	//Freeing the memory allocated on the heap
-	for (auto& bag : bags)
+	for (auto& bag : _bags)
 		for (auto& item : bag.second.second)
 		{
 			delete item;
@@ -25,7 +25,7 @@ Inventory::~Inventory()
 // Return the stored item at a slot of a bag
 InventoryItem* Inventory::GetItem(int ID, int slotNumber)
 {
-	return bags[ID].second[slotNumber];
+	return _bags[ID].second[slotNumber];
 }
 
 
@@ -36,11 +36,11 @@ bool Inventory::RemoveItem(InventoryItem* item)
 	if (IsBagExist(item->_ID))
 	{
 		// Go through the bag slots to find the item
-		auto it = std::find(bags[item->_ID].second.begin(), bags[item->_ID].second.end(), item);
-		if (it != bags[item->_ID].second.end())
+		auto it = std::find(_bags[item->_ID].second.begin(), _bags[item->_ID].second.end(), item);
+		if (it != _bags[item->_ID].second.end())
 		{
 			// delete the item when found
-			bags[item->_ID].second.erase(it);
+			_bags[item->_ID].second.erase(it);
 			delete item;
 			item = nullptr;
 			return true;
@@ -54,7 +54,7 @@ bool Inventory::RemoveItem(InventoryItem* item)
 // Check if a bag exists (decided with ID)
 bool Inventory::IsBagExist(int ID)
 {
-	return (bags.find(ID) != bags.end());
+	return (_bags.find(ID) != _bags.end());
 }
 
 // Check if a bag is opened (decided with ID)
@@ -63,13 +63,13 @@ bool Inventory::IsBagOpened(int ID)
 	if (!IsBagExist(ID))
 		return false;
 
-	return bags[ID].first;
+	return _bags[ID].first;
 }
 
 // Check if any bag is opened
 bool Inventory::IsAnyBagAlreadyOpened()
 {
-	for (auto i = 0; i < nbBags; ++i)
+	for (auto i = 0; i < _nbBags; ++i)
 	{
 		// return at the first opened bag found
 		if (IsBagOpened(i))
@@ -88,7 +88,7 @@ bool Inventory::AddItem(InventoryItem* item)
 	if (IsBagExist(item->_ID))
 	{
 		// Looking for an empty slot
-		for (auto& bagSlot : bags[item->_ID].second)
+		for (auto& bagSlot : _bags[item->_ID].second)
 		{
 			if (!bagSlot)
 			{

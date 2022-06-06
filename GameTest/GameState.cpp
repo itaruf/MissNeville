@@ -2,11 +2,11 @@
 #include "GameState.h"
 
 Scene* GameState::_currentScene;
-std::vector<Scene*> GameState::rooms;
-Player* GameState::player;
+std::vector<Scene*> GameState::_rooms;
+Player* GameState::_player;
 State GameState::_state;
-std::vector<GameStateController*> GameState::gameStates;
-GameStateController* GameState::currentState;
+std::vector<GameStateController*> GameState::_gameStates;
+GameStateController* GameState::_currentState;
 
 GameState::GameState()
 {
@@ -17,9 +17,9 @@ GameState::~GameState()
 {
 	printf("GAME STATE DESTRUCTOR CALLED\n");
 
-	if (player)
+	if (_player)
 	{
-		delete player;
+		delete _player;
 		nullptr;
 	}
 
@@ -29,7 +29,7 @@ GameState::~GameState()
 		_currentScene = nullptr;
 	}*/
 
-	for (auto& room : rooms) 
+	for (auto& room : _rooms) 
 	{
 		if (room)
 		{
@@ -37,18 +37,18 @@ GameState::~GameState()
 			room = nullptr;
 		}
 	}
-	rooms.clear();
+	_rooms.clear();
 
-	for (auto& gameState : gameStates)
+	for (auto& gameState : _gameStates)
 		if (gameState)
 			delete gameState;
 
-	gameStates.clear();
+	_gameStates.clear();
 }
 
 void GameState::AddPlayer(Player* player)
 {
-	this->player = player;
+	_player = player;
 	player = nullptr;
 }
 
@@ -62,7 +62,7 @@ void GameState::SwitchState()
 		{
 			std::cout << "Inventory State" << std::endl;
 			_state = State::INVENTORY;
-			currentState = gameStates[1];
+			_currentState = _gameStates[1];
 		}
 		break;
 
@@ -71,7 +71,7 @@ void GameState::SwitchState()
 		{
 			std::cout << "Regular State" << std::endl;
 			_state = State::REGULAR;
-			currentState = gameStates[0];
+			_currentState = _gameStates[0];
 		}
 		break;
 
@@ -81,7 +81,7 @@ void GameState::SwitchState()
 		{
 			std::cout << "Regular State" << std::endl;
 			_state = State::REGULAR;
-			currentState = gameStates[0];
+			_currentState = _gameStates[0];
 		}
 		break;
 	default:
@@ -91,7 +91,7 @@ void GameState::SwitchState()
 
 Player* GameState::GetPlayer()
 {
-	return player;
+	return _player;
 }
 
 std::string GameState::PrintState()

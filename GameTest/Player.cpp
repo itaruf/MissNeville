@@ -4,12 +4,12 @@
 Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed), _inventory{ inventory }
 {
 	// Instantiating all the bags and slots of the inventory
-	for (auto i = 0; i < Inventory::nbBags; ++i)
+	for (auto i = 0; i < Inventory::_nbBags; ++i)
 	{
-		_inventory->bags.insert(std::make_pair(i, std::make_pair(false, std::vector<InventoryItem*>())));
-		for (auto j = 0; j < Inventory::nbSlotBag; ++j)
+		_inventory->_bags.insert(std::make_pair(i, std::make_pair(false, std::vector<InventoryItem*>())));
+		for (auto j = 0; j < Inventory::_nbSlotBag; ++j)
 		{
-			_inventory->bags[i].second.emplace_back(nullptr);
+			_inventory->_bags[i].second.emplace_back(nullptr);
 		}
 	}
 }
@@ -170,13 +170,13 @@ bool Player::Interact(Collectable* collectable)
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
-		for (auto i = 0; i < _inventory->bags[i].second.size(); ++i)
+		for (auto i = 0; i < _inventory->_bags[i].second.size(); ++i)
 		{
 			// Looking for the first empty slot
-			if (!_inventory->bags[collectable->_ID].second[i])
+			if (!_inventory->_bags[collectable->_ID].second[i])
 			{
 				// Stock the collected object in an empty bag slot
-				_inventory->bags[collectable->_ID].second[i] = collectable->Collect();
+				_inventory->_bags[collectable->_ID].second[i] = collectable->Collect();
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
 				GameState::_currentScene->RemoveActor(collectable);
@@ -206,7 +206,7 @@ void Player::OpenBag(int ID)
 	}
 	
 	// The bag is now considered opened
-	_inventory->bags[ID].first = true;
+	_inventory->_bags[ID].first = true;
 	std::cout << "Bag " << ID << " is now opened" << std::endl;
 }
 
@@ -218,7 +218,7 @@ void Player::CloseBag(int ID)
 		return;
 
 	// The bag is now considered closed
-	_inventory->bags[ID].first = false;
+	_inventory->_bags[ID].first = false;
 	std::cout << "Bag " << ID << " is now closed" << std::endl;
 }
 
@@ -233,7 +233,7 @@ void Player::GoToBagSlot(int ID, int slotNumber)
 		{
 			// Check if an item is stored at the specific slot
 			if (_inventory->GetItem(ID, slotNumber))
-				std::cout << _inventory->GetItem(ID, slotNumber)->description << std::endl;
+				std::cout << _inventory->GetItem(ID, slotNumber)->_description << std::endl;
 			else 
 				std::cout << "No item found at slot " << slotNumber << std::endl;
 		}
