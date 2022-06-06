@@ -54,9 +54,7 @@ bool Inventory::RemoveItem(InventoryItem* item)
 // Check if a bag exists (decided with ID)
 bool Inventory::IsBagExist(int ID)
 {
-	if (bags.find(ID) != bags.end())
-		return true;
-	return false;
+	return (bags.find(ID) != bags.end());
 }
 
 // Check if a bag is opened (decided with ID)

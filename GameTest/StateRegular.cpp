@@ -5,12 +5,18 @@ StateRegular::StateRegular()
 {
 }
 
+StateRegular::~StateRegular()
+{
+}
+
 void StateRegular::Enter()
 {
 }
 
 void StateRegular::Update()
 {
+	player->MoveHorizontally();
+	player->MoveVertically();
 }
 
 void StateRegular::Render()

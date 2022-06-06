@@ -12,8 +12,10 @@
 #include "Scene.h"
 #include "Collision.h"
 #include "Collectable.h"
+
 class GameState;
 #include "GameState.h"	
+
 #include "Entrance.h"
 #include "Inventory.h"
 //------------------------------------------------------------------------
@@ -27,20 +29,29 @@ class GameState;
 #include <type_traits>
 #include <cmath>
 #include <map>
+
+class GameStateController;
 #include "GameStateController.h"
+
+class StateRegular;
+#include "StateRegular.h"
+
+class StateInventory;
+#include "StateInventory.h"
+
+class StateDialogue;
+#include "StateDialogue.h"
+
 //#include "csv.h"
 
 std::shared_ptr<GameState> gameState;
+
 void Init()
 {
-	/*io::CSVReader<3, io::trim_chars<' ', '\t'>, io::no_quote_escape<';'>> in("Test.csv");
-
-	in.read_header(io::ignore_extra_column, "Class", "Actor", "NPC");
-	std::string clas; std::string classType; std::string speed;
-	while (in.read_row(clas, classType, speed))
-	{
-		std::cout << clas << " " << classType << " " << speed << std::endl;
-	}*/
+	/*GameStates*/
+	StateRegular* stateRegular = new StateRegular();
+	StateInventory* stateInventory = new StateInventory();
+	StateDialogue* stateDialogue = new StateDialogue();
 
 	/*Instantiate the gamestate which will be persistent across all scenes*/
 	gameState = std::make_shared<GameState>();
@@ -65,13 +76,30 @@ void Init()
 	/*Adding the player to the gamestate*/
 	gameState->AddPlayer(player);
 
-	player = nullptr;
+	stateRegular->player = player;
+
+	/*player = nullptr;
 	vector = nullptr;
 	collider = nullptr;
-	playerSprite = nullptr;
+	playerSprite = nullptr;*/
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
+
+
+	/*gameStateController->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
+	gameStateController->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
+	gameStateController->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
+
+	gameStateController->currentState = gameStateController->gameStates[0];
+	gameStateController->player = player;*/
+
+	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
+	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
+	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
+	gameState->currentState = stateRegular;
+
+
 }
 
 template<
@@ -94,10 +122,13 @@ void Update(float deltaTime)
 	{
 		player->GetSprite()->Update(deltaTime);
 		player->IsMoving();
-		player->MoveHorizontally();
-		player->MoveVertically();
 		player->BagAction();
 	}
+
+	
+	if (gameState->player)
+		gameState->currentState->Update();
+
 }
 
 void Render()

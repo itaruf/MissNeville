@@ -4,6 +4,8 @@
 Scene* GameState::currentScene;
 std::vector<Scene*> GameState::rooms;
 Player* GameState::player;
+//std::vector<GameStateController*> gameStates;
+//GameStateController* currentState;
 
 GameState::GameState()
 {
@@ -35,6 +37,12 @@ GameState::~GameState()
 		}
 	}
 	rooms.clear();
+
+	for (auto& gameState : gameStates)
+		if (gameState)
+			delete gameState;
+
+	gameStates.clear();
 }
 
 void GameState::AddPlayer(Player* player)
