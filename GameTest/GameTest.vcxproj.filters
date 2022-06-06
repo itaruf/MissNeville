@@ -198,6 +198,9 @@
     <ClInclude Include="EState.h">
       <Filter>Enumerations</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sources.txt">

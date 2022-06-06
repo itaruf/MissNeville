@@ -4,10 +4,13 @@
 
 class GameStateController;
 #include "GameStateController.h"
+
 class StateDialogue : public GameStateController
 {
 public:
-	StateDialogue();
+	std::string _currentDialogue = " ";
+	CSimpleSprite* _dialogueBox;
+	StateDialogue(CSimpleSprite* dialogueBox);
 	~StateDialogue();
 	void Enter() override;
 	void Update() override;

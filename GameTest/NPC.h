@@ -6,6 +6,18 @@
 #include "IDialogue.h"
 #include "IInteractive.h"
 #include <unordered_map>
+#include "Utilities.h"
+#include "GameState.h"
+
+//class StateDialogue;
+//#include "StateDialogue.h"
+
+class GameStateController;
+#include "GameStateController.h"
+
+class StateDialogue;
+
+//#include "StateDialogue.h"
 
 // Class for non-playable entities (very WIP)
 class NPC : public Character, public IDialogue, public IInteractive

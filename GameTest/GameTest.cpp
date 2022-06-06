@@ -29,6 +29,7 @@ class GameState;
 #include <type_traits>
 #include <cmath>
 #include <map>
+#include "Utilities.h"
 
 //class GameStateController;
 //#include "GameStateController.h"
@@ -51,10 +52,12 @@ std::shared_ptr<GameState> gameState;
 
 void Init()
 {
+	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
+
 	/*GameStates*/
 	StateRegular* stateRegular = new StateRegular();
 	StateInventory* stateInventory = new StateInventory();
-	StateDialogue* stateDialogue = new StateDialogue();
+	StateDialogue* stateDialogue = new StateDialogue(dialBox);
 
 	/*Instantiate the gamestate which will be persistent across all scenes*/
 	gameState = std::make_shared<GameState>();
@@ -90,15 +93,6 @@ void Init()
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
 }
 
-template<
-	typename T,
-	typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type
->
-std::string GetChar(const T& var)
-{
-	return std::to_string(var);
-}
-
 void Update(float deltaTime)
 { 
 
@@ -125,6 +119,7 @@ void Render()
 
 	gameState->_currentScene->Render();
 	App::Print(800, 600, ("State : " + gameState->PrintState()).c_str());
+	gameState->_currentState->Render();
 
 	/*********PLAYER RENDER*********/
 	auto player{ gameState->GetPlayer() };

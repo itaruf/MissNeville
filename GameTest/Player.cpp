@@ -149,7 +149,9 @@ bool Player::Interact(IInteractive* actor)
 
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		GameState::SetState(State::DIALOGUE);
+		if (dynamic_cast<IDialogue*>(actor))
+			GameState::SetState(State::DIALOGUE);
+
 		actor->Interact();
 		actor = nullptr;
 		return true;

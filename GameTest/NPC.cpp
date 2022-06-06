@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "NPC.h"
+#include "StateDialogue.h"
 
 NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) 
 	: Character(name, sprite, position, collider, HP, movementSpeed)
@@ -14,7 +15,11 @@ NPC::~NPC()
 void NPC::PlayDialogue()
 {
 	if (_currentDialogue != "")
-		std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;
+	{
+		dynamic_cast<StateDialogue*>(GameState::_currentState)->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
+		/*App::Print(100, 100, ("[" + GetName() + "] says : " + _currentDialogue).c_str());
+		std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;*/
+	}
 }
 
 // Play a dialogue

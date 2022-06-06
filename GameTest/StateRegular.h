@@ -2,7 +2,6 @@
 #ifndef STATEREGULAR_H_
 #define STATEREGULAR_H_
 
-class GameStateController;
 #include "GameStateController.h"
 
 class StateRegular : public GameStateController
