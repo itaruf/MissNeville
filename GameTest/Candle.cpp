@@ -14,20 +14,20 @@ Candle::~Candle()
 // Get the current enlightnement of the candle
 bool Candle::isEnlighted()
 {
-	return enlighted;
+	return _enlighted;
 }
 
 // Changing candle's animation when being interacteed with
 void Candle::Interact()
 {
-	if (!enlighted)
+	if (!_enlighted)
 	{
-		enlighted = true;
+		_enlighted = true;
 		_sprite->SetFrame(1);
 	}
 	/*else
 	{
-		enlighted = false;
+		_enlighted = false;
 		_sprite->SetFrame(0);
 	}*/
 }

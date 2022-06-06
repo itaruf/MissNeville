@@ -10,8 +10,8 @@ class Character : public Actor
 {
 private:
 protected:
-	float HP;
-	float movementSpeed;
+	float _HP;
+	float _movementSpeed;
 public:
 	Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed);
 	~Character();

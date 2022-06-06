@@ -13,7 +13,7 @@ class NPC : public Character, public IDialogue, public IInteractive
 private:
 protected:
 public:
-	std::string currentDialogue;
+	std::string _currentDialogue;
 	std::unordered_map<int, std::pair<bool, std::string>> dialogues;
 
 	NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed);

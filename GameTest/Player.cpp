@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Inventory* inventory) : Character(name, sprite, position, collider, HP, movementSpeed), inventory{ inventory }
+Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed), _inventory{ inventory }
 {
 	// Instantiating all the bags and slots of the inventory
 	for (auto i = 0; i < Inventory::nbBags; ++i)
 	{
-		inventory->bags.insert(std::make_pair(i, std::make_pair(false, std::vector<InventoryItem*>())));
+		_inventory->bags.insert(std::make_pair(i, std::make_pair(false, std::vector<InventoryItem*>())));
 		for (auto j = 0; j < Inventory::nbSlotBag; ++j)
 		{
-			inventory->bags[i].second.emplace_back(nullptr);
+			_inventory->bags[i].second.emplace_back(nullptr);
 		}
 	}
 }
@@ -19,8 +19,8 @@ Player::~Player()
 	printf("CHARACTER DESTRUCTOR CALLED\n");
 
 	// Freeing the memory allocated on the heap
-	delete inventory;
-	inventory = nullptr;
+	delete _inventory;
+	_inventory = nullptr;
 }
 
 // Moving the player on the Y-Axis
@@ -38,12 +38,12 @@ void Player::MoveVertically()
 			if (actor == this)
 				continue;
 			// if the player is about to collide with an actor, then the player doesn't move
-			if (_collider->isColliding(this, actor, _position->x, _position->y + movementSpeed))
+			if (_collider->isColliding(this, actor, _position->x, _position->y + _movementSpeed))
 				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
 					return;
 		}
 		// else the player can move
-		_sprite->SetPosition(_position->x, _position->y + movementSpeed);
+		_sprite->SetPosition(_position->x, _position->y + _movementSpeed);
 	}
 
 	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN) || App::GetController().GetLeftThumbStickY() < -0.5f)
@@ -55,11 +55,11 @@ void Player::MoveVertically()
 		{
 			if (actor == this)
 				continue;
-			if (_collider->isColliding(this, actor, _position->x, _position->y - movementSpeed))
+			if (_collider->isColliding(this, actor, _position->x, _position->y - _movementSpeed))
 				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
 					return;
 		}
-		_sprite->SetPosition(_position->x, _position->y - movementSpeed);
+		_sprite->SetPosition(_position->x, _position->y - _movementSpeed);
 	}
 }
 
@@ -75,11 +75,11 @@ void Player::MoveHorizontally()
 		{
 			if (actor == this)
 				continue;
-			if (_collider->isColliding(this, actor, _position->x + movementSpeed, _position->y))
+			if (_collider->isColliding(this, actor, _position->x + _movementSpeed, _position->y))
 				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
 					return;
 		}
-		_sprite->SetPosition(_position->x + movementSpeed, _position->y);
+		_sprite->SetPosition(_position->x + _movementSpeed, _position->y);
 	}
 
 	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().GetLeftThumbStickX() < -0.5f)
@@ -91,21 +91,21 @@ void Player::MoveHorizontally()
 		{
 			if (actor == this)
 				continue;
-			if (_collider->isColliding(this, actor, _position->x - movementSpeed, _position->y))
+			if (_collider->isColliding(this, actor, _position->x - _movementSpeed, _position->y))
 				if (actor->GetCollider()->colliderType == Collision::ColliderType::Block)
 					return;
 		}
-		_sprite->SetPosition(_position->x - movementSpeed, _position->y);
+		_sprite->SetPosition(_position->x - _movementSpeed, _position->y);
 	}
 }
 
 void Player::BagAction()
 {
 	// BAG 0
-	if (App::IsKeyPressed('1') && !inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !inventory->IsBagOpened(0))
+	if (App::IsKeyPressed('1') && !_inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !_inventory->IsBagOpened(0))
 		OpenBag(0);
 
-	else if (inventory->IsBagOpened(0))
+	else if (_inventory->IsBagOpened(0))
 	{
 		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 			CloseBag(0);
@@ -120,10 +120,10 @@ void Player::BagAction()
 	}
 
 	// BAG 1
-	if (App::IsKeyPressed('2') && !inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !inventory->IsBagOpened(1))
+	if (App::IsKeyPressed('2') && !_inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !_inventory->IsBagOpened(1))
 		OpenBag(1);
 
-	else if (inventory->IsBagOpened(1))
+	else if (_inventory->IsBagOpened(1))
 	{
 		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 			CloseBag(1);
@@ -170,13 +170,13 @@ bool Player::Interact(Collectable* collectable)
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
-		for (auto i = 0; i < inventory->bags[i].second.size(); ++i)
+		for (auto i = 0; i < _inventory->bags[i].second.size(); ++i)
 		{
 			// Looking for the first empty slot
-			if (!inventory->bags[collectable->ID].second[i])
+			if (!_inventory->bags[collectable->ID].second[i])
 			{
 				// Stock the collected object in an empty bag slot
-				inventory->bags[collectable->ID].second[i] = collectable->Collect();
+				_inventory->bags[collectable->ID].second[i] = collectable->Collect();
 				std::cout << collectable->GetName() << " added in bag " << collectable->ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
 				GameState::_currentScene->RemoveActor(collectable);
@@ -195,18 +195,18 @@ bool Player::Interact(Collectable* collectable)
 void Player::OpenBag(int ID)
 {
 	// Check if any bag is opened (can't open multiple bags at the same time)
-	if (inventory->IsAnyBagAlreadyOpened())
+	if (_inventory->IsAnyBagAlreadyOpened())
 		return;
 
 	// Check if the targeted bag already is opened
-	if (inventory->IsBagOpened(ID))
+	if (_inventory->IsBagOpened(ID))
 	{
 		std::cout << "Bag " << ID << " is aleady opened" << std::endl;
 		return;
 	}
 	
 	// The bag is now considered opened
-	inventory->bags[ID].first = true;
+	_inventory->bags[ID].first = true;
 	std::cout << "Bag " << ID << " is now opened" << std::endl;
 }
 
@@ -214,11 +214,11 @@ void Player::OpenBag(int ID)
 void Player::CloseBag(int ID)
 {
 	// Check if the bag already is closed
-	if (!inventory->IsBagOpened(ID))
+	if (!_inventory->IsBagOpened(ID))
 		return;
 
 	// The bag is now considered closed
-	inventory->bags[ID].first = false;
+	_inventory->bags[ID].first = false;
 	std::cout << "Bag " << ID << " is now closed" << std::endl;
 }
 
@@ -226,14 +226,14 @@ void Player::CloseBag(int ID)
 void Player::GoToBagSlot(int ID, int slotNumber)
 {
 	// Check if the bag exists
-	if (inventory->IsBagExist(ID))
+	if (_inventory->IsBagExist(ID))
 	{
 		// Check if the bag is opened)
-		if (inventory->IsBagOpened(ID))
+		if (_inventory->IsBagOpened(ID))
 		{
 			// Check if an item is stored at the specific slot
-			if (inventory->GetItem(ID, slotNumber))
-				std::cout << inventory->GetItem(ID, slotNumber)->description << std::endl;
+			if (_inventory->GetItem(ID, slotNumber))
+				std::cout << _inventory->GetItem(ID, slotNumber)->description << std::endl;
 			else 
 				std::cout << "No item found at slot " << slotNumber << std::endl;
 		}

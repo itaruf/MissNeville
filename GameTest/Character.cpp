@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) : Actor(name, sprite, position, collider), HP{ HP }, movementSpeed{ movementSpeed }
+Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }
 {
 	/*std::cout << "CHARACTER CONSTRUCTOR CALLED" << std::endl;*/
 }
@@ -14,25 +14,25 @@ Character::~Character()
 // Get the current HP of the character
 const float& Character::GetHP() const
 {
-	return HP;
+	return _HP;
 }
 
 // Set the HP of the character
 void Character::SetHP(float value)
 {
-	HP = value;
+	_HP = value;
 }
 
 // Get the curret movement speed of the character
 const float& Character::GetMovementSpeed() const
 {
-	return movementSpeed;
+	return _movementSpeed;
 }
 
 // Set the movementspeed of the character
 void Character::SetMovementSpeed(float value)
 {
-	movementSpeed = value;
+	_movementSpeed = value;
 }
 
 // Check if the character is currently moving or not

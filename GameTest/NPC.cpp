@@ -13,8 +13,8 @@ NPC::~NPC()
 // Play a dialogue
 void NPC::PlayDialogue()
 {
-	if (currentDialogue != "")
-		std::cout << "[" << GetName() << "] says : " << currentDialogue << std::endl;
+	if (_currentDialogue != "")
+		std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;
 }
 
 // Play a dialogue
@@ -45,7 +45,7 @@ void NPC::EnableDialogue(int dialogueID)
 void NPC::SetCurrentDialogue(int dialogueID)
 {
 	if (dialogues.find(dialogueID) != dialogues.end())
-		currentDialogue = dialogues[dialogueID].second;
+		_currentDialogue = dialogues[dialogueID].second;
 }
 
 // Executing instructions when the NPC is being interacted with

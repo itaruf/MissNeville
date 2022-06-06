@@ -11,7 +11,7 @@ class Collectable : public Actor, public ICollectable
 {
 private:
 protected:
-	InventoryItem* invItem;
+	InventoryItem* _invItem;
 public:
 	int ID;
 	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, InventoryItem* invItem, int ID = 0);

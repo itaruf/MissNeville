@@ -21,7 +21,7 @@ public:
 	Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Inventory* inventory);
 	~Player();
 
-	Inventory* inventory;
+	Inventory* _inventory;
 
 	void MoveVertically();
 	void MoveHorizontally();
