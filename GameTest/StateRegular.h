@@ -1,15 +1,14 @@
 #pragma once
+#ifndef STATEREGULAR_H_
+#define STATEREGULAR_H_
 
+class GameStateController;
 #include "GameStateController.h"
-
-class Player;
-#include "Player.h";
 
 class StateRegular : public GameStateController
 {
 public:
 
-	Player* player;
 	StateRegular();
 	~StateRegular();
 	void Enter() override;
@@ -18,3 +17,4 @@ public:
 	void Exit() override;
 };
 
+#endif 

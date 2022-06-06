@@ -17,6 +17,8 @@ void StateRegular::Update()
 {
 	player->MoveHorizontally();
 	player->MoveVertically();
+	player->IsMoving();
+	player->BagAction();
 }
 
 void StateRegular::Render()

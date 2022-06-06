@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef GAMESTATECONTROLLER_H_
+#define GAMESTATECONTROLLER_H_
+
 #include <vector>
 
 class Player;
@@ -16,3 +20,4 @@ public:
 	virtual void Exit() = 0;
 };
 
+#endif

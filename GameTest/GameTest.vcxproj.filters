@@ -195,6 +195,9 @@
     <ClInclude Include="StateRegular.h">
       <Filter>GameStates</Filter>
     </ClInclude>
+    <ClInclude Include="EState.h">
+      <Filter>Enumerations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sources.txt">

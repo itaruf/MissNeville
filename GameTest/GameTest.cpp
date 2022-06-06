@@ -30,8 +30,8 @@ class GameState;
 #include <cmath>
 #include <map>
 
-class GameStateController;
-#include "GameStateController.h"
+//class GameStateController;
+//#include "GameStateController.h"
 
 class StateRegular;
 #include "StateRegular.h"
@@ -43,6 +43,9 @@ class StateDialogue;
 #include "StateDialogue.h"
 
 //#include "csv.h"
+
+enum class State;
+#include "EState.h"
 
 std::shared_ptr<GameState> gameState;
 
@@ -56,6 +59,7 @@ void Init()
 	/*Instantiate the gamestate which will be persistent across all scenes*/
 	gameState = std::make_shared<GameState>();
 
+	gameState->state = State::REGULAR;
 	/*Setting up the first scene*/
 	gameState->currentScene = new Entrance(0, nullptr);
 	gameState->currentScene->Init();
@@ -78,28 +82,13 @@ void Init()
 
 	stateRegular->player = player;
 
-	/*player = nullptr;
-	vector = nullptr;
-	collider = nullptr;
-	playerSprite = nullptr;*/
-
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
-
-
-	/*gameStateController->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
-	gameStateController->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
-	gameStateController->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
-
-	gameStateController->currentState = gameStateController->gameStates[0];
-	gameStateController->player = player;*/
 
 	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
 	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
 	gameState->gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
 	gameState->currentState = stateRegular;
-
-
 }
 
 template<
@@ -113,22 +102,21 @@ std::string GetChar(const T& var)
 
 void Update(float deltaTime)
 { 
+	if (gameState->player)
+		gameState->currentState->Update();
+
 	if (gameState->currentScene)
+	{
+		gameState->SwitchState();
 		gameState->currentScene->Update(deltaTime);
+	}
 
 	auto player{ gameState->GetPlayer() };
 
 	if (player)
 	{
 		player->GetSprite()->Update(deltaTime);
-		player->IsMoving();
-		player->BagAction();
 	}
-
-	
-	if (gameState->player)
-		gameState->currentState->Update();
-
 }
 
 void Render()
@@ -143,6 +131,7 @@ void Render()
 		return;
 
 	gameState->currentScene->Render();
+	App::Print(800, 600, ("State : " + gameState->PrintState()).c_str());
 
 	/*********PLAYER RENDER*********/
 	auto player{ gameState->GetPlayer() };

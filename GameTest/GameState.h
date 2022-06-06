@@ -14,6 +14,8 @@ class Player;
 class GameStateController;
 #include "GameStateController.h"
 
+enum class State;
+#include "EState.h"
 
 // Class in charge of managing the current state of the game and navigating through rooms
 class GameState
@@ -21,17 +23,25 @@ class GameState
 private:
 protected:
 public:
+	static State state;
 	static Scene* currentScene;
 	static std::vector<Scene*> rooms;
 	static Player* player;
-	/*static */std::vector<GameStateController*> gameStates;
-	/*static */GameStateController* currentState;
+	static std::vector<GameStateController*> gameStates;
+	static GameStateController* currentState;
 
 	GameState();
 	~GameState();
 
 	Player* GetPlayer();
 	void AddPlayer(Player* player);
+	void SwitchState();
+	std::string PrintState();
+
+	static void SetState(State mstate)
+	{
+		state = mstate;
+	}
 };
 
 #endif

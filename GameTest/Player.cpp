@@ -141,6 +141,9 @@ void Player::BagAction()
 // Player's main function to interact with other actors and trigger their response to the interaction
 bool Player::Interact(IInteractive* actor)
 {
+	if (GameState::state != State::REGULAR)
+		return false;
+
 	if (!actor)
 		return false;
 
@@ -157,11 +160,15 @@ bool Player::Interact(IInteractive* actor)
 // Player's main function to interact with other actors (collectable) and trigger their response to the interaction
 bool Player::Interact(Collectable* collectable)
 {
+	if (GameState::state != State::REGULAR)
+		return false;
+
 	if (!collectable)
 		return false;
 
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
+		GameState::SetState(State::DIALOGUE);
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
 		for (auto i = 0; i < inventory->bags[i].second.size(); ++i)
 		{

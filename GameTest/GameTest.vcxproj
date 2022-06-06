@@ -62,6 +62,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,6 +110,7 @@
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CandlePuzzle.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="EState.h" />
     <ClInclude Include="GameStateController.h" />
     <ClInclude Include="IDialogue.h" />
     <ClInclude Include="NPC.h" />

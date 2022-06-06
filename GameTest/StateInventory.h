@@ -1,10 +1,13 @@
 #pragma once
+
+#ifndef STATEINVENTORY_H_
+#define STATEINVENTORY_H_
+
+class GameStateController;
 #include "GameStateController.h"
-#include "GameState.h"
 class StateInventory : public GameStateController
 {
 public:
-	Player* player;
 	StateInventory();
 	~StateInventory();
 	void Enter() override;
@@ -13,3 +16,4 @@ public:
 	void Exit() override;
 };
 
+#endif
