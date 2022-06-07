@@ -23,10 +23,10 @@ void StateDialogue::Render()
 {
 	/*_currentDialogue.c_str()*/
 
-	if (_dialogueBox)
-	{
-		_dialogueBox->Draw();
-	}
+	if (!_dialogueBox)
+		return;
+
+	_dialogueBox->Draw();
 
 	App::Print(390, 135, Process(_currentDialogue, ']').c_str());
 	App::Print(100, 100, _currentDialogue.c_str());

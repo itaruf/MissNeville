@@ -14,22 +14,22 @@ NPC::~NPC()
 // Play a dialogue
 void NPC::PlayDialogue()
 {
-	if (_currentDialogue != "")
-	{
-		dynamic_cast<StateDialogue*>(GameState::_currentState)->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
-		/*App::Print(100, 100, ("[" + GetName() + "] says : " + _currentDialogue).c_str());
-		std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;*/
-	}
+	if (_currentDialogue == " ")
+		return;
+
+	dynamic_cast<StateDialogue*>(GameState::_currentState)->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
+	/*App::Print(100, 100, ("[" + GetName() + "] says : " + _currentDialogue).c_str());
+	std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;*/
 }
 
 // Play a dialogue
 void NPC::PlayDialogue(int dialogueID)
 {
-	if (dialogues[dialogueID].first)
-	{
-		dialogueID++;
-		std::cout << "[" <<  GetName() << "] says : " << dialogues[dialogueID].second << std::endl;
-	}
+	if (!dialogues[dialogueID].first)
+		return;
+
+	dialogueID++;
+	std::cout << "[" << GetName() << "] says : " << dialogues[dialogueID].second << std::endl;
 }
 
 // Stop a specific dialogue

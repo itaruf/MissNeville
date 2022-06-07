@@ -21,22 +21,21 @@ GameState::~GameState()
 		delete _player;
 
 	/*if (_currentScene)
-	{
 		delete _currentScene;
-	}*/
+	*/
 
 	for (auto& room : _rooms) 
-	{
 		if (room)
 			delete room;
-	}
 	_rooms.clear();
 
 	for (auto& gameState : _gameStates)
 		if (gameState)
 			delete gameState;
-
 	_gameStates.clear();
+
+	/*if (_currentState)
+		delete _currentState;*/
 }
 
 void GameState::AddPlayer(Player* player)

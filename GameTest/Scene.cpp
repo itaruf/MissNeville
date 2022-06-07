@@ -61,15 +61,14 @@ bool Scene::RemoveActor(Actor* actor)
 	// Looking for the actor to delete
 	auto it = std::find(_actors.begin(), _actors.end(), actor);
 
-	if (it != _actors.end())
-	{
-		// Deleting the actor
-		_actors.erase(it);
-		std::cout << actor->GetName() << " removed" << std::endl;
-		delete actor;
-		return true;
-	}
-	return false;
+	if (it == _actors.end())
+		return false;
+
+	// Deleting the actor
+	_actors.erase(it);
+	std::cout << actor->GetName() << " removed" << std::endl;
+	delete actor;
+	return true;
 }
 
 // Remove a collectable from the scene
@@ -81,12 +80,11 @@ bool Scene::RemoveActor(Collectable* collectable)
 	// Looking for the actor to delete
 	auto it = std::find(_actors.begin(), _actors.end(), dynamic_cast<Actor*>(collectable));
 
-	if (it != _actors.end())
-	{
-		// Deleting the actor
-		_actors.erase(it);
-		/*std::cout << collectable->GetName() << " removed" << std::endl;*/
-		return true;
-	}
-	return false;
+	if (it == _actors.end())
+		return false;
+	
+	// Deleting the actor
+	_actors.erase(it);
+	/*std::cout << collectable->GetName() << " removed" << std::endl;*/
+	return true;
 }

@@ -18,13 +18,9 @@ static std::string Process(std::string const& s, const char letter)
 {
     std::string::size_type pos = s.find(letter);
     if (pos != std::string::npos)
-    {
         return s.substr(0, pos + 1);
-    }
     else
-    {
         return s;
-    }
 }
 
 #endif

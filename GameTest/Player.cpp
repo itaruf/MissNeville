@@ -117,22 +117,22 @@ void Player::BagAction()
 	}
 
 	// BAG 1
-	if (App::IsKeyPressed('2') && !_inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !_inventory->IsBagOpened(1))
-		OpenBag(1);
+	//if (App::IsKeyPressed('2') && !_inventory->IsBagOpened(1) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true) && !_inventory->IsBagOpened(1))
+	//	OpenBag(1);
 
-	else if (_inventory->IsBagOpened(1))
-	{
-		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-			CloseBag(1);
-		else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
-			GoToBagSlot(1, 0);
-		else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
-			GoToBagSlot(1, 1);
-		else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
-			GoToBagSlot(1, 2);
-		else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
-			GoToBagSlot(1, 3);
-	}
+	//else if (_inventory->IsBagOpened(1))
+	//{
+	//	if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	//		CloseBag(1);
+	//	else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
+	//		GoToBagSlot(1, 0);
+	//	else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+	//		GoToBagSlot(1, 1);
+	//	else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
+	//		GoToBagSlot(1, 2);
+	//	else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+	//		GoToBagSlot(1, 3);
+	//}
 }
 
 // Player's main function to interact with other actors and trigger their response to the interaction
@@ -170,16 +170,16 @@ bool Player::Interact(Collectable* collectable)
 		for (auto i = 0; i < _inventory->_bags[i].second.size(); ++i)
 		{
 			// Looking for the first empty slot
-			if (!_inventory->_bags[collectable->_ID].second[i])
-			{
-				// Stock the collected object in an empty bag slot
-				_inventory->_bags[collectable->_ID].second[i] = collectable;
-				collectable->itemized = true;
-				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
-				// Removing the actor from the current scene as it is being itemized
-				GameState::_currentScene->RemoveActor(collectable);
-				return true;
-			}
+			if (_inventory->_bags[collectable->_ID].second[i])
+				continue;
+
+		    // Stock the collected object in an empty bag slot
+			_inventory->_bags[collectable->_ID].second[i] = collectable;
+			collectable->itemized = true;
+			std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
+			// Removing the actor from the current scene as it is being itemized
+			GameState::_currentScene->RemoveActor(collectable);
+			return true;
 		}
 		std::cout << collectable->GetName() << " couldn't be added" << std::endl;
 	}
@@ -239,69 +239,69 @@ void Player::GoToBagSlot(int ID, int slotNumber)
 void Player::OnCollision()
 {
 	auto actors{ GameState::_currentScene->GetActors() };
-	if (actors.size() != 0)
+
+	if (actors.size() <= 0)
+		return;
+
+	std::vector<Actor*> interactiveActors{};
+
+	// Select all Collectable or Interactive actors
+	for (auto& actor : actors)
+		if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
+			interactiveActors.emplace_back(actor);
+
+	float ms{ GetMovementSpeed() };
+
+	if (GetDirection() == Direction::LEFT || GetDirection() == Direction::DOWN)
+		ms = -GetMovementSpeed();
+
+	float x{ 0 };
+	float y{ 0 };
+
+	if (GetDirection() == Direction::RIGHT || GetDirection() == Direction::LEFT)
 	{
-		std::vector<Actor*> interactiveActors{};
-		// Select all Collectable or Interactive actors
-		for (auto& actor : actors)
-			if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
-				interactiveActors.emplace_back(actor);
+		x = GetPosition()->_x + ms;
+		y = GetPosition()->_y;
+	}
+	else
+	{
+		x = GetPosition()->_x;
+		y = GetPosition()->_y + ms;
+	}
 
-		float ms{ GetMovementSpeed() };
+	if (interactiveActors.size() <= 0)
+		return;
 
-		if (GetDirection() == Direction::LEFT || GetDirection() == Direction::DOWN)
-			ms = -GetMovementSpeed();
-
-		float x{ 0 };
-		float y{ 0 };
-
-		if (GetDirection() == Direction::RIGHT || GetDirection() == Direction::LEFT)
+	/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
+	std::sort(std::begin(interactiveActors), std::end(interactiveActors), [this, ms](Actor* const& l, Actor* const& r)
 		{
-			x = GetPosition()->_x + ms;
-			y = GetPosition()->_y;
-		}
-		else
-		{
-			x = GetPosition()->_x;
-			y = GetPosition()->_y + ms;
-		}
+			return
+				std::abs(GetPosition()->_x + ms - l->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - l->GetPosition()->_y + ms)
+				<
+				std::abs(GetPosition()->_x + ms - r->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - r->GetPosition()->_y + ms);
+		});
 
-		if (interactiveActors.size() > 0)
-		{
-			/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
-			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [this, ms](Actor* const& l, Actor* const& r)
-				{
-					return
-						std::abs(GetPosition()->_x + ms - l->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - l->GetPosition()->_y + ms)
-						<
-						std::abs(GetPosition()->_x + ms - r->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - r->GetPosition()->_y + ms);
-				});
+	auto closestActor = interactiveActors[0];
 
+	App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());
 
+	/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
 
-			auto closestActor = interactiveActors[0];
+	if (!GetCollider()->isColliding(this, closestActor, x, y))
+		return;
 
-			App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());
-
-			/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
-			if (GetCollider()->isColliding(this, closestActor, x, y))
-			{
-
-				/*INTERACT WITH NON COLLECTIBLE ITEMS*/
-				auto interactable = dynamic_cast<IInteractive*>(closestActor);
-				if (interactable)
-				{
-					Interact(interactable);
-					return;
-				}
-				/*COLLECT ITEMS*/
-				auto collectable = dynamic_cast<Collectable*>(closestActor);
-				if (collectable)
-				{
-					Interact(collectable);
-					return;
-				}
-			}
-		}
+	/*INTERACT WITH NON COLLECTIBLE ITEMS*/
+	auto interactable = dynamic_cast<IInteractive*>(closestActor);
+	if (interactable)
+	{
+		Interact(interactable);
+		return;
+	}
+	/*COLLECT ITEMS*/
+	auto collectable = dynamic_cast<Collectable*>(closestActor);
+	if (collectable)
+	{
+		Interact(collectable);
+		return;
 	}
 }
