@@ -16,7 +16,6 @@ Entrance::~Entrance()
 
 	// Freeing all the memory allocated on the heap
 	delete _candlePuzzle;
-	_candlePuzzle = nullptr;
 	
 	/*for (auto& candle : _candles)
 	{
@@ -130,48 +129,53 @@ void Entrance::Render()
 {
 	for (const auto& item : _actors)
 	{
-		if (item)
-		{
-			// Updating the sprites
-			item->GetSprite()->Draw();
-			// Updating the colliders
-			item->GetCollider()->DrawCollision(item, 50, 50, 50);
-		}
+		if (!item)
+			continue;
+		if (dynamic_cast<Collectable*>(item) && dynamic_cast<Collectable*>(item)->itemized)
+			continue;
+		// Updating the sprites
+		item->GetSprite()->Draw();
+		// Updating the colliders
+		item->GetCollider()->DrawCollision(item, 50, 50, 50);
 	}
 }
 
 bool Entrance::IsRoomCleared()
 {
-	if (_candlePuzzle) 
+	if (!_candlePuzzle)
+		return false;
+
+	if (!_candlePuzzle->IsCleared())
+		return false;
+
+	else if (_candlePuzzle->_status == Puzzle::Status::CLEARED)
+		return true;
+
+	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 	{
-		if (_candlePuzzle->IsCleared())
+		std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
+
+		auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 8, 8), 0, description);
+		page->GetSprite()->SetFrame(0);
+		page->GetSprite()->SetScale(3);
+		AddActor(page);
+
+		auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
+		if (it != _actors.end())
 		{
-			if (_candlePuzzle->_status == Puzzle::Status::PENDING)
-			{
-				std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
-
-				auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 8, 8), 0, description);
-				page->GetSprite()->SetFrame(0);
-				page->GetSprite()->SetScale(3);
-				AddActor(page);
-
-				auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
-				if (it != _actors.end())
-				{
-					RemoveActor(*it);
-				}
-
-				auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; });
-				if (npc != _actors.end())
-				{
-					dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
-				}
-				_candlePuzzle->_status = Puzzle::Status::CLEARED;
-
-			}
-			return true;
+			RemoveActor(*it);
 		}
+
+		auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; });
+		if (npc != _actors.end())
+		{
+			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
+		}
+		_candlePuzzle->_status = Puzzle::Status::CLEARED;
+
+		return true;
 	}
+
 	return false;
 }
 

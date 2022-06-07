@@ -18,22 +18,13 @@ Actor::~Actor()
 	// Freeing all the memory allocated on the heap
 
 	if (_sprite)
-	{
 		delete _sprite;
-		_sprite = nullptr;
-	}
 
 	if (_position)
-	{
 		delete _position;
-		_position = nullptr;
-	}
 
 	if (_collider)
-	{
 		delete _collider;
-		_collider = nullptr;
-	}
 }
 
 // Get the current name of the actor

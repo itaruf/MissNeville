@@ -131,83 +131,11 @@ void Render()
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
 
-	auto pos{ player->GetPosition() };
-	auto string{ std::to_string(pos->_x) + " " + std::to_string(pos->_y) };
-
 	/*SOME PRINTS*/
 	if (gameState->_currentScene->IsRoomCleared())
 		App::Print(800, 700, "Scene Cleared");
 	else
 		App::Print(800, 700, "Scene Not Cleared");
-
-	/*********PLAYER'S INTERACTIONS*********/
-	/*TEST WIP*/
-	auto actors{ gameState->_currentScene->GetActors() };
-	if (actors.size() != 0)
-	{
-		std::vector<Actor*> interactiveActors{};
-		// Select all Collectable or Interactive actors
-		for (auto& actor : actors)
-			if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
-				interactiveActors.emplace_back(actor);
-
-		float ms{ player->GetMovementSpeed() };
-
-		if (player->GetDirection() == Direction::LEFT || player->GetDirection() == Direction::DOWN)
-			ms = -player->GetMovementSpeed();
-
-		float x{ 0 };
-		float y{ 0 };
-
-		if (player->GetDirection() == Direction::RIGHT || player->GetDirection() == Direction::LEFT)
-		{
-			x = pos->_x + ms;
-			y = pos->_y;
-		}
-		else
-		{
-			x = pos->_x;
-			y = pos->_y + ms;
-		}
-
-		if (interactiveActors.size() > 0) 
-		{
-			/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
-			std::sort(std::begin(interactiveActors), std::end(interactiveActors), [pos, ms](Actor* const& l, Actor* const& r)
-				{
-					return
-						std::abs(pos->_x + ms - l->GetPosition()->_x + ms) + std::abs(pos->_y + ms - l->GetPosition()->_y + ms)
-						<
-						std::abs(pos->_x + ms - r->GetPosition()->_x + ms) + std::abs(pos->_y + ms - r->GetPosition()->_y + ms);
-				});
-
-
-			
-			auto closestActor = interactiveActors[0];
-
-			App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());
-
-			/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
-			if (player->GetCollider()->isColliding(player, closestActor, x, y))
-			{
-			
-				/*INTERACT WITH NON COLLECTIBLE ITEMS*/
-				auto interactable = dynamic_cast<IInteractive*>(closestActor);
-				if (interactable)
-				{
-					player->Interact(interactable);
-					return;
-				}
-				/*COLLECT ITEMS*/
-				auto collectable = dynamic_cast<Collectable*>(closestActor);
-				if (collectable)
-				{
-					player->Interact(collectable);
-					return;
-				}
-			}
-		}
-	}
 }
 
 //------------------------------------------------------------------------

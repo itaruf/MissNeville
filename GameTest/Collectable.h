@@ -13,7 +13,7 @@ protected:
 public:
 	int _ID;
 	std::string _description;
-
+	bool itemized = false;
 	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, int ID = 0, std::string description = "");
 	~Collectable();
 

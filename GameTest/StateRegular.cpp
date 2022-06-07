@@ -15,10 +15,14 @@ void StateRegular::Enter()
 
 void StateRegular::Update()
 {
-	_player->MoveHorizontally();
-	_player->MoveVertically();
-	_player->IsMoving();
-	_player->BagAction();
+	if (_player)
+	{
+		_player->MoveHorizontally();
+		_player->MoveVertically();
+		_player->IsMoving();
+		_player->BagAction();
+		_player->OnCollision();
+	}
 }
 
 void StateRegular::Render()

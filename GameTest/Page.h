@@ -2,7 +2,6 @@
 #ifndef PAGE_H_
 #define PAGE_H_
 
-class Collectable;
 #include "Collectable.h"
 #include "IInteractive.h"
 

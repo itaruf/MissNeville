@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Scene.h"
+#include "Collectable.h"
 
 Scene::Scene(int ID, std::vector<Actor*> actors) : _ID{ ID }, _actors{ actors } {}
 
@@ -15,10 +16,7 @@ Scene::~Scene()
 	for (auto& actor : _actors)
 	{
 		if (actor)
-		{
 			delete actor;
-			actor = nullptr;
-		}
 	}
 	_actors.clear();
 }
@@ -27,7 +25,6 @@ Scene::~Scene()
 void Scene::AddActor(Actor* actor)
 {
 	_actors.emplace_back(actor);
-	actor = nullptr;
 }
 
 // Get a specific actor among all actors of the scene
@@ -72,6 +69,24 @@ bool Scene::RemoveActor(Actor* actor)
 		delete actor;
 		return true;
 	}
-	actor = nullptr;
+	return false;
+}
+
+// Remove a collectable from the scene
+bool Scene::RemoveActor(Collectable* collectable)
+{
+	if (!collectable)
+		return false;
+
+	// Looking for the actor to delete
+	auto it = std::find(_actors.begin(), _actors.end(), dynamic_cast<Actor*>(collectable));
+
+	if (it != _actors.end())
+	{
+		// Deleting the actor
+		_actors.erase(it);
+		/*std::cout << collectable->GetName() << " removed" << std::endl;*/
+		return true;
+	}
 	return false;
 }

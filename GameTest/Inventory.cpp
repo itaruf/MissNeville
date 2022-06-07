@@ -14,15 +14,12 @@ Inventory::~Inventory()
 	printf("INVENTORY DESTRUCTOR CALLED\n");
 
 	//Freeing the memory allocated on the heap
-	/*for (auto& bag : _bags)
+	for (auto& bag : _bags)
 		for (auto& item : bag.second.second)
 		{
 			if (item)
-			{
 				delete item;
-				item = nullptr;
-			}
-		}*/
+		}
 }
 
 // Return the stored item at a slot of a bag
@@ -36,21 +33,19 @@ Collectable* Inventory::GetItem(int ID, int slotNumber)
 bool Inventory::RemoveItem(Collectable* item)
 {
 	// Check if the corresponding bag exists
-	if (IsBagExist(item->_ID))
-	{
+	if (!IsBagExist(item->_ID))
+		return false;
+
 		// Go through the bag slots to find the item
-		auto it = std::find(_bags[item->_ID].second.begin(), _bags[item->_ID].second.end(), item);
-		if (it != _bags[item->_ID].second.end())
-		{
-			// delete the item when found
-			_bags[item->_ID].second.erase(it);
-			delete item;
-			item = nullptr;
-			return true;
-		}
+	auto it = std::find(_bags[item->_ID].second.begin(), _bags[item->_ID].second.end(), item);
+	if (it != _bags[item->_ID].second.end())
+	{
+		// delete the item when found
+		_bags[item->_ID].second.erase(it);
+		delete item;
+		return true;
 	}
 	// item not found
-	item = nullptr;
 	return false;
 }
 
@@ -99,7 +94,6 @@ bool Inventory::AddItem(Collectable* item)
 			// Add the item at first empty slot found
 			std::cout << "item ID : " << item->_ID << " added to the inventory" << std::endl;
 			slot = item;
-			item = nullptr;
 			return true;
 		}
 
@@ -107,7 +101,6 @@ bool Inventory::AddItem(Collectable* item)
 
 	// No free slot found
 	std::cout << "item ID : " << item->_ID << " couldn't be added to the inventory" << std::endl;
-	item = nullptr;
 	return false;
 }
 

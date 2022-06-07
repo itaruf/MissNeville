@@ -31,5 +31,6 @@ public:
 	void OpenBag(int ID);
 	void CloseBag(int ID);
 	void GoToBagSlot(int ID, int slotNumber);
+	void OnCollision();
 };
 #endif

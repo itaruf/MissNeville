@@ -8,7 +8,6 @@ Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Coll
 Candle::~Candle()
 {
 	printf("CANDLE DESTRUCTOR CALLED\n");
-
 }
 
 // Get the current enlightnement of the candle

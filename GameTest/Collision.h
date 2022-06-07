@@ -4,8 +4,12 @@
 
 #include "app\app.h"
 #include "EDirection.h"
+
+//class Collectable;
 class Actor;
 #include "Actor.h"
+
+//#include "Collectable.h"
 
 // Class which defines the collision of an actor
 class Collision

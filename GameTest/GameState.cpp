@@ -18,24 +18,17 @@ GameState::~GameState()
 	printf("GAME STATE DESTRUCTOR CALLED\n");
 
 	if (_player)
-	{
 		delete _player;
-		nullptr;
-	}
 
 	/*if (_currentScene)
 	{
 		delete _currentScene;
-		_currentScene = nullptr;
 	}*/
 
 	for (auto& room : _rooms) 
 	{
 		if (room)
-		{
 			delete room;
-			room = nullptr;
-		}
 	}
 	_rooms.clear();
 
@@ -49,7 +42,6 @@ GameState::~GameState()
 void GameState::AddPlayer(Player* player)
 {
 	_player = player;
-	player = nullptr;
 }
 
 void GameState::SwitchState()

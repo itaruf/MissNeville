@@ -6,12 +6,13 @@
 #include <vector>
 #include "Puzzle.h"
 class Actor;
-#include "Actor.h"
+//#include "Actor.h"
 #include "App/app.h"
 
 class GameState;
 class Player;
 class Candle;
+class Collectable;
 
 // Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene
@@ -32,6 +33,7 @@ public:
 	std::vector<Actor*>& GetActors();
 	bool RemoveActor(Actor* item);
 	void AddActor(Actor* actor);
+	bool RemoveActor(Collectable* collectable);
 
 	virtual void Init() = 0;
 	virtual void Update(float deltaTime);

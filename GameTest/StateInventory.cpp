@@ -72,7 +72,13 @@ void StateInventory::Render()
 			y - heightOff + widthOff,
 			1, 1, 1);
 
-		App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Test");
+		//App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Test");
+
+		if (bag.second[i])
+		{
+			bag.second[i]->SetPosition(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff) / 2));
+			bag.second[i]->GetSprite()->Draw();
+		}
 
 		x = x + width * widthOff;
 	}
