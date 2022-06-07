@@ -40,6 +40,7 @@ void StateInventory::Render()
 	float width = 35;
 	float height = 35;
 	float heightOff = 50;
+
 	size_t size = bag.second.size();
 
 	for (int i = 0; i < size; ++i)
@@ -84,12 +85,11 @@ void StateInventory::Render()
 
 		//App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Test");
 
-		//if (bag.second[i])
-		//{
-		//	// bag.second[i]->SetPosition(((x + widthOff) + (x + width * widthOff)) / 2, (y - heightOff + height * widthOff));
-		//	bag.second[i]->SetPosition(((x + widthOff) + (x + width * widthOff)) / 2, (y - height * heightOff));
-		//	bag.second[i]->GetSprite()->Draw();
-		//}
+		if (bag.second[i])
+		{
+			bag.second[i]->SetPosition((x + (x + width)) / 2,  (y + (y - height)) / 2);
+			bag.second[i]->GetSprite()->Draw();
+		}
 
 		x = x + width + widthOff;
 	}
