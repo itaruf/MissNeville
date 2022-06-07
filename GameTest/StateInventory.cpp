@@ -45,6 +45,18 @@ void StateInventory::Render()
 
 	for (int i = 0; i < size; ++i)
 	{
+		if (i == _currentSlot)
+		{
+			selected.r = 1;
+			selected.g = 0;
+			selected.b = 0;
+		}
+		else
+		{
+			selected.r = 1;
+			selected.g = 1;
+			selected.b = 1;
+		}
 		if (i % 3 == 0)
 		{
 			y -= heightOff;
@@ -57,7 +69,7 @@ void StateInventory::Render()
 			y,
 			x + width,
 			y,
-			1, 1, 1);
+			selected.r, selected.g, selected.b);
 
 		// Left Line
 		App::DrawLine(
@@ -65,7 +77,7 @@ void StateInventory::Render()
 			y,
 			x,
 			y - height,
-			1, 1, 1);
+			selected.r, selected.g, selected.b);
 
 		// Right Line
 		App::DrawLine(
@@ -73,7 +85,7 @@ void StateInventory::Render()
 			y,
 			x + width,
 			y - height,
-			1, 1, 1);
+			selected.r, selected.g, selected.b);
 
 		// Down line
 		App::DrawLine(
@@ -81,7 +93,7 @@ void StateInventory::Render()
 			y - height,
 			x + width,
 			y - height,
-			1, 1, 1);
+			selected.r, selected.g, selected.b);
 
 		//App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Test");
 

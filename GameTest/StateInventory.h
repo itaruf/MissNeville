@@ -3,11 +3,13 @@
 #ifndef STATEINVENTORY_H_
 #define STATEINVENTORY_H_
 
+#include "Utilities.h"
 #include "GameStateController.h"
 class StateInventory : public GameStateController
 {
 public:
 	int _currentSlot = 0;
+	Color selected{ 0, 0, 0 };
 	StateInventory();
 	~StateInventory();
 	void Enter() override;

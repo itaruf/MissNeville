@@ -23,4 +23,10 @@ static std::string Process(std::string const& s, const char letter)
         return s;
 }
 
+struct Color
+{
+    float r = 0;
+    float g = 0;
+    float b = 0;
+};
 #endif
