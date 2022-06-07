@@ -51,17 +51,20 @@ void GameState::SwitchState()
 		// Start button to open the inventory / change the state back to INVENTORY
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
 		{
-			std::cout << "Inventory State" << std::endl;
+			_currentState->Exit();
+
+			// Updating state
 			_state = State::INVENTORY;
 			_currentState = _gameStates[1];
-			_player->OpenBag(0);
 		}
 		break;
 
 	case State::DIALOGUE:
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 		{
-			std::cout << "Regular State" << std::endl;
+			_currentState->Exit();
+
+			// Updating state
 			_state = State::REGULAR;
 			_currentState = _gameStates[0];
 		}
@@ -71,12 +74,12 @@ void GameState::SwitchState()
 		// Face button Right to close the inventory / change the state back to REGULAR
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 		{
-			std::cout << "Regular State" << std::endl;
-			_state = State::REGULAR;
 			_currentState->Exit();
-			_currentState = _gameStates[0];
 			_player->CloseBag(0);
 
+			// Updating state
+			_currentState = _gameStates[0];
+			_state = State::REGULAR;
 		}
 		break;
 	default:

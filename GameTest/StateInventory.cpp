@@ -11,7 +11,14 @@ StateInventory::~StateInventory()
 
 void StateInventory::Enter()
 {
+	_player->OpenBag(0);
 	_currentSlot = 0;
+}
+
+void StateInventory::Exit()
+{
+	_currentSlot = 0;
+	_player->CloseBag(0);
 }
 
 void StateInventory::Update()
@@ -24,8 +31,7 @@ void StateInventory::Render()
 {
 	Select();
 
-	auto player = GameState::_player;
-	auto bag = player->_inventory->_bags[0];
+	auto bag = _player->_inventory->_bags[0];
 	
 	float x = 700;
 	float y = 300;
@@ -89,21 +95,15 @@ void StateInventory::Render()
 	}
 }
 
-void StateInventory::Exit()
-{
-	_currentSlot = 0;
-}
-
 void StateInventory::Navigation()
 {
-	auto player = GameState::_player;
-	auto bag = player->_inventory->_bags[0];
+	_player->_inventory->_bags[0];
 
 	// Right navigation
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
 	{
 		// We already are at the end of the bag
-		if (_currentSlot >= player->_inventory->GetNbSlotBag() - 1)
+		if (_currentSlot >= _player->_inventory->GetNbSlotBag() - 1)
 			return;
 
 		_currentSlot++;
@@ -124,8 +124,7 @@ void StateInventory::Navigation()
 
 void StateInventory::Select()
 {
-	auto player = GameState::_player;
-	auto bag = player->_inventory->_bags[0];
+	auto bag = _player->_inventory->_bags[0];
 
 	if (!bag.second[_currentSlot])
 	{

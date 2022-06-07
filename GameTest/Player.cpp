@@ -96,27 +96,6 @@ void Player::MoveHorizontally()
 	}
 }
 
-void Player::BagAction()
-{
-	// BAG 0
-	/*if (App::IsKeyPressed('1') && !_inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !_inventory->IsBagOpened(0))
-		OpenBag(0);
-
-	else if (_inventory->IsBagOpened(0))
-	{
-		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-			CloseBag(0);
-		else if (App::IsKeyPressed('1') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true))
-			GoToBagSlot(0, 0);
-		else if (App::IsKeyPressed('2') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
-			GoToBagSlot(0, 1);
-		else if (App::IsKeyPressed('3') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_DOWN, true))
-			GoToBagSlot(0, 2);
-		else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
-			GoToBagSlot(0, 3);
-	}*/
-}
-
 // Player's main function to interact with other actors and trigger their response to the interaction
 bool Player::Interact(IInteractive* actor)
 {
@@ -149,20 +128,21 @@ bool Player::Interact(Collectable* collectable)
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
-		for (auto i = 0; i < _inventory->_bags[i].second.size(); ++i)
+		for (auto i = 0; i < _inventory->_bags[collectable->_ID].second.size(); ++i)
 		{
 			// Looking for the first empty slot
-			if (_inventory->_bags[collectable->_ID].second[i])
-				continue;
-
-		    // Stock the collected object in an empty bag slot
-			_inventory->_bags[collectable->_ID].second[i] = collectable;
-			collectable->itemized = true;
-			std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
-			// Removing the actor from the current scene as it is being itemized
-			GameState::_currentScene->RemoveActor(collectable);
-			return true;
+			if (!_inventory->_bags[collectable->_ID].second[i])
+			{
+				// Stock the collected object in an empty bag slot
+				_inventory->_bags[collectable->_ID].second[i] = collectable;
+				collectable->itemized = true;
+				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
+				// Removing the actor from the current scene as it is being itemized
+				GameState::_currentScene->RemoveActor(collectable);
+				return true;
+			}
 		}
+		std::cout << collectable->_ID << std::endl;
 		std::cout << collectable->GetName() << " couldn't be added" << std::endl;
 	}
 

@@ -20,7 +20,6 @@ void StateRegular::Update()
 		_player->MoveHorizontally();
 		_player->MoveVertically();
 		_player->IsMoving();
-		_player->BagAction();
 		_player->Interaction();
 	}
 }

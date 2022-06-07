@@ -123,6 +123,14 @@ void Entrance::Update(float deltaTime)
 		if (item)
 			item->GetSprite()->Update(deltaTime);
 	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
+	{
+		auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 8, 8), 0, "lul");
+		page->GetSprite()->SetFrame(0);
+		page->GetSprite()->SetScale(3);
+		AddActor(page);
+	}
 }
 
 void Entrance::Render()

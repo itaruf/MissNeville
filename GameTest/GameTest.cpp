@@ -89,6 +89,8 @@ void Init()
 	/*Adding the player to the gamestate*/
 	gameState->AddPlayer(player);
 	stateRegular->_player = player;
+	stateInventory->_player = player;
+	stateDialogue->_player = player;
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
