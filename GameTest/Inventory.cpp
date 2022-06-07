@@ -85,20 +85,21 @@ bool Inventory::AddItem(InventoryItem* item)
 		return false;
 
 	// Check if bag exists
-	if (IsBagExist(item->_ID))
+	if (!IsBagExist(item->_ID))
+		return false;
+
+	// Looking for an empty slot
+	for (auto& slot : _bags[item->_ID].second)
 	{
-		// Looking for an empty slot
-		for (auto& bagSlot : _bags[item->_ID].second)
+		if (!slot)
 		{
-			if (!bagSlot)
-			{
-				// Add the item at first empty slot found
-				std::cout << "item ID : " << item->_ID << " added to the inventory" << std::endl;
-				bagSlot = item;
-				item = nullptr;
-				return true;
-			}
+			// Add the item at first empty slot found
+			std::cout << "item ID : " << item->_ID << " added to the inventory" << std::endl;
+			slot = item;
+			item = nullptr;
+			return true;
 		}
+
 	}
 
 	// No free slot found

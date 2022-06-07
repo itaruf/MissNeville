@@ -12,8 +12,8 @@
 class Inventory
 {
 private:
-	static constexpr int _nbBags{ 4 };
-	static constexpr int _nbSlotBag{ 4 };
+	static constexpr int _nbBags{ 1 };
+	static constexpr int _nbSlotBag{ 9 };
 protected:
 public:
 	// Allow the Player class to access Inventory members
