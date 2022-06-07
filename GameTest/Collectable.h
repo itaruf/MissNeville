@@ -4,21 +4,21 @@
 
 #include "Actor.h"
 #include "ICollectable.h"
-#include "InventoryItem.h"
 
 // Actor which can be collected by the player and itemized
 class Collectable : public Actor, public ICollectable
 {
 private:
 protected:
-	InventoryItem* _invItem;
 public:
 	int _ID;
-	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, InventoryItem* invItem, int ID = 0);
+	std::string _description;
+
+	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, int ID = 0, std::string description = "");
 	~Collectable();
 
 	// Each Collectable will have its own treatment
-	virtual InventoryItem* Collect() = 0;
+	virtual bool UseItem() = 0;
 };
 
 #endif

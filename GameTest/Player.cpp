@@ -6,7 +6,7 @@ Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Coll
 	// Instantiating all the bags and slots of the inventory
 	for (auto i = 0; i < Inventory::_nbBags; ++i)
 	{
-		_inventory->_bags.insert(std::make_pair(i, std::make_pair(false, std::vector<InventoryItem*>())));
+		_inventory->_bags.insert(std::make_pair(i, std::make_pair(false, std::vector<Collectable*>())));
 		for (auto j = 0; j < Inventory::_nbSlotBag; ++j)
 		{
 			_inventory->_bags[i].second.emplace_back(nullptr);
@@ -178,7 +178,7 @@ bool Player::Interact(Collectable* collectable)
 			if (!_inventory->_bags[collectable->_ID].second[i])
 			{
 				// Stock the collected object in an empty bag slot
-				_inventory->_bags[collectable->_ID].second[i] = collectable->Collect();
+				_inventory->_bags[collectable->_ID].second[i] = collectable;
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
 				GameState::_currentScene->RemoveActor(collectable);

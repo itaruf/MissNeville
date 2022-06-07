@@ -5,7 +5,7 @@ Inventory::Inventory()
 {
 }
 
-Inventory::Inventory(std::map<int, std::vector<InventoryItem*>>)
+Inventory::Inventory(std::map<int, std::vector<Collectable*>>)
 {
 }
 
@@ -14,23 +14,26 @@ Inventory::~Inventory()
 	printf("INVENTORY DESTRUCTOR CALLED\n");
 
 	//Freeing the memory allocated on the heap
-	for (auto& bag : _bags)
+	/*for (auto& bag : _bags)
 		for (auto& item : bag.second.second)
 		{
-			delete item;
-			item = nullptr;
-		}
+			if (item)
+			{
+				delete item;
+				item = nullptr;
+			}
+		}*/
 }
 
 // Return the stored item at a slot of a bag
-InventoryItem* Inventory::GetItem(int ID, int slotNumber)
+Collectable* Inventory::GetItem(int ID, int slotNumber)
 {
 	return _bags[ID].second[slotNumber];
 }
 
 
 // Remove a stored item (when we know which item it is)
-bool Inventory::RemoveItem(InventoryItem* item)
+bool Inventory::RemoveItem(Collectable* item)
 {
 	// Check if the corresponding bag exists
 	if (IsBagExist(item->_ID))
@@ -79,7 +82,7 @@ bool Inventory::IsAnyBagAlreadyOpened()
 }
 
 // Add an item at the corresponding bag (decided with ID)
-bool Inventory::AddItem(InventoryItem* item)
+bool Inventory::AddItem(Collectable* item)
 {
 	if (!item)
 		return false;

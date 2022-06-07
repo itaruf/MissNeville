@@ -5,7 +5,6 @@
 #include "Collectable.h"
 #include "Page.h"
 #include <vector>
-#include "InventoryItem.h"
 #include <unordered_map>
 
 // Class to define an inventory with bags and slots
@@ -18,17 +17,17 @@ protected:
 public:
 	// Allow the Player class to access Inventory members
 	friend class Player;
-	std::unordered_map<int, std::pair<bool, std::vector<InventoryItem*>>> _bags;
+	std::unordered_map<int, std::pair<bool, std::vector<Collectable*>>> _bags;
 	Inventory();
-	Inventory(std::map<int, std::vector<InventoryItem*>>);
+	Inventory(std::map<int, std::vector<Collectable*>>);
 	~Inventory();
 
-	bool AddItem(InventoryItem* item);
-	bool RemoveItem(InventoryItem* item);
+	bool AddItem(Collectable* item);
+	bool RemoveItem(Collectable* item);
 	bool IsBagExist(int ID);
 	bool IsBagOpened(int ID);
 	bool IsAnyBagAlreadyOpened();
-	InventoryItem* GetItem(int ID, int slotNumber);
+	Collectable* GetItem(int ID, int slotNumber);
 };
 
 #endif

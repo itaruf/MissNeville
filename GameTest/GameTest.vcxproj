@@ -124,8 +124,6 @@
     <ClInclude Include="ICollectable.h" />
     <ClInclude Include="IInteractive.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="InventoryItem.h" />
-    <ClInclude Include="InvPage.h" />
     <ClInclude Include="Collectable.h" />
     <ClInclude Include="Page.h" />
     <ClInclude Include="Scene.h" />
@@ -157,8 +155,6 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="InventoryItem.cpp" />
-    <ClCompile Include="InvPage.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Page.cpp" />
     <ClCompile Include="Scene.cpp" />

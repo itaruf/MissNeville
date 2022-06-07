@@ -61,12 +61,6 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryItem.cpp">
-      <Filter>Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="InvPage.cpp">
-      <Filter>Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2D.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
@@ -169,12 +163,6 @@
       <Filter>Actors</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
-      <Filter>Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryItem.h">
-      <Filter>Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="InvPage.h">
       <Filter>Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Vector2D.h">
