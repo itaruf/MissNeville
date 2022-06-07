@@ -33,12 +33,12 @@ void StateInventory::Render()
 
 	auto bag = _player->_inventory->_bags[0];
 	
-	float x = 700;
-	float y = 300;
+	float x = 800;
+	float y = 400;
 
-	float widthOff = 25;
-	float width = 4;
-	float height = 3;
+	float widthOff = 10;
+	float width = 35;
+	float height = 35;
 	float heightOff = 50;
 	size_t size = bag.second.size();
 
@@ -47,51 +47,51 @@ void StateInventory::Render()
 		if (i % 3 == 0)
 		{
 			y -= heightOff;
-			x = 700;
-			widthOff = 15;
+			x = 800;
 		}
 
 		// Upper line
 		App::DrawLine(
-			x + widthOff,
+			x,
 			y,
-			x + width * widthOff,
+			x + width,
 			y,
 			1, 1, 1);
 
 		// Left Line
 		App::DrawLine(
-			x + widthOff,
-			y - heightOff + widthOff,
-			x + widthOff,
-			y - heightOff + height * widthOff,
+			x,
+			y,
+			x,
+			y - height,
 			1, 1, 1);
 
 		// Right Line
 		App::DrawLine(
-			x + width * widthOff,
-			y - heightOff + widthOff,
-			x + width * widthOff,
-			y - heightOff + height * widthOff,
+			x + width,
+			y,
+			x + width,
+			y - height,
 			1, 1, 1);
 
 		// Down line
 		App::DrawLine(
-			x + widthOff,
-			y - heightOff + widthOff,
-			x + width * widthOff,
-			y - heightOff + widthOff,
+			x,
+			y - height,
+			x + width,
+			y - height,
 			1, 1, 1);
 
 		//App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Test");
 
-		if (bag.second[i])
-		{
-			bag.second[i]->SetPosition(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff) / 2));
-			bag.second[i]->GetSprite()->Draw();
-		}
+		//if (bag.second[i])
+		//{
+		//	// bag.second[i]->SetPosition(((x + widthOff) + (x + width * widthOff)) / 2, (y - heightOff + height * widthOff));
+		//	bag.second[i]->SetPosition(((x + widthOff) + (x + width * widthOff)) / 2, (y - height * heightOff));
+		//	bag.second[i]->GetSprite()->Draw();
+		//}
 
-		x = x + width * widthOff;
+		x = x + width + widthOff;
 	}
 }
 
