@@ -141,13 +141,13 @@ void StateInventory::Select()
 	if (!bag.second[_currentSlot])
 	{
 		/*std::cout << "slot " << _currentSlot << " is empty" << std::endl;*/
-		App::Print(250, 250,  GetChar(_currentSlot).c_str());
+		App::Print(800, 370, GetChar(_currentSlot).c_str());
 		/*App::Print(250, 250, "TEST");*/
 		return;
 	}
 
 	/*std::cout << "slot " << _currentSlot << " " << bag.second[_currentSlot]->GetName() << std::endl;*/
-	App::Print(250, 250, bag.second[_currentSlot]->GetName().c_str());
+	App::Print(800, 370, bag.second[_currentSlot]->GetName().c_str());
 	/*App::Print(250, 250, "TEST");*/
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
