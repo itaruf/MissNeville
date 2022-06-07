@@ -181,8 +181,8 @@ bool Player::Interact(Collectable* collectable)
 				_inventory->_bags[collectable->_ID].second[i] = collectable;
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
-				GameState::_currentScene->RemoveActor(collectable);
-				collectable = nullptr;
+				/*GameState::_currentScene->RemoveActor(collectable);*/
+				/*collectable = nullptr;*/
 				return true;
 			}
 		}
@@ -228,16 +228,16 @@ void Player::CloseBag(int ID)
 void Player::GoToBagSlot(int ID, int slotNumber)
 {
 	// Check if the bag exists
-	if (_inventory->IsBagExist(ID))
-	{
-		// Check if the bag is opened)
-		if (_inventory->IsBagOpened(ID))
-		{
-			// Check if an item is stored at the specific slot
-			if (_inventory->GetItem(ID, slotNumber))
-				std::cout << _inventory->GetItem(ID, slotNumber)->_description << std::endl;
-			else 
-				std::cout << "No item found at slot " << slotNumber << std::endl;
-		}
-	}
+	if (!_inventory->IsBagExist(ID))
+		return;
+
+	// Check if the bag is opened)
+	if (!_inventory->IsBagOpened(ID))
+		return;
+
+	// Check if an item is stored at the specific slot
+	if (_inventory->GetItem(ID, slotNumber))
+		std::cout << _inventory->GetItem(ID, slotNumber)->UseItem() << std::endl;
+	else
+		std::cout << "No item found at slot " << slotNumber << std::endl;
 }

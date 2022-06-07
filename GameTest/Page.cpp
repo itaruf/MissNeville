@@ -12,15 +12,6 @@ Page::~Page()
 
 bool Page::UseItem()
 {
-	return false;
 	std::cout << _description << std::endl;
+	return true;
 }
-
-//// return the associated item
-//InventoryItem* Page::Collect()
-//{
-//	/*std::string description{ "page" };*/
-//	/*return new InvPage(InventoryItem::Usability::Usable, 0, description);*/
-//
-//	return _invItem;
-//}
