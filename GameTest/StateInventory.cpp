@@ -11,14 +11,19 @@ StateInventory::~StateInventory()
 
 void StateInventory::Enter()
 {
+	_currentSlot = 0;
 }
 
 void StateInventory::Update()
 {
+	// Navigation in the bag
+	Navigation();
 }
 
 void StateInventory::Render()
 {
+	Select();
+
 	auto player = GameState::_player;
 	auto bag = player->_inventory->_bags[0];
 	
@@ -86,4 +91,56 @@ void StateInventory::Render()
 
 void StateInventory::Exit()
 {
+	_currentSlot = 0;
+}
+
+void StateInventory::Navigation()
+{
+	auto player = GameState::_player;
+	auto bag = player->_inventory->_bags[0];
+
+	// Right navigation
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+	{
+		// We already are at the end of the bag
+		if (_currentSlot >= player->_inventory->GetNbSlotBag() - 1)
+			return;
+
+		_currentSlot++;
+	}
+
+	// Left navigation
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+	{
+		// We already are at the beginning of the bag
+		if (_currentSlot <= 0)
+			return;
+
+		_currentSlot--;
+	}
+
+	/*std::cout << _currentSlot << std::endl;*/
+}
+
+void StateInventory::Select()
+{
+	auto player = GameState::_player;
+	auto bag = player->_inventory->_bags[0];
+
+	if (!bag.second[_currentSlot])
+	{
+		/*std::cout << "slot " << _currentSlot << " is empty" << std::endl;*/
+		App::Print(250, 250,  GetChar(_currentSlot).c_str());
+		/*App::Print(250, 250, "TEST");*/
+		return;
+	}
+
+	/*std::cout << "slot " << _currentSlot << " " << bag.second[_currentSlot]->GetName() << std::endl;*/
+	App::Print(250, 250, bag.second[_currentSlot]->GetName().c_str());
+	/*App::Print(250, 250, "TEST");*/
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	{
+		bag.second[_currentSlot]->UseItem();
+	}
 }

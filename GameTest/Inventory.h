@@ -28,6 +28,16 @@ public:
 	bool IsBagOpened(int ID);
 	bool IsAnyBagAlreadyOpened();
 	Collectable* GetItem(int ID, int slotNumber);
+
+	inline static constexpr int GetNbSlotBag()
+	{
+		return _nbSlotBag;
+	}
+
+	inline static constexpr int GetNbBags()
+	{
+		return _nbBags;
+	}
 };
 
 #endif

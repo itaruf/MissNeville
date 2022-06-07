@@ -99,7 +99,7 @@ void Player::MoveHorizontally()
 void Player::BagAction()
 {
 	// BAG 0
-	if (App::IsKeyPressed('1') && !_inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !_inventory->IsBagOpened(0))
+	/*if (App::IsKeyPressed('1') && !_inventory->IsBagOpened(0) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_UP, true) && !_inventory->IsBagOpened(0))
 		OpenBag(0);
 
 	else if (_inventory->IsBagOpened(0))
@@ -114,7 +114,7 @@ void Player::BagAction()
 			GoToBagSlot(0, 2);
 		else if (App::IsKeyPressed('4') || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
 			GoToBagSlot(0, 3);
-	}
+	}*/
 }
 
 // Player's main function to interact with other actors and trigger their response to the interaction

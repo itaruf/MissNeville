@@ -54,6 +54,7 @@ void GameState::SwitchState()
 			std::cout << "Inventory State" << std::endl;
 			_state = State::INVENTORY;
 			_currentState = _gameStates[1];
+			_player->OpenBag(0);
 		}
 		break;
 
@@ -72,7 +73,10 @@ void GameState::SwitchState()
 		{
 			std::cout << "Regular State" << std::endl;
 			_state = State::REGULAR;
+			_currentState->Exit();
 			_currentState = _gameStates[0];
+			_player->CloseBag(0);
+
 		}
 		break;
 	default:

@@ -21,7 +21,7 @@ void StateRegular::Update()
 		_player->MoveVertically();
 		_player->IsMoving();
 		_player->BagAction();
-		_player->OnCollision();
+		_player->Interaction();
 	}
 }
 
