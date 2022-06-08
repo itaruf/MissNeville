@@ -82,6 +82,18 @@
     <ClCompile Include="StateRegular.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
+    <ClCompile Include="Hall.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Library.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Lounge.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -188,6 +200,18 @@
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Hall.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Library.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Lounge.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

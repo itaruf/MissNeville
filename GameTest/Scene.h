@@ -22,11 +22,14 @@ protected:
 	int _ID;
 	CSimpleSprite* _background{ nullptr };
 	std::vector<Actor*> _actors;
+
+public:
+
 	Scene* NScene{ nullptr };
 	Scene* EScene{ nullptr };
 	Scene* WScene{ nullptr };
 	Scene* SScene{ nullptr };
-public:
+
 	Scene(int ID, std::vector<Actor*> actors);
 	Scene(int ID);
 

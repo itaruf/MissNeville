@@ -112,7 +112,10 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="EState.h" />
     <ClInclude Include="GameStateController.h" />
+    <ClInclude Include="Hall.h" />
     <ClInclude Include="IDialogue.h" />
+    <ClInclude Include="Library.h" />
+    <ClInclude Include="Lounge.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Collision.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Collectable.h" />
     <ClInclude Include="Page.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="StateDialogue.h" />
     <ClInclude Include="StateInventory.h" />
@@ -147,6 +151,9 @@
     <ClCompile Include="CandlePuzzle.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameStateController.cpp" />
+    <ClCompile Include="Hall.cpp" />
+    <ClCompile Include="Library.cpp" />
+    <ClCompile Include="Lounge.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -157,6 +164,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Page.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="StateDialogue.cpp" />
     <ClCompile Include="StateInventory.cpp" />

@@ -68,20 +68,31 @@ void Init()
 	gameState = std::make_shared<GameState>();
 	gameState->_state = State::REGULAR;
 
-	/*Setting up the first scene*/
+	/*Scenes*/
 	Entrance* entrance = new Entrance{ 0, nullptr };
 	Lounge* lounge = new Lounge{ 0 };
 	Room* room = new Room{ 0 };
 	Hall* hall = new Hall{ 0 };
 	Library* library = new Library{ 0 };
 
-	gameState->_currentScene = new Entrance(0, nullptr);
+
+	/*Linking scenes*/
+	entrance->NScene = hall;
+	lounge->EScene = hall;
+	room->SScene = hall;
+	library->WScene = hall;
+
+	hall->NScene = room;
+	hall->WScene = lounge;
+	hall->SScene = entrance;
+	hall->EScene = library;
+
+
+	/*Setting up the first scene*/
+	gameState->_currentScene = entrance;
 	gameState->_currentScene->Init();
 
 	/*Other scenes*/
-
-
-
 	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
 	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
 	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
