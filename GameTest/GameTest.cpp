@@ -47,6 +47,10 @@ class StateDialogue;
 
 enum class State;
 #include "EState.h"
+#include "Lounge.h"
+#include "Room.h"
+#include "Hall.h"
+#include "Library.h"
 
 std::shared_ptr<GameState> gameState;
 
@@ -65,8 +69,18 @@ void Init()
 	gameState->_state = State::REGULAR;
 
 	/*Setting up the first scene*/
+	Entrance* entrance = new Entrance{ 0, nullptr };
+	Lounge* lounge = new Lounge{ 0 };
+	Room* room = new Room{ 0 };
+	Hall* hall = new Hall{ 0 };
+	Library* library = new Library{ 0 };
+
 	gameState->_currentScene = new Entrance(0, nullptr);
 	gameState->_currentScene->Init();
+
+	/*Other scenes*/
+
+
 
 	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
 	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));

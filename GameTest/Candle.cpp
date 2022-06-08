@@ -24,9 +24,9 @@ void Candle::Interact()
 		_enlighted = true;
 		_sprite->SetFrame(1);
 	}
-	/*else
+	else
 	{
 		_enlighted = false;
 		_sprite->SetFrame(0);
-	}*/
+	}
 }
