@@ -8,3 +8,8 @@ TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* po
 TriggerScene::~TriggerScene()
 {
 }
+
+void TriggerScene::OnOverlap()
+{
+	GameState::_currentScene = _scene;
+}

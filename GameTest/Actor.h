@@ -6,8 +6,6 @@
 class Collision;
 #include "Collision.h"
 #include "App/SimpleSprite.h"
-class Scene;
-#include "Scene.h"
 #include <memory>
 #include "EDirection.h"
 #include "EMobility.h"

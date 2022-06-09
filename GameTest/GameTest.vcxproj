@@ -136,6 +136,8 @@
     <ClInclude Include="StateRegular.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Trigger.h" />
+    <ClInclude Include="TriggerScene.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
@@ -173,6 +175,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Trigger.cpp" />
+    <ClCompile Include="TriggerScene.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>

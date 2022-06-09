@@ -109,6 +109,9 @@ void Entrance::Init()
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 
+	/*TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", nullptr, new Vector2D(0, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16));
+	AddActor(loungeTrigger);*/
+
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();
 }

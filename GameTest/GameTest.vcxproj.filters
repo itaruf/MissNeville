@@ -94,6 +94,12 @@
     <ClCompile Include="Lounge.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerScene.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -212,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="Lounge.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerScene.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
