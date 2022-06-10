@@ -50,22 +50,22 @@ void Init()
 
 	/*Scenes*/
 	Entrance* entrance = new Entrance{ 0, nullptr };
-	Lounge* lounge = new Lounge{ 0 };
-	Room* room = new Room{ 0 };
-	Hall* hall = new Hall{ 0 };
-	Library* library = new Library{ 0 };
+	Lounge* lounge = new Lounge{ 3 };
+	Room* room = new Room{ 4 };
+	Hall* hall = new Hall{ 1 };
+	Library* library = new Library{ 2 };
 
 
 	/*Linking scenes*/
-	entrance->NScene = hall;
-	lounge->EScene = hall;
-	room->SScene = hall;
-	library->WScene = hall;
+	entrance->_NScene = hall;
+	lounge->_EScene = hall;
+	room->_SScene = hall;
+	library->_WScene = hall;
 
-	hall->NScene = room;
-	hall->WScene = lounge;
-	hall->SScene = entrance;
-	hall->EScene = library;
+	hall->_NScene = room;
+	hall->_WScene = lounge;
+	hall->_SScene = entrance;
+	hall->_EScene = library;
 
 
 	/*Setting up the first scene*/
@@ -126,6 +126,7 @@ void Render()
 		return;
 
 	gameState->_currentScene->Render();
+	App::Print(800, 620, ("Scene : " + GetChar(gameState->_currentScene->GetID())).c_str());
 	App::Print(800, 600, ("State : " + gameState->PrintState()).c_str());
 	gameState->_currentState->Render();
 

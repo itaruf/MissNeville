@@ -49,22 +49,22 @@ void Entrance::Init()
 
 	/*Initiating Props */
 
-	auto wall = new Actor("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(64 * 2, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
+	auto wall = new Actor("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(128, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
 	wall->GetSprite()->SetFrame(1);
 	wall->GetSprite()->SetScale(3);
 	AddActor(wall);
 
-	auto wall2 = new Actor("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
+	auto wall2 = new Actor("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, 128), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
 	wall2->GetSprite()->SetFrame(1);
 	wall2->GetSprite()->SetScale(3);
 	AddActor(wall2);
 
-	auto wall3 = new Actor("wall3", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
+	auto wall3 = new Actor("wall3", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - 128), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
 	wall3->GetSprite()->SetFrame(1);
 	wall3->GetSprite()->SetScale(3);
 	AddActor(wall3);
 
-	auto wall4 = new Actor("wall4", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - 64 * 2, APP_VIRTUAL_HEIGHT - 64 * 2), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
+	auto wall4 = new Actor("wall4", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - 128, APP_VIRTUAL_HEIGHT - 128), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
 	wall4->GetSprite()->SetFrame(1);
 	wall4->GetSprite()->SetScale(3);
 	AddActor(wall4);
@@ -109,10 +109,17 @@ void Entrance::Init()
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 
-	/*TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(0, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16));
+	TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(128 + 24, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16));
 	loungeTrigger->GetSprite()->SetFrame(1);
-	loungeTrigger->GetSprite()->SetScale(1);*/
-	/*AddActor(loungeTrigger);*/
+	loungeTrigger->GetSprite()->SetScale(1);
+	AddActor(loungeTrigger);
+	loungeTrigger->_scene = _WScene;
+
+	TriggerScene* hallTrigger = new TriggerScene("Hall Trigger", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 128 - 24), new Collision(Collision::ColliderType::Overlap, 16, 16));
+	hallTrigger->GetSprite()->SetFrame(1);
+	hallTrigger->GetSprite()->SetScale(1);
+	AddActor(hallTrigger);
+	hallTrigger->_scene = _NScene;
 
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();
@@ -125,8 +132,16 @@ void Entrance::Update(float deltaTime)
 	// Updating the sprites of all the actors present in the scene
 	for (const auto& item : _actors)
 	{
-		if (item)
-			item->GetSprite()->Update(deltaTime);
+		if (!item)
+			continue;
+
+		item->GetSprite()->Update(deltaTime);
+
+		auto tmp = dynamic_cast<TriggerScene*>(item);
+		if (!tmp)
+			continue;
+
+		tmp->OnOverlap();
 	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))

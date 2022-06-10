@@ -28,10 +28,10 @@ protected:
 
 public:
 
-	Scene* NScene{ nullptr };
-	Scene* EScene{ nullptr };
-	Scene* WScene{ nullptr };
-	Scene* SScene{ nullptr };
+	Scene* _NScene{ nullptr };
+	Scene* _EScene{ nullptr };
+	Scene* _WScene{ nullptr };
+	Scene* _SScene{ nullptr };
 
 	Scene(int ID, std::vector<Actor*> actors);
 	Scene(int ID);
