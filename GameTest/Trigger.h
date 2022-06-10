@@ -8,7 +8,7 @@ class Trigger : public Actor
 {
 public:
 	Trigger(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
-	~Trigger();
+	virtual ~Trigger();
 
 	virtual void OnOverlap() = 0;
 };

@@ -28,6 +28,7 @@ protected:
 
 public:
 
+	bool initialized{ false };
 	Scene* _NScene{ nullptr };
 	Scene* _EScene{ nullptr };
 	Scene* _WScene{ nullptr };
@@ -45,9 +46,9 @@ public:
 	void AddActor(Actor* actor);
 	bool RemoveActor(Collectable* collectable);
 
-	virtual void Init() = 0;
+	virtual bool Init();
 	virtual void Update(float deltaTime);
-	virtual void Render() = 0;
+	virtual void Render();
 	virtual bool IsRoomCleared() = 0;
 };
 

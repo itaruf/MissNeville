@@ -22,6 +22,9 @@ void TriggerScene::OnOverlap()
 	auto p = GameState::_player;
 	auto v = p->GetPosition();
 
+	if (!v)
+		return;
+
 	if (
 		_collider->isColliding(p, this, v->_x, v->_y + p->GetMovementSpeed()) ||
 		_collider->isColliding(p, this, v->_x, v->_y - p->GetMovementSpeed()) ||
@@ -35,5 +38,9 @@ void TriggerScene::OnOverlap()
 			return;
 
 		GameState::_currentScene = _scene;
+		if (!GameState::_currentScene->Init())
+			std::cout << GameState::_currentScene->GetID() << " Initialized" << std::endl;
+		else
+			std::cout << GameState::_currentScene->GetID() << " Already Initialized" << std::endl;
 	}
 }

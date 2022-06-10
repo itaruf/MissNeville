@@ -13,8 +13,9 @@ Library::~Library()
 {
 }
 
-void Library::Init()
+bool Library::Init()
 {
+	return true;
 }
 
 void Library::Update(float deltaTime)

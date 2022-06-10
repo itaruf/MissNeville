@@ -13,8 +13,9 @@ Lounge::~Lounge()
 {
 }
 
-void Lounge::Init()
+bool Lounge::Init()
 {
+	return true;
 }
 
 void Lounge::Update(float deltaTime)

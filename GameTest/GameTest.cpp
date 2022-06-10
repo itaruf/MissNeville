@@ -73,9 +73,9 @@ void Init()
 	gameState->_currentScene->Init();
 
 	/*Other scenes*/
-	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateRegular));
-	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateInventory));
-	gameState->_gameStates.emplace_back(dynamic_cast<GameStateController*>(stateDialogue));
+	gameState->_gameStates.emplace_back(stateRegular);
+	gameState->_gameStates.emplace_back(stateInventory);
+	gameState->_gameStates.emplace_back(stateDialogue);
 	gameState->_currentState = stateRegular;
 
 	/*Instantiation du personnage*/

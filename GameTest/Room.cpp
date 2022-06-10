@@ -13,8 +13,9 @@ Room::~Room()
 {
 }
 
-void Room::Init()
+bool Room::Init()
 {
+	return true;
 }
 
 void Room::Update(float deltaTime)

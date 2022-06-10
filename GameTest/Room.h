@@ -19,7 +19,7 @@ public:
 	Room(int ID);
 	~Room();
 
-	void Init() override;
+	bool Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;

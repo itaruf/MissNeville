@@ -46,11 +46,46 @@ std::vector<Actor*>& Scene::GetActors()
 	return _actors;
 }
 
+bool Scene::Init()
+{
+	return initialized;
+}
+
 // If we want to setup a background
 void Scene::Update(float deltaTime)
 {
 	if (_background)
 		_background->Draw();
+
+	// Updating the sprites of all the actors present in the scene
+	for (const auto& item : _actors)
+	{
+		if (!item)
+			continue;
+
+		item->GetSprite()->Update(deltaTime);
+
+		auto tmp = dynamic_cast<Trigger*>(item);
+		if (!tmp)
+			continue;
+
+		tmp->OnOverlap();
+	}
+}
+
+void Scene::Render()
+{
+	for (const auto& item : _actors)
+	{
+		if (!item)
+			continue;
+		if (dynamic_cast<Collectable*>(item) && dynamic_cast<Collectable*>(item)->itemized)
+			continue;
+		// Updating the sprites
+		item->GetSprite()->Draw();
+		// Updating the colliders
+		item->GetCollider()->DrawCollision(item, 50, 50, 50);
+	}
 }
 
 // Remove an actor from the scene
@@ -79,7 +114,7 @@ bool Scene::RemoveActor(Collectable* collectable)
 		return false;
 
 	// Looking for the actor to delete
-	auto it = std::find(_actors.begin(), _actors.end(), dynamic_cast<Actor*>(collectable));
+	auto it = std::find(_actors.begin(), _actors.end(), collectable);
 
 	if (it == _actors.end())
 		return false;

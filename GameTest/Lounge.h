@@ -19,7 +19,7 @@ public:
 	Lounge(int ID);
 	~Lounge();
 
-	void Init() override;
+	bool Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;

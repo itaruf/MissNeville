@@ -26,8 +26,13 @@ Entrance::~Entrance()
 }
 
 // WIP - Initialization of the entrance scene 
-void Entrance::Init()
+bool Entrance::Init()
 {
+	// Init only once
+	if (Scene::Init())
+		return true;
+
+	initialized = true;
 	/*Background First*/
 	/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
 	{ 
@@ -123,26 +128,13 @@ void Entrance::Init()
 
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();
+
+	return false;
 }
 
 void Entrance::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
-
-	// Updating the sprites of all the actors present in the scene
-	for (const auto& item : _actors)
-	{
-		if (!item)
-			continue;
-
-		item->GetSprite()->Update(deltaTime);
-
-		auto tmp = dynamic_cast<TriggerScene*>(item);
-		if (!tmp)
-			continue;
-
-		tmp->OnOverlap();
-	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
 	{
@@ -155,17 +147,7 @@ void Entrance::Update(float deltaTime)
 
 void Entrance::Render()
 {
-	for (const auto& item : _actors)
-	{
-		if (!item)
-			continue;
-		if (dynamic_cast<Collectable*>(item) && dynamic_cast<Collectable*>(item)->itemized)
-			continue;
-		// Updating the sprites
-		item->GetSprite()->Draw();
-		// Updating the colliders
-		item->GetCollider()->DrawCollision(item, 50, 50, 50);
-	}
+	Scene::Render();
 }
 
 bool Entrance::IsRoomCleared()
