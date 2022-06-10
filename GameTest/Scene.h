@@ -6,6 +6,7 @@
 #include <vector>
 #include "Puzzle.h"
 #include "App/app.h"
+#include "Utilities.h"
 
 class Actor;
 #include "Actor.h"

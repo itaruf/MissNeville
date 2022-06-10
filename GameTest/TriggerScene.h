@@ -10,7 +10,8 @@ class TriggerScene : public Trigger
 {
 public:
 	Scene* _scene;
-	TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
+	Vector2D* _playerPos;
+	TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* scene, Vector2D* playerPos);
 	~TriggerScene();
 
 	void OnOverlap() override;

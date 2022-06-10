@@ -3,34 +3,20 @@
 //------------------------------------------------------------------------
 #include "stdafx.h"
 //------------------------------------------------------------------------
-#include <windows.h> 
-#include <math.h>  
-#include <numeric>
-#include <iterator>
-#include <algorithm>
-#include <vector>
-#include <type_traits>
-#include <cmath>
-#include <map>
-
 #include "Player.h"
-#include "Scene.h"
-#include "Collision.h"
-#include "Collectable.h"
 #include "GameState.h"	
-#include "Entrance.h"
-#include "Inventory.h"
+
 #include "StateRegular.h"
 #include "StateInventory.h"
+
 #include "StateDialogue.h"
 #include "EState.h"
+#include "Entrance.h"
 #include "Lounge.h"
 #include "Room.h"
 #include "Hall.h"
 #include "Library.h"
 #include "Utilities.h"
-
-//#include "csv.h"
 
 std::shared_ptr<GameState> gameState;
 
@@ -103,7 +89,6 @@ void Init()
 
 void Update(float deltaTime)
 { 
-
 	if (gameState->_currentScene)
 	{
 		gameState->SwitchState();

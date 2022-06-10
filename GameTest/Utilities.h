@@ -3,6 +3,10 @@
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
+#define TRIGGER_OFFSET (24)
+#define WALL_OFFSET (128)
+#define NEW_PLAYER_POS_OFFSET (32)
+
 #include <string>
 
 template<
@@ -29,4 +33,6 @@ struct Color
     float g = 0;
     float b = 0;
 };
+
+
 #endif

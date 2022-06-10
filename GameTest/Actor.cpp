@@ -92,7 +92,8 @@ void Actor::SetPosition(Vector2D* position)
 		return;
 
 	_sprite->SetPosition(_position->_x, _position->_y);
-	_position = GetPosition();
+	_position->_x = position->_x;
+	_position->_y = position->_y;
 }
 
 // Set the position of the actor
