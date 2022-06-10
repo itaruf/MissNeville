@@ -4,7 +4,6 @@
 
 #include "Character.h"
 #include "app\app.h"
-#include "EDirection.h"
 #include "Candle.h"
 #include "Inventory.h"
 #include "ICollectable.h"

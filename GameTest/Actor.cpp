@@ -48,8 +48,15 @@ CSimpleSprite* Actor::GetSprite()
 // Set the sprite of the actor
 void Actor::SetSprite(CSimpleSprite* sprite)
 {
+	if (!sprite)
+		return;
+
 	_sprite = sprite;
 	// Immediately Set the position of the sprite and thus, of the actor
+
+	if (!_position)
+		return;
+
 	_sprite->SetPosition(_position->_x, _position->_y);
 }
 
@@ -64,6 +71,12 @@ void Actor::SetSprite(CSimpleSprite& sprite)
 // Get the current position of the actor
 Vector2D* Actor::GetPosition()
 {
+	if (!_sprite)
+		return nullptr;
+
+	if (!_position)
+		return nullptr;
+
 	// The sprite of the actor manages its position
 	_sprite->GetPosition(_position->_x, _position->_y);
 	return _position;
@@ -72,6 +85,12 @@ Vector2D* Actor::GetPosition()
 // Set the position of the actor
 void Actor::SetPosition(Vector2D* position)
 {
+	if (!_sprite)
+		return;
+
+	if (!position)
+		return;
+
 	_sprite->SetPosition(_position->_x, _position->_y);
 	_position = GetPosition();
 }
@@ -79,6 +98,9 @@ void Actor::SetPosition(Vector2D* position)
 // Set the position of the actor
 void Actor::SetPosition(float x, float y)
 {
+	if (!_sprite)
+		return;
+
 	_sprite->SetPosition(x, y);
 	_position->_x = x;
 	_position->_y = y;

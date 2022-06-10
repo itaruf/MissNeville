@@ -5,23 +5,6 @@
 //------------------------------------------------------------------------
 #include <windows.h> 
 #include <math.h>  
-//------------------------------------------------------------------------
-//#include "app\app.h"
-//------------------------------------------------------------------------
-#include "Player.h"
-#include "Scene.h"
-#include "Collision.h"
-#include "Collectable.h"
-
-class GameState;
-#include "GameState.h"	
-
-#include "Entrance.h"
-#include "Inventory.h"
-//------------------------------------------------------------------------
-// Eample data....
-//------------------------------------------------------------------------
-
 #include <numeric>
 #include <iterator>
 #include <algorithm>
@@ -29,28 +12,25 @@ class GameState;
 #include <type_traits>
 #include <cmath>
 #include <map>
-#include "Utilities.h"
 
-//class GameStateController;
-//#include "GameStateController.h"
-
-class StateRegular;
+#include "Player.h"
+#include "Scene.h"
+#include "Collision.h"
+#include "Collectable.h"
+#include "GameState.h"	
+#include "Entrance.h"
+#include "Inventory.h"
 #include "StateRegular.h"
-
-class StateInventory;
 #include "StateInventory.h"
-
-class StateDialogue;
 #include "StateDialogue.h"
-
-//#include "csv.h"
-
-enum class State;
 #include "EState.h"
 #include "Lounge.h"
 #include "Room.h"
 #include "Hall.h"
 #include "Library.h"
+#include "Utilities.h"
+
+//#include "csv.h"
 
 std::shared_ptr<GameState> gameState;
 
