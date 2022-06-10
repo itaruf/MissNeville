@@ -15,7 +15,10 @@ Library::~Library()
 
 bool Library::Init()
 {
-	return true;
+	if (Scene::Init())
+		return true;
+
+	return false;
 }
 
 void Library::Update(float deltaTime)

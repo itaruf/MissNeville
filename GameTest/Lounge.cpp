@@ -15,7 +15,10 @@ Lounge::~Lounge()
 
 bool Lounge::Init()
 {
-	return true;
+	if (Scene::Init())
+		return true;
+
+	return false;
 }
 
 void Lounge::Update(float deltaTime)

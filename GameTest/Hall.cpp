@@ -15,6 +15,9 @@ Hall::~Hall()
 
 bool Hall::Init()
 {
+	if (Scene::Init())
+		return true;
+
 	auto wall = new Actor("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(128, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
 	wall->GetSprite()->SetFrame(1);
 	wall->GetSprite()->SetScale(3);
@@ -34,7 +37,6 @@ bool Hall::Init()
 	wall4->GetSprite()->SetFrame(1);
 	wall4->GetSprite()->SetScale(3);
 	AddActor(wall4);
-
 
 	// Triggers
 	TriggerScene* entranceTrigger = new TriggerScene("Entrance Trigger", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, 128 + 24), new Collision(Collision::ColliderType::Overlap, 16, 16));

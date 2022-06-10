@@ -48,7 +48,12 @@ std::vector<Actor*>& Scene::GetActors()
 
 bool Scene::Init()
 {
-	return initialized;
+	if (!initialized)
+	{
+		initialized = !initialized;
+		return false;
+	}
+	return true;
 }
 
 // If we want to setup a background

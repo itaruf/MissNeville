@@ -7,10 +7,10 @@
 #include "Candle.h"
 #include "GameState.h"
 #include "NPC.h"
-
-class TriggerScene;
 #include "TriggerScene.h";
+
 class GameState;
+
 // Entrance scene 
 class Entrance : public Scene, std::enable_shared_from_this<Entrance>
 {

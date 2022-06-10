@@ -32,7 +32,6 @@ bool Entrance::Init()
 	if (Scene::Init())
 		return true;
 
-	initialized = true;
 	/*Background First*/
 	/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
 	{ 
@@ -114,15 +113,15 @@ bool Entrance::Init()
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 
-	TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(128 + 24, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16));
+	TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(128 + 24, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16));
 	loungeTrigger->GetSprite()->SetFrame(1);
-	loungeTrigger->GetSprite()->SetScale(1);
+	loungeTrigger->GetSprite()->SetScale(2);
 	AddActor(loungeTrigger);
 	loungeTrigger->_scene = _WScene;
 
-	TriggerScene* hallTrigger = new TriggerScene("Hall Trigger", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 128 - 24), new Collision(Collision::ColliderType::Overlap, 16, 16));
+	TriggerScene* hallTrigger = new TriggerScene("Hall Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 128 - 24), new Collision(Collision::ColliderType::Overlap, 16, 16));
 	hallTrigger->GetSprite()->SetFrame(1);
-	hallTrigger->GetSprite()->SetScale(1);
+	hallTrigger->GetSprite()->SetScale(2);
 	AddActor(hallTrigger);
 	hallTrigger->_scene = _NScene;
 

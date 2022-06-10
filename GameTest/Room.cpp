@@ -15,7 +15,10 @@ Room::~Room()
 
 bool Room::Init()
 {
-	return true;
+	if (Scene::Init())
+		return true;
+
+	return false;
 }
 
 void Room::Update(float deltaTime)

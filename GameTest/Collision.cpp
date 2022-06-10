@@ -61,8 +61,8 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 	if (!actor)
 		return;
 
-	if (_colliderType == ColliderType::Overlap)
-		return;
+	/*if (_colliderType == ColliderType::Overlap)
+		return;*/
 
 	// Upper Bound
 	App::DrawLine(
