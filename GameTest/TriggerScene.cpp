@@ -43,8 +43,8 @@ void TriggerScene::OnOverlap()
 	if (!_playerPos)
 		return;
 
-	std::cout << _playerPos->_x << std::endl;
-	std::cout << _playerPos->_y << std::endl;
+	/*std::cout << _playerPos->_x << std::endl;
+	std::cout << _playerPos->_y << std::endl;*/
 
 	p->SetPosition(_playerPos->_x, _playerPos->_y);
 }

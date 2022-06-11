@@ -53,26 +53,6 @@ bool Entrance::Init()
 
 	/*Initiating Props */
 
-	auto wall = new Actor("wall", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
-	wall->GetSprite()->SetFrame(1);
-	wall->GetSprite()->SetScale(3);
-	AddActor(wall);
-
-	auto wall2 = new Actor("wall2", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
-	wall2->GetSprite()->SetFrame(1);
-	wall2->GetSprite()->SetScale(3);
-	AddActor(wall2);
-
-	auto wall3 = new Actor("wall3", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
-	wall3->GetSprite()->SetFrame(1);
-	wall3->GetSprite()->SetScale(3);
-	AddActor(wall3);
-
-	auto wall4 = new Actor("wall4", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
-	wall4->GetSprite()->SetFrame(1);
-	wall4->GetSprite()->SetScale(3);
-	AddActor(wall4);
-
 	auto carpet = new Actor("Carpet", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64));
 	carpet->GetSprite()->SetFrame(1);
 	carpet->GetSprite()->SetScale(3);
@@ -113,11 +93,11 @@ bool Entrance::Init()
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 
-	TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16), _WScene, new Vector2D());
+	/*TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16), _WScene, new Vector2D());
 	loungeTrigger->GetSprite()->SetFrame(1);
 	loungeTrigger->GetSprite()->SetScale(2);
 	AddActor(loungeTrigger);
-	loungeTrigger->_scene = _WScene;
+	loungeTrigger->_scene = _WScene;*/
 
 	TriggerScene* hallTrigger = new TriggerScene("Hall Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(Collision::ColliderType::Overlap, 16, 16), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET));
 	hallTrigger->GetSprite()->SetFrame(1);

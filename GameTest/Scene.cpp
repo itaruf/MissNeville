@@ -50,6 +50,26 @@ bool Scene::Init()
 {
 	if (!initialized)
 	{
+		auto wallLeft = new Actor("wallLeft", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
+		wallLeft->GetSprite()->SetFrame(1);
+		wallLeft->GetSprite()->SetScale(3);
+		AddActor(wallLeft);
+
+		auto wallBot = new Actor("wallBot", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
+		wallBot->GetSprite()->SetFrame(1);
+		wallBot->GetSprite()->SetScale(3);
+		AddActor(wallBot);
+
+		auto wallTop = new Actor("wallTop", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
+		wallTop->GetSprite()->SetFrame(1);
+		wallTop->GetSprite()->SetScale(3);
+		AddActor(wallTop);
+
+		auto wallRight = new Actor("wallRight", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
+		wallRight->GetSprite()->SetFrame(1);
+		wallRight->GetSprite()->SetScale(3);
+		AddActor(wallRight);
+
 		initialized = !initialized;
 		return false;
 	}
