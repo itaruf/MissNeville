@@ -41,8 +41,7 @@ bool Inventory::RemoveItem(Collectable* item)
 	if (it == _bags[0].second.end())
 		return false;
 	
-	// delete the item when found
-	_bags[0].second.erase(it);
+	*it = nullptr;
 	std::cout << item->GetName() << " removed" << std::endl;
 	delete item;
 	return true;
