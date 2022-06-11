@@ -3,13 +3,13 @@
 //------------------------------------------------------------------------
 #include "stdafx.h"
 //------------------------------------------------------------------------
-#include "Player.h"
 #include "GameState.h"	
+#include "Player.h"
 
 #include "StateRegular.h"
 #include "StateInventory.h"
-
 #include "StateDialogue.h"
+
 #include "EState.h"
 #include "Entrance.h"
 #include "Lounge.h"
@@ -53,18 +53,6 @@ void Init()
 	hall->_SScene = entrance;
 	hall->_EScene = library;
 
-
-	/*Setting up the first scene*/
-	/*gameState->_currentScene = entrance;*/
-	gameState->_currentScene = hall;
-	gameState->_currentScene->Init();
-
-	/*Other scenes*/
-	gameState->_gameStates.emplace_back(stateRegular);
-	gameState->_gameStates.emplace_back(stateInventory);
-	gameState->_gameStates.emplace_back(stateDialogue);
-	gameState->_currentState = stateRegular;
-
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
@@ -83,6 +71,17 @@ void Init()
 	stateRegular->_player = player;
 	stateInventory->_player = player;
 	stateDialogue->_player = player;
+
+	/*Setting up the first scene*/
+	/*gameState->_currentScene = entrance;*/
+	gameState->_currentScene = hall;
+	gameState->_currentScene->Init();
+
+	/*Other scenes*/
+	gameState->_gameStates.emplace_back(stateRegular);
+	gameState->_gameStates.emplace_back(stateInventory);
+	gameState->_gameStates.emplace_back(stateDialogue);
+	gameState->_currentState = stateRegular;
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/

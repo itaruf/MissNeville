@@ -3,8 +3,11 @@
 #ifndef CHARACTER_H_
 #define CHARACTER_H_
 
+class GameState;
+#include "GameState.h"
+
 #include "Actor.h"
-//#include "GameState.h"
+
 
 // Class for entities which will be either playable or non-playable such as NPCs
 class Character : public Actor
@@ -24,8 +27,8 @@ public:
 	void SetHP(float value);
 	void SetMovementSpeed(float value);
 
-	/*void MoveVertically();
-	void MoveHorizontally();*/
+	virtual void MoveVertically();
+	virtual void MoveHorizontally();
 };
 
 #endif

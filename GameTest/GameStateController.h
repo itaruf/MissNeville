@@ -3,12 +3,8 @@
 #ifndef GAMESTATECONTROLLER_H_
 #define GAMESTATECONTROLLER_H_
 
-#include <vector>
-
 class Player;
 #include "Player.h"
-
-#include "Utilities.h"
 
 class GameStateController
 {

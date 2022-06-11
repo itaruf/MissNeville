@@ -2,19 +2,10 @@
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 
-class Scene;
-#include "Scene.h"
-
-class Entrance;
 #include "Entrance.h"
-
+class Scene;
 class Player;
-#include "Player.h"
-
 class GameStateController;
-#include "GameStateController.h"
-
-enum class State;
 #include "EState.h"
 
 // Class in charge of managing the current state of the game and navigating through rooms

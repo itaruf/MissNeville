@@ -3,7 +3,6 @@
 #ifndef STATEINVENTORY_H_
 #define STATEINVENTORY_H_
 
-#include "Utilities.h"
 #include "GameStateController.h"
 class StateInventory : public GameStateController
 {

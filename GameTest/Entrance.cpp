@@ -105,11 +105,11 @@ bool Entrance::Init()
 	AddActor(hallTrigger);
 
 
-	//Character* candle{new Character("Candle", App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), new Vector2D(150, 150), new Collision(Collision::ColliderType::Block, 10, 10), 0, 2) };
-	//candle->GetSprite()->SetFrame(0);
-	//candle->GetSprite()->SetScale(1);
-	//candle->SetDirection(Direction::RIGHT);
-	//AddActor(candle);
+	Character* candle{new Character("Candle", App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), new Vector2D(150, 200), new Collision(Collision::ColliderType::Block, 10, 10), 0, 2) };
+	candle->GetSprite()->SetFrame(0);
+	candle->GetSprite()->SetScale(1);
+	candle->SetDirection(Direction::RIGHT);
+	AddActor(candle);
 
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();

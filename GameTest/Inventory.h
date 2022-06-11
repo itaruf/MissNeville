@@ -3,7 +3,6 @@
 #define INVENTORY_H_
 
 #include "Collectable.h"
-#include "Page.h"
 #include <vector>
 #include <unordered_map>
 

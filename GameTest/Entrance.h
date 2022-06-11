@@ -3,18 +3,13 @@
 #define ENTRANCE_H_
 
 #include "Scene.h"
-
 #include "CandlePuzzle.h"
-#include "Candle.h"
-#include "GameState.h"
 #include "TriggerScene.h";
-
 //class Character;
-////#include "Character.h"
+#include "Character.h"
 #include "NPC.h"
 
 class GameState;
-
 // Entrance scene 
 class Entrance : public Scene, std::enable_shared_from_this<Entrance>
 {

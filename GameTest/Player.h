@@ -3,13 +3,9 @@
 #define PLAYER_H_
 
 #include "Character.h"
-#include "app\app.h"
-#include "Candle.h"
 #include "Inventory.h"
 #include "ICollectable.h"
-class GameState;
 #include "GameState.h"
-//class Candle;
 
 // Class for the player character
 class Player : public Character
@@ -22,8 +18,8 @@ public:
 
 	Inventory* _inventory;
 
-	void MoveVertically();
-	void MoveHorizontally();
+	void MoveVertically() override;
+	void MoveHorizontally() override;
 	bool Interact(IInteractive* actor);
 	bool Interact(Collectable* collectable);
 	void OpenBag(int ID);

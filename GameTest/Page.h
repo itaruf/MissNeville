@@ -3,7 +3,6 @@
 #define PAGE_H_
 
 #include "Collectable.h"
-#include "IInteractive.h"
 
 // Class which represents a page which has a specific interaction
 class Page : public Collectable

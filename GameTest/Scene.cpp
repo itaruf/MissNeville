@@ -50,6 +50,8 @@ bool Scene::Init()
 {
 	if (!initialized)
 	{
+		AddActor(GameState::_player);
+
 		auto wallLeft = new Actor("wallLeft", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
 		wallLeft->GetSprite()->SetFrame(1);
 		wallLeft->GetSprite()->SetScale(3);
@@ -96,7 +98,7 @@ void Scene::Update(float deltaTime)
 			continue;
 		}
 
-		if (dynamic_cast<Character*>(item))
+		if (dynamic_cast<Character*>(item) && !dynamic_cast<Player*>(item))
 		{
 			dynamic_cast<Character*>(item)->MoveHorizontally();
 			dynamic_cast<Character*>(item)->MoveVertically();
