@@ -10,7 +10,7 @@ class Candle : public Actor, public IInteractive
 {
 private:
 protected:
-	bool _enlighted = false;
+	bool _enlighted{ false };
 public:
 	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	~Candle();

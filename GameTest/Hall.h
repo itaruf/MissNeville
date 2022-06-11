@@ -3,10 +3,11 @@
 #define HALL_H_
 
 #include "Scene.h"
-#include "CandlePuzzle.h"
+#include "MirrorPuzzle.h"
 #include "Candle.h"
 #include "GameState.h"
 #include "NPC.h"
+#include "MirrorShard.h"
 
 class GameState;
 // Hall scene 
@@ -15,6 +16,7 @@ class Hall : public Scene, std::enable_shared_from_this<Hall>
 private:
 protected:
 public:
+	MirrorPuzzle* _mirrorPuzzle;
 	Hall(int ID, std::vector<Actor*> actors);
 	Hall(int ID);
 	~Hall();

@@ -21,8 +21,8 @@ protected:
 	CSimpleSprite* _sprite;
 	Vector2D* _position;
 	Collision* _collider;
-	Mobility _mobility = defaultMobility;
-	Direction _direction = defaultDirection;
+	Mobility _mobility{ defaultMobility };
+	Direction _direction{ defaultDirection };
 public:
 	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	Actor(Actor* actor);

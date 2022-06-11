@@ -7,7 +7,6 @@ Page::Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collisio
 
 Page::~Page()
 {
-	printf("PAGE DESTRUCTOR CALLED\n");
 }
 
 bool Page::UseItem()

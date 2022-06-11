@@ -1,5 +1,6 @@
 #pragma once
 #ifndef CANDLEPUZZLE_H_
+#define CANDLEPUZZLE_H_
 
 #include "Puzzle.h"
 #include "Candle.h"

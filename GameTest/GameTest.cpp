@@ -55,7 +55,8 @@ void Init()
 
 
 	/*Setting up the first scene*/
-	gameState->_currentScene = entrance;
+	/*gameState->_currentScene = entrance;*/
+	gameState->_currentScene = hall;
 	gameState->_currentScene->Init();
 
 	/*Other scenes*/

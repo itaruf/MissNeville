@@ -100,6 +100,15 @@
     <ClCompile Include="TriggerScene.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="MirrorShard.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="MirrorPuzzle.cpp">
+      <Filter>Puzzles</Filter>
+    </ClCompile>
+    <ClCompile Include="Mirror.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -223,6 +232,15 @@
       <Filter>Actors</Filter>
     </ClInclude>
     <ClInclude Include="TriggerScene.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="MirrorShard.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="MirrorPuzzle.h">
+      <Filter>Puzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="Mirror.h">
       <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>

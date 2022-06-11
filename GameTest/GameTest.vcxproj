@@ -116,6 +116,9 @@
     <ClInclude Include="IDialogue.h" />
     <ClInclude Include="Library.h" />
     <ClInclude Include="Lounge.h" />
+    <ClInclude Include="Mirror.h" />
+    <ClInclude Include="MirrorShard.h" />
+    <ClInclude Include="MirrorPuzzle.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Collision.h" />
@@ -156,6 +159,9 @@
     <ClCompile Include="Hall.cpp" />
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="Lounge.cpp" />
+    <ClCompile Include="Mirror.cpp" />
+    <ClCompile Include="MirrorShard.cpp" />
+    <ClCompile Include="MirrorPuzzle.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Collision.cpp" />
