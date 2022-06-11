@@ -26,7 +26,6 @@ bool Hall::Init()
 	entranceTrigger->GetSprite()->SetScale(1);
 	AddActor(entranceTrigger);
 
-
 	Mirror* mirror{ new Mirror("Mirror", App::CreateSprite(".\\TestData\\Props\\mirror.bmp", 2, 1), new Vector2D(250,250), new Collision(Collision::ColliderType::Block, 16, 16)) };
 	mirror->GetSprite()->SetFrame(1);
 	mirror->GetSprite()->SetScale(0.25);

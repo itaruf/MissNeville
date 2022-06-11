@@ -41,6 +41,7 @@ public:
 	void SetPosition(Vector2D* position);
 	void SetPosition(float x = 0, float y = 0);
 	void SetCollider(Collision* collider);
+	void SetDirection(Direction direction);
 };
 
 #endif

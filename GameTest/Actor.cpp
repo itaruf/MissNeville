@@ -119,6 +119,11 @@ void Actor::SetCollider(Collision* collider)
 	_collider = collider;
 }
 
+void Actor::SetDirection(Direction direction)
+{
+	_direction = direction;
+}
+
 // Get the mobility of the actor (STATIC, MOVABLE)
 const Mobility& Actor::GetMobility()
 {

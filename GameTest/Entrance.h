@@ -3,11 +3,15 @@
 #define ENTRANCE_H_
 
 #include "Scene.h"
+
 #include "CandlePuzzle.h"
 #include "Candle.h"
 #include "GameState.h"
-#include "NPC.h"
 #include "TriggerScene.h";
+
+//class Character;
+////#include "Character.h"
+#include "NPC.h"
 
 class GameState;
 

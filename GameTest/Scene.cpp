@@ -90,11 +90,18 @@ void Scene::Update(float deltaTime)
 
 		item->GetSprite()->Update(deltaTime);
 
-		auto tmp = dynamic_cast<Trigger*>(item);
-		if (!tmp)
+		if (dynamic_cast<Trigger*>(item))
+		{
+			dynamic_cast<Trigger*>(item)->OnOverlap();
 			continue;
+		}
 
-		tmp->OnOverlap();
+		if (dynamic_cast<Character*>(item))
+		{
+			dynamic_cast<Character*>(item)->MoveHorizontally();
+			dynamic_cast<Character*>(item)->MoveVertically();
+			continue;
+		}
 	}
 }
 
