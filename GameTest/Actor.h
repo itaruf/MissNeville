@@ -17,19 +17,19 @@ protected:
 	static constexpr Mobility defaultMobility{ Mobility::STATIC };
 	static constexpr Direction defaultDirection{ Direction::STILL };
 
+	std::string _tag;
 	std::string _name;
 	CSimpleSprite* _sprite;
 	Vector2D* _position;
 	Collision* _collider;
 	Mobility _mobility{ defaultMobility };
-
 	Direction _direction{ defaultDirection };
 
 public:
 	friend class PlayerController;
 	friend class ObjectController;
 
-	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
+	Actor(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr);
 	Actor(Actor* actor);
 	virtual ~Actor();
 
@@ -39,6 +39,7 @@ public:
 	Collision* GetCollider();
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
+	const std::string& GetTag();
 
 	void SetName(std::string name);
 	void SetSprite(CSimpleSprite* sprite);
@@ -47,6 +48,7 @@ public:
 	void SetPosition(float x = 0, float y = 0);
 	void SetCollider(Collision* collider);
 	void SetDirection(Direction direction);
+	void SetTag(std::string&& tag);
 };
 
 #endif

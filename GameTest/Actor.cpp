@@ -124,6 +124,11 @@ void Actor::SetDirection(Direction direction)
 	_direction = direction;
 }
 
+void Actor::SetTag(std::string&& tag)
+{
+	_tag = tag;
+}
+
 // Get the mobility of the actor (STATIC, MOVABLE)
 const Mobility& Actor::GetMobility()
 {
@@ -134,4 +139,9 @@ const Mobility& Actor::GetMobility()
 const Direction& Actor::GetDirection()
 {
 	return _direction;
+}
+
+const std::string& Actor::GetTag()
+{
+	return _tag;
 }
