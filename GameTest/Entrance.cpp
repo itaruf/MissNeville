@@ -104,8 +104,8 @@ bool Entrance::Init()
 	hallTrigger->GetSprite()->SetScale(2);
 	AddActor(hallTrigger);
 
-
-	Character* candle{new Character("Candle", App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), new Vector2D(150, 200), new Collision(Collision::ColliderType::Block, 10, 10), 0, 2) };
+	ObjectController* objectC{ new ObjectController() };
+	Character* candle{new Character("Candle", App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), new Vector2D(150, 200), new Collision(Collision::ColliderType::Block, 10, 10), 0, 2, objectC) };
 	candle->GetSprite()->SetFrame(0);
 	candle->GetSprite()->SetScale(1);
 	candle->SetDirection(Direction::RIGHT);

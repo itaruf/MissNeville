@@ -17,8 +17,8 @@ void StateRegular::Update()
 {
 	if (_player)
 	{
-		_player->MoveHorizontally();
-		_player->MoveVertically();
+		_player->GetController()->MoveHorizontally(_player);
+		_player->GetController()->MoveVertically(_player);
 		_player->IsMoving();
 		_player->Interaction();
 	}

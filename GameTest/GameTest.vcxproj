@@ -121,6 +121,7 @@
     <ClInclude Include="MirrorShard.h" />
     <ClInclude Include="MirrorPuzzle.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="ObjectController.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="EMobility.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="MirrorShard.cpp" />
     <ClCompile Include="MirrorPuzzle.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="ObjectController.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="PlayerController.cpp" />

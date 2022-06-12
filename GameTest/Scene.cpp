@@ -98,7 +98,12 @@ void Scene::Update(float deltaTime)
 			continue;
 		}
 
-		if (dynamic_cast<Character*>(item) && !dynamic_cast<Player*>(item))
+		auto c = dynamic_cast<Character*>(item);
+
+		if (!c)
+			continue;
+
+		if (c && dynamic_cast<ObjectController*>(c->GetController()))
 		{
 			dynamic_cast<Character*>(item)->MoveHorizontally();
 			dynamic_cast<Character*>(item)->MoveVertically();

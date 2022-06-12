@@ -18,6 +18,9 @@ protected:
 	float _movementSpeed;
 	Controller* _controller;
 public:
+	friend class PlayerController;
+	friend class ObjectController;
+
 	Character(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr, float HP = 0, float movementSpeed = 0, Controller* controller =  nullptr);
 	virtual ~Character();
 

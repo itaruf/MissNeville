@@ -13,6 +13,8 @@ class Player : public Character
 private:
 protected:
 public:
+	friend class PlayerController;
+
 	Player(std::string name = "", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr, float HP = 0, float movementSpeed = 0, Controller* controller = nullptr, Inventory* inventory = nullptr);
 	~Player();
 

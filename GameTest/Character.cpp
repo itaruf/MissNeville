@@ -9,6 +9,9 @@ Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position
 Character::~Character()
 {
 	printf("CHARACTER DESTRUCTOR CALLED\n");
+
+	if (_controller)
+		delete _controller;
 }
 
 // Get the current HP of the character
@@ -46,39 +49,6 @@ void Character::MoveVertically()
 		return;
 
 	_controller->MoveVertically(this);
-	// Setting up the data to match the FORWARDS direction
-	if (_direction == Direction::UP)
-	{
-		_sprite->SetAnimation(_sprite->ANIM_FORWARDS);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			// Preventing the player to collide with themselves
-			if (actor == this)
-				continue;
-			// if the player is about to collide with an actor, then the player doesn't move
-			if (_collider->isColliding(this, actor, _position->_x, _position->_y + _movementSpeed))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x, _position->_y + _movementSpeed);
-
-	}
-
-	else if (_direction == Direction::DOWN)
-	{
-		// Setting up the data to match the BACKWARDS direction
-		_direction = Direction::DOWN;
-		_sprite->SetAnimation(_sprite->ANIM_BACKWARDS);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			if (actor == this)
-				continue;
-			if (_collider->isColliding(this, actor, _position->_x, _position->_y - _movementSpeed))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x, _position->_y - _movementSpeed);
-	}
 }
 
 void Character::MoveHorizontally()
@@ -87,36 +57,6 @@ void Character::MoveHorizontally()
 		return;
 
 	_controller->MoveHorizontally(this);
-
-	if (_direction == Direction::RIGHT)
-	{
-		std::cout << _name << std::endl;
-		// Setting up the data to match the RIGHT direction
-		_sprite->SetAnimation(_sprite->ANIM_RIGHT);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			if (actor == this)
-				continue;
-			if (_collider->isColliding(this, actor, _position->_x + _movementSpeed, _position->_y))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x + _movementSpeed, _position->_y);
-	}
-
-	else if (_direction == Direction::LEFT)
-	{
-		_sprite->SetAnimation(_sprite->ANIM_LEFT);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			if (actor == this)
-				continue;
-			if (_collider->isColliding(this, actor, _position->_x - _movementSpeed, _position->_y))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x - _movementSpeed, _position->_y);
-	}
 }
 
 // Check if the character is currently moving or not

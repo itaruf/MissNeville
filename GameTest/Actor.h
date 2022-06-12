@@ -22,8 +22,13 @@ protected:
 	Vector2D* _position;
 	Collision* _collider;
 	Mobility _mobility{ defaultMobility };
+
 	Direction _direction{ defaultDirection };
+
 public:
+	friend class PlayerController;
+	friend class ObjectController;
+
 	Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	Actor(Actor* actor);
 	virtual ~Actor();

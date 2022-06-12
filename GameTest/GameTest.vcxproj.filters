@@ -115,6 +115,9 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectController.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -253,6 +256,9 @@
       <Filter>Controller</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectController.h">
       <Filter>Controller</Filter>
     </ClInclude>
   </ItemGroup>

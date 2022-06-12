@@ -8,6 +8,9 @@ class Player;
 class GameStateController;
 #include "EState.h"
 
+#include "PlayerController.h"
+#include "ObjectController.h"
+
 // Class in charge of managing the current state of the game and navigating through rooms
 class GameState
 {
