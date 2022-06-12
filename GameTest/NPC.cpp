@@ -2,8 +2,8 @@
 #include "NPC.h"
 #include "StateDialogue.h"
 
-NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) 
-	: Character(name, sprite, position, collider, HP, movementSpeed)
+NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller)
+	: Character(name, sprite, position, collider, HP, movementSpeed, controller)
 {
 }
 

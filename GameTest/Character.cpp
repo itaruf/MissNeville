@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }
+Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }, _controller{controller}
 {
 	/*std::cout << "CHARACTER CONSTRUCTOR CALLED" << std::endl;*/
 }
@@ -15,6 +15,11 @@ Character::~Character()
 const float& Character::GetHP() const
 {
 	return _HP;
+}
+
+Controller* Character::GetController() const
+{
+	return _controller;
 }
 
 // Set the HP of the character
@@ -37,6 +42,10 @@ void Character::SetMovementSpeed(float value)
 
 void Character::MoveVertically()
 {
+	if (!_controller)
+		return;
+
+	_controller->MoveVertically(this);
 	// Setting up the data to match the FORWARDS direction
 	if (_direction == Direction::UP)
 	{
@@ -74,6 +83,11 @@ void Character::MoveVertically()
 
 void Character::MoveHorizontally()
 {
+	if (!_controller)
+		return;
+
+	_controller->MoveHorizontally(this);
+
 	if (_direction == Direction::RIGHT)
 	{
 		std::cout << _name << std::endl;

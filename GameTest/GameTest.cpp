@@ -17,6 +17,8 @@
 #include "Hall.h"
 #include "Library.h"
 #include "Utilities.h"
+#include "Controller.h"
+#include "PlayerController.h"
 
 std::shared_ptr<GameState> gameState;
 
@@ -57,7 +59,8 @@ void Init()
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
 	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
-	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, new Inventory()) };
+	PlayerController* controller{ new PlayerController() };
+	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 
 	/*Player base stats and configs*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });

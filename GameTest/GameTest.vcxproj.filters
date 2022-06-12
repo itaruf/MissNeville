@@ -109,6 +109,12 @@
     <ClCompile Include="Mirror.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -243,6 +249,12 @@
     <ClInclude Include="Mirror.h">
       <Filter>Actors</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sources.txt">
@@ -285,6 +297,9 @@
     </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{cca1c4a1-e101-45e5-8d70-510a9a98c00b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{0f5f052b-7db8-4f18-8e85-93ee4eeb42f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

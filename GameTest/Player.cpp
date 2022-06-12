@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed), _inventory{ inventory }
+Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed, controller), _inventory{ inventory }
 {
 	// Instantiating all the bags and slots of the inventory
 	for (auto i = 0; i < Inventory::_nbBags; ++i)
@@ -23,77 +23,81 @@ Player::~Player()
 // Moving the player on the Y-Axis
 void Player::MoveVertically()
 {
-	// If the player is moving forward
-	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP) || App::GetController().GetLeftThumbStickY() > 0.5f)
-	{
-		// Setting up the data to match the FORWARDS direction
-		_direction = Direction::UP;
-		_sprite->SetAnimation(_sprite->ANIM_FORWARDS);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			// Preventing the player to collide with themselves
-			if (actor == this)
-				continue;
-			// if the player is about to collide with an actor, then the player doesn't move
-			if (_collider->isColliding(this, actor, _position->_x, _position->_y + _movementSpeed))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		// else the player can move
-		_sprite->SetPosition(_position->_x, _position->_y + _movementSpeed);
-	}
 
-	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN) || App::GetController().GetLeftThumbStickY() < -0.5f)
-	{
-		// Setting up the data to match the BACKWARDS direction
-		_direction = Direction::DOWN;
-		_sprite->SetAnimation(_sprite->ANIM_BACKWARDS);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			if (actor == this)
-				continue;
-			if (_collider->isColliding(this, actor, _position->_x, _position->_y - _movementSpeed))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x, _position->_y - _movementSpeed);
-	}
+	_controller->MoveVertically(this);
+	//// If the player is moving forward
+	//if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP) || App::GetController().GetLeftThumbStickY() > 0.5f)
+	//{
+	//	// Setting up the data to match the FORWARDS direction
+	//	_direction = Direction::UP;
+	//	_sprite->SetAnimation(_sprite->ANIM_FORWARDS);
+	//	for (const auto& actor : GameState::_currentScene->GetActors())
+	//	{
+	//		// Preventing the player to collide with themselves
+	//		if (actor == this)
+	//			continue;
+	//		// if the player is about to collide with an actor, then the player doesn't move
+	//		if (_collider->isColliding(this, actor, _position->_x, _position->_y + _movementSpeed))
+	//			if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
+	//				return;
+	//	}
+	//	// else the player can move
+	//	_sprite->SetPosition(_position->_x, _position->_y + _movementSpeed);
+	//}
+
+	//else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN) || App::GetController().GetLeftThumbStickY() < -0.5f)
+	//{
+	//	// Setting up the data to match the BACKWARDS direction
+	//	_direction = Direction::DOWN;
+	//	_sprite->SetAnimation(_sprite->ANIM_BACKWARDS);
+	//	for (const auto& actor : GameState::_currentScene->GetActors())
+	//	{
+	//		if (actor == this)
+	//			continue;
+	//		if (_collider->isColliding(this, actor, _position->_x, _position->_y - _movementSpeed))
+	//			if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
+	//				return;
+	//	}
+	//	_sprite->SetPosition(_position->_x, _position->_y - _movementSpeed);
+	//}
 }
 
 // Moving the player on the X-Axis
 void Player::MoveHorizontally()
 {
-	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().GetLeftThumbStickX() > 0.5f)
-	{
-		// Setting up the data to match the RIGHT direction
-		_direction = Direction::RIGHT;
-		_sprite->SetAnimation(_sprite->ANIM_RIGHT);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			if (actor == this)
-				continue;
-			if (_collider->isColliding(this, actor, _position->_x + _movementSpeed, _position->_y))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x + _movementSpeed, _position->_y);
-	}
+	_controller->MoveHorizontally(this);
 
-	else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().GetLeftThumbStickX() < -0.5f)
-	{
-		// Setting up the data to match the LEFT direction
-		_direction = Direction::LEFT;
-		_sprite->SetAnimation(_sprite->ANIM_LEFT);
-		for (const auto& actor : GameState::_currentScene->GetActors())
-		{
-			if (actor == this)
-				continue;
-			if (_collider->isColliding(this, actor, _position->_x - _movementSpeed, _position->_y))
-				if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
-					return;
-		}
-		_sprite->SetPosition(_position->_x - _movementSpeed, _position->_y);
-	}
+	//if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().GetLeftThumbStickX() > 0.5f)
+	//{
+	//	// Setting up the data to match the RIGHT direction
+	//	_direction = Direction::RIGHT;
+	//	_sprite->SetAnimation(_sprite->ANIM_RIGHT);
+	//	for (const auto& actor : GameState::_currentScene->GetActors())
+	//	{
+	//		if (actor == this)
+	//			continue;
+	//		if (_collider->isColliding(this, actor, _position->_x + _movementSpeed, _position->_y))
+	//			if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
+	//				return;
+	//	}
+	//	_sprite->SetPosition(_position->_x + _movementSpeed, _position->_y);
+	//}
+
+	//else if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().GetLeftThumbStickX() < -0.5f)
+	//{
+	//	// Setting up the data to match the LEFT direction
+	//	_direction = Direction::LEFT;
+	//	_sprite->SetAnimation(_sprite->ANIM_LEFT);
+	//	for (const auto& actor : GameState::_currentScene->GetActors())
+	//	{
+	//		if (actor == this)
+	//			continue;
+	//		if (_collider->isColliding(this, actor, _position->_x - _movementSpeed, _position->_y))
+	//			if (actor->GetCollider()->_colliderType == Collision::ColliderType::Block)
+	//				return;
+	//	}
+	//	_sprite->SetPosition(_position->_x - _movementSpeed, _position->_y);
+	//}
 }
 
 // Player's main function to interact with other actors and trigger their response to the interaction
