@@ -151,30 +151,24 @@ void Player::Interaction()
 
 	// Select all Collectable or Interactive actors
 	for (auto& actor : actors)
-		if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor))
+		if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor) || actor->GetMobility() == Mobility::MOVABLE)
 			interactiveActors.emplace_back(actor);
+
+	if (interactiveActors.size() <= 0)
+		return;
 
 	float ms{ GetMovementSpeed() };
 
 	if (GetDirection() == Direction::LEFT || GetDirection() == Direction::DOWN)
 		ms = -GetMovementSpeed();
 
-	float x{ 0 };
-	float y{ 0 };
+	float x{ GetPosition()->_x };
+	float y{ GetPosition()->_y };
 
 	if (GetDirection() == Direction::RIGHT || GetDirection() == Direction::LEFT)
-	{
 		x = GetPosition()->_x + ms;
-		y = GetPosition()->_y;
-	}
 	else
-	{
-		x = GetPosition()->_x;
 		y = GetPosition()->_y + ms;
-	}
-
-	if (interactiveActors.size() <= 0)
-		return;
 
 	/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
 	std::sort(std::begin(interactiveActors), std::end(interactiveActors), [this, ms](Actor* const& l, Actor* const& r)
@@ -206,6 +200,17 @@ void Player::Interaction()
 	if (collectable)
 	{
 		Interact(collectable);
+		return;
+	}
+
+	auto m = dynamic_cast<Character*>(closestActor);
+	if (m)
+	{	
+		std::cout << "here" << std::endl;
+		m->SetDirection(_direction);
+		m->MoveHorizontally();
+		m->MoveVertically();
+		m->SetDirection(Direction::STILL);
 		return;
 	}
 }

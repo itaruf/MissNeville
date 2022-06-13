@@ -129,6 +129,11 @@ void Actor::SetTag(std::string&& tag)
 	_tag = tag;
 }
 
+void Actor::SetMobility(Mobility mobility)
+{
+	_mobility = mobility;
+}
+
 // Get the mobility of the actor (STATIC, MOVABLE)
 const Mobility& Actor::GetMobility()
 {

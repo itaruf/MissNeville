@@ -261,6 +261,9 @@
     <ClInclude Include="ObjectController.h">
       <Filter>Controller</Filter>
     </ClInclude>
+    <ClInclude Include="Models.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sources.txt">

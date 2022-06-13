@@ -29,9 +29,9 @@ namespace App
 		glEnd();
 	}
 	
-	CSimpleSprite *CreateSprite(const char *fileName, int columns, int rows)
+	CSimpleSprite *CreateSprite(const char *fileName, int columns, int rows, int frame, int scale)
 	{
-		return new CSimpleSprite(fileName, columns, rows);
+		return new CSimpleSprite(fileName, columns, rows, frame, scale);
 	}
 
 	std::unique_ptr<CSimpleSprite> CreateSprite2(const char* fileName, int columns, int rows)

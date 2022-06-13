@@ -30,6 +30,7 @@ bool Hall::Init()
 	mirror->GetSprite()->SetFrame(1);
 	mirror->GetSprite()->SetScale(0.25);
 	AddActor(mirror);
+	mirror->SetMobility(Mobility::MOVABLE);
 
 	MirrorShard* shard1{ new MirrorShard("Shard 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(150,300), new Collision(Collision::ColliderType::Block, 16, 16)) };
 	shard1->GetSprite()->SetFrame(0);
@@ -50,6 +51,13 @@ bool Hall::Init()
 	shard1->GetSprite()->SetFrame(0);
 	shard1->GetSprite()->SetScale(1);
 	AddActor(shard4);
+
+	ObjectController* objectC{ new ObjectController() };
+	Character* character{new Character("test",  App::CreateSprite(".\\TestData\\Props\\mirror.bmp", 2, 1), new Vector2D(350,250), new Collision(Collision::ColliderType::Block, 16, 16), 0, 4, objectC)};
+	character->SetMobility(Mobility::MOVABLE);
+	character->GetSprite()->SetFrame(1);
+	character->GetSprite()->SetScale(0.25);
+	AddActor(character);
 
 	/*Start Puzzle*/
 	_mirrorPuzzle->_mirror = mirror;

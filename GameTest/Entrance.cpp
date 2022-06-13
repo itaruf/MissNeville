@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Entrance.h"
+#include "Models.h"
 
 Entrance::Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), _candlePuzzle{std::move(candlePuzzle)}
 {
@@ -53,7 +54,7 @@ bool Entrance::Init()
 
 	/*Initiating Props */
 
-	auto carpet = new Actor("Carpet", App::CreateSprite(".\\TestData\\Props\\carpet-b.bmp", 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64));
+	auto carpet = new Actor(Carpet::name, App::CreateSprite(Carpet::model, 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64));
 	carpet->GetSprite()->SetFrame(1);
 	carpet->GetSprite()->SetScale(3);
 	AddActor(carpet);
@@ -61,31 +62,27 @@ bool Entrance::Init()
 	std::vector<Vector2D*> v{ new Vector2D(514,466), new Vector2D(446,432), new Vector2D(580,432), new Vector2D(460,356), new Vector2D(564,356) };
 	for (int i = 0; i < v.size(); ++i)
 	{
-		_candles.emplace_back(new Candle("Candle " + std::to_string(i), App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10)));
-		_candles[i]->GetSprite()->SetFrame(0);
+		_candles.emplace_back(new Candle(Cand::name+ std::to_string(i), App::CreateSprite(Cand::model, 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10)));
 		_candles[i]->GetSprite()->SetScale(0.5);
 		AddActor(_candles.at(i));
 		_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
 
-	auto pentagramme = new Actor("Pentagramme", App::CreateSprite(".\\TestData\\Props\\pentagramme.bmp", 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32));
-	pentagramme->GetSprite()->SetFrame(0);
+	auto pentagramme = new Actor(Pentagramme::name, App::CreateSprite(Pentagramme::model, 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32));
 	pentagramme->GetSprite()->SetScale(3);
 	AddActor(pentagramme);
 
-	auto bed = new Actor("Bed", App::CreateSprite(".\\TestData\\Props\\bed-blue-b.bmp", 1, 1), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32));
-	bed->GetSprite()->SetFrame(0);
-	bed->GetSprite()->SetScale(2);
+	auto bed = new Actor(Bed::name, App::CreateSprite(Bed::model, 1, 1, Bed::frame, Bed::scale), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32));
 	AddActor(bed);
 
-	auto smith = new NPC("Ms. Smith", App::CreateSprite(".\\TestData\\Characters\\family.bmp", 3, 4), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
+	auto smith = new NPC("Ms. Smith", App::CreateSprite(Family::model, 3, 4), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
 	smith->GetSprite()->SetFrame(1);
 	smith->GetSprite()->SetScale(3.5);
 	AddActor(smith);
-	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your path.. the false angel.. shall be your doom ..!")));
+	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your model.. the false angel.. shall be your doom ..!")));
 	smith->SetCurrentDialogue(0);
 
-	auto charlotte = new NPC("Charlotte Neville", App::CreateSprite(".\\TestData\\Characters\\charlotte.bmp", 3, 4), new Vector2D(300, 300), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
+	auto charlotte = new NPC(Charlotte::name, App::CreateSprite(Charlotte::model, 3, 4), new Vector2D(300, 300), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
 	charlotte->GetSprite()->SetFrame(1);
 	charlotte->GetSprite()->SetScale(3);
 	AddActor(charlotte);
@@ -93,21 +90,12 @@ bool Entrance::Init()
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 
-	/*TriggerScene* loungeTrigger = new TriggerScene("Lounge Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(Collision::ColliderType::Overlap, 16, 16), _WScene, new Vector2D());
-	loungeTrigger->GetSprite()->SetFrame(1);
-	loungeTrigger->GetSprite()->SetScale(2);
-	AddActor(loungeTrigger);
-	loungeTrigger->_scene = _WScene;*/
-
-	TriggerScene* hallTrigger = new TriggerScene("Hall Trigger", App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(Collision::ColliderType::Overlap, 16, 16), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET));
-	hallTrigger->GetSprite()->SetFrame(1);
+	TriggerScene* hallTrigger = new TriggerScene(TriggerSc::name, App::CreateSprite(Commode::model2, 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(Collision::ColliderType::Overlap, 16, 16), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET));
 	hallTrigger->GetSprite()->SetScale(2);
 	AddActor(hallTrigger);
 
 	ObjectController* objectC{ new ObjectController() };
-	Character* candle{new Character("Candle", App::CreateSprite(".\\TestData\\Props\\candle.bmp", 1, 2), new Vector2D(150, 200), new Collision(Collision::ColliderType::Block, 10, 10), 0, 6, objectC) };
-	candle->GetSprite()->SetFrame(0);
-	candle->GetSprite()->SetScale(1);
+	Character* candle{new Character(Cand::name, App::CreateSprite(Cand::model, 1, 2), new Vector2D(150, 200), new Collision(Collision::ColliderType::Block, 10, 10), 0, 6, objectC) };
 	candle->SetDirection(Direction::RIGHT);
 	AddActor(candle);
 

@@ -7,7 +7,7 @@
 #include "Puzzle.h"
 #include "App/app.h"
 #include "Utilities.h"
-
+struct Table;
 class Actor;
 #include "Actor.h"
 

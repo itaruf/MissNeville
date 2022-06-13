@@ -20,9 +20,11 @@
 std::map<std::string, CSimpleSprite::sTextureDef > CSimpleSprite::m_textures;
 
 //-----------------------------------------------------------------------------
-CSimpleSprite::CSimpleSprite(const char *fileName, unsigned int nColumns, unsigned int nRows)
+CSimpleSprite::CSimpleSprite(const char *fileName, unsigned int nColumns, unsigned int nRows, int frame, int scale)
 	: m_nColumns(nColumns)
 	, m_nRows(nRows)
+    , m_frame(frame)
+    , m_scale(scale)
 {
 	if (LoadTexture(fileName))
 	{

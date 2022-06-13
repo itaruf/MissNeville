@@ -20,5 +20,4 @@
 
 #include "Utilities.h"
 #include "GameState.h"
-
 //#include "Character.h"

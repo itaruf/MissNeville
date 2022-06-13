@@ -120,6 +120,7 @@
     <ClInclude Include="Mirror.h" />
     <ClInclude Include="MirrorShard.h" />
     <ClInclude Include="MirrorPuzzle.h" />
+    <ClInclude Include="Models.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ObjectController.h" />
     <ClInclude Include="Player.h" />
