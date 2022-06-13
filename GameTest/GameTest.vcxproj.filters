@@ -118,6 +118,9 @@
     <ClCompile Include="ObjectController.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
+    <ClCompile Include="Models.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">

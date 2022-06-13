@@ -7,6 +7,7 @@
 #include "Puzzle.h"
 #include "App/app.h"
 #include "Utilities.h"
+
 class Actor;
 #include "Actor.h"
 
@@ -16,6 +17,8 @@ class Candle;
 class Collectable;
 class Page;
 #include "Page.h"
+
+#include "Models.h"
 
 // Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene

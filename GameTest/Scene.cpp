@@ -51,24 +51,23 @@ bool Scene::Init()
 	if (!initialized)
 	{
 		AddActor(GameState::_player);
-
-	/*	auto wallLeft = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2));
+		
+		auto wallLeft = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2));
 		wallLeft->SetTag("wall");
 		AddActor(wallLeft);
 
-		auto wallBot = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
+		auto wallBot = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
 		wallBot->SetTag("wall");
 		AddActor(wallBot);
 
-		auto wallTop = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
+		auto wallTop = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
 		wallTop->SetTag("wall");
 		AddActor(wallTop);
 
-		auto wallRight = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(APP_VIRTUAL_HEIGHT, 2));
+		auto wallRight = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(APP_VIRTUAL_HEIGHT, 2));
 		wallRight->SetTag("wall");
 		AddActor(wallRight);
 
-	*/
 		initialized = !initialized;
 		return false;
 	}

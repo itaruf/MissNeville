@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 #include "../stdafx.h"
 //------------------------------------------------------------------------
-#include "GameState.h"	
+//#include "GameState.h"	
 #include "Player.h"
 
 #include "StateRegular.h"
