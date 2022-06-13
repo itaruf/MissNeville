@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Library.h"
 
 Library::Library(int ID, std::vector<Actor*> actors) : Scene(ID, actors)

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "MirrorPuzzle.h"
 
 MirrorPuzzle::MirrorPuzzle(Status status) : Puzzle(status), _mirror{nullptr}

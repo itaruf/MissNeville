@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Actor.h"
 
 Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : _name{ std::move(name) }, _sprite(std::move(sprite)), _position{ position }, _collider{ std::move(collider)}

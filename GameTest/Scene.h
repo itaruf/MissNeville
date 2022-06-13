@@ -15,8 +15,6 @@ class Player;
 class Candle;
 class Collectable;
 class Page;
-class Models;
-#include "Models.h"
 #include "Page.h"
 
 // Class which defines a scene : the game is meant to be divided in multiple scenes

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Puzzle.h"
 
 Puzzle::Puzzle(Status status) : _status{ status }

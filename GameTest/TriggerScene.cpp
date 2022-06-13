@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "TriggerScene.h"
 
 TriggerScene::~TriggerScene()

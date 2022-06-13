@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Room.h"
 
 Room::Room(int ID, std::vector<Actor*> actors) : Scene(ID, actors)

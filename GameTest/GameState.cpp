@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "GameState.h"
 
 Scene* GameState::_currentScene;

@@ -2,7 +2,7 @@
 // SimpleController.cpp
 // Simple controller support using XINPUT.
 //-----------------------------------------------------------------------------
-#include "stdafx.h"
+#include "../stdafx.h"
 //-----------------------------------------------------------------------------
 #include <windows.h>  // for MS Windows
 #include <stdio.h>

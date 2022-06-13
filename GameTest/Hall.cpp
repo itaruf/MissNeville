@@ -1,6 +1,5 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Hall.h"
-#include "Models.h"
 
 Hall::Hall(int ID, std::vector<Actor*> actors) : Scene(ID, actors)
 {
@@ -92,8 +91,8 @@ bool Hall::IsRoomCleared()
 	{
 		std::string description = "No";
 
-		auto page = new Page("Page 2", App::CreateSprite(MPage::model, 1, 1, MPage::frame, MPage::scale), new Vector2D(512, 394), new Collision(8, 8), 0, description);
-		AddActor(page);
+		/*auto page = new Page("Page 2", App::CreateSprite(MPage::model, 1, 1, MPage::frame, MPage::scale), new Vector2D(512, 394), new Collision(8, 8), 0, description);*/
+		/*AddActor(page);*/
 
 		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
 		if (it != _actors.end())

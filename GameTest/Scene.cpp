@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Scene.h"
 #include "Collectable.h"
 #include "TriggerScene.h"
@@ -52,7 +52,7 @@ bool Scene::Init()
 	{
 		AddActor(GameState::_player);
 
-		auto wallLeft = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2));
+	/*	auto wallLeft = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2));
 		wallLeft->SetTag("wall");
 		AddActor(wallLeft);
 
@@ -68,6 +68,7 @@ bool Scene::Init()
 		wallRight->SetTag("wall");
 		AddActor(wallRight);
 
+	*/
 		initialized = !initialized;
 		return false;
 	}

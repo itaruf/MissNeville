@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Lounge.h"
 
 Lounge::Lounge(int ID, std::vector<Actor*> actors) : Scene(ID, actors)

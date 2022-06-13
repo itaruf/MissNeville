@@ -1,5 +1,6 @@
-﻿#include "stdafx.h"
+﻿#include "../stdafx.h"
 #include "Entrance.h"
+#include "Models.h"
 
 Entrance::Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), _candlePuzzle{std::move(candlePuzzle)}
 {
