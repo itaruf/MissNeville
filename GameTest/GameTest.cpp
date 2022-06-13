@@ -11,7 +11,7 @@
 #include "StateDialogue.h"
 
 #include "EState.h"
-#include "Entrance.h"
+#include "Hall.h"
 #include "Lounge.h"
 #include "Room.h"
 #include "Hall.h"
@@ -28,20 +28,20 @@ void Init()
 	dialBox->SetPosition(APP_VIRTUAL_WIDTH / 2, 100);
 	dialBox->SetScale(7);
 	/*GameStates*/
-	StateRegular* stateRegular = new StateRegular();
-	StateInventory* stateInventory = new StateInventory();
-	StateDialogue* stateDialogue = new StateDialogue(dialBox);
+	StateRegular* stateRegular{ new StateRegular() };
+	StateInventory* stateInventory{ new StateInventory() };
+	StateDialogue* stateDialogue{ new StateDialogue(dialBox) };
 
 	/*Instantiate the gamestate which will be persistent across all scenes*/
 	gameState = std::make_shared<GameState>();
 	gameState->_state = State::REGULAR;
 
 	/*Scenes*/
-	Entrance* entrance = new Entrance{ 0, nullptr };
-	Lounge* lounge = new Lounge{ 3 };
-	Room* room = new Room{ 4 };
-	Hall* hall = new Hall{ 1 };
-	Library* library = new Library{ 2 };
+	Entrance* entrance{ new Entrance{ 0 } };
+	Lounge* lounge{ new Lounge{ 3 } };
+	Room* room{ new Room{ 4 } };
+	Hall* hall{ new Hall{ 1, nullptr} };
+	Library* library{ new Library{ 2 } };
 
 
 	/*Linking scenes*/
@@ -76,8 +76,8 @@ void Init()
 	stateDialogue->_player = player;
 
 	/*Setting up the first scene*/
-	gameState->_currentScene = entrance;
-	/*gameState->_currentScene = hall;*/
+	/*gameState->_currentScene = entrance;*/
+	gameState->_currentScene = hall;
 	gameState->_currentScene->Init();
 
 	/*Other scenes*/

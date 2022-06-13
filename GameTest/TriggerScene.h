@@ -6,6 +6,8 @@
 #include "Trigger.h"
 #include "GameState.h"
 
+class Scene;
+
 class TriggerScene : public Trigger
 {
 public:

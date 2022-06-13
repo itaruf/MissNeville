@@ -18,15 +18,21 @@ bool Lounge::Init()
 	if (Scene::Init())
 		return true;
 
+	// Triggers
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCommode.model2, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(16, 16, Collision::ColliderType::Overlap), _EScene, new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	AddActor(hallTrigger);
+
 	return false;
 }
 
 void Lounge::Update(float deltaTime)
 {
+	Scene::Update(deltaTime);
 }
 
 void Lounge::Render()
 {
+	Scene::Render();
 }
 
 bool Lounge::IsRoomCleared()

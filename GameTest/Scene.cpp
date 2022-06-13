@@ -52,19 +52,19 @@ bool Scene::Init()
 	{
 		AddActor(GameState::_player);
 		
-		auto wallLeft = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2));
+		auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2)) };
 		wallLeft->SetTag("wall");
 		AddActor(wallLeft);
 
-		auto wallBot = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
+		auto wallBot{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH)) };
 		wallBot->SetTag("wall");
 		AddActor(wallBot);
 
-		auto wallTop = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
+		auto wallTop{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH)) };
 		wallTop->SetTag("wall");
 		AddActor(wallTop);
 
-		auto wallRight = new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(APP_VIRTUAL_HEIGHT, 2));
+		auto wallRight{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(APP_VIRTUAL_HEIGHT, 2)) };
 		wallRight->SetTag("wall");
 		AddActor(wallRight);
 
@@ -94,7 +94,7 @@ void Scene::Update(float deltaTime)
 			continue;
 		}
 
-		auto c = dynamic_cast<Character*>(item);
+		auto c{ dynamic_cast<Character*>(item) };
 
 		if (!c)
 			continue;
@@ -130,7 +130,7 @@ bool Scene::RemoveActor(Actor* actor)
 		return false;
 
 	// Looking for the actor to delete
-	auto it = std::find(_actors.begin(), _actors.end(), actor);
+	auto it{ std::find(_actors.begin(), _actors.end(), actor) };
 
 	if (it == _actors.end())
 		return false;
@@ -149,7 +149,7 @@ bool Scene::RemoveActor(Collectable* collectable)
 		return false;
 
 	// Looking for the actor to delete
-	auto it = std::find(_actors.begin(), _actors.end(), collectable);
+	auto it{ std::find(_actors.begin(), _actors.end(), collectable) };
 
 	if (it == _actors.end())
 		return false;

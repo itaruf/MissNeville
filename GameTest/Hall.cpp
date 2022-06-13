@@ -1,56 +1,93 @@
-#include "../stdafx.h"
+﻿#include "../stdafx.h"
 #include "Hall.h"
-#include "Models.h"
 
-Hall::Hall(int ID, std::vector<Actor*> actors) : Scene(ID, actors)
+Hall::Hall(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), _candlePuzzle{std::move(candlePuzzle)}
 {
 }
 
-Hall::Hall(int ID) : Scene(ID)
+
+Hall::Hall(int ID, CandlePuzzle* candlePuzzle) : Scene(ID), _candlePuzzle{std::move(_candlePuzzle)}
 {
 }
 
 Hall::~Hall()
 {
+	printf("ENTRANCE DESTRUCTOR CALLED\n");
+
+	// Freeing all the memory allocated on the heap
+	delete _candlePuzzle;
+	
+	/*for (auto& candle : _candles)
+	{
+		if (candle)
+			delete candle;
+	}*/
+	_candles.clear();
 }
 
+// WIP - Initialization of the entrance scene 
 bool Hall::Init()
 {
+	// Init only once
 	if (Scene::Init())
 		return true;
 
-	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
+	/*Initiating Puzzles*/
+	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
-	// Triggers
-	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(".\\TestData\\Icons\\question-mark.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _SScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET)) };
-	entranceTrigger->GetSprite()->SetFrame(2);
-	entranceTrigger->GetSprite()->SetScale(1);
+	/*Triggers*/
+
+	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCommode.model2, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _SScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET)) };
 	AddActor(entranceTrigger);
 
-	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 2, 1, MMirror.frame, MMirror.scale), new Vector2D(250,250), new Collision(16, 16)) };
-	AddActor(mirror);
-	mirror->SetMobility(Mobility::MOVABLE);
+	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCommode.model2, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(16, 16, Collision::ColliderType::Overlap), _WScene, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	AddActor(loungeTrigger);
 
-	MirrorShard* shard1{ new MirrorShard(MMirrorShard.name + "1", App::CreateSprite(MPage.model , 1, 1), new Vector2D(150,300), new Collision(16, 16)) };
-	AddActor(shard1);
+	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCommode.model2, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(16, 16, Collision::ColliderType::Overlap), _EScene, new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	AddActor(libraryTrigger);
 
-	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model, 1, 1), new Vector2D(150,350), new Collision(16, 16))};
-	AddActor(shard2);
+	TriggerScene* roomTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCommode.model2, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
+	AddActor(roomTrigger);
 
-	MirrorShard* shard3{ new MirrorShard(MMirrorShard.name + "3", App::CreateSprite(MPage.model, 1, 1), new Vector2D(150,400), new Collision(16, 16)) };
-	AddActor(shard3);
+	/*Initiating Props */
 
-	MirrorShard* shard4{ new MirrorShard(MMirrorShard.name + "4", App::CreateSprite(MPage.model, 1, 1), new Vector2D(150, 450), new Collision(16, 16))};
-	AddActor(shard4);
+	auto carpet{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale), new Vector2D(512, 384), new Collision(64, 64, Collision::ColliderType::Overlap)) };
+	AddActor(carpet);
+
+	std::vector<Vector2D*> v{ new Vector2D(514,466), new Vector2D(446,432), new Vector2D(580,432), new Vector2D(460,356), new Vector2D(564,356) };
+	for (int i = 0; i < v.size(); ++i)
+	{
+		_candles.emplace_back(new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), v[i], new Collision(10, 10)));
+		AddActor(_candles.at(i));
+		_candlePuzzle->GetCandles().emplace_back(_candles[i]);
+	}
+
+	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(516, 418), new Collision(48, 32, Collision::ColliderType::Overlap)) };
+	AddActor(pentagramme);
+
+	auto bed{ new Actor(MBed.name, App::CreateSprite(MBed.model, 1, 1, MBed.frame, MBed.scale), new Vector2D(312, 464), new Collision(48, 32)) };
+	AddActor(bed);
+
+	auto smith{ new NPC("Ms. Smith", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(512, 394), new Collision(16, 16)) };
+	AddActor(smith);
+	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your model.. the false angel.. shall be your doom ..!")));
+	smith->SetCurrentDialogue(0);
+
+	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(16, 16)) };
+	AddActor(charlotte);
+	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal should be around.. But it's so dark here ! Well, it always has been...")));
+	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
+	charlotte->SetCurrentDialogue(0);
+
+
 
 	ObjectController* objectC{ new ObjectController() };
-	Character* character{new Character(MMirror.name, App::CreateSprite(MMirror.model, 2, 1, MMirror.frame, MMirror.scale), new Vector2D(350,250), new Collision(16, 16), 0, 4, objectC)};
-	character->SetMobility(Mobility::MOVABLE);
-	AddActor(character);
+	Character* candle{new Character(MCandle.name, App::CreateSprite(MCandle.model, 1, 2), new Vector2D(150, 200), new Collision(10, 10), 0, 6, objectC) };
+	candle->SetDirection(Direction::RIGHT);
+	AddActor(candle);
 
 	/*Start Puzzle*/
-	_mirrorPuzzle->_mirror = mirror;
-	_mirrorPuzzle->StartPuzzle();
+	_candlePuzzle->StartPuzzle();
 
 	return false;
 }
@@ -58,6 +95,12 @@ bool Hall::Init()
 void Hall::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
+	{
+		auto page{ new Page(MPage.name + "1", App::CreateSprite(MPage.model, 1, 1), new Vector2D(300, 250), new Collision(8, 8), 0, "lul") };
+		AddActor(page);
+	}
 }
 
 void Hall::Render()
@@ -67,37 +110,39 @@ void Hall::Render()
 
 bool Hall::IsRoomCleared()
 {
-	if (!_mirrorPuzzle)
+	if (!_candlePuzzle)
 		return false;
 
-	if (!_mirrorPuzzle->IsCleared())
+	if (!_candlePuzzle->IsCleared())
 		return false;
 
-	else if (_mirrorPuzzle->_status == Puzzle::Status::CLEARED)
+	else if (_candlePuzzle->_status == Puzzle::Status::CLEARED)
 		return true;
 
-	else if (_mirrorPuzzle->_status == Puzzle::Status::PENDING)
+	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 	{
-		std::string description = "No";
+		std::string description{ "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"MCharlotte ! do not do this !\" or \"No.. MCharlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- MCharlotte Neville." };
 
-		auto page = new Page(MPage.name , App::CreateSprite(MPage.model, 1, 1), new Vector2D(512, 394), new Collision(8, 8), 0, description);
+		auto page{ new Page(MPage.name + "1", App::CreateSprite(MPage.model, 1, 1), new Vector2D(512, 394), new Collision(8, 8), 0, description) };
 		AddActor(page);
 
-		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
+		auto it{ std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; }) };
 		if (it != _actors.end())
 		{
 			RemoveActor(*it);
 		}
 
-		auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; });
+		auto npc{ std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; }) };
 		if (npc != _actors.end())
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
-		}*/
-		_mirrorPuzzle->_status = Puzzle::Status::CLEARED;
+		}
+		_candlePuzzle->_status = Puzzle::Status::CLEARED;
 
 		return true;
 	}
 
-	return false; 
+	return false;
 }
+
+

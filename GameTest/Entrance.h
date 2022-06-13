@@ -1,13 +1,13 @@
 #pragma once
-#ifndef ENTRANCE_H_
-#define ENTRANCE_H_
+#ifndef HALL_H_
+#define HALL_H_
 
 #include "Scene.h"
-#include "CandlePuzzle.h"
-#include "TriggerScene.h";
-//class Character;
-#include "Character.h"
+#include "MirrorPuzzle.h"
+#include "Candle.h"
+#include "GameState.h"
 #include "NPC.h"
+#include "MirrorShard.h"
 
 class GameState;
 // Entrance scene 
@@ -16,11 +16,9 @@ class Entrance : public Scene, std::enable_shared_from_this<Entrance>
 private:
 protected:
 public:
-	CandlePuzzle* _candlePuzzle;
-	std::vector<Candle*> _candles;
-
-	Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle);
-	Entrance(int ID, CandlePuzzle* candlePuzzle);
+	MirrorPuzzle* _mirrorPuzzle;
+	Entrance(int ID, std::vector<Actor*> actors);
+	Entrance(int ID);
 	~Entrance();
 
 	bool Init() override;

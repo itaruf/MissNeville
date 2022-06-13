@@ -43,7 +43,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Entrance.cpp">
+    <ClCompile Include="Hall.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
@@ -82,7 +82,7 @@
     <ClCompile Include="StateRegular.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="Hall.cpp">
+    <ClCompile Include="Entrance.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Room.cpp">
@@ -180,7 +180,7 @@
     <ClInclude Include="Scene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Entrance.h">
+    <ClInclude Include="Hall.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
@@ -228,7 +228,7 @@
     <ClInclude Include="Utilities.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Hall.h">
+    <ClInclude Include="Entrance.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Room.h">

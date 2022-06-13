@@ -19,8 +19,8 @@ void TriggerScene::OnOverlap()
 	if (!GameState::_player)
 		return;
 
-	auto p = GameState::_player;
-	auto v = p->GetPosition();
+	auto p{ GameState::_player };
+	auto v{ p->GetPosition() };
 
 	if (!v)
 		return;
@@ -31,7 +31,10 @@ void TriggerScene::OnOverlap()
 	App::Print(350, 350, _name.c_str());
 
 	if (!_scene)
+	{
+		std::cout << "null" << std::endl;
 		return;
+	}
 
 	GameState::_currentScene = _scene;
 
