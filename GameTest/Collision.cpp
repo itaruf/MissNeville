@@ -2,10 +2,24 @@
 #include "Collision.h"
 #include "Collectable.h"
 
-Collision::Collision(ColliderType colliderType, float height, float width, Vector2D* offset)
+Collision::Collision() : _colliderType{ ColliderType::Block }, _height{ 16}, _width{ 16 }, _offset{ new Vector2D()}
+{
+}
+
+Collision::Collision(float height, float width, ColliderType colliderType, Vector2D* offset)
 	: _colliderType{ colliderType }, _height{ height }, _width{ width }, _offset{std::move(offset)}
 {
 }
+
+//Collision::Collision(float height, float width, Vector2D* offset) : Collision()
+//{
+//}
+//
+//Collision::Collision(float height, float width) : Collision()
+//{
+//	_height = height;
+//	_width = width; 
+//}
 
 Collision::~Collision()
 {

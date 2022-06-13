@@ -52,28 +52,20 @@ bool Scene::Init()
 	{
 		AddActor(GameState::_player);
 
-		auto wallLeft = new Actor("wallLeft", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
+		auto wallLeft = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2));
 		wallLeft->SetTag("wall");
-		wallLeft->GetSprite()->SetFrame(1);
-		wallLeft->GetSprite()->SetScale(3);
 		AddActor(wallLeft);
 
-		auto wallBot = new Actor("wallBot", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
+		auto wallBot = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
 		wallBot->SetTag("wall");
-		wallBot->GetSprite()->SetFrame(1);
-		wallBot->GetSprite()->SetScale(3);
 		AddActor(wallBot);
 
-		auto wallTop = new Actor("wallTop", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(Collision::ColliderType::Block, 2, APP_VIRTUAL_WIDTH));
+		auto wallTop = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH));
 		wallTop->SetTag("wall");
-		wallTop->GetSprite()->SetFrame(1);
-		wallTop->GetSprite()->SetScale(3);
 		AddActor(wallTop);
 
-		auto wallRight = new Actor("wallRight", App::CreateSprite(".\\TestData\\.bmp", 1, 1), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(Collision::ColliderType::Block, APP_VIRTUAL_HEIGHT, 2));
+		auto wallRight = new Actor(MWall::name, App::CreateSprite(MWall::model, 1, 1, MWall::frame, MWall::scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(APP_VIRTUAL_HEIGHT, 2));
 		wallRight->SetTag("wall");
-		wallRight->GetSprite()->SetFrame(1);
-		wallRight->GetSprite()->SetScale(3);
 		AddActor(wallRight);
 
 		initialized = !initialized;

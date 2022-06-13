@@ -29,7 +29,7 @@ namespace App
 		glEnd();
 	}
 	
-	CSimpleSprite *CreateSprite(const char *fileName, int columns, int rows, int frame, int scale)
+	CSimpleSprite *CreateSprite(const char *fileName, int columns, int rows, int frame, float scale)
 	{
 		return new CSimpleSprite(fileName, columns, rows, frame, scale);
 	}

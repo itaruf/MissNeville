@@ -58,7 +58,7 @@ void Init()
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
-	Collision* collider{ new Collision(Collision::ColliderType::Block, 16, 16, new Vector2D(0, -10)) };
+	Collision* collider{ new Collision(16, 16, Collision::ColliderType::Block, new Vector2D(0, -10))};
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 

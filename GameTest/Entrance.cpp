@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "Entrance.h"
-#include "Models.h"
 
 Entrance::Entrance(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), _candlePuzzle{std::move(candlePuzzle)}
 {
@@ -33,69 +32,44 @@ bool Entrance::Init()
 	if (Scene::Init())
 		return true;
 
-	/*Background First*/
-	/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
-	{ 
-		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
-		{
-			auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Backgrounds\\wood-plank3-b.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(Collision::ColliderType::Overlap, 32, 32), this);
-			ground->GetSprite()->SetFrame(1);
-			ground->GetSprite()->SetScale(0.5);
-			AddActor(ground);
-		}
-	}*/
-
-	/*_background = App::CreateSprite(".\\TestData\\Backgrounds\\night.bmp", 1, 1);
-	_background->SetScale(2.0f);
-	_background->SetAnimation(0);*/
-
 	/*Initiating Puzzles*/
 	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
 	/*Initiating Props */
 
-	auto carpet = new Actor(Carpet::name, App::CreateSprite(Carpet::model, 1, 1), new Vector2D(512, 384), new Collision(Collision::ColliderType::Overlap, 64, 64));
-	carpet->GetSprite()->SetFrame(1);
-	carpet->GetSprite()->SetScale(3);
+	auto carpet = new Actor(MCarpet::name, App::CreateSprite(MCarpet::model, 1, 1, MCarpet::frame, MCarpet::scale), new Vector2D(512, 384), new Collision(64, 64, Collision::ColliderType::Overlap));
 	AddActor(carpet);
 
 	std::vector<Vector2D*> v{ new Vector2D(514,466), new Vector2D(446,432), new Vector2D(580,432), new Vector2D(460,356), new Vector2D(564,356) };
 	for (int i = 0; i < v.size(); ++i)
 	{
-		_candles.emplace_back(new Candle(Cand::name+ std::to_string(i), App::CreateSprite(Cand::model, 1, 2), v[i], new Collision(Collision::ColliderType::Block, 10, 10)));
-		_candles[i]->GetSprite()->SetScale(0.5);
+		_candles.emplace_back(new Candle(MCandle::name, App::CreateSprite(MCandle::model, 1, 2, MCandle::frame, MCandle::scale), v[i], new Collision(10, 10)));
 		AddActor(_candles.at(i));
 		_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
 
-	auto pentagramme = new Actor(Pentagramme::name, App::CreateSprite(Pentagramme::model, 4, 4), new Vector2D(516, 418), new Collision(Collision::ColliderType::Overlap, 48, 32));
-	pentagramme->GetSprite()->SetScale(3);
+	auto pentagramme = new Actor(MPentagramme::name, App::CreateSprite(MPentagramme::model, 4, 4, MPentagramme::frame, MPentagramme::scale), new Vector2D(516, 418), new Collision(48, 32, Collision::ColliderType::Overlap));
 	AddActor(pentagramme);
 
-	auto bed = new Actor(Bed::name, App::CreateSprite(Bed::model, 1, 1, Bed::frame, Bed::scale), new Vector2D(312, 464), new Collision(Collision::ColliderType::Block, 48, 32));
+	auto bed = new Actor(MBed::name, App::CreateSprite(MBed::model, 1, 1, MBed::frame, MBed::scale), new Vector2D(312, 464), new Collision(48, 32));
 	AddActor(bed);
 
-	auto smith = new NPC("Ms. Smith", App::CreateSprite(Family::model, 3, 4), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
-	smith->GetSprite()->SetFrame(1);
-	smith->GetSprite()->SetScale(3.5);
+	auto smith = new NPC("Ms. Smith", App::CreateSprite(MFamily::model, 3, 4, MFamily::frame, MFamily::scale), new Vector2D(512, 394), new Collision(16, 16));
 	AddActor(smith);
 	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your model.. the false angel.. shall be your doom ..!")));
 	smith->SetCurrentDialogue(0);
 
-	auto charlotte = new NPC(Charlotte::name, App::CreateSprite(Charlotte::model, 3, 4), new Vector2D(300, 300), new Collision(Collision::ColliderType::Block, 16, 16), 0, 0);
-	charlotte->GetSprite()->SetFrame(1);
-	charlotte->GetSprite()->SetScale(3);
+	auto charlotte = new NPC(MCharlotte::name, App::CreateSprite(MCharlotte::model, 3, 4, MCharlotte::frame, MCharlotte::scale), new Vector2D(300, 300), new Collision(16, 16));
 	AddActor(charlotte);
 	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal should be around.. But it's so dark here ! Well, it always has been...")));
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 
-	TriggerScene* hallTrigger = new TriggerScene(TriggerSc::name, App::CreateSprite(Commode::model2, 1, 1), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(Collision::ColliderType::Overlap, 16, 16), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET));
-	hallTrigger->GetSprite()->SetScale(2);
+	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene::name, App::CreateSprite(MCommode::model2, 1, 1, MCommode::frame, MCommode::scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET));
 	AddActor(hallTrigger);
 
 	ObjectController* objectC{ new ObjectController() };
-	Character* candle{new Character(Cand::name, App::CreateSprite(Cand::model, 1, 2), new Vector2D(150, 200), new Collision(Collision::ColliderType::Block, 10, 10), 0, 6, objectC) };
+	Character* candle{new Character(MCandle::name, App::CreateSprite(MCandle::model, 1, 2), new Vector2D(150, 200), new Collision(10, 10), 0, 6, objectC) };
 	candle->SetDirection(Direction::RIGHT);
 	AddActor(candle);
 
@@ -111,7 +85,7 @@ void Entrance::Update(float deltaTime)
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
 	{
-		auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(300, 250), new Collision(Collision::ColliderType::Block, 8, 8), 0, "lul");
+		auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(300, 250), new Collision(8, 8), 0, "lul");
 		page->GetSprite()->SetFrame(0);
 		page->GetSprite()->SetScale(3);
 		AddActor(page);
@@ -136,9 +110,9 @@ bool Entrance::IsRoomCleared()
 
 	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 	{
-		std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville.";
+		std::string description = "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"MCharlotte ! do not do this !\" or \"No.. MCharlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- MCharlotte Neville.";
 
-		auto page = new Page("Page 1", App::CreateSprite(".\\TestData\\Props\\page.bmp", 1, 1), new Vector2D(512, 394), new Collision(Collision::ColliderType::Block, 8, 8), 0, description);
+		auto page = new Page("Page 1", App::CreateSprite(MPage::model, 1, 1, MPage::frame, MPage::scale), new Vector2D(512, 394), new Collision(8, 8), 0, description);
 		page->GetSprite()->SetFrame(0);
 		page->GetSprite()->SetScale(3);
 		AddActor(page);

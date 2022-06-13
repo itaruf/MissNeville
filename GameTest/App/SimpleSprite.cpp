@@ -20,7 +20,7 @@
 std::map<std::string, CSimpleSprite::sTextureDef > CSimpleSprite::m_textures;
 
 //-----------------------------------------------------------------------------
-CSimpleSprite::CSimpleSprite(const char *fileName, unsigned int nColumns, unsigned int nRows, int frame, int scale)
+CSimpleSprite::CSimpleSprite(const char *fileName, unsigned int nColumns, unsigned int nRows, int frame, float scale)
 	: m_nColumns(nColumns)
 	, m_nRows(nRows)
     , m_frame(frame)

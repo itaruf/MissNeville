@@ -22,7 +22,11 @@ public:
 	float _width;
 	Vector2D* _offset;
 
-	Collision(ColliderType colliderType, float height, float width, Vector2D* offset = new Vector2D(0,0));
+	Collision();
+	Collision(float height = 16, float width = 16, ColliderType colliderType = ColliderType::Block, Vector2D* offset = new Vector2D(0,0));
+	/*Collision(float height = 16, float width = 16, Vector2D* offset = new Vector2D(0, 0));*/
+	/*Collision(float height = 16, float width = 16);*/
+
 	~Collision();
 
 	const float& GetHeight() const;
