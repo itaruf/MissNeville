@@ -1,9 +1,13 @@
 #include "../stdafx.h"
 #include "Character.h"
 
+//CSimpleSound& Character::_SFXDeath = CSimpleSound::GetInstance();
+//CSimpleSound& Character::_SFXInteract = CSimpleSound::GetInstance();
+
 Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }, _controller{controller}
 {
 	/*std::cout << "CHARACTER CONSTRUCTOR CALLED" << std::endl;*/
+	/*_SFXInteract = new CSimpleSound(SFX.item_pick);*/
 }
 
 Character::~Character()
@@ -12,6 +16,12 @@ Character::~Character()
 
 	if (_controller)
 		delete _controller;
+
+	/*if (_SDeath)
+		delete[] _SDeath;
+
+	if (_SInteract)
+		delete[] _SInteract;*/
 }
 
 // Get the current HP of the character

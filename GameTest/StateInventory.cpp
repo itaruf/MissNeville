@@ -11,12 +11,16 @@ StateInventory::~StateInventory()
 
 void StateInventory::Enter()
 {
+	if (_SBag_open)
+	CSimpleSound::GetInstance().PlaySoundW(_SBag_open, 0);
 	_player->OpenBag(0);
 	_currentSlot = 0;
 }
 
 void StateInventory::Exit()
 {
+	if (_SBag_open)
+		CSimpleSound::GetInstance().PlaySoundW(_SBag_open, 0);
 	_currentSlot = 0;
 	_player->CloseBag(0);
 }
@@ -118,6 +122,8 @@ void StateInventory::Navigation()
 		if (_currentSlot >= _player->_inventory->GetNbSlotBag() - 1)
 			return;
 
+		if (_SBag_navigate)
+			CSimpleSound::GetInstance().PlaySoundW(_SBag_navigate, 0);
 		_currentSlot++;
 	}
 
@@ -128,6 +134,8 @@ void StateInventory::Navigation()
 		if (_currentSlot <= 0)
 			return;
 
+		if (_SBag_navigate)
+			CSimpleSound::GetInstance().PlaySoundW(_SBag_navigate, 0);
 		_currentSlot--;
 	}
 

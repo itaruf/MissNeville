@@ -3,6 +3,9 @@
 
 Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed, controller), _inventory{ inventory }
 {
+	/*_SFXInteract = CSimpleSound::GetInstance();
+	_SFXDeath = CSimpleSound::GetInstance();*/
+
 	// Instantiating all the bags and slots of the inventory
 	for (auto i = 0; i < Inventory::_nbBags; ++i)
 	{
@@ -17,7 +20,15 @@ Player::~Player()
 	printf("CHARACTER DESTRUCTOR CALLED\n");
 
 	// Freeing the memory allocated on the heap
-	delete _inventory;
+
+	if (_inventory)
+		delete _inventory;
+
+	/*if (_SBag)
+		delete[] _SBag;
+
+	if (_SCollect)
+		delete[] _SCollect;*/
 }
 
 // Moving the player on the Y-Axis
@@ -52,6 +63,9 @@ bool Player::Interact(IInteractive* actor)
 		if (dynamic_cast<IDialogue*>(actor))
 			GameState::SetState(State::DIALOGUE);
 
+		/*if (dynamic_cast<Actor*>(actor)->_SInteract)
+			CSimpleSound::GetInstance().PlaySound(dynamic_cast<Actor*>(actor)->_SInteract, 0);*/
+
 		actor->Interact();
 		return true;
 	}
@@ -77,10 +91,12 @@ bool Player::Interact(Collectable* collectable)
 			{
 				// Stock the collected object in an empty bag slot
 				_inventory->_bags[collectable->_ID].second[i] = collectable;
+				collectable->OnCollected();
 				collectable->itemized = true;
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
 				GameState::_currentScene->RemoveActor(collectable);
+				/*CSimpleSound::GetInstance().PlaySound(collectable->_SInteract, 0, -2500);*/
 				return true;
 			}
 		}

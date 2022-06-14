@@ -58,6 +58,7 @@ bool Hall::Init()
 	for (int i = 0; i < v.size(); ++i)
 	{
 		_candles.emplace_back(new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), v[i], new Collision(10, 10)));
+		_candles[i]->_SInteract = SFX.item_pick;
 		AddActor(_candles.at(i));
 		_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
@@ -121,7 +122,7 @@ bool Hall::IsRoomCleared()
 
 	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 	{
-		std::string description{ "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"MCharlotte ! do not do this !\" or \"No.. MCharlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- MCharlotte Neville." };
+		std::string description{ "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. MCharlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville." };
 
 		auto page{ new Page(MPage.name + "1", App::CreateSprite(MPage.model, 1, 1), new Vector2D(512, 394), new Collision(8, 8), 0, description) };
 		AddActor(page);
@@ -132,7 +133,7 @@ bool Hall::IsRoomCleared()
 			RemoveActor(*it);
 		}
 
-		auto npc{ std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; }) };
+		auto npc{ std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte Neville"; }) };
 		if (npc != _actors.end())
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);

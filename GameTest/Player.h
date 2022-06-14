@@ -14,6 +14,11 @@ private:
 protected:
 public:
 	friend class PlayerController;
+	/*CSimpleSound* _SFXBag{ nullptr };
+	CSimpleSound* _SFXCollect{ nullptr };*/
+	
+	const char* _SBag{SFX.candle_enlight};
+	const char* _SCollect{SFX.item_pick};
 
 	Player(std::string name = "", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr, float HP = 0, float movementSpeed = 0, Controller* controller = nullptr, Inventory* inventory = nullptr);
 	~Player();

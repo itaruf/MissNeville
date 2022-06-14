@@ -52,10 +52,10 @@ void GameState::SwitchState()
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
 		{
 			_currentState->Exit();
-
 			// Updating state
 			_state = State::INVENTORY;
 			_currentState = _gameStates[1];
+			_currentState->Enter();
 		}
 		break;
 
@@ -63,10 +63,10 @@ void GameState::SwitchState()
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 		{
 			_currentState->Exit();
-
 			// Updating state
 			_state = State::REGULAR;
 			_currentState = _gameStates[0];
+			_currentState->Enter();
 		}
 		break;
 
@@ -75,11 +75,10 @@ void GameState::SwitchState()
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 		{
 			_currentState->Exit();
-			_player->CloseBag(0);
-
 			// Updating state
-			_currentState = _gameStates[0];
 			_state = State::REGULAR;
+			_currentState = _gameStates[0];
+			_currentState->Enter();
 		}
 		break;
 	default:

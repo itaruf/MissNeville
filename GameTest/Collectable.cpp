@@ -9,3 +9,9 @@ Collectable::~Collectable()
 {
 	printf("ITEM DESTRUCTOR CALLED\n");
 }
+
+void Collectable::OnCollected()
+{
+	if (_SCollected)
+		CSimpleSound::GetInstance().PlaySoundW(_SCollected, 0);
+}

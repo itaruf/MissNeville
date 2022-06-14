@@ -6,6 +6,7 @@
 #define TRIGGER_OFFSET (24)
 #define WALL_OFFSET (128)
 #define NEW_PLAYER_POS_OFFSET (32)
+#define VOLUME (-2500)
 
 #include <string>
 

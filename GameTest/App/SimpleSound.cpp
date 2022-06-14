@@ -126,7 +126,7 @@ void CSimpleSound::ShutdownDirectSound()
 	return;
 }
 
-bool CSimpleSound::PlaySound(const char *filename, DWORD flags)
+bool CSimpleSound::PlaySound(const char *filename, DWORD flags, LONG volume)
 {
 	HRESULT result;
 
@@ -150,7 +150,7 @@ bool CSimpleSound::PlaySound(const char *filename, DWORD flags)
 		}
 
 		// Set volume of the buffer to 100%.
-		result = m_sounds[filename]->SetVolume(DSBVOLUME_MAX);
+		result = m_sounds[filename]->SetVolume(volume);
 		if (FAILED(result))
 		{
 			return false;

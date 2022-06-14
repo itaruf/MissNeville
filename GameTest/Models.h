@@ -151,4 +151,25 @@ struct MMirrorShard
 
 extern struct MMirrorShard MMirrorShard;
 
+struct SFX
+{
+	const char* entrance{ ".\\TestData\\SFX\\entrance.wav" };
+	const char* mshard_pick{ ".\\TestData\\SFX\\mshard_pick.wav" };
+	const char* mirror_broken{ ".\\TestData\\SFX\\mirror_broken.wav" };
+	const char* candle_enlight{ ".\\TestData\\SFX\\candle_enlight.wav" };
+	const char* item_pick{ ".\\TestData\\SFX\\item_pick.wav" };
+	const char* item_pick2{ ".\\TestData\\SFX\\item_pick2.wav" };
+	const char* ghost_death{ ".\\TestData\\SFX\\ghost_death.wav" };
+	const char* door_open{ ".\\TestData\\SFX\\door_open.wav" };
+	const char* scene{ ".\\TestData\\SFX\\scene.wav" };
+	const char* bag_open{ ".\\TestData\\SFX\\bag_open.wav" };
+	const char* bag_navigate{ ".\\TestData\\SFX\\bag_navigate.wav" };
+	const char* footstep{ ".\\TestData\\SFX\\footstep.wav" };
+	const char* page_read{ ".\\TestData\\SFX\\page_read.wav" };
+};
+
+extern struct SFX SFX;
+
 #endif // !MODEL_H
+
+//CSimpleSound::GetInstance().PlaySoundW(_SEnlight, 0);

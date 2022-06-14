@@ -40,7 +40,7 @@ public:
 	bool Initialize(HWND);
 	void Shutdown();
 	
-	bool PlaySound(const char *filename, DWORD flags = 0);
+	bool PlaySound(const char *filename, DWORD flags = 0, LONG volume = VOLUME);
 	bool StopSound(const char *filename);
 	bool IsPlaying(const char *filename);
 private:

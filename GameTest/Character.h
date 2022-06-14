@@ -9,6 +9,8 @@ class GameState;
 class Controller;
 #include "Controller.h"
 
+#include "App/SimpleSound.h"
+
 // Class for entities which will be either playable or non-playable such as NPCs
 class Character : public Actor
 {
@@ -20,6 +22,11 @@ protected:
 public:
 	friend class PlayerController;
 	friend class ObjectController;
+
+	/*static CSimpleSound& _SFXDeath;
+	static CSimpleSound& _SFXInteract;*/
+
+	const char* _SDeath{SFX.ghost_death};
 
 	Character(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr, float HP = 0, float movementSpeed = 0, Controller* controller =  nullptr);
 	virtual ~Character();
@@ -35,5 +42,6 @@ public:
 	virtual void MoveVertically();
 	virtual void MoveHorizontally();
 };
+
 
 #endif

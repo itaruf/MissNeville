@@ -12,6 +12,9 @@ private:
 protected:
 	bool _enlighted{ false };
 public:
+	
+	const char* _SEnlight{SFX.candle_enlight};
+	const char* _SShut{ SFX.candle_enlight };
 	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	~Candle();
 

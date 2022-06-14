@@ -15,3 +15,4 @@ struct MPage MPage {};
 struct MWall MWall {};
 struct MMirror MMirror{};
 struct MMirrorShard MMirrorShard {};
+struct SFX SFX {};

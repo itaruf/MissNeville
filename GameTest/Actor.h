@@ -10,6 +10,8 @@ class Collision;
 #include "EDirection.h"
 #include "EMobility.h"
 #include "Controller.h"
+#include <unordered_map>
+#include "Models.h"
 
 // Base class for all physical entities in the game (props, characters (player, NPC), ...) 
 class Actor
@@ -25,10 +27,13 @@ protected:
 	Collision* _collider;
 	Mobility _mobility{ defaultMobility };
 	Direction _direction{ defaultDirection };
+	std::unordered_map<std::string, const char*> sfx;
 
 public:
 	friend class PlayerController;
 	friend class ObjectController;
+
+	const char* _SInteract{ SFX.item_pick };
 
 	Actor(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr);
 	Actor(Actor* actor);

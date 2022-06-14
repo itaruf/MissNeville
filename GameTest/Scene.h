@@ -28,6 +28,7 @@ protected:
 	int _ID;
 	CSimpleSprite* _background{ nullptr };
 	std::vector<Actor*> _actors;
+	const char* sfx{SFX.scene};
 
 public:
 
