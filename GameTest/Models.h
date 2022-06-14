@@ -10,7 +10,7 @@ struct MTable
 	std::string name{ "Table" };
 	const char* model{ ".\\TestData\\Props\\table.bmp" };
 	int frame{ 0 };
-	float scale{ 1 };
+	float scale{ 2 };
 };
 
 extern struct MTable MTable;
@@ -22,11 +22,11 @@ struct MCommode
 	const char* model2{ ".\\TestData\\Props\\commode2.bmp" };
 	const char* model3{ ".\\TestData\\Props\\commode3.bmp" };
 	int frame{ 0 };
-	float scale{ 2 };
+	float scale{ 2.5 };
 	int frame2{ 0 };
-	float scale2{ 2 };
+	float scale2{ 2.5 };
 	int frame3{ 0 };
-	float scale3{ 2 };
+	float scale3{ 2.5 };
 };
 
 extern struct MCommode MCommode;
@@ -150,6 +150,57 @@ struct MMirrorShard
 };
 
 extern struct MMirrorShard MMirrorShard;
+
+struct MPillar
+{
+	std::string name{ "Pillar" };
+	const char* model{ ".\\TestData\\Props\\pillar2.bmp" };
+	int frame{ 0 };
+	float scale{ 4 };
+};
+
+extern struct MPillar MPillar;
+
+struct MStairs
+{
+	std::string name{ "Stairs" };
+	const char* model{ ".\\TestData\\Props\\stairs.bmp" };
+	int frame{ 0 };
+	float scale{ 4 };
+};
+
+extern struct MStairs MStairs;
+
+struct MRailing
+{
+	std::string name{ "Railing" };
+	const char* model{ ".\\TestData\\Props\\railing.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MRailing MRailing;
+
+struct MPicture
+{
+	std::string name{ "Picture" };
+	const char* model{ ".\\TestData\\Props\\picture.bmp" };
+	const char* model2{ ".\\TestData\\Props\\picture2.bmp" };
+	int frame{ 0 };
+	float scale{ 3 };
+};
+
+extern struct MPicture MPicture;
+
+struct MIcon
+{
+	std::string name{ "Icon" };
+	const char* model{ ".\\TestData\\Icons\\question_mark.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MIcon MIcon;
 
 struct SFX
 {

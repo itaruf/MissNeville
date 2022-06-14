@@ -21,7 +21,7 @@ bool Entrance::Init()
 	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
 
 	// Triggers
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCommode.model2, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
 	AddActor(hallTrigger);
 
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 2, 1, MMirror.frame, MMirror.scale), new Vector2D(250,250), new Collision(16, 16)) };
@@ -77,7 +77,7 @@ bool Entrance::IsRoomCleared()
 	{
 		std::string description = "No";
 
-		auto page{ new Page(MPage.name , App::CreateSprite(MPage.model, 1, 1), new Vector2D(512, 394), new Collision(8, 8), 0, description) };
+		auto page{ new Page(MPage.name , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(8, 8), 0, description) };
 		AddActor(page);
 
 		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
