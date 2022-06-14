@@ -41,9 +41,19 @@ void PlayerController::MoveHorizontally(Character* actor)
 		}		
 	}
 
-	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().GetLeftThumbStickX() > 0.5f 
+	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().GetLeftThumbStickX() > 0.5f
 		|| App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().GetLeftThumbStickX() < -0.5f)
+	{
 		actor->_sprite->SetPosition(x, y);
+
+		if (!actor->_SMove)
+			return;
+
+		if (CSimpleSound::GetInstance().IsPlaying(actor->_SMove))
+			return;
+
+		CSimpleSound::GetInstance().PlaySoundW(actor->_SMove, 0, -3500);
+	}
 }
 
 void PlayerController::MoveVertically(Character* actor)
@@ -78,7 +88,17 @@ void PlayerController::MoveVertically(Character* actor)
 		}
 	}
 
-	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP) || App::GetController().GetLeftThumbStickY() > 0.5f 
+	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP) || App::GetController().GetLeftThumbStickY() > 0.5f
 		|| App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN) || App::GetController().GetLeftThumbStickY() < -0.5f)
+	{
 		actor->_sprite->SetPosition(x, y);
+
+		if (!actor->_SMove)
+			return;
+
+		if (CSimpleSound::GetInstance().IsPlaying(actor->_SMove))
+			return;
+
+		CSimpleSound::GetInstance().PlaySoundW(actor->_SMove, 0, -3500);
+	}
 }

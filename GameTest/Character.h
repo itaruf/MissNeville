@@ -27,6 +27,7 @@ public:
 	static CSimpleSound& _SFXInteract;*/
 
 	const char* _SDeath{SFX.ghost_death};
+	const char* _SMove{ SFX.footstep2 };
 
 	Character(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr, float HP = 0, float movementSpeed = 0, Controller* controller =  nullptr);
 	virtual ~Character();

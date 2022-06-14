@@ -156,6 +156,7 @@ struct SFX
 	const char* entrance{ ".\\TestData\\SFX\\entrance.wav" };
 	const char* mshard_pick{ ".\\TestData\\SFX\\mshard_pick.wav" };
 	const char* mirror_broken{ ".\\TestData\\SFX\\mirror_broken.wav" };
+	const char* mirror_repaired{ ".\\TestData\\SFX\\item_pick.wav" };
 	const char* candle_enlight{ ".\\TestData\\SFX\\candle_enlight.wav" };
 	const char* item_pick{ ".\\TestData\\SFX\\item_pick.wav" };
 	const char* item_pick2{ ".\\TestData\\SFX\\item_pick2.wav" };
@@ -165,6 +166,7 @@ struct SFX
 	const char* bag_open{ ".\\TestData\\SFX\\bag_open.wav" };
 	const char* bag_navigate{ ".\\TestData\\SFX\\bag_navigate.wav" };
 	const char* footstep{ ".\\TestData\\SFX\\footstep.wav" };
+	const char* footstep2{ ".\\TestData\\SFX\\footstep2.wav" };
 	const char* page_read{ ".\\TestData\\SFX\\page_read.wav" };
 };
 

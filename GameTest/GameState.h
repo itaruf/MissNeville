@@ -2,6 +2,10 @@
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 
+#include <chrono>
+#include <thread>
+#include <future>
+
 #include "Entrance.h"
 class Scene;
 class Player;
@@ -31,6 +35,7 @@ public:
 	void AddPlayer(Player* player);
 	void SwitchState();
 	std::string PrintState();
+	void OnChangeState();
 
 	static void GameState::SetState(State state)
 	{

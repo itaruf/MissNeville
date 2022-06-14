@@ -14,4 +14,6 @@ void Collectable::OnCollected()
 {
 	if (_SCollected)
 		CSimpleSound::GetInstance().PlaySoundW(_SCollected, 0);
+
+	itemized = true;
 }

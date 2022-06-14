@@ -58,8 +58,12 @@ bool Player::Interact(IInteractive* actor)
 	if (!actor)
 		return false;
 
-	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
+		if (GameState::_state != State::REGULAR)
+			return false;
+
+		std::cout << "INTERACTING" << std::endl;
 		if (dynamic_cast<IDialogue*>(actor))
 			GameState::SetState(State::DIALOGUE);
 
@@ -81,7 +85,7 @@ bool Player::Interact(Collectable* collectable)
 	if (!collectable)
 		return false;
 
-	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
 		for (auto i = 0; i < _inventory->_bags[collectable->_ID].second.size(); ++i)
@@ -92,7 +96,6 @@ bool Player::Interact(Collectable* collectable)
 				// Stock the collected object in an empty bag slot
 				_inventory->_bags[collectable->_ID].second[i] = collectable;
 				collectable->OnCollected();
-				collectable->itemized = true;
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
 				GameState::_currentScene->RemoveActor(collectable);

@@ -87,6 +87,9 @@ void Init()
 	gameState->_gameStates.emplace_back(stateDialogue);
 	gameState->_currentState = stateRegular;
 
+
+	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
+
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
 }

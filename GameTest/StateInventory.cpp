@@ -158,7 +158,7 @@ void StateInventory::Select()
 	App::Print(800, 370, bag.second[_currentSlot]->GetName().c_str());
 	/*App::Print(250, 250, "TEST");*/
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		bag.second[_currentSlot]->UseItem();
 	}

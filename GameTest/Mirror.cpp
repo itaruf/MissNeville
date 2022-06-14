@@ -3,6 +3,7 @@
 
 Mirror::Mirror(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : Actor(name, sprite, position, collider)
 {
+	_SInteract = SFX.mirror_broken;
 }
 
 Mirror::~Mirror()
@@ -45,6 +46,7 @@ void Mirror::Interact()
 
 	if (nb < nbShards)
 	{
+		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
 		App::Print(200, 200, "Not enough shards");
 		return;
 	}
@@ -59,6 +61,7 @@ void Mirror::Interact()
 	}
 
 	// the mirror is repaired
+	CSimpleSound::GetInstance().PlaySoundW(_SMirror_repaired, 0);
 	_repaired = true;
 	_sprite->SetFrame(0);
 }

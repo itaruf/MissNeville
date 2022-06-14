@@ -43,42 +43,82 @@ void GameState::AddPlayer(Player* player)
 	_player = player;
 }
 
+using namespace std::chrono;
+
+void GameState::OnChangeState()
+{
+	_currentState = _gameStates[0];
+	std::cout << PrintState() << std::endl;
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+
 void GameState::SwitchState()
 {
 	switch (_state)
 	{
 	case State::REGULAR:
 		// Start button to open the inventory / change the state back to INVENTORY
-		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START))
 		{
 			_currentState->Exit();
 			// Updating state
-			_state = State::INVENTORY;
 			_currentState = _gameStates[1];
 			_currentState->Enter();
+			_state = State::INVENTORY;
 		}
 		break;
 
 	case State::DIALOGUE:
-		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 		{
+			/*std::cout << "CLOSING" << std::endl;*/
 			_currentState->Exit();
-			// Updating state
-			_state = State::REGULAR;
 			_currentState = _gameStates[0];
 			_currentState->Enter();
+			_state = State::REGULAR;
+			// Updating state
+
+
+			//using namespace std::chrono_literals;
+			//std::cout << "Hello waiter\n" << std::flush;
+			//auto start = std::chrono::high_resolution_clock::now();
+			//std::this_thread::sleep_for(1000ms);
+			//auto end = std::chrono::high_resolution_clock::now();
+			//std::chrono::duration<double, std::milli> elapsed = end - start;
+			//std::cout << "Waited " << elapsed.count() << " ms\n";
+
+			//std::future<void> fut = std::async(std::launch::async, &GameState::OnChangeState, this);
+
+			//if (fut.wait_for(1000ms) == std::future_status::ready) {
+			//	// Result is ready.
+			//	std::cout << PrintState() << std::endl;
+			//	_state = State::REGULAR;
+			//	_currentState->Enter();
+			//}
+			//else {
+			//	// Do something else.
+			//	break;
+			//}
+
+			/*fut.wait();*/
+			/*fut.get();*/
+
+			/*_currentState = _gameStates[0];
+			_currentState->Enter();*/
+
 		}
 		break;
 
 	case State::INVENTORY:
 		// Face button Right to close the inventory / change the state back to REGULAR
-		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 		{
 			_currentState->Exit();
 			// Updating state
-			_state = State::REGULAR;
 			_currentState = _gameStates[0];
 			_currentState->Enter();
+			_state = State::REGULAR;
 		}
 		break;
 	default:

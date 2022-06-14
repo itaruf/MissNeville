@@ -69,8 +69,6 @@ bool Scene::Init()
 		AddActor(wallRight);
 
 		initialized = !initialized;
-
-		CSimpleSound::GetInstance().PlaySound(sfx, true, -3000);
 		/*App::PlaySoundW(sfx, true);*/
 
 		return false;
