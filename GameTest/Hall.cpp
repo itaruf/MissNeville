@@ -130,12 +130,6 @@ bool Hall::Init()
 void Hall::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
-
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
-	{
-		auto page{ new Page(MPage.name + " 1", App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(300, 250), new Collision(8, 8), 0, "lul") };
-		AddActor(page);
-	}
 }
 
 void Hall::Render()

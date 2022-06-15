@@ -50,6 +50,7 @@ void StateDialogue::Enter()
 	}
 
 	remainingDials = subDialogues.size();
+	end = maxLines;
 
 	std::cout << remainingDials << std::endl;
 	std::cout << line.length() << std::endl;
@@ -58,20 +59,19 @@ void StateDialogue::Enter()
 void StateDialogue::Update()
 {
 	// Check if there are more dialogues
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		if (remainingDials > maxLines)
 		{
 			start += maxLines;
 			remainingDials -= maxLines;
+			end = maxLines + remainingDials;
 		}
 	}
 }
 
 void StateDialogue::Render()
 {
-	/*_currentDialogue.c_str()*/
-
 	if (!_dialogueBox)
 		return;
 
@@ -79,13 +79,10 @@ void StateDialogue::Render()
 
 	App::Print(390, 135, speaker.c_str());
 	int count{ 0 };
-	for (auto i{ start }; i < maxLines; ++i)
+	for (auto i{ start }; i < end; ++i)
 	{
-		if (remainingDials >= i)
-		{
-			App::Print(310, 100 - (count * 25), subDialogues[i].c_str());
-			count++;
-		}
+		App::Print(310, 100 - (count * 25), subDialogues[i].c_str());
+		count++;
 	}
 }
 
