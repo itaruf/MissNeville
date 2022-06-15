@@ -5,11 +5,11 @@
 #include "Scene.h"
 #include "MirrorPuzzle.h"
 #include "Candle.h"
-#include "GameState.h"
+#include "StateMain.h"
 #include "NPC.h"
 #include "MirrorShard.h"
 
-class GameState;
+class StateMain;
 // Entrance scene 
 class Entrance : public Scene, std::enable_shared_from_this<Entrance>
 {

@@ -2,9 +2,9 @@
 #ifndef STATEDIALOGUE_H_
 #define STATEDIALOGUE_H_
 
-#include "GameStateController.h"
+#include "StateController.h"
 
-class StateDialogue : public GameStateController
+class StateDialogue : public StateController
 {
 public:
 	std::string _currentDialogue = " ";

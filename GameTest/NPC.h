@@ -3,24 +3,23 @@
 #define NPC_H_
 
 #include "Character.h"
-#include "IDialogue.h"
 #include "IInteractive.h"
 #include <unordered_map>
 #include "Utilities.h"
-#include "GameState.h"
+#include "StateMain.h"
 
 //class StateDialogue;
 //#include "StateDialogue.h"
 
-class GameStateController;
-#include "GameStateController.h"
+class StateController;
+#include "StateController.h"
 
 class StateDialogue;
 
 //#include "StateDialogue.h"
 
 // Class for non-playable entities (very WIP)
-class NPC : public Character, public IDialogue, public IInteractive
+class NPC : public Character, public IInteractive
 {
 private:
 protected:
@@ -32,9 +31,9 @@ public:
 	~NPC();
 
 	void PlayDialogue() override;
-	void PlayDialogue(int dialogueID) override;
+	/*void PlayDialogue(int dialogueID) override;
 	void StopDialogue(int dialogueID) override;
-	void EnableDialogue(int dialogueID) override;
+	void EnableDialogue(int dialogueID) override;*/
 	void SetCurrentDialogue(int dialogueID) override;
 	void Interact() override;
 };

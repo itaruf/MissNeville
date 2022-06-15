@@ -28,7 +28,7 @@ void ObjectController::MoveHorizontally(Character* actor)
 		y = actor->GetPosition()->_y;
 	}
 
-	for (const auto& other : GameState::_currentScene->GetActors())
+	for (const auto& other : StateMain::_currentScene->GetActors())
 	{
 		if (other == actor)
 			continue;
@@ -43,7 +43,9 @@ void ObjectController::MoveHorizontally(Character* actor)
 			}
 		}
 		else
+		{
 			actor->GetSprite()->SetPosition(x, y);
+		}
 	}
 }
 
@@ -66,7 +68,7 @@ void ObjectController::MoveVertically(Character* actor)
 		y = actor->GetPosition()->_y - actor->GetMovementSpeed();
 	}
 
-	for (const auto& other : GameState::_currentScene->GetActors())
+	for (const auto& other : StateMain::_currentScene->GetActors())
 	{
 		if (other == actor)
 			continue;
@@ -80,6 +82,8 @@ void ObjectController::MoveVertically(Character* actor)
 			}
 		}
 		else
+		{
 			actor->GetSprite()->SetPosition(x, y);
+		}
 	}
 }

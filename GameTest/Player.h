@@ -5,7 +5,7 @@
 #include "Character.h"
 #include "Inventory.h"
 #include "ICollectable.h"
-#include "GameState.h"
+#include "StateMain.h"
 
 // Class for the player character
 class Player : public Character

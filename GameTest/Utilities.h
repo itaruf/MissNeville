@@ -6,7 +6,7 @@
 #define TRIGGER_OFFSET (24)
 #define WALL_OFFSET (128)
 #define NEW_PLAYER_POS_OFFSET (32)
-#define VOLUME (-2500)
+#define VOLUME (-1500)
 
 #include <string>
 
@@ -19,11 +19,26 @@ static std::string GetChar(const T& var)
 	return std::to_string(var);
 }
 
-static std::string Process(std::string const& s, const char letter)
+static std::string Process(std::string const& s, const char letter, bool inclusive = true)
 {
     std::string::size_type pos = s.find(letter);
     if (pos != std::string::npos)
-        return s.substr(0, pos + 1);
+        if (inclusive)
+            return s.substr(0, pos + 1);
+        else
+            return s.substr(0, pos);
+    else
+        return s;
+}
+
+static std::string Process2(std::string const& s, const char letter, bool inclusive = true)
+{
+    std::string::size_type pos = s.find(letter);
+    if (pos != std::string::npos)
+        if (inclusive)
+            return s.substr(pos, s.length() - 1);
+        else
+            return s.substr(pos + 1, s.length() - 1);
     else
         return s;
 }

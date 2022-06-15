@@ -1,19 +1,19 @@
 #include "../stdafx.h"
-#include "GameState.h"
+#include "StateMain.h"
 
-Scene* GameState::_currentScene;
-std::vector<Scene*> GameState::_rooms;
-Player* GameState::_player;
-State GameState::_state;
-std::vector<GameStateController*> GameState::_gameStates;
-GameStateController* GameState::_currentState;
+Scene* StateMain::_currentScene;
+std::vector<Scene*> StateMain::_rooms;
+Player* StateMain::_player;
+State StateMain::_state;
+std::vector<StateController*> StateMain::_stateControllers;
+StateController* StateMain::_currentStateController;
 
-GameState::GameState()
+StateMain::StateMain()
 {
 }
 
 
-GameState::~GameState()
+StateMain::~StateMain()
 {
 	printf("GAME STATE DESTRUCTOR CALLED\n");
 
@@ -29,31 +29,31 @@ GameState::~GameState()
 			delete room;
 	_rooms.clear();
 
-	for (auto& gameState : _gameStates)
-		if (gameState)
-			delete gameState;
-	_gameStates.clear();
+	for (auto& state : _stateControllers)
+		if (state)
+			delete state;
+	_stateControllers.clear();
 
-	/*if (_currentState)
-		delete _currentState;*/
+	/*if (_currentStateController)
+		delete _currentStateController;*/
 }
 
-void GameState::AddPlayer(Player* player)
+void StateMain::AddPlayer(Player* player)
 {
 	_player = player;
 }
 
 using namespace std::chrono;
 
-void GameState::OnChangeState()
+void StateMain::OnChangeState()
 {
-	_currentState = _gameStates[0];
+	_currentStateController = _stateControllers[0];
 	std::cout << PrintState() << std::endl;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
 
-void GameState::SwitchState()
+void StateMain::SwitchState()
 {
 	switch (_state)
 	{
@@ -61,10 +61,10 @@ void GameState::SwitchState()
 		// Start button to open the inventory / change the state back to INVENTORY
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START))
 		{
-			_currentState->Exit();
+			_currentStateController->Exit();
 			// Updating state
-			_currentState = _gameStates[1];
-			_currentState->Enter();
+			_currentStateController = _stateControllers[1];
+			_currentStateController->Enter();
 			_state = State::INVENTORY;
 		}
 		break;
@@ -73,9 +73,9 @@ void GameState::SwitchState()
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 		{
 			/*std::cout << "CLOSING" << std::endl;*/
-			_currentState->Exit();
-			_currentState = _gameStates[0];
-			_currentState->Enter();
+			_currentStateController->Exit();
+			_currentStateController = _stateControllers[0];
+			_currentStateController->Enter();
 			_state = State::REGULAR;
 			// Updating state
 
@@ -88,13 +88,13 @@ void GameState::SwitchState()
 			//std::chrono::duration<double, std::milli> elapsed = end - start;
 			//std::cout << "Waited " << elapsed.count() << " ms\n";
 
-			//std::future<void> fut = std::async(std::launch::async, &GameState::OnChangeState, this);
+			//std::future<void> fut = std::async(std::launch::async, &StateMain::OnChangeState, this);
 
 			//if (fut.wait_for(1000ms) == std::future_status::ready) {
 			//	// Result is ready.
 			//	std::cout << PrintState() << std::endl;
 			//	_state = State::REGULAR;
-			//	_currentState->Enter();
+			//	_currentStateController->Enter();
 			//}
 			//else {
 			//	// Do something else.
@@ -104,8 +104,8 @@ void GameState::SwitchState()
 			/*fut.wait();*/
 			/*fut.get();*/
 
-			/*_currentState = _gameStates[0];
-			_currentState->Enter();*/
+			/*_currentStateController = _stateControllers[0];
+			_currentStateController->Enter();*/
 
 		}
 		break;
@@ -114,10 +114,10 @@ void GameState::SwitchState()
 		// Face button Right to close the inventory / change the state back to REGULAR
 		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 		{
-			_currentState->Exit();
+			_currentStateController->Exit();
 			// Updating state
-			_currentState = _gameStates[0];
-			_currentState->Enter();
+			_currentStateController = _stateControllers[0];
+			_currentStateController->Enter();
 			_state = State::REGULAR;
 		}
 		break;
@@ -126,12 +126,12 @@ void GameState::SwitchState()
 	}
 }
 
-Player* GameState::GetPlayer()
+Player* StateMain::GetPlayer()
 {
 	return _player;
 }
 
-std::string GameState::PrintState()
+std::string StateMain::PrintState()
 {
 	switch (_state)
 	{

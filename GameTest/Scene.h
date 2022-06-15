@@ -11,7 +11,7 @@
 class Actor;
 #include "Actor.h"
 
-class GameState;
+class StateMain;
 class Player;
 class Candle;
 class Collectable;

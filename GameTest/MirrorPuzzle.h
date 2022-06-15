@@ -3,7 +3,7 @@
 #define MIRRORSHARDPUZZLE_H_
 
 #include "Puzzle.h"
-#include "GameState.h"
+#include "StateMain.h"
 class Mirror;
 #include "Mirror.h"
 

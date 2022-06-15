@@ -41,7 +41,7 @@ bool Entrance::Init()
 	AddActor(shard4);
 
 	ObjectController* objectC{ new ObjectController() };
-	Character* character{new Character(MMirror.name, App::CreateSprite(MMirror.model, 2, 1, MMirror.frame, MMirror.scale), new Vector2D(350,250), new Collision(16, 16), 0, 4, objectC)};
+	Character* character{new Character(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(350,250), new Collision(16, 16), 0, 4, objectC)};
 	character->SetMobility(Mobility::MOVABLE);
 	AddActor(character);
 
@@ -77,7 +77,7 @@ bool Entrance::IsRoomCleared()
 	{
 		std::string description = "No";
 
-		auto page{ new Page(MPage.name , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(8, 8), 0, description) };
+		auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(8, 8), 0, description)};
 		AddActor(page);
 
 		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });

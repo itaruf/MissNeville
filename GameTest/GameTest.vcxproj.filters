@@ -64,13 +64,13 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp">
+    <ClCompile Include="StateMain.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
     <ClCompile Include="GameTest.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateController.cpp">
+    <ClCompile Include="StateController.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
     <ClCompile Include="StateDialogue.cpp">
@@ -207,10 +207,10 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
+    <ClInclude Include="StateMain.h">
       <Filter>GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateController.h">
+    <ClInclude Include="StateController.h">
       <Filter>GameStates</Filter>
     </ClInclude>
     <ClInclude Include="StateDialogue.h">

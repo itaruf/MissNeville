@@ -1,16 +1,16 @@
 #pragma once
 
-#ifndef GAMESTATECONTROLLER_H_
-#define GAMESTATECONTROLLER_H_
+#ifndef STATECONTROLLER_H_
+#define STATECONTROLLER_H_
 
 class Player;
 #include "Player.h"
 
-class GameStateController
+class StateController
 {
 public:
 	Player* _player;
-	virtual ~GameStateController();
+	virtual ~StateController();
 	
 	virtual void Enter() = 0;
 	virtual void Update() = 0;

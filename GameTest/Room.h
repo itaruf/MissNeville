@@ -5,10 +5,10 @@
 #include "Scene.h"
 #include "CandlePuzzle.h"
 #include "Candle.h"
-#include "GameState.h"
+#include "StateMain.h"
 #include "NPC.h"
 
-class GameState;
+class StateMain;
 // Room scene 
 class Room : public Scene, std::enable_shared_from_this<Room>
 {

@@ -52,7 +52,7 @@ void Player::MoveHorizontally()
 // Player's main function to interact with other actors and trigger their response to the interaction
 bool Player::Interact(IInteractive* actor)
 {
-	if (GameState::_state != State::REGULAR)
+	if (StateMain::_state != State::REGULAR)
 		return false;
 
 	if (!actor)
@@ -60,12 +60,12 @@ bool Player::Interact(IInteractive* actor)
 
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
-		if (GameState::_state != State::REGULAR)
+		if (StateMain::_state != State::REGULAR)
 			return false;
 
 		std::cout << "INTERACTING" << std::endl;
 		if (dynamic_cast<IDialogue*>(actor))
-			GameState::SetState(State::DIALOGUE);
+			StateMain::SetState(State::DIALOGUE);
 
 		/*if (dynamic_cast<Actor*>(actor)->_SInteract)
 			CSimpleSound::GetInstance().PlaySound(dynamic_cast<Actor*>(actor)->_SInteract, 0);*/
@@ -79,7 +79,7 @@ bool Player::Interact(IInteractive* actor)
 // Player's main function to interact with other actors (collectable) and trigger their response to the interaction
 bool Player::Interact(Collectable* collectable)
 {
-	if (GameState::_state != State::REGULAR)
+	if (StateMain::_state != State::REGULAR)
 		return false;
 
 	if (!collectable)
@@ -98,7 +98,7 @@ bool Player::Interact(Collectable* collectable)
 				collectable->OnCollected();
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
-				GameState::_currentScene->RemoveActor(collectable);
+				StateMain::_currentScene->RemoveActor(collectable);
 				/*CSimpleSound::GetInstance().PlaySound(collectable->_SInteract, 0, -2500);*/
 				return true;
 			}
@@ -161,7 +161,7 @@ void Player::GoToBagSlot(int ID, int slotNumber)
 
 void Player::Interaction()
 {
-	auto actors{ GameState::_currentScene->GetActors() };
+	auto actors{ StateMain::_currentScene->GetActors() };
 
 	if (actors.size() <= 0)
 		return;
@@ -225,7 +225,6 @@ void Player::Interaction()
 	auto m = dynamic_cast<Character*>(closestActor);
 	if (m)
 	{	
-		std::cout << "here" << std::endl;
 		m->SetDirection(_direction);
 		m->MoveHorizontally();
 		m->MoveVertically();

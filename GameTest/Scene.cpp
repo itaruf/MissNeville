@@ -50,7 +50,7 @@ bool Scene::Init()
 {
 	if (!initialized)
 	{
-		AddActor(GameState::_player);
+		AddActor(StateMain::_player);
 		
 		auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2)) };
 		wallLeft->SetTag("wall");

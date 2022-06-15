@@ -3,8 +3,8 @@
 #ifndef STATEINVENTORY_H_
 #define STATEINVENTORY_H_
 
-#include "GameStateController.h"
-class StateInventory : public GameStateController
+#include "StateController.h"
+class StateInventory : public StateController
 {
 public:
 	int _currentSlot = 0;

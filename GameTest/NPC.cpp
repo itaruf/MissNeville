@@ -17,11 +17,12 @@ void NPC::PlayDialogue()
 	if (_currentDialogue == " ")
 		return;
 
-	dynamic_cast<StateDialogue*>(GameState::_currentState)->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
+	dynamic_cast<StateDialogue*>(StateMain::_currentStateController)->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
 	/*App::Print(100, 100, ("[" + GetName() + "] says : " + _currentDialogue).c_str());
 	std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;*/
 }
 
+/*
 // Play a dialogue
 void NPC::PlayDialogue(int dialogueID)
 {
@@ -46,6 +47,7 @@ void NPC::EnableDialogue(int dialogueID)
 		dialogues[dialogueID].first = true;
 }
 
+*/
 // Set the current dialogue with another dialogue
 void NPC::SetCurrentDialogue(int dialogueID)
 {

@@ -28,8 +28,10 @@ void StateDialogue::Render()
 
 	_dialogueBox->Draw();
 
-	App::Print(390, 135, Process(_currentDialogue, ']').c_str());
-	App::Print(100, 100, _currentDialogue.c_str());
+
+	std::cout << _currentDialogue.length() << std::endl;
+	App::Print(390, 135, Process(_currentDialogue, ':').c_str());
+	App::Print(100, 100, Process2(_currentDialogue, ':', false).c_str());
 }
 
 void StateDialogue::Exit()

@@ -9,14 +9,14 @@
 #include "Entrance.h"
 class Scene;
 class Player;
-class GameStateController;
+class StateController;
 #include "EState.h"
 
 #include "PlayerController.h"
 #include "ObjectController.h"
 
 // Class in charge of managing the current state of the game and navigating through rooms
-class GameState
+class StateMain
 {
 private:
 protected:
@@ -25,11 +25,11 @@ public:
 	static Scene* _currentScene;
 	static std::vector<Scene*> _rooms;
 	static Player* _player;
-	static std::vector<GameStateController*> _gameStates;
-	static GameStateController* _currentState;
+	static std::vector<StateController*> _stateControllers;
+	static StateController* _currentStateController;
 
-	GameState();
-	~GameState();
+	StateMain();
+	~StateMain();
 
 	Player* GetPlayer();
 	void AddPlayer(Player* player);
@@ -37,21 +37,21 @@ public:
 	std::string PrintState();
 	void OnChangeState();
 
-	static void GameState::SetState(State state)
+	static void StateMain::SetState(State state)
 	{
 		_state = state;
 		switch (state)
 		{
 		case State::REGULAR:
-			_currentState = _gameStates[0];
+			_currentStateController = _stateControllers[0];
 			break;
 
 		case State::INVENTORY:
-			_currentState = _gameStates[1];
+			_currentStateController = _stateControllers[1];
 			break;
 
 		case State::DIALOGUE:
-			_currentState = _gameStates[2];
+			_currentStateController = _stateControllers[2];
 			break;
 
 		default:

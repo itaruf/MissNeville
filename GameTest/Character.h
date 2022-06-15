@@ -3,16 +3,17 @@
 #ifndef CHARACTER_H_
 #define CHARACTER_H_
 
-class GameState;
-#include "GameState.h"
+class StateMain;
+#include "StateMain.h"
 #include "Actor.h"
 class Controller;
 #include "Controller.h"
 
+#include "IDialogue.h"
 #include "App/SimpleSound.h"
 
 // Class for entities which will be either playable or non-playable such as NPCs
-class Character : public Actor
+class Character : public Actor, public IDialogue
 {
 private:
 protected:
@@ -42,7 +43,10 @@ public:
 
 	virtual void MoveVertically();
 	virtual void MoveHorizontally();
-};
+
+	virtual void PlayDialogue() override;
+	virtual void SetCurrentDialogue(int dialogueID) override;
+};  
 
 
 #endif

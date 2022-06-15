@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 #include "../stdafx.h"
 //------------------------------------------------------------------------
-//#include "GameState.h"	
+//#include "StateMain.h"	
 #include "Player.h"
 
 #include "StateRegular.h"
@@ -20,7 +20,7 @@
 #include "Controller.h"
 #include "PlayerController.h"
 
-std::shared_ptr<GameState> gameState;
+std::shared_ptr<StateMain> state;
 
 void Init()
 {
@@ -33,8 +33,8 @@ void Init()
 	StateDialogue* stateDialogue{ new StateDialogue(dialBox) };
 
 	/*Instantiate the gamestate which will be persistent across all scenes*/
-	gameState = std::make_shared<GameState>();
-	gameState->_state = State::REGULAR;
+	state = std::make_shared<StateMain>();
+	state->_state = State::REGULAR;
 
 	/*Scenes*/
 	Entrance* entrance{ new Entrance{ 0 } };
@@ -68,24 +68,24 @@ void Init()
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 18,19,20,21,22,23,24,25,26 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
-	player->_SBag = SFX.candle_enlight;
+	/*player->_SBag = SFX.candle_enlight;*/
 
 	/*Adding the player to the gamestate*/
-	gameState->AddPlayer(player);
+	state->AddPlayer(player);
 	stateRegular->_player = player;
 	stateInventory->_player = player;
 	stateDialogue->_player = player;
 
 	/*Setting up the first scene*/
-	/*gameState->_currentScene = entrance;*/
-	gameState->_currentScene = hall;
-	gameState->_currentScene->Init();
+	/*state->_currentScene = entrance;*/
+	state->_currentScene = hall;
+	state->_currentScene->Init();
 
 	/*Other scenes*/
-	gameState->_gameStates.emplace_back(stateRegular);
-	gameState->_gameStates.emplace_back(stateInventory);
-	gameState->_gameStates.emplace_back(stateDialogue);
-	gameState->_currentState = stateRegular;
+	state->_stateControllers.emplace_back(stateRegular);
+	state->_stateControllers.emplace_back(stateInventory);
+	state->_stateControllers.emplace_back(stateDialogue);
+	state->_currentStateController = stateRegular;
 
 
 	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
@@ -96,14 +96,14 @@ void Init()
 
 void Update(float deltaTime)
 { 
-	if (gameState->_currentScene)
+	if (state->_currentScene)
 	{
-		gameState->SwitchState();
-		gameState->_currentScene->Update(deltaTime);
-		gameState->_currentState->Update();
+		state->SwitchState();
+		state->_currentScene->Update(deltaTime);
+		state->_currentStateController->Update();
 	}
 
-	auto player{ gameState->GetPlayer() };
+	auto player{ state->GetPlayer() };
 
 	if (player)
 	{
@@ -114,16 +114,16 @@ void Update(float deltaTime)
 void Render()
 {
 	/*********CURRENT ROOM RENDER*********/
-	if (!gameState->_currentScene)
+	if (!state->_currentScene)
 		return;
 
-	gameState->_currentScene->Render();
-	App::Print(800, 620, ("Scene : " + GetChar(gameState->_currentScene->GetID())).c_str());
-	App::Print(800, 600, ("State : " + gameState->PrintState()).c_str());
-	gameState->_currentState->Render();
+	state->_currentScene->Render();
+	App::Print(800, 620, ("Scene : " + GetChar(state->_currentScene->GetID())).c_str());
+	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
+	state->_currentStateController->Render();
 
 	/*********PLAYER RENDER*********/
-	auto player{ gameState->GetPlayer() };
+	auto player{ state->GetPlayer() };
 
 	if (!player)
 		return;
@@ -132,7 +132,7 @@ void Render()
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
 
 	/*SOME PRINTS*/
-	if (gameState->_currentScene->IsRoomCleared())
+	if (state->_currentScene->IsRoomCleared())
 		App::Print(800, 700, "Scene Cleared");
 	else
 		App::Print(800, 700, "Scene Not Cleared");

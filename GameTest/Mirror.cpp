@@ -24,7 +24,7 @@ void Mirror::Interact()
 	}
 
 	std::cout << _repaired << std::endl;
-	auto p{ GameState::_player };
+	auto p{ StateMain::_player };
 	if (!p)
 		return;
 

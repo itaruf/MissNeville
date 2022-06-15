@@ -4,7 +4,7 @@
 
 #include "Collectable.h"
 #include "IInteractive.h"
-#include "GameState.h"
+#include "StateMain.h"
 #include "MirrorShard.h"
 
 // Class defining a candle which has a specific interaction

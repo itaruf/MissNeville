@@ -4,7 +4,7 @@
 #define TRIGGERSCENE_H_
 
 #include "Trigger.h"
-#include "GameState.h"
+#include "StateMain.h"
 
 class Scene;
 
