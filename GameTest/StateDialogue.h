@@ -12,6 +12,10 @@ public:
 
 	const int maxChar{ 50 };
 	const int maxLines{ 3 };
+	int start{ 0 };
+	int end{ 0 };
+	int remainingDials{ 0 };
+	std::string speaker{ " " };
 	std::vector<std::string> subDialogues;
 
 	StateDialogue(CSimpleSprite* dialogueBox);

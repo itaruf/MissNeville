@@ -14,12 +14,16 @@ NPC::~NPC()
 // Play a dialogue
 void NPC::PlayDialogue()
 {
-	if (_currentDialogue == " ")
-		return;
+	/*if (_currentDialogue == " ")
+		return;*/
 
-	dynamic_cast<StateDialogue*>(StateMain::_currentStateController)->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
-	/*App::Print(100, 100, ("[" + GetName() + "] says : " + _currentDialogue).c_str());
-	std::cout << "[" << GetName() << "] says : " << _currentDialogue << std::endl;*/
+	StateMain::SetState(State::DIALOGUE);
+
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_currentStateController) };
+	if (!stateDialogue)
+		return;
+	stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
+	stateDialogue->Enter();
 }
 
 /*

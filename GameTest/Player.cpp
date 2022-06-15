@@ -63,14 +63,14 @@ bool Player::Interact(IInteractive* actor)
 		if (StateMain::_state != State::REGULAR)
 			return false;
 
-		std::cout << "INTERACTING" << std::endl;
-		if (dynamic_cast<IDialogue*>(actor))
-			StateMain::SetState(State::DIALOGUE);
-
 		/*if (dynamic_cast<Actor*>(actor)->_SInteract)
 			CSimpleSound::GetInstance().PlaySound(dynamic_cast<Actor*>(actor)->_SInteract, 0);*/
 
+		/*if (dynamic_cast<IDialogue*>(actor))
+			StateMain::SetState(State::DIALOGUE);*/
+
 		actor->Interact();
+
 		return true;
 	}
 	return false;

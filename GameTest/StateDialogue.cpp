@@ -13,10 +13,59 @@ StateDialogue::~StateDialogue()
 
 void StateDialogue::Enter()
 {
+	subDialogues.clear();
+	remainingDials = 0;
+	start = 0;
+
+	if (!_dialogueBox)
+		return;
+
+	speaker = Process(_currentDialogue, ':');
+	auto line{ Process2(_currentDialogue, ':', false) };
+
+	// If the dialogue to display is larger than the number of max characters allowed
+	if (line.length() > maxChar)
+	{
+		auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
+		auto nbTrunc{ std::trunc((double)line.length() / (double) maxChar) };
+
+		std::cout << nbSubDials << std::endl;
+		std::cout << nbTrunc << std::endl;
+
+		App::Print(390, 315, GetChar(nbSubDials).c_str());
+
+		auto start{ 0 };
+		for (int i =  0 ; i < nbSubDials; i++)
+		{
+			/*std::cout << "current start:  " << start << std::endl;*/
+
+			subDialogues.emplace_back(line.substr(start, maxChar));
+			std::cout << "[LINE] : " << line.substr(start, maxChar) << std::endl;
+
+			/*std::cout << subDialogues[i] << std::endl;*/
+			/*std::cout << "next start:  " << start << std::endl;*/
+
+			start = maxChar * (i + 1);
+		}
+	}
+
+	remainingDials = subDialogues.size();
+
+	std::cout << remainingDials << std::endl;
+	std::cout << line.length() << std::endl;
 }
 
 void StateDialogue::Update()
 {
+	// Check if there are more dialogues
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X))
+	{
+		if (remainingDials > maxLines)
+		{
+			start += maxLines;
+			remainingDials -= maxLines;
+		}
+	}
 }
 
 void StateDialogue::Render()
@@ -28,35 +77,20 @@ void StateDialogue::Render()
 
 	_dialogueBox->Draw();
 
-	auto speaker{ Process(_currentDialogue, ':') };
-	auto line{ Process2(_currentDialogue, ':', false) };
-
-	// If the dialogue to display is larger than the number of max characters allowed
-	if (line.length() > maxChar)
+	App::Print(390, 135, speaker.c_str());
+	int count{ 0 };
+	for (auto i{ start }; i < maxLines; ++i)
 	{
-		auto nbSubDials{ std::ceil((double) line.length() / (double) maxChar)};
-		App::Print(390, 315, GetChar(nbSubDials).c_str());
-		
-		auto start{ 0 };
-		for (auto i{ 0 }; i < (int)nbSubDials; ++i)
+		if (remainingDials >= i)
 		{
-			subDialogues.emplace_back(line.substr(start , static_cast<__int64>(maxChar) * static_cast<__int64>(i + 1)));
-			App::Print(390, 340 + i * 25, subDialogues[i].c_str());
-			start = maxChar * (i + 1);
+			App::Print(310, 100 - (count * 25), subDialogues[i].c_str());
+			count++;
 		}
 	}
-
-	App::Print(390, 300, GetChar(line.length()).c_str());
-
-	App::Print(390, 135, speaker.c_str());
-	for (auto i{ 0 }; i < subDialogues.size(); ++i)
-	{
-		App::Print(310, 100 - (i * 25), subDialogues[i].c_str());
-	}
-
-	subDialogues.clear();
 }
 
 void StateDialogue::Exit()
 {
+	remainingDials = 0;
+	start = 0;
 }

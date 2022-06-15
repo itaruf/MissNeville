@@ -88,7 +88,7 @@ bool Hall::Init()
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(16, 16)) };
 	AddActor(charlotte);
-	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal must be around.. But it's so dark here ! Well, it always has been...")));
+	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal must be around.. But it's so dark here ! Well, it always has been... You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 

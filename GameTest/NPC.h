@@ -31,9 +31,6 @@ public:
 	~NPC();
 
 	void PlayDialogue() override;
-	/*void PlayDialogue(int dialogueID) override;
-	void StopDialogue(int dialogueID) override;
-	void EnableDialogue(int dialogueID) override;*/
 	void SetCurrentDialogue(int dialogueID) override;
 	void Interact() override;
 };
