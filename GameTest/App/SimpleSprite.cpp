@@ -51,15 +51,21 @@ void CSimpleSprite::Update(float dt)
         {
             m_animTime = m_animTime - duration;
         }
+
         int frame = (int)( m_animTime / anim.m_speed );
+
 		frame %= anim.m_frames.size();
+
         SetFrame(anim.m_frames[frame]);        
 
+        // Stop playing the animation
         if (anim.m_frames[frame] == anim.m_frames[anim.m_frames.size() - 1] && !anim.m_loop)
         {
-            std::cout << "here" << std::endl;
             m_currentAnim = -1;
+            return;
         }
+
+        std::cout << m_currentAnim << std::endl;
     }
 }
 

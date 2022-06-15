@@ -25,8 +25,8 @@ bool Entrance::Init()
 	AddActor(hallTrigger);
 
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 6, 1, MMirror.frame, MMirror.scale), new Vector2D(250,250), new Collision(16, 16)) };
-	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_BROKEN, 1.0f / 5.0f, { 0,1,2,3,4,5 });
-	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_REPAIRED, 1.0f / 5.0f, { 5,4,3,2,1,0 });
+	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_BROKEN, 1.0f / 15.0f, { 0,1,2,3,4,5 });
+	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_REPAIRED, 1.0f / 15.0f, { 5,4,3,2,1,0 });
 	AddActor(mirror);
 	mirror->SetMobility(Mobility::MOVABLE);
 

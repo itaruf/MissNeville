@@ -87,6 +87,7 @@ public:
     void SetAngle(float a)  { m_angle = a; }
     void SetScale(float s) { m_scale = s; }
     void SetFrame(unsigned int f);
+    void SetCurrentAnim(int i) { m_currentAnim = i; }
     
 	void GetPosition(float &x, float &y) { x = m_xpos; y = m_ypos; }
     float GetWidth()  const { return m_width;  }
@@ -95,6 +96,7 @@ public:
     float GetScale()  const { return m_scale;  }    
 	unsigned int GetFrame()  const { return m_frame; }
     std::vector<sAnimation>& GetAnimations() { return m_animations; }
+    int GetCurrentAnim() const { return m_currentAnim; }
 
 	// Set the sprite color. r,g,b for color and a= the alpha value (Fade).
 	void SetColor(float r, float g, float b, float a = 1.0f) { m_red = r; m_green = g; m_blue = b; m_alpha = a; }
