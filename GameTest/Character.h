@@ -13,7 +13,7 @@ class Controller;
 #include "App/SimpleSound.h"
 
 // Class for entities which will be either playable or non-playable such as NPCs
-class Character : public Actor, public IDialogue
+class Character : public Actor
 {
 private:
 protected:
@@ -43,9 +43,6 @@ public:
 
 	virtual void MoveVertically();
 	virtual void MoveHorizontally();
-
-	virtual void PlayDialogue() override;
-	virtual void SetCurrentDialogue(int dialogueID) override;
 };  
 
 

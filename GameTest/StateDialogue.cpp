@@ -13,9 +13,9 @@ StateDialogue::~StateDialogue()
 
 void StateDialogue::Enter()
 {
-	subDialogues.clear();
+	/*subDialogues.clear();
 	remainingDials = 0;
-	start = 0;
+	start = 0;*/
 
 	if (!_dialogueBox)
 		return;
@@ -27,10 +27,7 @@ void StateDialogue::Enter()
 	if (line.length() > maxChar)
 	{
 		auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
-		auto nbTrunc{ std::trunc((double)line.length() / (double) maxChar) };
-
-		std::cout << nbSubDials << std::endl;
-		std::cout << nbTrunc << std::endl;
+		/*auto nbTrunc{ std::trunc((double)line.length() / (double) maxChar) };*/
 
 		App::Print(390, 315, GetChar(nbSubDials).c_str());
 
@@ -53,8 +50,8 @@ void StateDialogue::Enter()
 		end = subDialogues.size();
 	}
 
-	std::cout << remainingDials << std::endl;
-	std::cout << line.length() << std::endl;
+	/*std::cout << remainingDials << std::endl;
+	std::cout << line.length() << std::endl;*/
 }
 
 void StateDialogue::Update()
@@ -67,6 +64,10 @@ void StateDialogue::Update()
 			start += maxLines;
 			remainingDials -= maxLines;
 			end = maxLines + remainingDials;
+		}
+		else
+		{
+			StateMain::SetState(State::REGULAR);
 		}
 	}
 }
@@ -89,6 +90,8 @@ void StateDialogue::Render()
 
 void StateDialogue::Exit()
 {
+	std::cout << "cleared" << std::endl;
+	subDialogues.clear();
 	remainingDials = 0;
 	start = 0;
 }

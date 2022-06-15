@@ -66,10 +66,10 @@ bool Player::Interact(IInteractive* actor)
 		/*if (dynamic_cast<Actor*>(actor)->_SInteract)
 			CSimpleSound::GetInstance().PlaySound(dynamic_cast<Actor*>(actor)->_SInteract, 0);*/
 
-		/*if (dynamic_cast<IDialogue*>(actor))
-			StateMain::SetState(State::DIALOGUE);*/
-
 		actor->Interact();
+
+		if (dynamic_cast<IDialogue*>(actor))
+			StateMain::SetState(State::DIALOGUE);
 
 		return true;
 	}

@@ -14,44 +14,16 @@ NPC::~NPC()
 // Play a dialogue
 void NPC::PlayDialogue()
 {
-	/*if (_currentDialogue == " ")
-		return;*/
-
-	StateMain::SetState(State::DIALOGUE);
-
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_currentStateController) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 	if (!stateDialogue)
 		return;
-	stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
-	stateDialogue->Enter();
+
+	if (_currentDialogue.empty())
+		stateDialogue->_currentDialogue = "[" + GetName() + "] says : ...";
+	else
+		stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
 }
 
-/*
-// Play a dialogue
-void NPC::PlayDialogue(int dialogueID)
-{
-	if (!dialogues[dialogueID].first)
-		return;
-
-	dialogueID++;
-	std::cout << "[" << GetName() << "] says : " << dialogues[dialogueID].second << std::endl;
-}
-
-// Stop a specific dialogue
-void NPC::StopDialogue(int dialogueID)
-{
-	if (dialogues[dialogueID].first)
-		dialogues[dialogueID].first = false;
-}
-
-// Enable of a specific dialogue 
-void NPC::EnableDialogue(int dialogueID)
-{
-	if (!dialogues[dialogueID].first)
-		dialogues[dialogueID].first = true;
-}
-
-*/
 // Set the current dialogue with another dialogue
 void NPC::SetCurrentDialogue(int dialogueID)
 {

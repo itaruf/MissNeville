@@ -43,16 +43,6 @@ void StateMain::AddPlayer(Player* player)
 	_player = player;
 }
 
-using namespace std::chrono;
-
-void StateMain::OnChangeState()
-{
-	_currentStateController = _stateControllers[0];
-	std::cout << PrintState() << std::endl;
-
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-}
-
 void StateMain::SwitchState()
 {
 	switch (_state)
@@ -70,43 +60,21 @@ void StateMain::SwitchState()
 		break;
 
 	case State::DIALOGUE:
-		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 		{
-			/*std::cout << "CLOSING" << std::endl;*/
+			/*auto stateDialogue{ dynamic_cast<StateDialogue*>(_currentStateController) };
+
+			if (!stateDialogue)
+				break;
+
+			if (stateDialogue->remainingDials < stateDialogue->maxLines)
+				break;
+
 			_currentStateController->Exit();
 			_currentStateController = _stateControllers[0];
 			_currentStateController->Enter();
 			_state = State::REGULAR;
-			// Updating state
-
-
-			//using namespace std::chrono_literals;
-			//std::cout << "Hello waiter\n" << std::flush;
-			//auto start = std::chrono::high_resolution_clock::now();
-			//std::this_thread::sleep_for(1000ms);
-			//auto end = std::chrono::high_resolution_clock::now();
-			//std::chrono::duration<double, std::milli> elapsed = end - start;
-			//std::cout << "Waited " << elapsed.count() << " ms\n";
-
-			//std::future<void> fut = std::async(std::launch::async, &StateMain::OnChangeState, this);
-
-			//if (fut.wait_for(1000ms) == std::future_status::ready) {
-			//	// Result is ready.
-			//	std::cout << PrintState() << std::endl;
-			//	_state = State::REGULAR;
-			//	_currentStateController->Enter();
-			//}
-			//else {
-			//	// Do something else.
-			//	break;
-			//}
-
-			/*fut.wait();*/
-			/*fut.get();*/
-
-			/*_currentStateController = _stateControllers[0];
-			_currentStateController->Enter();*/
-
+		*/
 		}
 		break;
 

@@ -19,7 +19,7 @@ class StateDialogue;
 //#include "StateDialogue.h"
 
 // Class for non-playable entities (very WIP)
-class NPC : public Character, public IInteractive
+class NPC : public Character, public IDialogue, public IInteractive
 {
 private:
 protected:

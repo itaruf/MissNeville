@@ -69,14 +69,6 @@ void Character::MoveHorizontally()
 	_controller->MoveHorizontally(this);
 }
 
-void Character::PlayDialogue()
-{
-}
-
-void Character::SetCurrentDialogue(int dialogueID)
-{
-}
-
 // Check if the character is currently moving or not
 bool Character::IsMoving()
 {

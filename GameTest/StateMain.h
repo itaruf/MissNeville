@@ -10,6 +10,8 @@
 class Scene;
 class Player;
 class StateController;
+class StateDialogue;
+#include "StateDialogue.h"
 #include "EState.h"
 
 #include "PlayerController.h"
@@ -35,23 +37,43 @@ public:
 	void AddPlayer(Player* player);
 	void SwitchState();
 	std::string PrintState();
-	void OnChangeState();
 
 	static void StateMain::SetState(State state)
 	{
-		_state = state;
 		switch (state)
 		{
 		case State::REGULAR:
-			_currentStateController = _stateControllers[0];
+			_currentStateController->Exit();
 			break;
 
 		case State::INVENTORY:
+			_currentStateController->Exit();
+			break;
+
+		case State::DIALOGUE:
+			_currentStateController->Exit();
+			break;
+
+		default:
+			break;
+		}
+
+		_state = state;
+		switch (_state)
+		{
+		case State::REGULAR:
+			_currentStateController = _stateControllers[0];
+			_currentStateController->Enter();
+			break;
+
+		case State::INVENTORY:;
 			_currentStateController = _stateControllers[1];
+			_currentStateController->Enter();
 			break;
 
 		case State::DIALOGUE:
 			_currentStateController = _stateControllers[2];
+			_currentStateController->Enter();
 			break;
 
 		default:
