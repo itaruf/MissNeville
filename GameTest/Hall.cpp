@@ -83,12 +83,12 @@ bool Hall::Init()
 
 	auto smith{ new NPC("Ms. Smith", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(512, 394), new Collision(16, 16)) };
 	AddActor(smith);
-	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your model.. the false angel.. shall be your doom ..!")));
+	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your path.. the false angel.. shall be your doom ..!")));
 	smith->SetCurrentDialogue(0);
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(16, 16)) };
 	AddActor(charlotte);
-	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal should be around.. But it's so dark here ! Well, it always has been...")));
+	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal must be around.. But it's so dark here ! Well, it always has been...")));
 	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
 	charlotte->SetCurrentDialogue(0);
 

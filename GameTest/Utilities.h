@@ -36,7 +36,7 @@ static std::string Process2(std::string const& s, const char letter, bool inclus
     std::string::size_type pos = s.find(letter);
     if (pos != std::string::npos)
         if (inclusive)
-            return s.substr(pos, s.length() - 1);
+            return s.substr(pos , s.length() - 1);
         else
             return s.substr(pos + 1, s.length() - 1);
     else

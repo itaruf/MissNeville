@@ -9,6 +9,11 @@ class StateDialogue : public StateController
 public:
 	std::string _currentDialogue = " ";
 	CSimpleSprite* _dialogueBox;
+
+	const int maxChar{ 50 };
+	const int maxLines{ 3 };
+	std::vector<std::string> subDialogues;
+
 	StateDialogue(CSimpleSprite* dialogueBox);
 	~StateDialogue();
 	void Enter() override;
