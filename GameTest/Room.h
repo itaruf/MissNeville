@@ -3,10 +3,11 @@
 #define ROOM_H_
 
 #include "Scene.h"
-#include "CandlePuzzle.h"
+#include "MirrorPuzzle.h"
 #include "Candle.h"
 #include "StateMain.h"
 #include "NPC.h"
+#include "MirrorShard.h"
 
 class StateMain;
 // Room scene 
@@ -15,6 +16,8 @@ class Room : public Scene, std::enable_shared_from_this<Room>
 private:
 protected:
 public:
+	MirrorPuzzle* _mirrorPuzzle;
+
 	Room(int ID, std::vector<Actor*> actors);
 	Room(int ID);
 	~Room();

@@ -80,7 +80,7 @@ void StateMain::SwitchState()
 
 	case State::INVENTORY:
 		// Face button Right to close the inventory / change the state back to REGULAR
-		if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START) || App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 		{
 			_currentStateController->Exit();
 			// Updating state

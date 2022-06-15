@@ -8,7 +8,7 @@
 #include "StateMain.h"
 
 // Class for the player character
-class Player : public Character
+class Player : public Character, public IDialogue
 {
 private:
 protected:
@@ -33,5 +33,7 @@ public:
 	void CloseBag(int ID);
 	void GoToBagSlot(int ID, int slotNumber);
 	void Interaction();
+
+	void PlayDialogue() override;
 };
 #endif

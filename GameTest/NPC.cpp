@@ -24,13 +24,6 @@ void NPC::PlayDialogue()
 		stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
 }
 
-// Set the current dialogue with another dialogue
-void NPC::SetCurrentDialogue(int dialogueID)
-{
-	if (dialogues.find(dialogueID) != dialogues.end())
-		_currentDialogue = dialogues[dialogueID].second;
-}
-
 // Executing instructions when the NPC is being interacted with
 void NPC::Interact()
 {

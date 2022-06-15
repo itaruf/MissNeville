@@ -135,8 +135,8 @@ struct MMirror
 {
 	std::string name{ "Mirror" };
 	const char* model{ ".\\TestData\\Props\\mirror.bmp" };
-	int frame{ 1 };
-	float scale{ 0.25 };
+	int frame{ 0 };
+	float scale{ 1 };
 };
 
 extern struct MMirror MMirror;

@@ -90,7 +90,6 @@ void StateDialogue::Render()
 
 void StateDialogue::Exit()
 {
-	std::cout << "cleared" << std::endl;
 	subDialogues.clear();
 	remainingDials = 0;
 	start = 0;

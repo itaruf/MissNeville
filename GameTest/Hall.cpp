@@ -83,13 +83,13 @@ bool Hall::Init()
 
 	auto smith{ new NPC("Ms. Smith", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(512, 394), new Collision(16, 16)) };
 	AddActor(smith);
-	smith->dialogues.insert(std::make_pair(0, std::make_pair(false, "You must not.. lighten your path.. the false angel.. shall be your doom ..!")));
+	smith->dialogues.insert(std::make_pair(0, "You must not.. lighten your path.. the false angel.. shall be your doom ..!"));
 	smith->SetCurrentDialogue(0);
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(16, 16)) };
 	AddActor(charlotte);
-	charlotte->dialogues.insert(std::make_pair(0, std::make_pair(false, "A page from my journal must be around.. But it's so dark here ! Well, it always has been... You did it ! Serves her right once again, good bye Ms. Smith !")));
-	charlotte->dialogues.insert(std::make_pair(1, std::make_pair(false, "You did it ! Serves her right once again, good bye Ms. Smith !")));
+	charlotte->dialogues.insert(std::make_pair(0, "A page from my journal must be around.. But it's so dark here ! Well, it always has been... You did it ! Serves her right once again, good bye Ms. Smith !"));
+	charlotte->dialogues.insert(std::make_pair(1, "You did it ! Serves her right once again, good bye Ms. Smith !"));
 	charlotte->SetCurrentDialogue(0);
 
 	auto pillar{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 - 70, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 16)) };

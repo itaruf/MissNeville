@@ -232,3 +232,15 @@ void Player::Interaction()
 		return;
 	}
 }
+
+void Player::PlayDialogue()
+{
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	if (!stateDialogue)
+		return;
+
+	if (_currentDialogue.empty())
+		stateDialogue->_currentDialogue = "[" + GetName() + "] says : ...";
+	else
+		stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
+}

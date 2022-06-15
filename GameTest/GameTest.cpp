@@ -68,7 +68,9 @@ void Init()
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 18,19,20,21,22,23,24,25,26 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
-	/*player->_SBag = SFX.candle_enlight;*/
+
+	player->dialogues.insert(std::make_pair(0, "You must not.. lighten your path.. the false angel.. shall be your doom ..!"));
+	player->SetCurrentDialogue(0);
 
 	/*Adding the player to the gamestate*/
 	state->AddPlayer(player);

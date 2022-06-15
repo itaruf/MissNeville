@@ -15,6 +15,50 @@
 //-----------------------------------------------------------------------------
 class CSimpleSprite
 {
+private:
+    void CalculateUVs();
+    GLuint m_texture;
+    float m_xpos = 0.0F;
+    float m_ypos = 0.0F;
+    float m_width = 0.0F;
+    float m_height = 0.0F;
+    unsigned int   m_texWidth = 0;
+    unsigned int   m_texHeight = 0;
+    float m_angle = 0.0F;
+    float m_scale = 1.0F;
+    float m_points[8];
+    float m_uvcoords[8];
+    unsigned int   m_frame;
+    unsigned int   m_nColumns;
+    unsigned int   m_nRows;
+    float m_red = 1.0f;
+    float m_green = 1.0f;
+    float m_blue = 1.0f;
+    float m_alpha = 1.0f;
+    int     m_currentAnim = -1;
+    float   m_animTime = 0.0F;
+    bool m_verticalFlip = false;
+    bool m_loop = false;
+
+    struct sAnimation
+    {
+        unsigned int m_id;
+        float m_speed;
+        bool m_loop;
+        std::vector<int> m_frames;
+    };
+    std::vector<sAnimation> m_animations;
+
+    // Texture management.
+    struct sTextureDef
+    {
+        unsigned int m_width;
+        unsigned int m_height;
+        GLuint m_textureID;
+    };
+    bool LoadTexture(const char*);
+    static std::map<std::string, sTextureDef > m_textures;
+
 public:
     enum
     {
@@ -22,6 +66,12 @@ public:
         ANIM_BACKWARDS,
         ANIM_LEFT,
         ANIM_RIGHT,
+    };
+
+    enum
+    {
+        ANIM_MIRROR_BROKEN,
+        ANIM_MIRROR_REPAIRED
     };
 
     // fileName: File must be a 32 bit BMP format (A8 R8 G8 B8). The alpha channel can be used to mask out the sprite.
@@ -44,6 +94,7 @@ public:
     float GetAngle()  const { return m_angle;  }
     float GetScale()  const { return m_scale;  }    
 	unsigned int GetFrame()  const { return m_frame; }
+    std::vector<sAnimation>& GetAnimations() { return m_animations; }
 
 	// Set the sprite color. r,g,b for color and a= the alpha value (Fade).
 	void SetColor(float r, float g, float b, float a = 1.0f) { m_red = r; m_green = g; m_blue = b; m_alpha = a; }
@@ -52,7 +103,7 @@ public:
 	// ID, Gives this animation a unique id.
 	// speed, Set the movement speed for this sprite.
 	// frames, provide a vector of sprite frame indices. Indices into your sprite page.
-	void CreateAnimation( unsigned int id, float speed, const std::vector<int> &frames);;
+    void CreateAnimation(unsigned int id, float speed, const std::vector<int>& frames, bool loop = false);
 	// Set the current animation to play.
 	// Note -1 will stop the animation.
 	void SetAnimation(int id);
@@ -67,49 +118,6 @@ public:
 
     // Flip the UVs when rendering the texture, usefull if your asset pack provide a right anim but not the left one for example.
     void SetVerticalFlip(const bool verticalFlip) { m_verticalFlip = verticalFlip; }
-
-private:
-    void CalculateUVs();
-    GLuint m_texture;
-    float m_xpos = 0.0F;
-    float m_ypos = 0.0F;
-    float m_width = 0.0F;
-    float m_height = 0.0F;
-    unsigned int   m_texWidth = 0;
-    unsigned int   m_texHeight = 0;
-    float m_angle = 0.0F;
-    float m_scale = 1.0F;
-    float m_points[8];    
-    float m_uvcoords[8];
-    unsigned int   m_frame;
-    unsigned int   m_nColumns;
-    unsigned int   m_nRows;
-	float m_red = 1.0f;
-	float m_green = 1.0f;
-	float m_blue = 1.0f;
-	float m_alpha = 1.0f;
-    int     m_currentAnim = -1;
-    float   m_animTime = 0.0F;
-    bool m_verticalFlip = false;
-
-    struct sAnimation
-    {
-        unsigned int m_id;
-        float m_speed;
-        std::vector<int> m_frames;
-    };
-    std::vector<sAnimation> m_animations;
-
-    // Texture management.
-    struct sTextureDef
-    {
-        unsigned int m_width;
-        unsigned int m_height;
-        GLuint m_textureID;
-    };
-    bool LoadTexture(const char*);
-    static std::map<std::string, sTextureDef > m_textures;
-    
 };
 
 #endif

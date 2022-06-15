@@ -54,6 +54,12 @@ void CSimpleSprite::Update(float dt)
         int frame = (int)( m_animTime / anim.m_speed );
 		frame %= anim.m_frames.size();
         SetFrame(anim.m_frames[frame]);        
+
+        if (anim.m_frames[frame] == anim.m_frames[anim.m_frames.size() - 1] && !anim.m_loop)
+        {
+            std::cout << "here" << std::endl;
+            m_currentAnim = -1;
+        }
     }
 }
 
@@ -157,12 +163,13 @@ void CSimpleSprite::SetAnimation(int id)
 	m_currentAnim = -1;
 }
 
-void CSimpleSprite::CreateAnimation(unsigned int id, float speed, const std::vector<int> &frames)
+void CSimpleSprite::CreateAnimation(unsigned int id, float speed, const std::vector<int> &frames, bool loop)
 {
 	sAnimation anim;
 	anim.m_id = id;
 	anim.m_speed = speed;
 	anim.m_frames = frames;
+    anim.m_loop = loop;
 	m_animations.push_back(anim);
 }
 
