@@ -37,20 +37,21 @@ void StateDialogue::Enter()
 		auto start{ 0 };
 		for (int i =  0 ; i < nbSubDials; i++)
 		{
-			/*std::cout << "current start:  " << start << std::endl;*/
-
 			subDialogues.emplace_back(line.substr(start, maxChar));
-			std::cout << "[LINE] : " << line.substr(start, maxChar) << std::endl;
-
-			/*std::cout << subDialogues[i] << std::endl;*/
-			/*std::cout << "next start:  " << start << std::endl;*/
-
 			start = maxChar * (i + 1);
 		}
 	}
 
-	remainingDials = subDialogues.size();
-	end = maxLines;
+	if (subDialogues.size() > maxLines)
+	{
+		remainingDials = subDialogues.size();
+		end = maxLines;
+	}
+	else
+	{
+		remainingDials = 0;
+		end = subDialogues.size();
+	}
 
 	std::cout << remainingDials << std::endl;
 	std::cout << line.length() << std::endl;
