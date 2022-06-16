@@ -79,8 +79,8 @@ void Init()
 	stateDialogue->_player = player;
 
 	/*Setting up the first scene*/
-	/*state->_currentScene = entrance;*/
-	state->_currentScene = hall;
+	state->_currentScene = entrance;
+	/*state->_currentScene = hall;*/
 	state->_currentScene->Init();
 
 	/*Other scenes*/

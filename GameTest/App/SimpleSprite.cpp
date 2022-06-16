@@ -44,8 +44,8 @@ void CSimpleSprite::Update(float dt)
 {
     if (m_currentAnim >= 0)
     {
+        sAnimation& anim = m_animations[m_currentAnim];
         m_animTime += dt/1000.0f;
-        sAnimation &anim = m_animations[m_currentAnim];
         float duration = anim.m_speed * anim.m_frames.size();
         if (m_animTime > duration)
         {
@@ -53,9 +53,8 @@ void CSimpleSprite::Update(float dt)
         }
 
         int frame = (int)( m_animTime / anim.m_speed );
-
+        m_frame = frame;
 		frame %= anim.m_frames.size();
-
         SetFrame(anim.m_frames[frame]);        
 
         // Stop playing the animation
@@ -64,8 +63,6 @@ void CSimpleSprite::Update(float dt)
             m_currentAnim = -1;
             return;
         }
-
-        std::cout << m_currentAnim << std::endl;
     }
 }
 

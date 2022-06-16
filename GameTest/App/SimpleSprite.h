@@ -60,16 +60,12 @@ private:
     static std::map<std::string, sTextureDef > m_textures;
 
 public:
-    enum
+    enum Anim
     {
         ANIM_FORWARDS,
         ANIM_BACKWARDS,
         ANIM_LEFT,
         ANIM_RIGHT,
-    };
-
-    enum
-    {
         ANIM_MIRROR_BROKEN,
         ANIM_MIRROR_REPAIRED
     };

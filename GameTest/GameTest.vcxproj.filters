@@ -121,6 +121,9 @@
     <ClCompile Include="Models.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="TriggerAnimation.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -266,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="Models.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerAnimation.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

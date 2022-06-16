@@ -7,12 +7,15 @@ TriggerScene::~TriggerScene()
 		delete _scene;
 }
 
-TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* scene, Vector2D* playerPos) : Trigger(name, sprite, position, collider), _scene{ scene }, _playerPos{ playerPos }
+TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* scene, Vector2D* playerPos, bool activated) : Trigger(name, sprite, position, collider, activated), _scene{ scene }, _playerPos{ playerPos }
 {
 }
 
 void TriggerScene::OnOverlap()
 {
+	if (!_activated)
+		return;
+
 	if (!_collider)
 		return;
 

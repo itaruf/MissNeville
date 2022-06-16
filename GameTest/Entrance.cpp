@@ -30,6 +30,12 @@ bool Entrance::Init()
 	AddActor(mirror);
 	mirror->SetMobility(Mobility::MOVABLE);
 
+	TriggerAnimation* m{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - 200), new Collision(16, 16, Collision::ColliderType::Overlap)) };
+	m->_anim = mirror->GetSprite()->ANIM_MIRROR_BROKEN;
+	m->_targetSprite = mirror->GetSprite();
+	m->_sfx = SFX.mirror_repaired;
+	AddActor(m);
+
 	MirrorShard* shard1{ new MirrorShard(MMirrorShard.name + "1", App::CreateSprite(MPage.model , 1, 1), new Vector2D(150,300), new Collision(16, 16)) };
 	AddActor(shard1);
 
@@ -61,10 +67,19 @@ void Entrance::Update(float deltaTime)
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 	{
 		_mirrorPuzzle->_mirror->GetSprite()->SetAnimation(_mirrorPuzzle->_mirror->GetSprite()->ANIM_MIRROR_BROKEN);
+		auto tmp = _mirrorPuzzle->_mirror->GetSprite()->GetAnimations()[_mirrorPuzzle->_mirror->GetSprite()->GetCurrentAnim()].m_frames;
+		if (tmp[_mirrorPuzzle->_mirror->GetSprite()->GetFrame()] == tmp[tmp.size() - 1])
+			_mirrorPuzzle->_mirror->GetSprite()->SetAnimation(-1);
 	}
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X))
 	{
 		_mirrorPuzzle->_mirror->GetSprite()->SetAnimation(_mirrorPuzzle->_mirror->GetSprite()->ANIM_MIRROR_REPAIRED);
+		auto tmp = _mirrorPuzzle->_mirror->GetSprite()->GetAnimations()[_mirrorPuzzle->_mirror->GetSprite()->GetCurrentAnim()].m_frames;
+		if (tmp[_mirrorPuzzle->_mirror->GetSprite()->GetFrame()] == tmp[tmp.size() - 1])
+		{
+			std::cout << true << std::endl;
+			_mirrorPuzzle->_mirror->GetSprite()->SetAnimation(-1);
+		}
 	}
 }
 
