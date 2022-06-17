@@ -21,14 +21,14 @@ bool Entrance::Init()
 	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
 
 	// Triggers
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene, new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
 	
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 6, 1, MMirror.frame, MMirror.scale), new Vector2D(250,250), new Collision(32, 32)) };
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_BROKEN, 1.0f / 15.0f, { 0,1,2,3,4,5 });
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_REPAIRED, 1.0f / 15.0f, { 5,4,3,2,1,0 });
 		mirror->SetMobility(Mobility::MOVABLE);
 
-	TriggerAnimation* m{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - 200), new Collision(32, 32, Collision::ColliderType::Overlap)) };
+	TriggerAnimation* m{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - 200), new Collision(32, 32, Collision::ColliderType::Overlap)) };
 	m->_anim = mirror->GetSprite()->ANIM_MIRROR_BROKEN;
 	m->_targetSprite = mirror->GetSprite();
 	m->_sfx = SFX.mirror_repaired;

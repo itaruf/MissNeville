@@ -18,11 +18,11 @@ bool Library::Init()
 	if (Scene::Init())
 		return true;
 
-	startingPos = new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2 - 128);
+	startingPos = new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT - 128);
 	
 	StateMain::_player->SetPosition(startingPos);
 
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
 	
 	auto wallH2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, (MIDDLE_HEIGHT + 64)), new Collision(2, MIDDLE_WIDTH + WALL_OFFSET * 2)) };
 	wallH2->SetTag("wall");
@@ -39,31 +39,31 @@ bool Library::Init()
 	/* Triggers*/
 	
 	// First Part
-	TriggerScene* tp1{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y - 100), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos)};
+	TriggerScene* tp1{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y - 100), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos)};
 	
-	TriggerScene* tp2{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y - 200), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, new Vector2D(wallV4->GetPosition()->_x + 128,  wallH2->GetPosition()->_y + 128)) };
+	TriggerScene* tp2{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y - 200), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, new Vector2D(wallV4->GetPosition()->_x + 128,  wallH2->GetPosition()->_y + 128)) };
 	
 	// Second Part
-	TriggerScene* tp3{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 128), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	TriggerScene* tp3{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 128), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
 	
-	TriggerScene* tp4{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 64), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos) };
+	TriggerScene* tp4{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 64), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos) };
 	
-	TriggerScene* tp5{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV4->GetPosition()->_x + 128,  wallH2->GetPosition()->_y + 64), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos) };
+	TriggerScene* tp5{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV4->GetPosition()->_x + 128,  wallH2->GetPosition()->_y + 64), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos) };
 	
 	// Third Part
-	TriggerScene* tp6{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV3->GetPosition()->_x + 128,  wallH2->GetPosition()->_y - 100), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos) };
+	TriggerScene* tp6{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV3->GetPosition()->_x + 128,  wallH2->GetPosition()->_y - 100), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos) };
 	
-	TriggerScene* tp7{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV3->GetPosition()->_x + 128,  wallH2->GetPosition()->_y - 200), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y + 64)) };
+	TriggerScene* tp7{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV3->GetPosition()->_x + 128,  wallH2->GetPosition()->_y - 200), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y + 64)) };
 	
 	// Fourth Part
-	TriggerScene* tp8{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y + 128), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos) };
+	TriggerScene* tp8{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y + 128), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos) };
 	
-	TriggerScene* tp9{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x , wallH2->GetPosition()->_y + 128), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, new Vector2D(APP_VIRTUAL_WIDTH / 2 , APP_VIRTUAL_HEIGHT / 2 - 64)) };
+	TriggerScene* tp9{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x , wallH2->GetPosition()->_y + 128), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, new Vector2D(MIDDLE_WIDTH , MIDDLE_HEIGHT - 48)) };
 	
-	TriggerScene* tp10{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x , wallH2->GetPosition()->_y + 64), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos) };
+	TriggerScene* tp10{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(wallV2->GetPosition()->_x , wallH2->GetPosition()->_y + 64), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos) };
 	
 	// Fifth Part 
-	TriggerScene* tp11{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 , APP_VIRTUAL_HEIGHT / 2 - 128), new Collision(32, 32, Collision::ColliderType::Overlap), nullptr, startingPos)};
+	TriggerScene* tp11{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH , MIDDLE_HEIGHT - 128), new Collision(16, 16, Collision::ColliderType::Overlap), nullptr, startingPos)};
 	
 	/*Props*/
 	auto shelf{ new Actor(MShelf.name, App::CreateSprite(MShelf.model, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(WALL_OFFSET + 16, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
@@ -158,6 +158,12 @@ bool Library::Init()
 	
 	auto shelf20{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf19->GetPosition()->_x + 32, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };
 	
+	auto table{ new Actor(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(tp11->GetPosition()->_x - 32, tp11->GetPosition()->_y), new Collision(32, 32)) };
+
+	auto table2{ new Actor(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(tp11->GetPosition()->_x + 32, tp11->GetPosition()->_y), new Collision(32, 32)) };
+
+	auto table3{ new Actor(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(tp11->GetPosition()->_x, tp11->GetPosition()->_y + 32), new Collision(32, 32)) };
+
 	return false;
 }
 

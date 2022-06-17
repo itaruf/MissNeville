@@ -9,6 +9,8 @@ struct MTable
 {
 	std::string name{ "Table" };
 	const char* model{ ".\\TestData\\Props\\table.bmp" };
+	const char* model2{ ".\\TestData\\Props\\table2.bmp" };
+	const char* model3{ ".\\TestData\\Props\\table3.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
 };

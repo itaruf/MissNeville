@@ -25,7 +25,7 @@ std::shared_ptr<StateMain> state;
 void Init()
 {
 	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
-	dialBox->SetPosition(APP_VIRTUAL_WIDTH / 2, 100);
+	dialBox->SetPosition(MIDDLE_WIDTH, 100);
 	dialBox->SetScale(7);
 	/*GameStates*/
 	StateRegular* stateRegular{ new StateRegular() };
@@ -64,7 +64,7 @@ void Init()
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
-	Collision* collider{ new Collision(32, 32, Collision::ColliderType::Block, new Vector2D(0, -10))};
+	Collision* collider{ new Collision(24, 24, Collision::ColliderType::Block, new Vector2D(0, -5))};
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 

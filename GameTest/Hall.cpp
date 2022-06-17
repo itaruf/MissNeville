@@ -37,13 +37,13 @@ bool Hall::Init()
 
 	/*Triggers*/
 
-	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene, new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET)) };
 	
-	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
 	
-	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, APP_VIRTUAL_HEIGHT / 2), new Collision(32, 32, Collision::ColliderType::Overlap), _EScene, new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, APP_VIRTUAL_HEIGHT / 2)) };
+	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _EScene, new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
 	
-	TriggerScene* roomTrigger{ new TriggerScene(MStairs.name, App::CreateSprite(MStairs.model, 1, 1, MStairs.frame, MStairs.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* roomTrigger{ new TriggerScene(MStairs.name, App::CreateSprite(MStairs.model, 1, 1, MStairs.frame, MStairs.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene, new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
 	
 	/*Initiating Props */
 
@@ -70,17 +70,17 @@ bool Hall::Init()
 	charlotte->dialogues.insert(std::make_pair(1, "You did it ! Serves her right once again, good bye Ms. Smith !"));
 	charlotte->SetCurrentDialogue(0);
 
-	auto pillar{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 - 70, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 16)) };
+	auto pillar{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH - 70, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 16)) };
 	
-	auto pillar2{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 + 70, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 16)) };
+	auto pillar2{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH + 70, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 16)) };
 	
-	auto railing{ new Actor(MRailing.name, App::CreateSprite(MRailing.model, 1, 1, MRailing.frame, MRailing.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 - 40, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 16)) };
+	auto railing{ new Actor(MRailing.name, App::CreateSprite(MRailing.model, 1, 1, MRailing.frame, MRailing.scale), new Vector2D(MIDDLE_WIDTH - 40, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 16)) };
 	
-	auto railing2{ new Actor(MRailing.name, App::CreateSprite(MRailing.model, 1, 1, MRailing.frame, MRailing.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 + 40, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 16)) };
+	auto railing2{ new Actor(MRailing.name, App::CreateSprite(MRailing.model, 1, 1, MRailing.frame, MRailing.scale), new Vector2D(MIDDLE_WIDTH + 40, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 16)) };
 	
-	auto picture{ new Actor(MPicture.name, App::CreateSprite(MPicture.model, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 - 150, APP_VIRTUAL_HEIGHT - WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32)) };
+	auto picture{ new Actor(MPicture.name, App::CreateSprite(MPicture.model, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH - 150, APP_VIRTUAL_HEIGHT - WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32)) };
 	
-	auto picture2{ new Actor(MPicture.name, App::CreateSprite(MPicture.model2, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2 + 150, APP_VIRTUAL_HEIGHT - WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32)) };
+	auto picture2{ new Actor(MPicture.name, App::CreateSprite(MPicture.model2, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH + 150, APP_VIRTUAL_HEIGHT - WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32)) };
 	
 	auto table{ new Actor(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(WALL_OFFSET + 64, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(32, 32)) };
 	
