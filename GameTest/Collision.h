@@ -23,9 +23,7 @@ public:
 	Vector2D* _offset;
 
 	Collision();
-	Collision(float height = 16, float width = 16, ColliderType colliderType = ColliderType::Block, Vector2D* offset = new Vector2D(0,0));
-	/*Collision(float height = 16, float width = 16, Vector2D* offset = new Vector2D(0, 0));*/
-	/*Collision(float height = 16, float width = 16);*/
+	Collision(float height = 32, float width = 32, ColliderType colliderType = ColliderType::Block, Vector2D* offset = new Vector2D(0,0));
 
 	~Collision();
 

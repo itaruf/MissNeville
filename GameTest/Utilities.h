@@ -6,6 +6,8 @@
 #define TRIGGER_OFFSET (24)
 #define WALL_OFFSET (128)
 #define NEW_PLAYER_POS_OFFSET (32)
+#define MIDDLE_WIDTH (APP_VIRTUAL_WIDTH / 2)
+#define MIDDLE_HEIGHT (APP_VIRTUAL_HEIGHT / 2)
 #define VOLUME (-1500)
 
 #include <string>

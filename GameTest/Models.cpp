@@ -3,6 +3,7 @@
 
 struct MTable MTable {};
 struct MCommode MCommode {};
+struct MShelf MShelf {};
 struct MBed MBed {};
 struct MCandle MCandle {};
 struct MPentagramme MPentagramme {};

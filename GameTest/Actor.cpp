@@ -1,15 +1,17 @@
 #include "../stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : _name{ std::move(name) }, _sprite(std::move(sprite)), _position{ position }, _collider{ std::move(collider)}
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : _name{ std::move(name) }, _sprite(std::move(sprite)), _position{ position }, _collider{ std::move(collider) }
 {
 
 	// Immediately Set the position of the actor 
 	SetPosition(position);
+	StateMain::_currentScene->AddActor(this);
 }
 
 Actor::Actor(Actor* actor) : _name(actor->_name), _sprite(actor->_sprite), _position(actor->_position), _collider(actor->_collider), _mobility(actor->_mobility), _direction(actor->_direction)
 {
+
 }
 
 Actor::~Actor()

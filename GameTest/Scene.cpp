@@ -50,36 +50,30 @@ bool Scene::Init()
 {
 	if (!initialized)
 	{
-		AddActor(StateMain::_player);
-		
+				
 		/*Background First*/
-		/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
+		/*for (int j = 0; j < (APP_VIRTUAL_HEIGHT - WALL_OFFSET * 2) / 32; j++)
 		{
-			for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
+			for (int i = 0; i < (APP_VIRTUAL_WIDTH - WALL_OFFSET * 2) / 32 ; i++)
 			{
-				auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Props\\wood-plank2.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(32, 32, Collision::ColliderType::Overlap));
+				auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Backgrounds\\background.bmp", 1, 1), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));
 				ground->GetSprite()->SetFrame(1);
-				ground->GetSprite()->SetScale(4);
-				AddActor(ground);
-			}
+				ground->GetSprite()->SetScale(2);
+							}
 		}*/
 
-		auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2)) };
+		auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, MIDDLE_HEIGHT ), new Collision(MIDDLE_HEIGHT + WALL_OFFSET, 2)) };
 		wallLeft->SetTag("wall");
-		AddActor(wallLeft);
-
-		auto wallBot{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH)) };
+		
+		auto wallBot{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET), new Collision(2, MIDDLE_WIDTH + WALL_OFFSET * 2)) };
 		wallBot->SetTag("wall");
-		AddActor(wallBot);
-
-		auto wallTop{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, APP_VIRTUAL_WIDTH)) };
+		
+		auto wallTop{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(2, MIDDLE_WIDTH + WALL_OFFSET * 2)) };
 		wallTop->SetTag("wall");
-		AddActor(wallTop);
-
-		auto wallRight{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(APP_VIRTUAL_HEIGHT, 2)) };
+		
+		auto wallRight{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET, MIDDLE_HEIGHT), new Collision(MIDDLE_HEIGHT + WALL_OFFSET, 2)) };
 		wallRight->SetTag("wall");
-		AddActor(wallRight);
-
+		
 		initialized = !initialized;
 		/*App::PlaySoundW(sfx, true);*/
 

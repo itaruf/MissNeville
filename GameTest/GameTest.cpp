@@ -55,10 +55,16 @@ void Init()
 	hall->_SScene = entrance;
 	hall->_EScene = library;
 
+	/*Setting up the first scene*/
+	/*state->_currentScene = entrance;*/
+	/*state->_currentScene = hall;*/
+	/*state->_currentScene = lounge;*/
+	state->_currentScene = library;
+
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
-	Collision* collider{ new Collision(16, 16, Collision::ColliderType::Block, new Vector2D(0, -10))};
+	Collision* collider{ new Collision(32, 32, Collision::ColliderType::Block, new Vector2D(0, -10))};
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 
@@ -78,20 +84,13 @@ void Init()
 	stateInventory->_player = player;
 	stateDialogue->_player = player;
 
-	/*Setting up the first scene*/
-	/*state->_currentScene = entrance;*/
-	/*state->_currentScene = hall;*/
-	/*state->_currentScene = lounge;*/
-	state->_currentScene = library;
-
-	state->_currentScene->Init();
-
-	/*Other scenes*/
+	/*Other states*/
 	state->_stateControllers.emplace_back(stateRegular);
 	state->_stateControllers.emplace_back(stateInventory);
 	state->_stateControllers.emplace_back(stateDialogue);
 	state->_currentStateController = stateRegular;
 
+	state->_currentScene->Init();
 	/*CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);*/
 
 	// Test ambiance WIP (need to create a sound manager)
