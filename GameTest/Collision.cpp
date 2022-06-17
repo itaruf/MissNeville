@@ -70,7 +70,7 @@ void Collision::SetWidth(float value)
 // DEBUG : Draw the collider with the actor pos in the center
 void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 {
-	return; // Print no collider
+	//return; // Print no collider
 
 	if (!actor)
 		return;

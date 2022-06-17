@@ -52,6 +52,18 @@ bool Scene::Init()
 	{
 		AddActor(StateMain::_player);
 		
+		/*Background First*/
+		/*for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
+		{
+			for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
+			{
+				auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Props\\wood-plank2.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(32, 32, Collision::ColliderType::Overlap));
+				ground->GetSprite()->SetFrame(1);
+				ground->GetSprite()->SetScale(4);
+				AddActor(ground);
+			}
+		}*/
+
 		auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, APP_VIRTUAL_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT, 2)) };
 		wallLeft->SetTag("wall");
 		AddActor(wallLeft);

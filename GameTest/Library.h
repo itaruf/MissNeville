@@ -15,6 +15,7 @@ class Library : public Scene, std::enable_shared_from_this<Library>
 private:
 protected:
 public:
+	Vector2D* startingPos{ nullptr };
 	Library(int ID, std::vector<Actor*> actors);
 	Library(int ID);
 	~Library();

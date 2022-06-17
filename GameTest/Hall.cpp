@@ -35,18 +35,6 @@ bool Hall::Init()
 	/*Initiating Puzzles*/
 	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
-	/*Background First*/
-	for (int j = 3; j <= APP_VIRTUAL_HEIGHT / 64 - 3; j++)
-	{
-		for (int i = 3; i <= APP_VIRTUAL_WIDTH / 64 - 3; i++)
-		{
-			auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Props\\wood-plank2.bmp", 1, 1), new Vector2D(0 + i * 64, 0 + j * 64), new Collision(32, 32, Collision::ColliderType::Overlap));
-			ground->GetSprite()->SetFrame(1);
-			ground->GetSprite()->SetScale(4);
-			AddActor(ground);
-		}
-	}
-
 	/*Triggers*/
 
 	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _SScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET)) };

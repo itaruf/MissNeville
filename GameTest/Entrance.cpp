@@ -21,7 +21,7 @@ bool Entrance::Init()
 	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
 
 	// Triggers
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(16, 16, Collision::ColliderType::Overlap), _NScene, new Vector2D(APP_VIRTUAL_WIDTH / 2, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
 	AddActor(hallTrigger);
 
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 6, 1, MMirror.frame, MMirror.scale), new Vector2D(250,250), new Collision(16, 16)) };
@@ -64,7 +64,7 @@ void Entrance::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
+	/*if (App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 	{
 		_mirrorPuzzle->_mirror->GetSprite()->SetAnimation(_mirrorPuzzle->_mirror->GetSprite()->ANIM_MIRROR_BROKEN);
 		auto tmp = _mirrorPuzzle->_mirror->GetSprite()->GetAnimations()[_mirrorPuzzle->_mirror->GetSprite()->GetCurrentAnim()].m_frames;
@@ -80,7 +80,7 @@ void Entrance::Update(float deltaTime)
 			std::cout << true << std::endl;
 			_mirrorPuzzle->_mirror->GetSprite()->SetAnimation(-1);
 		}
-	}
+	}*/
 }
 
 void Entrance::Render()

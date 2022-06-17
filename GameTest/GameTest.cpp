@@ -79,8 +79,11 @@ void Init()
 	stateDialogue->_player = player;
 
 	/*Setting up the first scene*/
-	state->_currentScene = entrance;
+	/*state->_currentScene = entrance;*/
 	/*state->_currentScene = hall;*/
+	/*state->_currentScene = lounge;*/
+	state->_currentScene = library;
+
 	state->_currentScene->Init();
 
 	/*Other scenes*/
@@ -89,8 +92,7 @@ void Init()
 	state->_stateControllers.emplace_back(stateDialogue);
 	state->_currentStateController = stateRegular;
 
-
-	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
+	/*CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);*/
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/

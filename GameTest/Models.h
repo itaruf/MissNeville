@@ -94,9 +94,9 @@ extern struct MCarpet MCarpet;
 struct MTriggerScene
 {
 	std::string name{ "Trigger Scene" };
-	const char* model{ ".\\TestData\\Characters\\charlotte.bmp" };
+	const char* model{ ".\\TestData\\Props\\door.bmp" };
 	int frame{ 0 };
-	float scale{ 3 };
+	float scale{ 1.5 };
 };
 
 extern struct MTriggerScene MTriggerScene;
@@ -219,6 +219,7 @@ struct SFX
 	const char* footstep{ ".\\TestData\\SFX\\footstep.wav" };
 	const char* footstep2{ ".\\TestData\\SFX\\footstep2.wav" };
 	const char* page_read{ ".\\TestData\\SFX\\page_read.wav" };
+
 };
 
 extern struct SFX SFX;

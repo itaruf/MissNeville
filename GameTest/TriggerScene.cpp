@@ -33,18 +33,15 @@ void TriggerScene::OnOverlap()
 
 	App::Print(350, 350, _name.c_str());
 
-	if (!_scene)
+	if (_scene)
 	{
-		std::cout << "null" << std::endl;
-		return;
+		StateMain::_currentScene = _scene;
+
+		if (!StateMain::_currentScene->Init())
+			std::cout << StateMain::_currentScene->GetID() << " Initialized" << std::endl;
+		else
+			std::cout << StateMain::_currentScene->GetID() << " Already Initialized" << std::endl;
 	}
-
-	StateMain::_currentScene = _scene;
-
-	if (!StateMain::_currentScene->Init())
-		std::cout << StateMain::_currentScene->GetID() << " Initialized" << std::endl;
-	else
-		std::cout << StateMain::_currentScene->GetID() << " Already Initialized" << std::endl;
 
 	if (!_playerPos)
 		return;
