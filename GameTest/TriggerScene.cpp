@@ -7,7 +7,7 @@ TriggerScene::~TriggerScene()
 		delete _scene;
 }
 
-TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* scene, Vector2D* playerPos, bool activated) : Trigger(name, sprite, position, collider, activated), _scene{ scene }, _playerPos{ playerPos }
+TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Vector2D* playerPos, Collision* collider, Scene* scene, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx), _scene{ scene }, _playerPos{ playerPos }
 {
 }
 
@@ -46,8 +46,13 @@ void TriggerScene::OnOverlap()
 	if (!_playerPos)
 		return;
 
-	/*std::cout << _playerPos->_x << std::endl;
-	std::cout << _playerPos->_y << std::endl;*/
-
 	p->SetPosition(_playerPos->_x, _playerPos->_y);
+
+	if (_SInteract == "")
+		return;
+
+	/*_sprite->SetAnimation(_anim);*/
+
+	/*if (!CSimpleSound::GetInstance().IsPlaying(_SInteract))*/
+		CSimpleSound::GetInstance().PlaySoundW(_SInteract);
 }

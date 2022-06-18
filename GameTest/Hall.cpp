@@ -37,13 +37,13 @@ bool Hall::Init()
 
 	/*Triggers*/
 
-	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene, new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene) };
 	
-	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene, new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
+	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene) };
 	
-	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _EScene, new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
+	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT),  new Collision(32, 32, Collision::ColliderType::Overlap), _EScene) };
 	
-	TriggerScene* roomTrigger{ new TriggerScene(MStairs.name, App::CreateSprite(MStairs.model, 1, 1, MStairs.frame, MStairs.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene, new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET)) };
+	TriggerScene* roomTrigger{ new TriggerScene(MStairs.name, App::CreateSprite(MStairs.model, 1, 1, MStairs.frame, MStairs.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene) };
 	
 	/*Initiating Props */
 
@@ -57,7 +57,7 @@ bool Hall::Init()
 				_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
 
-	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(516, 418), new Collision(48, 32, Collision::ColliderType::Overlap)) };
+	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, 3), new Vector2D(516, 418), new Collision(48, 32, Collision::ColliderType::Overlap)) };
 	
 	auto bed{ new Actor(MBed.name, App::CreateSprite(MBed.model, 1, 1, MBed.frame, MBed.scale), new Vector2D(312, 464), new Collision(48, 32)) };
 	

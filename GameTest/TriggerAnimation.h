@@ -11,11 +11,9 @@ class Scene;
 class TriggerAnimation : public Trigger
 {
 public:
-	CSimpleSprite::Anim _anim;
+	CSimpleSprite::Anim _targetAnim;
 	CSimpleSprite* _targetSprite;
-	const char* _sfx;
-	bool _end{ false };
-	TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
+	TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, bool activated = false, const char* sfx = SFX.tp_sound);
 	~TriggerAnimation();
 
 	void OnOverlap() override;

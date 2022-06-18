@@ -50,17 +50,21 @@ bool Scene::Init()
 {
 	if (!initialized)
 	{
-				
+		std::random_device myRandomDevice;
 		/*Background First*/
-		/*for (int j = 0; j < (APP_VIRTUAL_HEIGHT - WALL_OFFSET * 2) / 32; j++)
+		for (int j = 0; j < (APP_VIRTUAL_HEIGHT - WALL_OFFSET * 2) / 32; j++)
 		{
 			for (int i = 0; i < (APP_VIRTUAL_WIDTH - WALL_OFFSET * 2) / 32 ; i++)
 			{
-				auto ground = new Actor("Wood Plank", App::CreateSprite(".\\TestData\\Backgrounds\\background.bmp", 1, 1), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));
-				ground->GetSprite()->SetFrame(1);
-				ground->GetSprite()->SetScale(2);
-							}
-		}*/
+				unsigned seed = myRandomDevice();
+				std::default_random_engine myRandomEngine(seed);
+
+				/*if (myRandomEngine() % 12 != 1)*/
+				new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));
+				/*else
+					new Actor(MBackground.name, App::CreateSprite(MBackground.model2, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));*/
+			}
+		}
 
 		auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(WALL_OFFSET, MIDDLE_HEIGHT ), new Collision(MIDDLE_HEIGHT + WALL_OFFSET, 2)) };
 		wallLeft->SetTag("wall");

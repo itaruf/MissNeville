@@ -5,6 +5,17 @@
 
 #include <string>
 
+struct MBackground
+{
+	std::string name{ "Background" };
+	const char* model{ ".\\TestData\\Backgrounds\\background.bmp" };
+	const char* model2{ ".\\TestData\\Backgrounds\\background2.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MBackground MBackground;
+
 struct MTable
 {
 	std::string name{ "Table" };
@@ -61,6 +72,28 @@ struct MShelf
 
 extern struct MShelf MShelf;
 
+struct MWeb
+{
+	std::string name{ "Spider Web" };
+	const char* model{ ".\\TestData\\Props\\web.bmp" };
+	const char* model2{ ".\\TestData\\Props\\web2.bmp" };
+	int frame{ 0 };
+	float scale{ 1 };
+};
+
+extern struct MWeb MWeb;
+
+struct MBook
+{
+	std::string name{ "Book" };
+	const char* model{ ".\\TestData\\Props\\booksheet.bmp" };
+	int frame{ 12 };
+	float scale{ 2 };
+};
+
+extern struct MBook MBook;
+
+
 struct MBed
 {
 	std::string name{ "Bed" };
@@ -85,8 +118,8 @@ struct MPentagramme
 {
 	std::string name{ "Pentagramme" };
 	const char* model{ ".\\TestData\\Props\\pentagramme.bmp" };
-	int frame{ 0 };
-	float scale{ 3 };
+	int frame{ 5 };
+	float scale{ 1 };
 };
 
 extern struct MPentagramme MPentagramme;
@@ -145,11 +178,23 @@ struct MPage
 {
 	std::string name{ "Page" };
 	const char* model{ ".\\TestData\\Props\\page.bmp" };
+	const char* model2{ ".\\TestData\\Props\\papers.bmp" };
 	int frame{ 0 };
 	float scale{ 3 };
+	float scale2{ 2 };
 };
 
 extern struct MPage MPage;
+
+struct MSkull
+{
+	std::string name{ "skull" };
+	const char* model{ ".\\TestData\\Props\\skull.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MSkull MSkull;
 
 struct MWall
 {
@@ -232,6 +277,16 @@ struct MIcon
 
 extern struct MIcon MIcon;
 
+struct MLamp
+{
+	std::string name{ "Lamp" };
+	const char* model{ ".\\TestData\\Props\\lamp.bmp" };
+	int frame{ 0 };
+	float scale{ 3 };
+};
+
+extern struct MLamp MLamp;
+
 struct SFX
 {
 	const char* entrance{ ".\\TestData\\SFX\\entrance.wav" };
@@ -249,7 +304,7 @@ struct SFX
 	const char* footstep{ ".\\TestData\\SFX\\footstep.wav" };
 	const char* footstep2{ ".\\TestData\\SFX\\footstep2.wav" };
 	const char* page_read{ ".\\TestData\\SFX\\page_read.wav" };
-
+	const char* tp_sound{ ".\\TestData\\SFX\\tp_sound.wav" };
 };
 
 extern struct SFX SFX;

@@ -13,7 +13,7 @@ class TriggerScene : public Trigger
 public:
 	Scene* _scene;
 	Vector2D* _playerPos;
-	TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, Scene* scene, Vector2D* playerPos, bool activated = true);
+	TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Vector2D* playerPos = new Vector2D(), Collision* collider = new Collision(32, 32), Scene* scene = nullptr, bool activated = true, const char* sfx = SFX.tp_sound);
 	~TriggerScene();
 
 	void OnOverlap() override;

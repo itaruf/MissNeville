@@ -67,7 +67,10 @@ public:
         ANIM_LEFT,
         ANIM_RIGHT,
         ANIM_MIRROR_BROKEN,
-        ANIM_MIRROR_REPAIRED
+        ANIM_MIRROR_REPAIRED,
+        ANIM_BOOK_OPENING,
+        ANIM_PENTAGRAMME,
+        ANIM_LAMP
     };
 
     // fileName: File must be a 32 bit BMP format (A8 R8 G8 B8). The alpha channel can be used to mask out the sprite.

@@ -20,6 +20,7 @@ class Page;
 #include "TriggerScene.h";
 #include "Models.h"
 #include "TriggerAnimation.h"
+#include <random>
 
 // Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene

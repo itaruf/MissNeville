@@ -64,9 +64,10 @@ void Init()
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
-	Collision* collider{ new Collision(24, 24, Collision::ColliderType::Block, new Vector2D(0, -5))};
+	Collision* collider{ new Collision(24, 24, Collision::ColliderType::Block, new Vector2D(0, -10))};
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
+	player->SetTag("player");
 
 	/*Player base stats and configs*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
@@ -91,7 +92,7 @@ void Init()
 	state->_currentStateController = stateRegular;
 
 	state->_currentScene->Init();
-	/*CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);*/
+	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/

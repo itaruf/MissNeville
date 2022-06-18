@@ -3,10 +3,10 @@
 #define LIBRARY_H_
 
 #include "Scene.h"
-#include "CandlePuzzle.h"
-#include "Candle.h"
+#include "TPPuzzle.h"
 #include "StateMain.h"
 #include "NPC.h"
+#include "StateDialogue.h"
 
 class StateMain;
 // Library scene 
@@ -15,7 +15,9 @@ class Library : public Scene, std::enable_shared_from_this<Library>
 private:
 protected:
 public:
-	Vector2D* startingPos{ nullptr };
+	TPPuzzle* _TPPuzzle;
+	Vector2D* _startingPos{ nullptr };
+
 	Library(int ID, std::vector<Actor*> actors);
 	Library(int ID);
 	~Library();

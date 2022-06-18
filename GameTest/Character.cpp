@@ -75,6 +75,10 @@ bool Character::IsMoving()
 	if (App::GetController().GetLeftThumbStickY() == 0.f && App::GetController().GetLeftThumbStickX() == 0.f)
 	{
 		/*_direction = Direction::STILL;*/
+		if (_sprite->GetCurrentAnim() == -1)
+			return false;
+
+		_sprite->SetFrame(_sprite->GetAnimations()[_sprite->GetCurrentAnim()].m_frames[0]);
 		_sprite->SetAnimation(-1);
 		return false;
 	}

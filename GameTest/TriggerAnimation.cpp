@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "TriggerAnimation.h"
 
-TriggerAnimation::TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : Trigger(name, sprite, position, collider)
+TriggerAnimation::TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx)
 {
 }
 
@@ -34,7 +34,7 @@ void TriggerAnimation::OnOverlap()
 	if (!_targetSprite)
 		return;
 
-	_targetSprite->SetAnimation(_anim);
+	_targetSprite->SetAnimation(_targetAnim);
 	auto tmp = _targetSprite->GetAnimations()[_targetSprite->GetCurrentAnim()].m_frames;
 	if (tmp[_targetSprite->GetFrame()] == tmp[tmp.size() - 1])
 	{
@@ -42,9 +42,9 @@ void TriggerAnimation::OnOverlap()
 		return;
 	}
 	
-	if (_sfx == "")
+	if (_SInteract == "")
 		return;
 
-	if (!CSimpleSound::GetInstance().IsPlaying(_sfx))
-		CSimpleSound::GetInstance().PlaySoundW(_sfx);
+	if (!CSimpleSound::GetInstance().IsPlaying(_SInteract))
+		CSimpleSound::GetInstance().PlaySoundW(_SInteract);
 }
