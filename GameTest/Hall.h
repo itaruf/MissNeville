@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ENTRANCE_H_
-#define ENTRANCE_H_
+#ifndef HALL_H_
+#define HALL_H_
 
 #include "Scene.h"
 #include "CandlePuzzle.h"
@@ -27,6 +27,7 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;
+	void OnMirrorShattered() override;
 
 	void slt()
 	{

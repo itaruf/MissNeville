@@ -57,16 +57,17 @@ void Init()
 
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
-	state->_currentScene = hall;
+	/*state->_currentScene = hall;*/
 	/*state->_currentScene = lounge;*/
 	/*state->_currentScene = library;*/
+	state->_currentScene = room;
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
-	Vector2D* vector{ new Vector2D{ 300.0f, 200.0f } };
+	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 316.0f } };
 	Collision* collider{ new Collision(24, 24, Collision::ColliderType::Block, new Vector2D(0, -10))};
 	PlayerController* controller{ new PlayerController() };
-	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
+	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 	player->SetTag("player");
 	player->_interactSprite = App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale);
 	/*Player base stats and configs*/
@@ -76,7 +77,9 @@ void Init()
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
 
-	player->dialogues.insert(std::make_pair(0, "You must not.. lighten your path.. the false angel.. shall be your doom ..!"));
+	player->dialogues.insert(std::make_pair(0, "["+ player->GetName() + "] says : The mirror shattered in pieces !"));
+	player->dialogues.insert(std::make_pair(1, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
+	//player->dialogues.insert(std::make_pair(2, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
 	player->SetCurrentDialogue(0);
 
 	/*Adding the player to the gamestate*/

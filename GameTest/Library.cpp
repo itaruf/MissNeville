@@ -15,8 +15,32 @@ Library::~Library()
 
 bool Library::Init()
 {
-	if (Scene::Init())
+	if (initialized)
 		return true;
+
+	std::random_device myRandomDevice;
+	/*Background First*/
+	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET * 2) / 32; j++)
+	{
+		for (int i = 0; i < (APP_VIRTUAL_WIDTH - LIBRARY_WALL_OFFSET * 2) / 32; i++)
+		{
+			unsigned seed = myRandomDevice();
+			std::default_random_engine myRandomEngine(seed);
+			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(LIBRARY_WALL_OFFSET + 16 + i * 32, LIBRARY_WALL_OFFSET + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));
+		}
+	}
+
+	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(LIBRARY_WALL_OFFSET, MIDDLE_HEIGHT), new Collision(MIDDLE_HEIGHT + LIBRARY_WALL_OFFSET, 2)) };
+	wallLeft->SetTag("wall");
+
+	auto wallBot{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, LIBRARY_WALL_OFFSET), new Collision(2, MIDDLE_WIDTH + LIBRARY_WALL_OFFSET * 2)) };
+	wallBot->SetTag("wall");
+
+	auto wallTop{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET), new Collision(2, MIDDLE_WIDTH + LIBRARY_WALL_OFFSET * 2)) };
+	wallTop->SetTag("wall");
+
+	auto wallRight{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL_OFFSET, MIDDLE_HEIGHT), new Collision(MIDDLE_HEIGHT + LIBRARY_WALL_OFFSET, 2)) };
+	wallRight->SetTag("wall");
 
 	/*PAGE*/
 	std::string description = "Page number 2";
@@ -27,24 +51,24 @@ bool Library::Init()
 
 	ObjectController* objectC{ new ObjectController() };
 
-	_startingPos = new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT - 128);
+	_startingPos = new Vector2D(LIBRARY_WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT - 128);
 	/*_startingPos = new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 32);*/
 	
 	StateMain::_player->SetPosition(_startingPos);
 
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(LIBRARY_WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene) };
 	
-	auto wallH2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, (MIDDLE_HEIGHT + 64)), new Collision(2, MIDDLE_WIDTH + WALL_OFFSET * 2)) };
+	auto wallH2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, (MIDDLE_HEIGHT + 64)), new Collision(2, MIDDLE_WIDTH + LIBRARY_WALL_OFFSET * 2)) };
 	wallH2->SetTag("wall");
 	
-	auto wallV2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH - 128, wallH2->GetPosition()->_y / 2 + 64), new Collision(MIDDLE_HEIGHT / 2 + WALL_OFFSET, 2)) };
+	auto wallV2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH - 128, wallH2->GetPosition()->_y / 2 + 64), new Collision(MIDDLE_HEIGHT / 2 + LIBRARY_WALL_OFFSET, 2)) };
 	wallV2->SetTag("wall");
 	
-	auto wallV3{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(wallV2->GetPosition()->_x + 256, wallH2->GetPosition()->_y / 2 + 64), new Collision(MIDDLE_HEIGHT / 2 + WALL_OFFSET, 2)) };
-	wallV2->SetTag("wall");
+	auto wallV3{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(wallV2->GetPosition()->_x + 256, wallH2->GetPosition()->_y / 2 + 64), new Collision(MIDDLE_HEIGHT / 2 + LIBRARY_WALL_OFFSET, 2)) };
+	wallV3->SetTag("wall");
 	
-	auto wallV4{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, wallH2->GetPosition()->_y + 100), new Collision(MIDDLE_HEIGHT - WALL_OFFSET * 2 + 64, 2)) };
-	wallV2->SetTag("wall");
+	auto wallV4{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, wallH2->GetPosition()->_y + 100), new Collision(MIDDLE_HEIGHT - LIBRARY_WALL_OFFSET * 2 + 64, 2)) };
+	wallV4->SetTag("wall");
 	
 	/* Triggers*/
 	
@@ -58,7 +82,7 @@ bool Library::Init()
 	tp2->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
 
 	// Second Part
-	TriggerScene* tp3{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 126), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
+	TriggerScene* tp3{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 126), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT)) };
 	tp3->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp3->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
 
@@ -106,7 +130,7 @@ bool Library::Init()
 	auto commode3{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(MIDDLE_WIDTH - 128, commode2->GetPosition()->_y - 92), new Collision(64, 32)) };
 	commode->SetTag("wall");
 
-	auto shelf8{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(WALL_OFFSET + 24, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };	
+	auto shelf8{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(LIBRARY_WALL_OFFSET + 24, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };	
 	auto shelf9{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf8->GetPosition()->_x + 32, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };	
 	auto shelf10{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf9->GetPosition()->_x + 32, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };
 	auto shelf11{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf10->GetPosition()->_x + 32, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };
@@ -114,20 +138,20 @@ bool Library::Init()
 	auto shelf13{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf12->GetPosition()->_x + 32, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };
 	auto shelf14{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf13->GetPosition()->_x + 32, wallH2->GetPosition()->_y - 16), new Collision(64, 32)) };
 
-	auto papers{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(WALL_OFFSET + 24, wallH2->GetPosition()->_y - 128), new Collision(32, 32, Collision::ColliderType::Overlap)) };
-	auto papers2{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(WALL_OFFSET + 50, wallH2->GetPosition()->_y - 200), new Collision(32, 32, Collision::ColliderType::Overlap)) };
-	auto papers3{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(WALL_OFFSET + 100, wallH2->GetPosition()->_y - 300), new Collision(32, 32, Collision::ColliderType::Overlap)) };
-	auto papers4{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(WALL_OFFSET + 150, wallH2->GetPosition()->_y - 250), new Collision(32, 32, Collision::ColliderType::Overlap)) };
+	auto papers{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL_OFFSET + 24, wallH2->GetPosition()->_y - 128), new Collision(32, 32, Collision::ColliderType::Overlap)) };
+	auto papers2{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL_OFFSET + 50, wallH2->GetPosition()->_y - 200), new Collision(32, 32, Collision::ColliderType::Overlap)) };
+	auto papers3{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL_OFFSET + 100, wallH2->GetPosition()->_y - 300), new Collision(32, 32, Collision::ColliderType::Overlap)) };
+	auto papers4{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL_OFFSET + 150, wallH2->GetPosition()->_y - 250), new Collision(32, 32, Collision::ColliderType::Overlap)) };
 	
-	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(WALL_OFFSET + 164, wallH2->GetPosition()->_y - 64), new Collision(32, 32)) };
-	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(WALL_OFFSET + 164, wallH2->GetPosition()->_y - 290), new Collision(32, 32)) };
+	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL_OFFSET + 164, wallH2->GetPosition()->_y - 64), new Collision(32, 32)) };
+	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL_OFFSET + 164, wallH2->GetPosition()->_y - 290), new Collision(32, 32)) };
 
-	auto table5{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(WALL_OFFSET + 32, wallH2->GetPosition()->_y - 150), new Collision(32, 32), 0, 2, objectC) };
+	auto table5{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(LIBRARY_WALL_OFFSET + 32, wallH2->GetPosition()->_y - 150), new Collision(32, 32), 0, 2, objectC) };
 	table5->SetDirection(Direction::RIGHT);
-	auto table6{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(WALL_OFFSET + 164, wallH2->GetPosition()->_y - 250), new Collision(32, 32), 0, 2, objectC) };
+	auto table6{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(LIBRARY_WALL_OFFSET + 164, wallH2->GetPosition()->_y - 250), new Collision(32, 32), 0, 2, objectC) };
 	table6->SetDirection(Direction::LEFT);
 
-	auto book{ new Actor(MBook.name, App::CreateSprite(MBook.model, 6, 7, MBook.frame, MBook.scale), new Vector2D(WALL_OFFSET + 92, wallH2->GetPosition()->_y - 92), new Collision(32, 32)) };
+	auto book{ new Actor(MBook.name, App::CreateSprite(MBook.model, 6, 7, MBook.frame, MBook.scale), new Vector2D(LIBRARY_WALL_OFFSET + 92, wallH2->GetPosition()->_y - 92), new Collision(32, 32)) };
 	book->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_BOOK_OPENING, 1 / 15.0f, { 12, 13, 14, 15, 16, 17 }, true);
 	book->GetSprite()->SetAnimation(CSimpleSprite::ANIM_BOOK_OPENING);
 
@@ -135,15 +159,15 @@ bool Library::Init()
 	auto commode7{ new Actor(MShelf.name, App::CreateSprite(MCommode.model6, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(MIDDLE_WIDTH, wallH2->GetPosition()->_y + 46), new Collision(64, 32)) };
 	auto commode8{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(MIDDLE_WIDTH, commode7->GetPosition()->_y + 92), new Collision(64, 32)) };
 
-	auto shelf28{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(wallV4->GetPosition()->_x + 96, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf29{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf28->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf30{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf29->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf31{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf30->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf32{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf31->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf33{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf32->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf34{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf33->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf35{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf34->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf36{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf35->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf28{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(wallV4->GetPosition()->_x + 96, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf29{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf28->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf30{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf29->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf31{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf30->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf32{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf31->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf33{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf32->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf34{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf33->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf35{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf34->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf36{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf35->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
 
 	auto papers5{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(shelf28->GetPosition()->_x + 24, wallH2->GetPosition()->_y + 10), new Collision(32, 32, Collision::ColliderType::Overlap)) };
 	auto papers6{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(shelf28->GetPosition()->_x - 50, wallH2->GetPosition()->_y + 110), new Collision(32, 32, Collision::ColliderType::Overlap)) };
@@ -188,17 +212,17 @@ bool Library::Init()
 	table8->SetDirection(Direction::LEFT);
 
 	/*Fourth Part*/
-	auto shelf{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(WALL_OFFSET + 24, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf2{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf3{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf2->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf4{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf3->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf5{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf4->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf6{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf5->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf7{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf6->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf37{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf7->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf38{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf37->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf39{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf38->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
-	auto shelf40{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf39->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(LIBRARY_WALL_OFFSET + 24, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf2{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf3{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf2->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf4{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf3->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf5{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf4->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf6{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf5->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf7{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf6->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf37{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf7->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf38{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf37->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf39{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf38->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
+	auto shelf40{ new Actor(MShelf.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame, MShelf.scale), new Vector2D(shelf39->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET), new Collision(64, 32)) };
 
 	auto book6{ new Actor(MBook.name, App::CreateSprite(MBook.model, 6, 7, 24, MBook.scale), new Vector2D(shelf2->GetPosition()->_x - 32, wallH2->GetPosition()->_y + 64), new Collision(32, 32)) };
 	book6->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_BOOK_OPENING, 1 / 15.0f, { 24, 25, 26, 27, 28, 29 }, true);
@@ -208,7 +232,7 @@ bool Library::Init()
 	book7->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_BOOK_OPENING, 1 / 15.0f, { 24, 25, 26, 27, 28, 29 }, true);
 	book7->GetSprite()->SetAnimation(CSimpleSprite::ANIM_BOOK_OPENING);
 
-	auto table9{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(WALL_OFFSET + 140, wallH2->GetPosition()->_y + 32), new Collision(32, 32), 0, 4, objectC) };
+	auto table9{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(LIBRARY_WALL_OFFSET + 140, wallH2->GetPosition()->_y + 32), new Collision(32, 32), 0, 4, objectC) };
 	table9->SetDirection(Direction::UP);
 
 	auto papers11{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(shelf->GetPosition()->_x + 24, wallH2->GetPosition()->_y + 50), new Collision(32, 32, Collision::ColliderType::Overlap)) };
@@ -253,7 +277,8 @@ bool Library::Init()
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
 
-	return false;
+	initialized != initialized;
+	return true;
 }
 
 void Library::Update(float deltaTime)

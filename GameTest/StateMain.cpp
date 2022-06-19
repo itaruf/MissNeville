@@ -46,7 +46,7 @@ void StateMain::AddPlayer(Player* player)
 
 void StateMain::SwitchState()
 {
-	delegate();
+	/*delegate();*/
 
 	switch (_state)
 	{

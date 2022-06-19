@@ -1,6 +1,6 @@
 #pragma once
-#ifndef HALL_H_
-#define HALL_H_
+#ifndef ENTRANCE_H_
+#define ENTRANCE_H_
 
 #include "Scene.h"
 #include "MirrorPuzzle.h"

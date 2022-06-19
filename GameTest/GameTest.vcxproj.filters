@@ -127,6 +127,9 @@
     <ClCompile Include="TPPuzzle.cpp">
       <Filter>Puzzles</Filter>
     </ClCompile>
+    <ClCompile Include="TriggerDialogue.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -278,6 +281,9 @@
     </ClInclude>
     <ClInclude Include="TPPuzzle.h">
       <Filter>Puzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="TriggerDialogue.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,9 @@ class Collision;
 #include <unordered_map>
 #include "Models.h"
 
+class Scene;
+#include "Scene.h"
+
 // Base class for all physical entities in the game (props, characters (player, NPC), ...) 
 class Actor
 {

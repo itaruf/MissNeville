@@ -29,11 +29,27 @@ void TriggerAnimation::OnOverlap()
 	if (!_collider->isColliding(p, this, v->_x, v->_y))
 		return;
 
-	_activated = false;
-
 	if (!_targetSprite)
 		return;
 
+	if (!_targetAnim)
+		return;
+
+	_activated = !_activated;
+
+	PlayAnimation();
+	
+	if (_SInteract == "")
+		return;
+
+	if (!CSimpleSound::GetInstance().IsPlaying(_SInteract))
+		CSimpleSound::GetInstance().PlaySoundW(_SInteract);
+
+}
+
+void TriggerAnimation::PlayAnimation()
+{
+	_onPlayingAnim();
 	_targetSprite->SetAnimation(_targetAnim);
 	auto tmp = _targetSprite->GetAnimations()[_targetSprite->GetCurrentAnim()].m_frames;
 	if (tmp[_targetSprite->GetFrame()] == tmp[tmp.size() - 1])
@@ -41,10 +57,4 @@ void TriggerAnimation::OnOverlap()
 		_targetSprite->SetAnimation(-1);
 		return;
 	}
-	
-	if (_SInteract == "")
-		return;
-
-	if (!CSimpleSound::GetInstance().IsPlaying(_SInteract))
-		CSimpleSound::GetInstance().PlaySoundW(_SInteract);
 }

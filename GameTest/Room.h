@@ -4,10 +4,10 @@
 
 #include "Scene.h"
 #include "MirrorPuzzle.h"
-#include "Candle.h"
 #include "StateMain.h"
 #include "NPC.h"
 #include "MirrorShard.h"
+#include "TriggerDialogue.h"
 
 class StateMain;
 // Room scene 
@@ -26,6 +26,7 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;
+	void OnMirrorShattered();
 };
 
 #endif

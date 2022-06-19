@@ -40,6 +40,8 @@ public:
 		void operator()() { for (auto& f : funcs) f(); }
 	}; 
 	
+	Delegate _delegate;
+
 	bool initialized{ false };
 	Scene* _NScene{ nullptr };
 	Scene* _EScene{ nullptr };
@@ -47,8 +49,6 @@ public:
 	Scene* _SScene{ nullptr };
 
 	std::vector<TriggerScene*> doors;
-
-	Delegate onCleared;
 
 	Scene(int ID, std::vector<Actor*> actors);
 	Scene(int ID);
@@ -62,10 +62,12 @@ public:
 	void AddActor(Actor* actor);
 	bool RemoveActor(Collectable* collectable);
 
-	virtual bool Init();
+	virtual bool Init() = 0;
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual bool IsRoomCleared() = 0;
+	virtual void OnMirrorShattered();
+
 };
 
 #endif

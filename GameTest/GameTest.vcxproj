@@ -148,6 +148,7 @@
     <ClInclude Include="TPPuzzle.h" />
     <ClInclude Include="Trigger.h" />
     <ClInclude Include="TriggerAnimation.h" />
+    <ClInclude Include="TriggerDialogue.h" />
     <ClInclude Include="TriggerScene.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vector2D.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="TPPuzzle.cpp" />
     <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="TriggerAnimation.cpp" />
+    <ClCompile Include="TriggerDialogue.cpp" />
     <ClCompile Include="TriggerScene.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
