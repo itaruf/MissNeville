@@ -33,12 +33,22 @@ protected:
 	const char* sfx{SFX.scene};
 
 public:
-
+	struct Delegate
+	{
+		std::vector<std::function<void()>> funcs;
+		template<class T> Delegate& operator+=(T mFunc) { funcs.push_back(mFunc); return *this; }
+		void operator()() { for (auto& f : funcs) f(); }
+	}; 
+	
 	bool initialized{ false };
 	Scene* _NScene{ nullptr };
 	Scene* _EScene{ nullptr };
 	Scene* _WScene{ nullptr };
 	Scene* _SScene{ nullptr };
+
+	std::vector<TriggerScene*> doors;
+
+	Delegate onCleared;
 
 	Scene(int ID, std::vector<Actor*> actors);
 	Scene(int ID);

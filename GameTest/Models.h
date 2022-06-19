@@ -272,7 +272,7 @@ struct MIcon
 	std::string name{ "Icon" };
 	const char* model{ ".\\TestData\\Icons\\question_mark.bmp" };
 	int frame{ 0 };
-	float scale{ 2 };
+	float scale{ 1 };
 };
 
 extern struct MIcon MIcon;
@@ -308,6 +308,14 @@ struct SFX
 };
 
 extern struct SFX SFX;
+
+struct MMessage
+{
+	std::string door_unlocked{ "[...] : You hear the sound of a now unlocked door..." };
+};
+
+extern struct MMessage MMessage;
+
 
 #endif // !MODEL_H
 

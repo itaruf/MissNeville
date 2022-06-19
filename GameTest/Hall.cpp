@@ -35,16 +35,24 @@ bool Hall::Init()
 	/*Initiating Puzzles*/
 	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
+	StateMain::delegate += [this]() {this->slt(); };
+
 	/*Triggers*/
 
-	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene) };
+	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene, false) };
 	
-	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene) };
+	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene, false) };
 	
-	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT),  new Collision(32, 32, Collision::ColliderType::Overlap), _EScene) };
+	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - WALL_OFFSET - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT),  new Collision(32, 32, Collision::ColliderType::Overlap), _EScene, false) };
 	
-	TriggerScene* roomTrigger{ new TriggerScene(MStairs.name, App::CreateSprite(MStairs.model, 1, 1, MStairs.frame, MStairs.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene) };
-	
+	TriggerScene* roomTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET + 16), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene, false) };
+	roomTrigger->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_DOOR, 1 / 15.f, { 0, 1 });
+
+	doors.emplace_back(entranceTrigger);
+	doors.emplace_back(loungeTrigger);
+	doors.emplace_back(libraryTrigger);
+	doors.emplace_back(roomTrigger);
+
 	/*Initiating Props */
 
 	auto carpet{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale), new Vector2D(512, 384), new Collision(64, 64, Collision::ColliderType::Overlap)) };
@@ -57,7 +65,7 @@ bool Hall::Init()
 				_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
 
-	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, 3), new Vector2D(516, 418), new Collision(48, 32, Collision::ColliderType::Overlap)) };
+	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, 0, 3), new Vector2D(516, 418), new Collision(48, 32, Collision::ColliderType::Overlap)) };
 	
 	auto bed{ new Actor(MBed.name, App::CreateSprite(MBed.model, 1, 1, MBed.frame, MBed.scale), new Vector2D(312, 464), new Collision(48, 32)) };
 	
@@ -110,7 +118,7 @@ bool Hall::IsRoomCleared()
 {
 	if (!_candlePuzzle)
 		return false;
-
+	 
 	if (!_candlePuzzle->IsCleared())
 		return false;
 
@@ -119,10 +127,6 @@ bool Hall::IsRoomCleared()
 
 	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 	{
-		std::string description{ "\n[Page 1] :\n\nDear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nIn all seriousness, I hope Father and Mother will dismiss her very soon.. Or I'll do it myself ! Yes !\n\n- Charlotte Neville." };
-
-		auto page{ new Page(MPage.name + " 1", App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, description) };
-		
 		auto it{ std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; }) };
 		if (it != _actors.end())
 		{
@@ -134,11 +138,33 @@ bool Hall::IsRoomCleared()
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 		}
-		_candlePuzzle->_status = Puzzle::Status::CLEARED;
-
-		return true;
 	}
 
+	if (_candlePuzzle->_page->itemized && _candlePuzzle->_status == Puzzle::Status::PENDING)
+	{
+		_candlePuzzle->_status = Puzzle::Status::CLEARED;
+
+		for (auto& door : doors)
+		{
+			if (door->_scene == _NScene)
+			{
+				auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+
+				if (!stateDialogue)
+					return true;
+
+				stateDialogue->_currentDialogue = MMessage.door_unlocked;
+				StateMain::SetState(State::DIALOGUE);
+
+				door->GetSprite()->SetAnimation(CSimpleSprite::ANIM_DOOR);
+				CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
+
+				door->_activated = true;
+				break;
+			}
+		}
+		return true;
+	}
 	return false;
 }
 

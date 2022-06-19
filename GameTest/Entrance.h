@@ -8,6 +8,7 @@
 #include "StateMain.h"
 #include "NPC.h"
 #include "MirrorShard.h"
+#include <functional>
 
 class StateMain;
 // Entrance scene 
@@ -25,6 +26,7 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;
+	
 };
 
 #endif

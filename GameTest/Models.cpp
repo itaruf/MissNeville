@@ -27,3 +27,4 @@ struct MPicture MPicture {};
 struct MIcon MIcon {};
 struct MLamp MLamp {};
 struct SFX SFX {};
+struct MMessage MMessage {};

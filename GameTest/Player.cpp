@@ -85,6 +85,12 @@ bool Player::Interact(Collectable* collectable)
 	if (!collectable)
 		return false;
 
+	if (_interactSprite)
+	{
+		_interactSprite->SetPosition(GetPosition()->_x, GetPosition()->_y + 32);
+		_interactSprite->Draw();
+	}
+
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)

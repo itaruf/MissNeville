@@ -24,8 +24,8 @@ void StateDialogue::Enter()
 	auto line{ Process2(_currentDialogue, ':', false) };
 
 	// If the dialogue to display is larger than the number of max characters allowed
-	if (line.length() > maxChar)
-	{
+	/*if (line.length() > maxChar)
+	{*/
 		auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
 		/*auto nbTrunc{ std::trunc((double)line.length() / (double) maxChar) };*/
 
@@ -37,7 +37,8 @@ void StateDialogue::Enter()
 			subDialogues.emplace_back(line.substr(start, maxChar));
 			start = maxChar * (i + 1);
 		}
-	}
+	/*}*/
+
 
 	if (subDialogues.size() > maxLines)
 	{

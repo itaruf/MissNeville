@@ -28,6 +28,7 @@ bool Library::Init()
 	ObjectController* objectC{ new ObjectController() };
 
 	_startingPos = new Vector2D(WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT - 128);
+	/*_startingPos = new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 32);*/
 	
 	StateMain::_player->SetPosition(_startingPos);
 
@@ -278,11 +279,7 @@ bool Library::IsRoomCleared()
 
 	else if (_TPPuzzle->_status == Puzzle::Status::PENDING)
 	{
-		/*std::string description = "No";
-
-		auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, description) };*/
-
-		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
+		auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
 		if (it != _actors.end())
 		{
 			RemoveActor(*it);
@@ -292,18 +289,19 @@ bool Library::IsRoomCleared()
 		if (npc != _actors.end())
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
-		}*/
+		}
 
 		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 
 		if (!stateDialogue)
 			return true;
 
-		stateDialogue->_currentDialogue = "[...] : You hear the sound of a now unlocked door";
+		stateDialogue->_currentDialogue = MMessage.door_unlocked;
 		StateMain::SetState(State::DIALOGUE);
 
-		_TPPuzzle->_status = Puzzle::Status::CLEARED;
+		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
 
+		_TPPuzzle->_status = Puzzle::Status::CLEARED;
 		return true;
 	}
 }

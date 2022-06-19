@@ -7,6 +7,7 @@ Player* StateMain::_player;
 State StateMain::_state;
 std::vector<StateController*> StateMain::_stateControllers;
 StateController* StateMain::_currentStateController;
+StateMain::Delegate StateMain::delegate;
 
 StateMain::StateMain()
 {
@@ -24,15 +25,15 @@ StateMain::~StateMain()
 		delete _currentScene;
 	*/
 
-	for (auto& room : _rooms) 
-		if (room)
-			delete room;
-	_rooms.clear();
-
-	for (auto& state : _stateControllers)
+	/*for (auto& state : _stateControllers)
 		if (state)
 			delete state;
 	_stateControllers.clear();
+	
+	for (auto& room : _rooms)
+		if (room)
+			delete room;
+	_rooms.clear();*/
 
 	/*if (_currentStateController)
 		delete _currentStateController;*/
@@ -45,6 +46,8 @@ void StateMain::AddPlayer(Player* player)
 
 void StateMain::SwitchState()
 {
+	delegate();
+
 	switch (_state)
 	{
 	case State::REGULAR:

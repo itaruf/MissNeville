@@ -13,7 +13,7 @@ class TriggerAnimation : public Trigger
 public:
 	CSimpleSprite::Anim _targetAnim;
 	CSimpleSprite* _targetSprite;
-	TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, bool activated = false, const char* sfx = SFX.tp_sound);
+	TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider = new Collision(32, 32, Collision::ColliderType::Overlap), bool activated = false, const char* sfx = SFX.tp_sound);
 	~TriggerAnimation();
 
 	void OnOverlap() override;

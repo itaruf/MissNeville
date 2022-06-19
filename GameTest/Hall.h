@@ -27,6 +27,12 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;
+
+	void slt()
+	{
+		std::cout << "salut" << std::endl;
+	}
+
 };
 
 #endif

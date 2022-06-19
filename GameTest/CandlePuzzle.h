@@ -12,6 +12,8 @@ private:
 protected:
 	std::vector<Candle*> _candles;
 public:
+	Page* _page;
+
 	CandlePuzzle(Status status);
 	~CandlePuzzle();
 

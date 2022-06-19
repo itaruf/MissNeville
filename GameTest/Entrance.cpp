@@ -20,6 +20,7 @@ bool Entrance::Init()
 
 	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
 
+	/*std::function<void()> f = slt;*/
 	// Triggers
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - WALL_OFFSET - TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene) };
 	

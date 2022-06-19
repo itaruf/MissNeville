@@ -57,9 +57,9 @@ void Init()
 
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
-	/*state->_currentScene = hall;*/
+	state->_currentScene = hall;
 	/*state->_currentScene = lounge;*/
-	state->_currentScene = library;
+	/*state->_currentScene = library;*/
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
@@ -68,7 +68,7 @@ void Init()
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("Imane", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 	player->SetTag("player");
-
+	player->_interactSprite = App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale);
 	/*Player base stats and configs*/
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_LEFT, 1.0f / 15.0f, { 9,10,11,12,13,14,15,16,17 });
@@ -93,6 +93,11 @@ void Init()
 
 	state->_currentScene->Init();
 	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
+
+	/*Delegate delegate;
+	delegate += [] { std::cout << "hello, "; };
+	delegate += [] { std::cout << "world!" << std::endl; };
+	delegate();*/
 
 	// Test ambiance WIP (need to create a sound manager)
 	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/

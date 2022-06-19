@@ -23,6 +23,16 @@ class StateMain
 private:
 protected:
 public:
+
+	struct Delegate
+	{
+		std::vector<std::function<void()>> funcs;
+		template<class T> Delegate& operator+=(T mFunc) { funcs.push_back(mFunc); return *this; }
+		void operator()() { for (auto& f : funcs) f(); }
+	};
+
+	static Delegate delegate;
+
 	static State _state;
 	static Scene* _currentScene;
 	static std::vector<Scene*> _rooms;
