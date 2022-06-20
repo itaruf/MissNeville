@@ -26,6 +26,10 @@ void StateRegular::Update()
 
 void StateRegular::Render()
 {
+	if (_player)
+	{
+		_player->DisplayIcon(_player->_interactSprite);
+	}
 }
 
 void StateRegular::Exit()

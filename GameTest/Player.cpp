@@ -85,12 +85,6 @@ bool Player::Interact(Collectable* collectable)
 	if (!collectable)
 		return false;
 
-	if (_interactSprite)
-	{
-		_interactSprite->SetPosition(GetPosition()->_x, GetPosition()->_y + 32);
-		_interactSprite->Draw();
-	}
-
 	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
@@ -167,68 +161,27 @@ void Player::GoToBagSlot(int ID, int slotNumber)
 
 void Player::Interaction()
 {
-	auto actors{ StateMain::_currentScene->GetActors() };
+	auto closest{ GetClosestActor(GetMovementSpeed()) };
 
-	if (actors.size() <= 0)
-		return;
-
-	std::vector<Actor*> interactiveActors{};
-
-	// Select all Collectable or Interactive actors
-	for (auto& actor : actors)
-		if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor) || actor->GetMobility() == Mobility::MOVABLE)
-			interactiveActors.emplace_back(actor);
-
-	if (interactiveActors.size() <= 0)
-		return;
-
-	float ms{ GetMovementSpeed() };
-
-	if (GetDirection() == Direction::LEFT || GetDirection() == Direction::DOWN)
-		ms = -GetMovementSpeed();
-
-	float x{ GetPosition()->_x };
-	float y{ GetPosition()->_y };
-
-	if (GetDirection() == Direction::RIGHT || GetDirection() == Direction::LEFT)
-		x = GetPosition()->_x + ms;
-	else
-		y = GetPosition()->_y + ms;
-
-	/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
-	std::sort(std::begin(interactiveActors), std::end(interactiveActors), [this, ms](Actor* const& l, Actor* const& r)
-		{
-			return
-				std::abs(GetPosition()->_x + ms - l->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - l->GetPosition()->_y + ms)
-				<
-				std::abs(GetPosition()->_x + ms - r->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - r->GetPosition()->_y + ms);
-		});
-
-	auto closestActor = interactiveActors[0];
-
-	App::Print(100, 600, ("Closest Item to Player : " + closestActor->GetName()).c_str());
-
-	/*PLAYER CAN INTERACT WITH ITEMS ONLY IF HE COLLIDES WITH THEM*/
-
-	if (!GetCollider()->isColliding(this, closestActor, x, y))
+	if (!closest)
 		return;
 
 	/*INTERACT WITH NON COLLECTIBLE ITEMS*/
-	auto interactable = dynamic_cast<IInteractive*>(closestActor);
+	auto interactable{ dynamic_cast<IInteractive*>(closest) };
 	if (interactable)
 	{
 		Interact(interactable);
 		return;
 	}
 	/*COLLECT ITEMS*/
-	auto collectable = dynamic_cast<Collectable*>(closestActor);
+	auto collectable{ dynamic_cast<Collectable*>(closest) };
 	if (collectable)
 	{
 		Interact(collectable);
 		return;
 	}
 
-	auto m = dynamic_cast<Character*>(closestActor);
+	auto m{ dynamic_cast<Character*>(closest) };
 	if (m)
 	{	
 		m->SetDirection(_direction);
@@ -238,6 +191,25 @@ void Player::Interaction()
 		return;
 	}
 }
+
+void Player::DisplayIcon(CSimpleSprite* icon)
+{
+	if (!icon)
+		return;
+
+	auto closest{ GetClosestActor(GetMovementSpeed()) };
+
+	if (!closest)
+		return;
+
+	if (dynamic_cast<IInteractive*>(closest) || dynamic_cast<Collectable*>(closest));
+	{
+		App::Print(MIDDLE_WIDTH, 700, closest->GetName().c_str(), 0.7, 0,  0.5);
+		icon->SetPosition(_position->_x, _position->_y + 32);
+		icon->Draw();
+	}
+}
+
 
 void Player::PlayDialogue()
 {

@@ -64,7 +64,7 @@ void Init()
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
-	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 316.0f } };
+	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
 	Collision* collider{ new Collision(24, 24, Collision::ColliderType::Block, new Vector2D(0, -10))};
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
@@ -78,7 +78,7 @@ void Init()
 	player->GetSprite()->SetScale(2.0f);
 
 	player->dialogues.insert(std::make_pair(0, "["+ player->GetName() + "] says : The mirror shattered in pieces !"));
-	player->dialogues.insert(std::make_pair(1, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
+	player->dialogues.insert(std::make_pair(1, "[" + player->GetName() + "] says : I need to find all the missing pieces... But why would they spread everywhere in the mansion ?"));
 	//player->dialogues.insert(std::make_pair(2, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
 	player->SetCurrentDialogue(0);
 

@@ -56,7 +56,7 @@ bool Library::Init()
 	
 	StateMain::_player->SetPosition(_startingPos);
 
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(LIBRARY_WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(LIBRARY_WALL_OFFSET + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET, MIDDLE_HEIGHT), new Collision(32, 32, Collision::ColliderType::Overlap), _WScene) };
 	
 	auto wallH2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, (MIDDLE_HEIGHT + 64)), new Collision(2, MIDDLE_WIDTH + LIBRARY_WALL_OFFSET * 2)) };
 	wallH2->SetTag("wall");
@@ -274,6 +274,8 @@ bool Library::Init()
 	auto lamp5{ new Actor(MLamp.name, App::CreateSprite(MLamp.model, 4, 1, 0, MLamp.scale), new Vector2D(table11->GetPosition()->_x, table11->GetPosition()->_y + 16), new Collision(32, 32)) };
 	lamp5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_LAMP, 1 / 5.0f, { 0, 1, 2, 3 }, true);
 	lamp5->GetSprite()->SetAnimation(CSimpleSprite::ANIM_LAMP);
+
+	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1), new Vector2D(MIDDLE_WIDTH - 64, MIDDLE_HEIGHT), new Collision(32, 32)) };
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
 

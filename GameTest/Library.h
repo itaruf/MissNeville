@@ -7,6 +7,7 @@
 #include "StateMain.h"
 #include "NPC.h"
 #include "StateDialogue.h"
+#include "MirrorShard.h"
 
 class StateMain;
 // Library scene 

@@ -47,7 +47,13 @@ void Mirror::Interact()
 	if (nb < nbShards)
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
-		App::Print(200, 200, "Not enough shards");
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+
+		if (!stateDialogue)
+			return;
+
+		stateDialogue->_currentDialogue = p->dialogues[1];
+		StateMain::SetState(State::DIALOGUE);
 		return;
 	}
 	

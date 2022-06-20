@@ -34,7 +34,7 @@ public:
 	void CloseBag(int ID);
 	void GoToBagSlot(int ID, int slotNumber);
 	void Interaction();
-
+	void DisplayIcon(CSimpleSprite* icon);
 	void PlayDialogue() override;
 };
 #endif

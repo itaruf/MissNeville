@@ -152,3 +152,46 @@ const std::string& Actor::GetTag()
 {
 	return _tag;
 }
+
+Actor* Actor::GetClosestActor(float ms)
+{
+	auto actors{ StateMain::_currentScene->GetActors() };
+
+	if (actors.size() <= 0)
+		return nullptr;
+
+	std::vector<Actor*> interactiveActors{};
+
+	// Select all Collectable or Interactive actors
+	for (auto& actor : actors)
+		if (dynamic_cast<ICollectable*>(actor) || dynamic_cast<IInteractive*>(actor) || actor->GetMobility() == Mobility::MOVABLE)
+			interactiveActors.emplace_back(actor);
+
+	if (interactiveActors.size() <= 0)
+		return nullptr;
+
+	if (GetDirection() == Direction::LEFT || GetDirection() == Direction::DOWN)
+		ms = -ms;
+
+	float x{ GetPosition()->_x };
+	float y{ GetPosition()->_y };
+
+	if (GetDirection() == Direction::RIGHT || GetDirection() == Direction::LEFT)
+		x = GetPosition()->_x + ms;
+	else
+		y = GetPosition()->_y + ms;
+
+	/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
+	std::sort(std::begin(interactiveActors), std::end(interactiveActors), [this, ms](Actor* const& l, Actor* const& r)
+		{
+			return
+				std::abs(GetPosition()->_x + ms - l->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - l->GetPosition()->_y + ms)
+				<
+				std::abs(GetPosition()->_x + ms - r->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - r->GetPosition()->_y + ms);
+		});
+
+	if (!GetCollider()->isColliding(this, interactiveActors[0], x, y))
+		return nullptr;
+
+	return (interactiveActors[0]);
+}

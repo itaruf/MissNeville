@@ -22,6 +22,9 @@ Collision::~Collision()
 // Check if an actor is colliding with another by projecting their future move
 bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 {
+	if (!actor || !other)
+		return false;
+
 	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->itemized)
 		return false;
 

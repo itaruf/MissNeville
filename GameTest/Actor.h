@@ -49,6 +49,7 @@ public:
 	const Mobility& GetMobility();
 	const Direction& GetDirection();
 	const std::string& GetTag();
+	Actor* GetClosestActor(float ms = 0);
 
 	void SetName(std::string name);
 	void SetSprite(CSimpleSprite* sprite);

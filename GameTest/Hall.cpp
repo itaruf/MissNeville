@@ -29,9 +29,6 @@ Hall::~Hall()
 bool Hall::Init()
 {
 	// Init only once
-	/*if (Scene::Init())
-		return true;*/
-
 	if (initialized)
 		return true;
 

@@ -41,8 +41,8 @@ struct MCommode
 	const char* model8{ ".\\TestData\\Props\\commode8.bmp" };
 	int frame{ 0 };
 	float scale{ 2.5 };
-	float scale2{ 2.5 };
-	float scale3{ 2.5 };
+	float scale2{ 2 };
+	float scale3{ 2 };
 	float scale4{ 1 };
 	float scale5{ 1 };
 	float scale6{ 1 };
@@ -272,7 +272,7 @@ struct MIcon
 	std::string name{ "Icon" };
 	const char* model{ ".\\TestData\\Icons\\question_mark.bmp" };
 	int frame{ 0 };
-	float scale{ 1 };
+	float scale{ 1.5 };
 };
 
 extern struct MIcon MIcon;
