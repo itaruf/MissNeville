@@ -8,7 +8,7 @@
 #include "StateMain.h"
 #include "NPC.h"
 #include "MirrorShard.h"
-#include <functional>
+#include "Mirror.h"
 
 class StateMain;
 // Entrance scene 

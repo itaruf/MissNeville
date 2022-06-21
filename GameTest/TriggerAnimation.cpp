@@ -47,6 +47,11 @@ void TriggerAnimation::OnOverlap()
 
 }
 
+void TriggerAnimation::OnActivation()
+{
+	_activated = true;
+}
+
 void TriggerAnimation::PlayAnimation()
 {
 	_onPlayingAnim();

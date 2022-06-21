@@ -7,6 +7,15 @@ TriggerScene::~TriggerScene()
 		delete _scene;
 }
 
+void TriggerScene::OnActivation()
+{
+	if (_activated)
+		return;
+
+	CSimpleSound::GetInstance().PlaySoundW(_SInteract);
+	_activated = true;
+}
+
 TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Vector2D* playerPos, Collision* collider, Scene* scene, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx), _scene{ scene }, _playerPos{ playerPos }
 {
 }

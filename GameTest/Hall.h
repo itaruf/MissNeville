@@ -28,12 +28,6 @@ public:
 	void Render() override;
 	bool IsRoomCleared() override;
 	void OnMirrorShattered() override;
-
-	void slt()
-	{
-		std::cout << "salut" << std::endl;
-	}
-
 };
 
 #endif

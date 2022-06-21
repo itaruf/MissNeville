@@ -11,6 +11,7 @@ class Collectable : public Actor, public ICollectable
 private:
 protected:
 public:
+	Delegate _delegate;
 	int _ID;
 	std::string _description;
 	bool itemized = false;

@@ -35,7 +35,7 @@ public:
 
 	static State _state;
 	static Scene* _currentScene;
-	static std::vector<Scene*> _rooms;
+	static std::unordered_map<int, Scene*> _rooms;
 	static Player* _player;
 	static std::vector<StateController*> _stateControllers;
 	static StateController* _currentStateController;

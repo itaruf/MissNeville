@@ -36,5 +36,10 @@ void TriggerDialogue::OnOverlap()
 
 	stateDialogue->_currentDialogue = _dialogue;
 	StateMain::SetState(State::DIALOGUE);
-	_activated = !_activated;
+	_activated = false;
+}
+
+void TriggerDialogue::OnActivation()
+{
+	_activated = true;
 }

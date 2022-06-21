@@ -63,8 +63,6 @@ bool Hall::Init()
 	/*Initiating Puzzles*/
 	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
-	StateMain::delegate += [this]() {this->slt(); };
-
 	/*Triggers*/
 
 	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, HALL_WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene, false) };
@@ -162,7 +160,7 @@ bool Hall::IsRoomCleared()
 			RemoveActor(*it);
 		}
 
-		auto npc{ std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte Neville"; }) };
+		auto npc{ std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == MCharlotte.name; }) };
 		if (npc != _actors.end())
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);

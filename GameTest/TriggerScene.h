@@ -17,6 +17,7 @@ public:
 	~TriggerScene();
 
 	void OnOverlap() override;
+	void OnActivation() override;
 };
 
 #endif

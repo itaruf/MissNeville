@@ -26,6 +26,7 @@ public:
 	~TriggerAnimation();
 
 	void OnOverlap() override;
+	void OnActivation() override;
 	void PlayAnimation();
 };
 

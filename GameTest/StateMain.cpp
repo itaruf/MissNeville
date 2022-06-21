@@ -2,7 +2,7 @@
 #include "StateMain.h"
 
 Scene* StateMain::_currentScene;
-std::vector<Scene*> StateMain::_rooms;
+std::unordered_map<int, Scene*> StateMain::_rooms;
 Player* StateMain::_player;
 State StateMain::_state;
 std::vector<StateController*> StateMain::_stateControllers;

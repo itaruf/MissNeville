@@ -57,10 +57,16 @@ void Init()
 
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
-	/*state->_currentScene = hall;*/
+	state->_currentScene = hall;
 	/*state->_currentScene = lounge;*/
 	/*state->_currentScene = library;*/
-	state->_currentScene = room;
+	/*state->_currentScene = room;*/
+	
+	state->_rooms.insert(std::make_pair(0, entrance));
+	state->_rooms.insert(std::make_pair(1, hall));
+	state->_rooms.insert(std::make_pair(2, room));
+	state->_rooms.insert(std::make_pair(3, library));
+	state->_rooms.insert(std::make_pair(4, lounge));
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
@@ -88,6 +94,12 @@ void Init()
 	stateInventory->_player = player;
 	stateDialogue->_player = player;
 
+	entrance->AddActor(player);
+	hall->AddActor(player);
+	room->AddActor(player);
+	library->AddActor(player);
+	lounge->AddActor(player);
+
 	/*Other states*/
 	state->_stateControllers.emplace_back(stateRegular);
 	state->_stateControllers.emplace_back(stateInventory);
@@ -96,14 +108,6 @@ void Init()
 
 	state->_currentScene->Init();
 	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
-
-	/*Delegate delegate;
-	delegate += [] { std::cout << "hello, "; };
-	delegate += [] { std::cout << "world!" << std::endl; };
-	delegate();*/
-
-	// Test ambiance WIP (need to create a sound manager)
-	/*App::PlaySoundW(".\\TestData\\SFX\\entrance.wav", true);*/
 }
 
 void Update(float deltaTime)
@@ -113,13 +117,6 @@ void Update(float deltaTime)
 		state->SwitchState();
 		state->_currentScene->Update(deltaTime);
 		state->_currentStateController->Update();
-	}
-
-	auto player{ state->GetPlayer() };
-
-	if (player)
-	{
-		player->GetSprite()->Update(deltaTime);
 	}
 }
 

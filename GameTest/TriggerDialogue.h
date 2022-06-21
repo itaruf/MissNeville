@@ -17,6 +17,7 @@ public:
 	~TriggerDialogue();
 
 	void OnOverlap() override;
+	void OnActivation() override;
 };
 
 #endif

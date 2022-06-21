@@ -67,9 +67,13 @@ bool Room::Init()
 	mirror->SetMobility(Mobility::MOVABLE);
 
 	_mirrorPuzzle->_mirror = mirror;
+	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
+
+	if (it != StateMain::_rooms[1]->GetActors().end())
+		mirror->_delegate += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 
 	// Triggers
-	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ROOM_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene);
+	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene);
 
 	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL_OFFSET * 2, Collision::ColliderType::Overlap), StateMain::_player->dialogues[0]) };
 
@@ -78,12 +82,6 @@ bool Room::Init()
 	mirrorAnimTrigger->_targetSprite = mirror->GetSprite();
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
 	mirrorAnimTrigger->_onPlayingAnim += [this]() {this->OnMirrorShattered(); };
-
-	/*MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model, 1, 1), new Vector2D(150,350), new Collision(32, 32)) };
-
-	MirrorShard* shard3{ new MirrorShard(MMirrorShard.name + "3", App::CreateSprite(MPage.model, 1, 1), new Vector2D(150,400), new Collision(32, 32)) };
-
-	MirrorShard* shard4{ new MirrorShard(MMirrorShard.name + "4", App::CreateSprite(MPage.model, 1, 1), new Vector2D(150, 450), new Collision(32, 32)) };*/
 
 	ObjectController* objectC{ new ObjectController() };
 	Character* character{ new Character(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(350,250), new Collision(32, 32), 0, 4, objectC) };

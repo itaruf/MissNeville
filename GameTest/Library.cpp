@@ -46,6 +46,11 @@ bool Library::Init()
 	std::string description = "Page number 2";
 	auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(), new Collision(16, 16), 0, description) };
 
+	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
+
+	if (it != StateMain::_rooms[1]->GetActors().end())
+		page->_delegate += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+
 	/*Initiating Puzzles*/
 	_TPPuzzle = new TPPuzzle(TPPuzzle::Status::PENDING, page);
 
@@ -279,7 +284,8 @@ bool Library::Init()
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
 
-	initialized != initialized;
+	initialized = !initialized;
+
 	return true;
 }
 
@@ -320,13 +326,13 @@ bool Library::IsRoomCleared()
 
 		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 
-		if (!stateDialogue)
+		/*if (!stateDialogue)
 			return true;
 
 		stateDialogue->_currentDialogue = MMessage.door_unlocked;
 		StateMain::SetState(State::DIALOGUE);
 
-		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
+		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);*/
 
 		_TPPuzzle->_status = Puzzle::Status::CLEARED;
 		return true;

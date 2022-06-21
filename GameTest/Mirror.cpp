@@ -51,7 +51,8 @@ void Mirror::Interact()
 
 		if (!stateDialogue)
 			return;
-
+		
+		_delegate();
 		stateDialogue->_currentDialogue = p->dialogues[1];
 		StateMain::SetState(State::DIALOGUE);
 		return;
@@ -70,4 +71,8 @@ void Mirror::Interact()
 	CSimpleSound::GetInstance().PlaySoundW(_SMirror_repaired, 0);
 	_repaired = true;
 	_sprite->SetFrame(0);
+}
+
+void Mirror::OnInteract()
+{
 }

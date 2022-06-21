@@ -21,6 +21,7 @@ public:
 
 	bool isRepaired();
 	void Interact() override;
+	void OnInteract() override;
 };
 
 #endif

@@ -30,3 +30,7 @@ void NPC::Interact()
 	// Dialogue to play
 	PlayDialogue();
 }
+
+void NPC::OnInteract()
+{
+}

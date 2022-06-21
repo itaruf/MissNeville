@@ -14,6 +14,7 @@ public:
 	virtual ~Trigger();
 
 	virtual void OnOverlap() = 0;
+	virtual void OnActivation() = 0;
 };
 
 #endif

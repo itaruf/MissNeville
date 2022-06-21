@@ -17,7 +17,9 @@
 #define MIDDLE_HEIGHT (APP_VIRTUAL_HEIGHT / 2)
 #define VOLUME (-2500)
 
+#include <algorithm>
 #include <string>
+#include <functional>
 
 template<
 	typename T,
@@ -59,5 +61,11 @@ struct Color
     float b = 0;
 };
 
+struct Delegate
+{
+    std::vector<std::function<void()>> funcs;
+    template<class T> Delegate& operator+=(T mFunc) { funcs.push_back(mFunc); return *this; }
+    void operator()() { for (auto& f : funcs) f(); }
+};
 
 #endif
