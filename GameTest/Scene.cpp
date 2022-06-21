@@ -46,6 +46,11 @@ std::vector<Actor*>& Scene::GetActors()
 	return _actors;
 }
 
+void Scene::Init()
+{
+	_startingPos = new Vector2D(StateMain::_player->GetPosition()->_x, StateMain::_player->GetPosition()->_y);
+}
+
 // If we want to setup a background
 void Scene::Update(float deltaTime)
 {

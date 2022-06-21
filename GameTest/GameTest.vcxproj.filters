@@ -130,6 +130,12 @@
     <ClCompile Include="TriggerDialogue.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="DodgePuzzle.cpp">
+      <Filter>Puzzles</Filter>
+    </ClCompile>
+    <ClCompile Include="Lethal.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -284,6 +290,15 @@
     </ClInclude>
     <ClInclude Include="TriggerDialogue.h">
       <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="DodgePuzzle.h">
+      <Filter>Puzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="Lethal.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="ECollider.h">
+      <Filter>Enumerations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

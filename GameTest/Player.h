@@ -36,5 +36,7 @@ public:
 	void Interaction();
 	void DisplayIcon(CSimpleSprite* icon);
 	void PlayDialogue() override;
+	void Hit();
+	void Respawn(Vector2D* newPos);
 };
 #endif

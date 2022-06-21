@@ -28,11 +28,34 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->itemized)
 		return false;
 
-	if (x + _offset->_x - _width < other->GetPosition()->_x + other->GetCollider()->_offset->_x + other->GetCollider()->GetWidth() &&
-		x + _offset->_x + _width > other->GetPosition()->_x + other->GetCollider()->_offset->_x - other->GetCollider()->GetWidth() &&
-		y + _offset->_y - _height < other->GetPosition()->_y + other->GetCollider()->_offset->_y + other->GetCollider()->GetHeight() &&
-		y + _offset->_y + _height > other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight())
+	auto x1{ actor->GetPosition()->_x };
+	auto y1{ actor->GetPosition()->_y };
+	auto w1{ actor->GetCollider()->GetWidth() };
+	auto h1{ actor->GetCollider()->GetHeight() };
+
+	auto x2{ other->GetPosition()->_x };
+	auto y2{ other->GetPosition()->_y };
+	auto w2{ other->GetCollider()->GetWidth()};
+	auto h2{ other->GetCollider()->GetHeight()};
+
+	if 
+		(
+
+		x + _offset->_x - _width <= other->GetPosition()->_x + other->GetCollider()->_offset->_x + other->GetCollider()->GetWidth() &&
+		x + _offset->_x + _width >= other->GetPosition()->_x + other->GetCollider()->_offset->_x - other->GetCollider()->GetWidth() &&
+
+		 y + _offset->_y - _height <= other->GetPosition()->_y + other->GetCollider()->_offset->_y + other->GetCollider()->GetHeight() &&
+		 y + _offset->_y + _height >= other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight()
+			
+		
+			//x + x1 /*+ _offset->_x*/ - w1	<	x2 /*+ other->GetCollider()->_offset->_x*/ + w2 &&
+			//x + x1 /*+ _offset->_x*/ + w1	>	x2 /*+ other->GetCollider()->_offset->_x*/ - w2	&&
+			//y + y1 /*+ _offset->_y*/ - h1	<	y2 /*+ other->GetCollider()->_offset->_y*/ + h2	&&
+			//y + y1 /*+ _offset->_y*/ + h1	>	y2 /*+ other->GetCollider()->_offset->_y*/ - h2
+		)
+
 		return true;
+
 	return false;
 }
 

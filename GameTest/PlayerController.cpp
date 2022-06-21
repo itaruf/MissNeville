@@ -36,7 +36,7 @@ void PlayerController::MoveHorizontally(Character* actor)
 			continue;
 		if (actor->_collider->isColliding(actor, other, x, y))
 		{
-			if (other->_collider->_colliderType == Collision::ColliderType::Block)
+			if (other->_collider->_colliderType == ColliderType::Block)
 				return;
 		}		
 	}
@@ -83,7 +83,7 @@ void PlayerController::MoveVertically(Character* actor)
 			continue;
 		if (actor->_collider->isColliding(actor, other, x, y))
 		{
-			if (other->_collider->_colliderType == Collision::ColliderType::Block)
+			if (other->_collider->_colliderType == ColliderType::Block)
 				return;
 		}
 	}

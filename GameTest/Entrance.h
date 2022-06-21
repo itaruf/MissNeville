@@ -22,7 +22,7 @@ public:
 	Entrance(int ID);
 	~Entrance();
 
-	bool Init() override;
+	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;

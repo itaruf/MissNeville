@@ -4,6 +4,7 @@
 
 #include "app\app.h"
 #include "EDirection.h"
+#include "ECollider.h"
 
 class Actor;
 #include "Actor.h"
@@ -12,11 +13,6 @@ class Actor;
 class Collision
 {
 public:
-	enum class ColliderType {
-		Block,
-		Overlap,
-	};
-
 	ColliderType _colliderType;
 	float _height;
 	float _width;
@@ -24,7 +20,6 @@ public:
 
 	Collision();
 	Collision(float height = 32, float width = 32, ColliderType colliderType = ColliderType::Block, Vector2D* offset = new Vector2D(0,0));
-
 	~Collision();
 
 	const float& GetHeight() const;
@@ -35,12 +30,6 @@ public:
 	void SetWidth(float value);
 
 	void DrawCollision(Actor* actor, float r, float g, float b);
-
-	//Vector2D* GetDownLeftColPos(Actor* actor);
-	//Vector2D* GetDownRightColPos(Actor* actor);
-	//Vector2D* GetUpLeftColPos(Actor* actor);
-	//Vector2D* GetUpRightColPos(Actor* actor);
-
 };
 
 #endif

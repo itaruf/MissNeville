@@ -287,6 +287,46 @@ struct MLamp
 
 extern struct MLamp MLamp;
 
+struct MKnife
+{
+	std::string name{ "Axe" };
+	const char* model{ ".\\TestData\\Props\\knife.bmp" };
+	int frame{ 0 };
+	float scale{ 4 };
+};
+
+extern struct MKnife MKnife;
+
+struct MOven
+{
+	std::string name{ "Oven" };
+	const char* model{ ".\\TestData\\Props\\oven.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MOven MOven;
+
+struct MBarrel
+{
+	std::string name{ "Barrel" };
+	const char* model{ ".\\TestData\\Props\\barrels.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MBarrel MBarrel;
+
+struct MBag
+{
+	std::string name{ "Bag" };
+	const char* model{ ".\\TestData\\Props\\bags.bmp" };
+	int frame{ 0 };
+	float scale{ 1 };
+};
+
+extern struct MBag MBag;
+
 struct SFX
 {
 	const char* entrance{ ".\\TestData\\SFX\\entrance.wav" };

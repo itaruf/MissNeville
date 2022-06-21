@@ -13,10 +13,12 @@ Room::~Room()
 {
 }
 
-bool Room::Init()
+void Room::Init()
 {
 	if (initialized)
-		return true;
+		return;
+
+	Scene::Init();
 
 	std::random_device myRandomDevice;
 	/*Background First*/
@@ -28,9 +30,9 @@ bool Room::Init()
 			std::default_random_engine myRandomEngine(seed);
 
 			/*if (myRandomEngine() % 12 != 1)*/
-			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ROOM_WALL_OFFSET + 16 + i * 32, ROOM_WALL_OFFSET + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));
+			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ROOM_WALL_OFFSET + 16 + i * 32, ROOM_WALL_OFFSET + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
 			/*else
-				new Actor(MBackground.name, App::CreateSprite(MBackground.model2, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, Collision::ColliderType::Overlap));*/
+				new Actor(MBackground.name, App::CreateSprite(MBackground.model2, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));*/
 		}
 	}
 
@@ -73,11 +75,11 @@ bool Room::Init()
 		mirror->_delegate += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 
 	// Triggers
-	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _SScene);
+	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL_OFFSET - TRIGGER_OFFSET - NEW_PLAYER_POS_OFFSET), new Collision(32, 32, ColliderType::Overlap), _SScene);
 
-	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL_OFFSET * 2, Collision::ColliderType::Overlap), StateMain::_player->dialogues[0]) };
+	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL_OFFSET * 2, ColliderType::Overlap), StateMain::_player->dialogues[0]) };
 
-	TriggerAnimation* mirrorAnimTrigger{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale),  new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL_OFFSET * 2, Collision::ColliderType::Overlap), true)};
+	TriggerAnimation* mirrorAnimTrigger{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale),  new Vector2D(MIDDLE_WIDTH, ROOM_WALL_OFFSET + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL_OFFSET * 2, ColliderType::Overlap), true)};
 	mirrorAnimTrigger->_targetAnim = CSimpleSprite::ANIM_MIRROR_BROKEN;
 	mirrorAnimTrigger->_targetSprite = mirror->GetSprite();
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
@@ -91,8 +93,6 @@ bool Room::Init()
 	_mirrorPuzzle->StartPuzzle();
 
 	initialized = !initialized;
-
-	return true;
 }
 
 void Room::Update(float deltaTime)

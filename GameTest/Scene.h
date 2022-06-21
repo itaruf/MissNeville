@@ -34,7 +34,7 @@ protected:
 
 public:
 	Delegate _delegate;
-
+	Vector2D* _startingPos{ nullptr };
 	bool initialized{ false };
 	Scene* _NScene{ nullptr };
 	Scene* _EScene{ nullptr };
@@ -55,7 +55,7 @@ public:
 	void AddActor(Actor* actor);
 	bool RemoveActor(Collectable* collectable);
 
-	virtual bool Init() = 0;
+	virtual void Init();
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual bool IsRoomCleared() = 0;

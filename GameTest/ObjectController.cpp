@@ -35,7 +35,7 @@ void ObjectController::MoveHorizontally(Character* actor)
 
 		if (actor->GetCollider()->isColliding(actor, other, x, y))
 		{
-			if (other->GetCollider()->_colliderType == Collision::ColliderType::Block)
+			if (other->GetCollider()->_colliderType == ColliderType::Block)
 			{
 				if (other->GetTag() == "wall")
 					actor->_direction = nextDir;
@@ -74,7 +74,7 @@ void ObjectController::MoveVertically(Character* actor)
 			continue;
 		if (actor->GetCollider()->isColliding(actor, other, x, y))
 		{
-			if (other->GetCollider()->_colliderType == Collision::ColliderType::Block)
+			if (other->GetCollider()->_colliderType == ColliderType::Block)
 			{
 				if (other->GetTag() == "wall")
 					actor->_direction = nextDir;

@@ -21,6 +21,7 @@ void StateRegular::Update()
 		_player->GetController()->MoveVertically(_player);
 		_player->IsMoving();
 		_player->Interaction();
+		_player->Hit();
 	}
 }
 

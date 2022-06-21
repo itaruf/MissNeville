@@ -23,7 +23,7 @@ public:
 	Hall(int ID, CandlePuzzle* candlePuzzle);
 	~Hall();
 
-	bool Init() override;
+	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;

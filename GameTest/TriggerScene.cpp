@@ -46,7 +46,7 @@ void TriggerScene::OnOverlap()
 	{
 		StateMain::_currentScene = _scene;
 
-		if (!StateMain::_currentScene->Init())
+		if (!StateMain::_currentScene->initialized)
 			std::cout << StateMain::_currentScene->GetID() << " Initialized" << std::endl;
 		else
 			std::cout << StateMain::_currentScene->GetID() << " Already Initialized" << std::endl;

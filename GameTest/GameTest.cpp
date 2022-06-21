@@ -57,8 +57,8 @@ void Init()
 
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
-	state->_currentScene = hall;
-	/*state->_currentScene = lounge;*/
+	/*state->_currentScene = hall;*/
+	state->_currentScene = lounge;
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
 	
@@ -71,7 +71,7 @@ void Init()
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
-	Collision* collider{ new Collision(24, 24, Collision::ColliderType::Block, new Vector2D(0, -10))};
+	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10))};
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 4, controller, new Inventory())};
 	player->SetTag("player");

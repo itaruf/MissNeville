@@ -29,6 +29,10 @@ void StateInventory::Update()
 {
 	// Navigation in the bag
 	Navigation();
+	if (_player)
+	{
+		_player->Hit();
+	}
 }
 
 void StateInventory::Render()

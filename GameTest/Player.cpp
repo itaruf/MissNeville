@@ -222,3 +222,53 @@ void Player::PlayDialogue()
 	else
 		stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
 }
+
+void Player::Hit()
+{
+	auto actors{ StateMain::_currentScene->GetActors() };
+
+	for (const auto& actor : actors)
+	{
+		if (actor == this)
+			continue;
+
+		auto a{ dynamic_cast<Character*>(actor) };
+
+		if (!a)
+			continue;
+
+		float x{ a->GetPosition()->_x }, y{ a->GetPosition()->_y };
+		if (a->GetDirection() == Direction::RIGHT)
+		{
+			x = a->GetPosition()->_x + a->GetMovementSpeed();
+			y = a->GetPosition()->_y;
+		}
+
+		else if (a->GetDirection() == Direction::LEFT)
+		{
+			x = a->GetPosition()->_x - a->GetMovementSpeed();
+			y = a->GetPosition()->_y;
+		}
+
+		if (!GetCollider()->isColliding(a, this, x, y))
+			continue;
+
+		if (a->GetTag() == "lethal")
+		{
+			/*std::cout << "dead" << std::endl;*/
+			Respawn(StateMain::_currentScene->_startingPos);
+			return;
+		}
+	}
+}
+
+void Player::Respawn(Vector2D* newPos)
+{
+	if (!newPos)
+		return;
+
+	/*std::cout << newPos->_x << std::endl;
+	std::cout << newPos->_y << std::endl;*/
+
+	GetSprite()->SetPosition(newPos->_x, newPos->_y);
+}

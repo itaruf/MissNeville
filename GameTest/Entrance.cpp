@@ -13,10 +13,12 @@ Entrance::~Entrance()
 {
 }
 
-bool Entrance::Init()
+void Entrance::Init()
 {
 	if (initialized)
-		return true;
+		return;
+
+	Scene::Init();
 
 	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
 
@@ -34,14 +36,14 @@ bool Entrance::Init()
 
 	/*std::function<void()> f = slt;*/
 	// Triggers
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL_OFFSET - TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, ENTRANCE_WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET), new Collision(32, 32, Collision::ColliderType::Overlap), _NScene) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL_OFFSET - TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, ENTRANCE_WALL_OFFSET + TRIGGER_OFFSET + NEW_PLAYER_POS_OFFSET), new Collision(32, 32, ColliderType::Overlap), _NScene) };
 	
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 6, 1, MMirror.frame, MMirror.scale), new Vector2D(250,250), new Collision(32, 32)) };
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_BROKEN, 1.0f / 15.0f, { 0,1,2,3,4,5 });
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_REPAIRED, 1.0f / 15.0f, { 5,4,3,2,1,0 });
 		mirror->SetMobility(Mobility::MOVABLE);
 
-	TriggerAnimation* m{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL_OFFSET - TRIGGER_OFFSET - 200), new Collision(32, 32, Collision::ColliderType::Overlap), true) };
+	TriggerAnimation* m{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL_OFFSET - TRIGGER_OFFSET - 200), new Collision(32, 32, ColliderType::Overlap), true) };
 	m->_targetAnim = mirror->GetSprite()->ANIM_MIRROR_BROKEN;
 	m->_targetSprite = mirror->GetSprite();
 	m->_SInteract = SFX.mirror_repaired;
@@ -63,8 +65,6 @@ bool Entrance::Init()
 	_mirrorPuzzle->StartPuzzle();
 
 	initialized = !initialized;
-
-	return true;
 }
 
 void Entrance::Update(float deltaTime)

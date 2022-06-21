@@ -17,13 +17,11 @@ private:
 protected:
 public:
 	TPPuzzle* _TPPuzzle;
-	Vector2D* _startingPos{ nullptr };
-
 	Library(int ID, std::vector<Actor*> actors);
 	Library(int ID);
 	~Library();
 
-	bool Init() override;
+	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
 	bool IsRoomCleared() override;
