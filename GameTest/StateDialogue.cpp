@@ -37,8 +37,8 @@ void StateDialogue::Enter()
 		auto start{ 0 };
 		for (int i =  0 ; i < nbSubDials; i++)
 		{
-			subDialogues.emplace_back(line.substr(start, maxChar - 1));
-			start = maxChar * (i + 1);
+			subDialogues.emplace_back(line.substr(start, maxChar));
+			start = maxChar * (i + 1) + 1;
 		}
 	/*}*/
 
@@ -54,11 +54,11 @@ void StateDialogue::Enter()
 		end = subDialogues.size();
 	}
 
-	for (const auto& d : subDialogues)
-		std::cout << d << std::endl;
+	/*for (const auto& d : subDialogues)
+		std::cout << d << std::endl;*/
 
-	std::cout << remainingDials << std::endl;
-	std::cout << line.length() << std::endl;
+	/*std::cout << remainingDials << std::endl;
+	std::cout << line.length() << std::endl;*/
 }
 
 void StateDialogue::Update()
@@ -95,9 +95,6 @@ void StateDialogue::Render()
 	int count{ 0 };
 	for (auto i{ start }; i < end; ++i)
 	{
-		if (count >= maxLines)
-			count = 0;
-
 		App::Print(310, 100 - (count * 25), subDialogues[i].c_str());
 		count++;
 	}
