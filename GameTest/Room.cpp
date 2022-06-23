@@ -1,10 +1,6 @@
 #include "../stdafx.h"
 #include "Room.h"
 
-Room::Room(int ID, std::vector<Actor*> actors) : Scene(ID, actors)
-{
-}
-
 Room::Room(int ID) : Scene(ID)
 {
 }
@@ -19,6 +15,7 @@ void Room::Init()
 		return;
 
 	Scene::Init();
+	AddActor(StateMain::_player);
 
 	std::random_device myRandomDevice;
 	/*Background First*/
@@ -85,14 +82,13 @@ void Room::Init()
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
 	mirrorAnimTrigger->_onPlayingAnim += [this]() {this->OnMirrorShattered(); };
 
-	ObjectController* objectC{ new ObjectController() };
+	/*ObjectController* objectC{ new ObjectController() };
 	Character* character{ new Character(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(350,250), new Collision(32, 32), 0, 4, objectC) };
-	character->SetMobility(Mobility::MOVABLE);
+	character->SetMobility(Mobility::MOVABLE);*/
 
+	std::cout << "HERE" << std::endl;
 	/*Start Puzzle*/
 	_mirrorPuzzle->StartPuzzle();
-
-	initialized = !initialized;
 }
 
 void Room::Update(float deltaTime)
@@ -103,6 +99,10 @@ void Room::Update(float deltaTime)
 void Room::Render()
 {
 	Scene::Render();
+}
+
+void Room::Exit()
+{
 }
 
 bool Room::IsRoomCleared()

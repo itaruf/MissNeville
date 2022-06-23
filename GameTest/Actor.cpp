@@ -5,8 +5,12 @@ Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collis
 {
 
 	// Immediately Set the position of the actor 
-	SetPosition(position);
-	StateMain::_currentScene->AddActor(this);
+
+	if (StateMain::_currentScene->initialized)
+	{
+		SetPosition(position);
+		StateMain::_currentScene->AddActor(this);
+	}
 }
 
 Actor::Actor(Actor* actor) : _name(actor->_name), _sprite(actor->_sprite), _position(actor->_position), _collider(actor->_collider), _mobility(actor->_mobility), _direction(actor->_direction)

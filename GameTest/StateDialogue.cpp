@@ -68,6 +68,7 @@ void StateDialogue::Update()
 		}
 		else
 		{
+			onDialogueEnd();
 			StateMain::SetState(State::REGULAR);
 		}
 	}

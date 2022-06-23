@@ -3,12 +3,14 @@
 #define STATEDIALOGUE_H_
 
 #include "StateController.h"
+#include "Utilities.h"
 
 class StateDialogue : public StateController
 {
 public:
 	std::string _currentDialogue = " ";
 	CSimpleSprite* _dialogueBox;
+	Delegate onDialogueEnd;
 
 	const int maxChar{ 50 };
 	const int maxLines{ 3 };

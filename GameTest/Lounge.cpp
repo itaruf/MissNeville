@@ -1,10 +1,6 @@
 #include "../stdafx.h"
 #include "Lounge.h"
 
-Lounge::Lounge(int ID, std::vector<Actor*> actors) : Scene(ID, actors)
-{
-}
-
 Lounge::Lounge(int ID) : Scene(ID)
 {
 }
@@ -19,8 +15,9 @@ void Lounge::Init()
 		return;
 
 	Scene::Init();
+	AddActor(StateMain::_player);
 
-	std::cout << StateMain::_player->GetPosition()->_x << std::endl;
+	/*std::cout << StateMain::_player->GetPosition()->_x << std::endl;*/
 
 	ObjectController* objectC{new ObjectController() };
 
@@ -78,6 +75,10 @@ void Lounge::Update(float deltaTime)
 void Lounge::Render()
 {
 	Scene::Render();
+}
+
+void Lounge::Exit()
+{
 }
 
 bool Lounge::IsRoomCleared()

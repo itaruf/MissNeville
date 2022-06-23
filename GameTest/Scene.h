@@ -59,6 +59,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render();
 	virtual bool IsRoomCleared() = 0;
+	virtual void Exit() = 0;
 	virtual void OnMirrorShattered();
 
 };

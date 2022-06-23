@@ -113,9 +113,11 @@
     <ClInclude Include="CandlePuzzle.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Dialogues.h" />
     <ClInclude Include="DodgePuzzle.h" />
     <ClInclude Include="ECollider.h" />
     <ClInclude Include="EState.h" />
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="Lethal.h" />
     <ClInclude Include="StateController.h" />
     <ClInclude Include="Entrance.h" />
@@ -168,7 +170,9 @@
     <ClCompile Include="CandlePuzzle.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="DodgePuzzle.cpp" />
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Lethal.cpp" />
     <ClCompile Include="StateController.cpp" />
     <ClCompile Include="Entrance.cpp" />
@@ -207,7 +211,6 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="Test.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

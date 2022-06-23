@@ -39,7 +39,7 @@ StateMain::~StateMain()
 		delete _currentStateController;*/
 }
 
-void StateMain::AddPlayer(Player* player)
+void StateMain::SetPlayer(Player* player)
 {
 	_player = player;
 }

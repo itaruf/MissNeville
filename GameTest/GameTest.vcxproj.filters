@@ -136,6 +136,12 @@
     <ClCompile Include="Lethal.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogues.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -300,6 +306,12 @@
     <ClInclude Include="ECollider.h">
       <Filter>Enumerations</Filter>
     </ClInclude>
+    <ClInclude Include="Dialogues.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sources.txt">
@@ -349,9 +361,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Test.csv">
-      <Filter>Others</Filter>
-    </None>
-    <None Include="ClassDiagram.cd">
       <Filter>Others</Filter>
     </None>
   </ItemGroup>

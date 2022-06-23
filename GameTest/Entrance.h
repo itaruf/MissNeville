@@ -12,21 +12,19 @@
 
 class StateMain;
 // Entrance scene 
-class Entrance : public Scene, std::enable_shared_from_this<Entrance>
+class Entrance : public Scene
 {
 private:
 protected:
 public:
-	MirrorPuzzle* _mirrorPuzzle;
-	Entrance(int ID, std::vector<Actor*> actors);
 	Entrance(int ID);
 	~Entrance();
 
 	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
+	void Exit() override;
 	bool IsRoomCleared() override;
-	
 };
 
 #endif

@@ -18,14 +18,13 @@ protected:
 public:
 	CandlePuzzle* _candlePuzzle;
 	std::vector<Candle*> _candles;
-
-	Hall(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle);
-	Hall(int ID, CandlePuzzle* candlePuzzle);
+	Hall(int ID);
 	~Hall();
 
 	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
+	void Exit() override;
 	bool IsRoomCleared() override;
 	void OnMirrorShattered() override;
 };

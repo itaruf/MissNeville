@@ -15,13 +15,13 @@ class Lounge : public Scene, std::enable_shared_from_this<Lounge>
 private:
 protected:
 public:
-	Lounge(int ID, std::vector<Actor*> actors);
 	Lounge(int ID);
 	~Lounge();
 
 	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
+	void Exit() override;
 	bool IsRoomCleared() override;
 };
 

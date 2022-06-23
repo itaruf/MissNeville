@@ -1,14 +1,10 @@
 ﻿#include "../stdafx.h"
 #include "Hall.h"
 
-Hall::Hall(int ID, std::vector<Actor*> actors, CandlePuzzle* candlePuzzle) : Scene(ID, actors), _candlePuzzle{std::move(candlePuzzle)}
+Hall::Hall(int ID) : Scene(ID)
 {
 }
 
-
-Hall::Hall(int ID, CandlePuzzle* candlePuzzle) : Scene(ID), _candlePuzzle{std::move(_candlePuzzle)}
-{
-}
 
 Hall::~Hall()
 {
@@ -32,6 +28,7 @@ void Hall::Init()
 		return;
 
 	Scene::Init();
+	AddActor(StateMain::_player);
 
 	std::random_device myRandomDevice;
 	/*Background First*/
@@ -100,7 +97,7 @@ void Hall::Init()
 	smith->SetCurrentDialogue(0);
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(32, 32)) };
-	charlotte->dialogues.insert(std::make_pair(0, "A page from my journal must be around.. But it's so dark here ! Well, it always has been... You did it ! Serves her right once again, good bye Ms. Smith !"));
+	charlotte->dialogues.insert(std::make_pair(0, "A page from my journal must be around.. But it's so dark here ! Well, it always has been..."));
 	charlotte->dialogues.insert(std::make_pair(1, "You did it ! Serves her right once again, good bye Ms. Smith !"));
 	charlotte->SetCurrentDialogue(0);
 
@@ -126,8 +123,6 @@ void Hall::Init()
 
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();
-
-	initialized = !initialized;
 }
 
 void Hall::Update(float deltaTime)
@@ -138,6 +133,10 @@ void Hall::Update(float deltaTime)
 void Hall::Render()
 {
 	Scene::Render();
+}
+
+void Hall::Exit()
+{
 }
 
 bool Hall::IsRoomCleared()

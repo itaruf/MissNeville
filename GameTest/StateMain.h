@@ -44,9 +44,25 @@ public:
 	~StateMain();
 
 	Player* GetPlayer();
-	void AddPlayer(Player* player);
+	void SetPlayer(Player* player);
 	void SwitchState();
 	std::string PrintState();
+
+	static void LoadScene(int ID)
+	{
+		_currentScene->Exit();
+		SetState(State::REGULAR);
+		_currentScene = _rooms[ID];
+		_currentScene->Init();
+	}
+
+	static void LoadScene(Scene* scene)
+	{
+		_currentScene->Exit();
+		SetState(State::REGULAR);
+		_currentScene = scene;
+		_currentScene->Init();
+	}
 
 	static void StateMain::SetState(State state)
 	{

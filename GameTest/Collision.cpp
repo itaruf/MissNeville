@@ -38,21 +38,10 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 	auto w2{ other->GetCollider()->GetWidth()};
 	auto h2{ other->GetCollider()->GetHeight()};
 
-	if 
-		(
-
-		x + _offset->_x - _width <= other->GetPosition()->_x + other->GetCollider()->_offset->_x + other->GetCollider()->GetWidth() &&
-		x + _offset->_x + _width >= other->GetPosition()->_x + other->GetCollider()->_offset->_x - other->GetCollider()->GetWidth() &&
-
-		 y + _offset->_y - _height <= other->GetPosition()->_y + other->GetCollider()->_offset->_y + other->GetCollider()->GetHeight() &&
-		 y + _offset->_y + _height >= other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight()
-			
-		
-			//x + x1 /*+ _offset->_x*/ - w1	<	x2 /*+ other->GetCollider()->_offset->_x*/ + w2 &&
-			//x + x1 /*+ _offset->_x*/ + w1	>	x2 /*+ other->GetCollider()->_offset->_x*/ - w2	&&
-			//y + y1 /*+ _offset->_y*/ - h1	<	y2 /*+ other->GetCollider()->_offset->_y*/ + h2	&&
-			//y + y1 /*+ _offset->_y*/ + h1	>	y2 /*+ other->GetCollider()->_offset->_y*/ - h2
-		)
+	if (x + _offset->_x - _width < other->GetPosition()->_x + other->GetCollider()->_offset->_x + other->GetCollider()->GetWidth() &&
+		x + _offset->_x + _width > other->GetPosition()->_x + other->GetCollider()->_offset->_x - other->GetCollider()->GetWidth() &&
+		y + _offset->_y - _height < other->GetPosition()->_y + other->GetCollider()->_offset->_y + other->GetCollider()->GetHeight() &&
+		y + _offset->_y + _height > other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight())
 
 		return true;
 
@@ -86,7 +75,7 @@ void Collision::SetWidth(float value)
 // DEBUG : Draw the collider with the actor pos in the center
 void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 {
-	//return; // Print no collider
+	return; // Print no collider
 
 	if (!actor)
 		return;

@@ -13,3 +13,6 @@ https://pipoya.itch.io/pipoya-free-rpg-character-sprites-32x32
 https://kartoy.itch.io/32x32sandstone-dungeon-and-character-pack
 https://opengameart.org/content/retro-pixel-art-guihud-elements-including-dialogue-box
 https://opengameart.org/content/lpc-house-interior-and-decorations
+https://opengameart.org/content/lpc-medieval-village-decorations
+https://opengameart.org/content/lpc-house-insides
+https://opengameart.org/content/lpc-weapons

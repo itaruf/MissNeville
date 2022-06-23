@@ -11,11 +11,14 @@
 #include "StateDialogue.h"
 
 #include "EState.h"
+
+#include "Intro.h"
 #include "Hall.h"
 #include "Lounge.h"
 #include "Room.h"
 #include "Hall.h"
 #include "Library.h"
+
 #include "Utilities.h"
 #include "Controller.h"
 #include "PlayerController.h"
@@ -27,6 +30,7 @@ void Init()
 	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
 	dialBox->SetPosition(MIDDLE_WIDTH, 100);
 	dialBox->SetScale(7);
+
 	/*GameStates*/
 	StateRegular* stateRegular{ new StateRegular() };
 	StateInventory* stateInventory{ new StateInventory() };
@@ -37,12 +41,12 @@ void Init()
 	state->_state = State::REGULAR;
 
 	/*Scenes*/
-	Entrance* entrance{ new Entrance{ 0 } };
-	Lounge* lounge{ new Lounge{ 3 } };
-	Room* room{ new Room{ 4 } };
-	Hall* hall{ new Hall{ 1, nullptr} };
-	Library* library{ new Library{ 2 } };
-
+	Intro* intro{ new Intro { 0 } };
+	Hall* hall{ new Hall{ 1 } };
+	Room* room{ new Room{ 2 } };
+	Library* library{ new Library{ 3 } };
+	Lounge* lounge{ new Lounge{ 4 } };
+	Entrance* entrance{ new Entrance{ 5 } };
 
 	/*Linking scenes*/
 	entrance->_NScene = hall;
@@ -58,15 +62,17 @@ void Init()
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
 	/*state->_currentScene = hall;*/
-	state->_currentScene = lounge;
+	/*state->_currentScene = lounge;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
+	state->_currentScene = intro;
 	
-	state->_rooms.insert(std::make_pair(0, entrance));
+	state->_rooms.insert(std::make_pair(0, intro));
 	state->_rooms.insert(std::make_pair(1, hall));
 	state->_rooms.insert(std::make_pair(2, room));
 	state->_rooms.insert(std::make_pair(3, library));
 	state->_rooms.insert(std::make_pair(4, lounge));
+	state->_rooms.insert(std::make_pair(5, entrance));
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
@@ -89,16 +95,10 @@ void Init()
 	player->SetCurrentDialogue(0);
 
 	/*Adding the player to the gamestate*/
-	state->AddPlayer(player);
+	state->SetPlayer(player);
 	stateRegular->_player = player;
 	stateInventory->_player = player;
 	stateDialogue->_player = player;
-
-	entrance->AddActor(player);
-	hall->AddActor(player);
-	room->AddActor(player);
-	library->AddActor(player);
-	lounge->AddActor(player);
 
 	/*Other states*/
 	state->_stateControllers.emplace_back(stateRegular);
@@ -129,6 +129,9 @@ void Render()
 	state->_currentScene->Render();
 	App::Print(800, 620, ("Scene : " + GetChar(state->_currentScene->GetID())).c_str());
 	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
+	state->_currentStateController->Render();
+
+	App::Print(400, 600, GetChar(state->_currentScene->GetActors().size()).c_str());
 	state->_currentStateController->Render();
 
 	/*********PLAYER RENDER*********/

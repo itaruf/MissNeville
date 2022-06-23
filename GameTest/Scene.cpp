@@ -48,7 +48,8 @@ std::vector<Actor*>& Scene::GetActors()
 
 void Scene::Init()
 {
-	_startingPos = new Vector2D(StateMain::_player->GetPosition()->_x, StateMain::_player->GetPosition()->_y);
+	initialized = true;
+	/*_startingPos = new Vector2D(StateMain::_player->GetPosition()->_x, StateMain::_player->GetPosition()->_y);*/
 }
 
 // If we want to setup a background

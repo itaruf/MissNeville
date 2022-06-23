@@ -10,6 +10,7 @@ class StateController
 {
 public:
 	Player* _player;
+
 	virtual ~StateController();
 	
 	virtual void Enter() = 0;

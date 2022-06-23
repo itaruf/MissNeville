@@ -18,13 +18,13 @@ protected:
 public:
 	MirrorPuzzle* _mirrorPuzzle;
 
-	Room(int ID, std::vector<Actor*> actors);
 	Room(int ID);
 	~Room();
 
 	void Init() override;
 	void Update(float deltaTime) override;
 	void Render() override;
+	void Exit() override;
 	bool IsRoomCleared() override;
 	void OnMirrorShattered();
 };

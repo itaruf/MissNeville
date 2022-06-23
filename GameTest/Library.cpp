@@ -19,6 +19,7 @@ void Library::Init()
 		return;
 
 	Scene::Init();
+	AddActor(StateMain::_player);
 
 	std::random_device myRandomDevice;
 	/*Background First*/
@@ -285,8 +286,6 @@ void Library::Init()
 	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1), new Vector2D(MIDDLE_WIDTH - 64, MIDDLE_HEIGHT), new Collision(32, 32)) };
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
-
-	initialized = !initialized;
 }
 
 void Library::Update(float deltaTime)
@@ -297,6 +296,10 @@ void Library::Update(float deltaTime)
 void Library::Render()
 {
 	Scene::Render();
+}
+
+void Library::Exit()
+{
 }
 
 bool Library::IsRoomCleared()
