@@ -38,7 +38,7 @@ public:
 
 	const char* _SInteract{ SFX.item_pick };
 
-	Actor(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr);
+	Actor(std::string name = " ", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = new Collision(32,32));
 	Actor(Actor* actor);
 	virtual ~Actor();
 

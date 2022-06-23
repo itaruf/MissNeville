@@ -68,7 +68,7 @@ struct DDetective
 
 struct DIntro
 {
-	std::string i1{ "[...] says : We are in 1877, the tragedy of the Neville house, highborns in the english society found murdered in their mansion, still remains in the mind of the inhabitants, who now considerer the lands of the once pround family, cursed. Some says ghosts of the former members still wander to protect their secrets. Some says spine-chilling screams and demoniac laughters can be heard from there. However, sayings without proof are superstitions.. But Could there still be prooves to step-in closer to the truth ? You, JJ Detective, have decided to investigate the place once and for all..." };
+	std::string i1{ "[...] says : We are in 1877, the tragedy of the Neville house, highborns in the english society found murdered in their mansion, still remains in the mind of the inhabitants, who now considerer the lands of the once pround family, cursed. No one could tell the reason of their deaths and since then, rumors started to spread. Some say ghosts of the former members still wander, waiting to take revenge, as they could not find peace... Some say spine-chilling screams and demoniac laughters can be heard from time to time from there... However, sayings without proof are superstitions.. But could there still be prooves after so long ? To step-in closer to the truth, you, JJ Detective, have decided to investigate the Neville's abandonned mansion once and for all..." };
 };
 
 extern struct DIntro DIntro;

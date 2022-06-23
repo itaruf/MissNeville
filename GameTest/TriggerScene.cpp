@@ -57,6 +57,7 @@ void TriggerScene::OnOverlap()
 
 	p->SetPosition(_playerPos->_x, _playerPos->_y);
 
+	std::cout << "triggered " << std::endl;
 	if (_SInteract == "")
 		return;
 

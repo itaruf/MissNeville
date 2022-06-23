@@ -60,12 +60,12 @@ void Init()
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
-	/*state->_currentScene = entrance;*/
+	state->_currentScene = entrance;
 	/*state->_currentScene = hall;*/
 	/*state->_currentScene = lounge;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	state->_currentScene = intro;
+	/*state->_currentScene = intro;*/
 	
 	state->_rooms.insert(std::make_pair(0, intro));
 	state->_rooms.insert(std::make_pair(1, hall));
@@ -107,7 +107,7 @@ void Init()
 	state->_currentStateController = stateRegular;
 
 	state->_currentScene->Init();
-	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
+	/*CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);*/
 }
 
 void Update(float deltaTime)
@@ -118,6 +118,11 @@ void Update(float deltaTime)
 		state->_currentScene->Update(deltaTime);
 		state->_currentStateController->Update();
 	}
+
+	/*auto player{ state->GetPlayer() };
+
+	if (player)
+		player->GetSprite()->Update(deltaTime);*/
 }
 
 void Render()
@@ -131,7 +136,7 @@ void Render()
 	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
 	state->_currentStateController->Render();
 
-	App::Print(400, 600, GetChar(state->_currentScene->GetActors().size()).c_str());
+	/*App::Print(400, 600, GetChar(state->_currentScene->GetActors().size()).c_str());*/
 	state->_currentStateController->Render();
 
 	/*********PLAYER RENDER*********/

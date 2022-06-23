@@ -23,24 +23,18 @@ void StateDialogue::Enter()
 	speaker = Process(_currentDialogue, ':');
 	auto line{ Process2(_currentDialogue, ':', false) };
 
-	std::cout << speaker << std::endl;
-	std::cout << line << std::endl;
+	/*std::cout << speaker << std::endl;
+	std::cout << line << std::endl;*/
 
 	// If the dialogue to display is larger than the number of max characters allowed
-	/*if (line.length() > maxChar)
-	{*/
-		auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
-		/*auto nbTrunc{ std::trunc((double)line.length() / (double) maxChar) };*/
+	auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
 
-		App::Print(390, 315, GetChar(nbSubDials).c_str());
-
-		auto start{ 0 };
-		for (int i =  0 ; i < nbSubDials; i++)
-		{
-			subDialogues.emplace_back(line.substr(start, maxChar));
-			start = maxChar * (i + 1) + 1;
-		}
-	/*}*/
+	auto start{ 0 };
+	for (int i = 0; i < nbSubDials; i++)
+	{
+		subDialogues.emplace_back(line.substr(start, maxChar));
+		start = maxChar * (i + 1);
+	}
 
 
 	if (subDialogues.size() > maxLines)
@@ -66,6 +60,8 @@ void StateDialogue::Update()
 	// Check if there are more dialogues
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
+		CSimpleSound::GetInstance().PlaySoundW(SFX.page_read, 0);
+
 		if (remainingDials > maxLines)
 		{
 			start += maxLines;

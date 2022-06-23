@@ -78,7 +78,7 @@ struct MWeb
 	const char* model{ ".\\TestData\\Props\\web.bmp" };
 	const char* model2{ ".\\TestData\\Props\\web2.bmp" };
 	int frame{ 0 };
-	float scale{ 1 };
+	float scale{ 2 };
 };
 
 extern struct MWeb MWeb;
@@ -109,6 +109,7 @@ struct MCandle
 	std::string name{ "Candle" };
 	const char* model{ ".\\TestData\\Props\\candle.bmp" };
 	int frame{ 0 };
+	int frame2{ 1 };
 	float scale{ 0.5 };
 };
 
@@ -150,6 +151,7 @@ struct MCarpet
 	const char* model{ ".\\TestData\\Props\\carpet-b.bmp" };
 	int frame{ 0 };
 	float scale{ 3 };
+	float scale2{ 2 };
 };
 
 extern struct MCarpet MCarpet;
@@ -231,7 +233,7 @@ struct MPillar
 	std::string name{ "Pillar" };
 	const char* model{ ".\\TestData\\Props\\pillar2.bmp" };
 	int frame{ 0 };
-	float scale{ 4 };
+	float scale{ 3 };
 };
 
 extern struct MPillar MPillar;

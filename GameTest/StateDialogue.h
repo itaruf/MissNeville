@@ -12,7 +12,7 @@ public:
 	CSimpleSprite* _dialogueBox;
 	Delegate onDialogueEnd;
 
-	const int maxChar{ 50 };
+	const int maxChar{ 45 };
 	const int maxLines{ 3 };
 	int start{ 0 };
 	int end{ 0 };
