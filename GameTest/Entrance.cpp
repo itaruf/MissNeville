@@ -18,14 +18,6 @@ void Entrance::Init()
 	AddActor(StateMain::_player);
 	StateMain::_player->GetSprite()->SetPosition(MIDDLE_WIDTH, ENTRANCE_WALL + 64);
 
-	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2) / 32; j++)
-	{
-		for (int i = 0; i < (APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL * 2) / 32; i++)
-		{
-			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16 + i * 32, HALL_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
-		}
-	}
-
 	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(ENTRANCE_WIDTH_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2, 2)) };
 	wallLeft->SetTag("wall");
 
@@ -41,7 +33,7 @@ void Entrance::Init()
 	/*PROPS*/
 
 	auto carpet{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale2), new Vector2D(MIDDLE_WIDTH, ENTRANCE_WALL + 48), new Collision(64, 64, ColliderType::Overlap)) };
-	auto carpet2{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale2), new Vector2D(MIDDLE_WIDTH, carpet->GetPosition()->_y	+ 92), new Collision(64, 64, ColliderType::Overlap)) };
+	auto carpet2{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale2), new Vector2D(MIDDLE_WIDTH, carpet->GetPosition()->_y + 92), new Collision(64, 64, ColliderType::Overlap)) };
 	auto carpet3{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale2), new Vector2D(MIDDLE_WIDTH, carpet2->GetPosition()->_y + 92), new Collision(64, 64, ColliderType::Overlap)) };
 	auto carpet4{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale2), new Vector2D(MIDDLE_WIDTH, carpet3->GetPosition()->_y + 92), new Collision(64, 64, ColliderType::Overlap)) };
 
@@ -64,7 +56,7 @@ void Entrance::Init()
 	auto candle13{ new Actor(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame2, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle12->GetPosition()->_y + 48), new Collision(30, 10)) };
 	auto candle14{ new Actor(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame2, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle13->GetPosition()->_y + 48), new Collision(30, 10)) };
 
-	auto web{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 80), new Collision(32, 32, ColliderType::Overlap))};
+	auto web{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 80), new Collision(32, 32, ColliderType::Overlap)) };
 	auto web2{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 48), new Collision(32, 32, ColliderType::Overlap)) };
 	auto web3{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 144), new Collision(32, 32, ColliderType::Overlap)) };
 	auto web4{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 176), new Collision(32, 32, ColliderType::Overlap)) };
@@ -77,11 +69,15 @@ void Entrance::Init()
 	auto picture2{ new Actor(MPicture.name, App::CreateSprite(MPicture.model2, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH + 112, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 32), new Collision(32, 32, ColliderType::Overlap)) };
 
 	auto commode{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16, MIDDLE_HEIGHT + 64), new Collision(64, 32)) };
-	auto commode2{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH -ENTRANCE_WIDTH_WALL - 16, MIDDLE_HEIGHT), new Collision(64, 32)) };
+	auto commode2{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL - 16, MIDDLE_HEIGHT), new Collision(64, 32)) };
 	auto commode3{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale4), new Vector2D(ENTRANCE_WIDTH_WALL + 8, MIDDLE_HEIGHT - 128), new Collision(64, 32)) };
 
 	// Triggers
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 16), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _NScene, false) };
+
+	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
+
+	trigger->_onTriggered += [this]() {	Test(); };
 }
 
 void Entrance::Update(float deltaTime)
@@ -101,4 +97,20 @@ void Entrance::Exit()
 bool Entrance::IsRoomCleared()
 {
 	return true;
+}
+
+void Entrance::Test()
+{
+	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT + 32), new Collision(32, 32)) };
+
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	if (!stateDialogue)
+		return;
+
+	/*stateDialogue->onDialogueEnd += [this]() { StateMain::LoadScene(5); };*/
+
+	stateDialogue->_currentDialogue = DDetective.e1;
+	StateMain::SetState(State::DIALOGUE);
+
+	CSimpleSound::GetInstance().PlaySoundW(SFX.ghost_death, 0);
 }

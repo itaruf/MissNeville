@@ -2,7 +2,7 @@
 #include "Collision.h"
 #include "Collectable.h"
 
-Collision::Collision() : _colliderType{ ColliderType::Block }, _height{32 / 2}, _width{ 32 / 2 }, _offset{ new Vector2D()}
+Collision::Collision() : Collision(32 / 2, 32 / 2, ColliderType::Block, new Vector2D())
 {
 }
 
@@ -34,7 +34,6 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 		y + _offset->_y + _height > other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight())
 
 	{
-		std::cout << other->GetName() << std::endl;
 		return true;
 	}
 

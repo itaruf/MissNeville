@@ -21,11 +21,15 @@ struct DCharlotte
 	std::string k1{ "Mother, you always were living for and by the books.. You would always tell others how precious were your books but you would never care for me.. Until I did. " };
 };
 
+extern struct DCharlotte DCharlotte;
+
 struct DJones
 {
 	// Hall
 	std::string h1{ "No.. Do not light your path ..! Leave this cursed place while you can..! " };
 };
+
+extern struct DJones DJones;
 
 struct DSmith
 {
@@ -33,17 +37,23 @@ struct DSmith
 	std::string r1{ "It was no use.. A demon disguised as an angel could never be a true member of the highborn society..." };
 };
 
+extern struct DSmith DSmith;
+
 struct DFather
 {
 	// Library
 	std::string l1{ "Why..? How could I not realized that the seed of evil was growing inside our glorious family..? Do not make the same mistake... Open your eyes and leave now ..!" };
 };
 
+extern struct DFather DFather;
+
 struct DMother
 {
 	// Kitchen
 	std::string k1{ "How could a mother be blind to the pain of their own child ..? This eternal punishment should be mine... But they decided to make it yours now..! You cannot escape this anymore..!" };
 };
+
+extern struct DMother DMother;
 
 struct DDetective
 {
@@ -65,6 +75,8 @@ struct DDetective
 	// Kitchen
 	std::string k1{ "Oh no, no... This was not supposed to be like this ! the mansion is trying to kill me !!" };
 };
+
+extern struct DDetective DDetective;
 
 struct DIntro
 {

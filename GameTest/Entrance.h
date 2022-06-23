@@ -3,12 +3,9 @@
 #define ENTRANCE_H_
 
 #include "Scene.h"
-#include "MirrorPuzzle.h"
-#include "Candle.h"
 #include "StateMain.h"
 #include "NPC.h"
-#include "MirrorShard.h"
-#include "Mirror.h"
+#include "Dialogues.h"
 
 class StateMain;
 // Entrance scene 
@@ -25,6 +22,7 @@ public:
 	void Render() override;
 	void Exit() override;
 	bool IsRoomCleared() override;
+	void Test();
 };
 
 #endif

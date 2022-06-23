@@ -13,7 +13,6 @@ class Intro : public Scene
 private:
 protected:
 public:
-	MirrorPuzzle* _mirrorPuzzle;
 	Intro(int ID);
 	~Intro();
 
