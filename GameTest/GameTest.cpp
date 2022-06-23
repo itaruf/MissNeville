@@ -61,11 +61,11 @@ void Init()
 
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
-	/*state->_currentScene = hall;*/
+	state->_currentScene = hall;
 	/*state->_currentScene = lounge;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	state->_currentScene = intro;
+	/*state->_currentScene = intro;*/
 	
 	state->_rooms.insert(std::make_pair(0, intro));
 	state->_rooms.insert(std::make_pair(1, hall));

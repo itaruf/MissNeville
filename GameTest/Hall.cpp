@@ -29,6 +29,7 @@ void Hall::Init()
 
 	Scene::Init();
 	AddActor(StateMain::_player);
+	StateMain::_player->SetPosition(300, 250);
 
 	std::random_device myRandomDevice;
 	/*Background First*/
@@ -97,7 +98,7 @@ void Hall::Init()
 	smith->SetCurrentDialogue(0);
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(32, 32)) };
-	charlotte->dialogues.insert(std::make_pair(0, "A page from my journal must be around.. But it's so dark here ! Well, it always has been..."));
+	charlotte->dialogues.insert(std::make_pair(0, "A page from my journal must be around.. But it's so dark here ! Well, it always has been... A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been..."));
 	charlotte->dialogues.insert(std::make_pair(1, "You did it ! Serves her right once again, good bye Ms. Smith !"));
 	charlotte->SetCurrentDialogue(0);
 

@@ -23,6 +23,9 @@ void StateDialogue::Enter()
 	speaker = Process(_currentDialogue, ':');
 	auto line{ Process2(_currentDialogue, ':', false) };
 
+	std::cout << speaker << std::endl;
+	std::cout << line << std::endl;
+
 	// If the dialogue to display is larger than the number of max characters allowed
 	/*if (line.length() > maxChar)
 	{*/
@@ -34,7 +37,7 @@ void StateDialogue::Enter()
 		auto start{ 0 };
 		for (int i =  0 ; i < nbSubDials; i++)
 		{
-			subDialogues.emplace_back(line.substr(start, maxChar));
+			subDialogues.emplace_back(line.substr(start, maxChar - 1));
 			start = maxChar * (i + 1);
 		}
 	/*}*/
@@ -51,8 +54,11 @@ void StateDialogue::Enter()
 		end = subDialogues.size();
 	}
 
-	/*std::cout << remainingDials << std::endl;
-	std::cout << line.length() << std::endl;*/
+	for (const auto& d : subDialogues)
+		std::cout << d << std::endl;
+
+	std::cout << remainingDials << std::endl;
+	std::cout << line.length() << std::endl;
 }
 
 void StateDialogue::Update()
@@ -64,7 +70,11 @@ void StateDialogue::Update()
 		{
 			start += maxLines;
 			remainingDials -= maxLines;
-			end = maxLines + remainingDials;
+
+			if (remainingDials < maxLines)
+				end = start + remainingDials;
+			else
+				end = start + maxLines;
 		}
 		else
 		{
@@ -85,6 +95,9 @@ void StateDialogue::Render()
 	int count{ 0 };
 	for (auto i{ start }; i < end; ++i)
 	{
+		if (count >= maxLines)
+			count = 0;
+
 		App::Print(310, 100 - (count * 25), subDialogues[i].c_str());
 		count++;
 	}
