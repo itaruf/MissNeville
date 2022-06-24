@@ -180,7 +180,7 @@ bool Hall::IsRoomCleared()
 				if (!stateDialogue)
 					return true;
 
-				stateDialogue->_currentDialogue = MMessage.door_unlocked;
+				stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
 				StateMain::SetState(State::DIALOGUE);
 
 				door->GetSprite()->SetAnimation(CSimpleSprite::ANIM_DOOR);

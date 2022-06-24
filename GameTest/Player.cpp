@@ -218,9 +218,9 @@ void Player::PlayDialogue()
 		return;
 
 	if (_currentDialogue.empty())
-		stateDialogue->_currentDialogue = "[" + GetName() + "] says : ...";
+		stateDialogue->_currentDialogue.emplace_back("[" + GetName() + "] says : ...");
 	else
-		stateDialogue->_currentDialogue = "[" + GetName() + "] says : " + _currentDialogue;
+		stateDialogue->_currentDialogue.emplace_back("[" + GetName() + "] says : " + _currentDialogue);
 }
 
 void Player::Hit()

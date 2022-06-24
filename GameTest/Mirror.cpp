@@ -53,7 +53,7 @@ void Mirror::Interact()
 			return;
 		
 		_delegate();
-		stateDialogue->_currentDialogue = p->dialogues[1];
+		stateDialogue->_currentDialogue.emplace_back(p->dialogues[1]);
 		StateMain::SetState(State::DIALOGUE);
 		return;
 	}

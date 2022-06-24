@@ -18,6 +18,14 @@ void Entrance::Init()
 	AddActor(StateMain::_player);
 	StateMain::_player->GetSprite()->SetPosition(MIDDLE_WIDTH, ENTRANCE_WALL + 64);
 
+	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2) / 32; j++)
+	{
+		for (int i = 0; i < (APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL * 2) / 32; i++)
+		{
+			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16 + i * 32, HALL_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
+		}
+	}
+
 	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(ENTRANCE_WIDTH_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2, 2)) };
 	wallLeft->SetTag("wall");
 
@@ -75,7 +83,7 @@ void Entrance::Init()
 	// Triggers
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 16), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _NScene, false) };
 
-	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
+	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
 
 	trigger->_onTriggered += [this]() {	Test(); };
 }
@@ -109,7 +117,8 @@ void Entrance::Test()
 
 	/*stateDialogue->onDialogueEnd += [this]() { StateMain::LoadScene(5); };*/
 
-	stateDialogue->_currentDialogue = DDetective.e1;
+	stateDialogue->_currentDialogue.emplace_back(DDetective.e1);
+	stateDialogue->_currentDialogue.emplace_back(DCharlotte.e1);
 	StateMain::SetState(State::DIALOGUE);
 
 	CSimpleSound::GetInstance().PlaySoundW(SFX.ghost_death, 0);

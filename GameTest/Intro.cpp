@@ -24,7 +24,7 @@ void Intro::Init()
 
 	stateDialogue->onDialogueEnd += [this]() { StateMain::LoadScene(5); };
 
-	stateDialogue->_currentDialogue = DIntro.i1;
+	stateDialogue->_currentDialogue.emplace_back(DIntro.i1);
 	StateMain::SetState(State::DIALOGUE);
 }
 

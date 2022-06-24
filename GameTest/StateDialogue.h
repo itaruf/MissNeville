@@ -8,7 +8,7 @@
 class StateDialogue : public StateController
 {
 public:
-	std::string _currentDialogue = " ";
+	std::vector<std::string> _currentDialogue;
 	CSimpleSprite* _dialogueBox;
 	Delegate onDialogueEnd;
 
@@ -26,6 +26,8 @@ public:
 	void Update() override;
 	void Render() override;
 	void Exit() override;
+	void ProcessDialogue(std::string dialogue);
+	void Clear();
 };
 
 #endif

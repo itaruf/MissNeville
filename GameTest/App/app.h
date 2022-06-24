@@ -49,7 +49,7 @@ namespace App
 	// The columns and rows parameters define the number of columns and rows of sprite animation frames in the given image.
 	// You can then use the CSimpleSprite methods to animate/move etc.
 	//-------------------------------------------------------------------------------------------
-	CSimpleSprite *CreateSprite(const char *fileName, int columns, int rows, int frame = 0, float scale = 1);
+	CSimpleSprite *CreateSprite(const char *fileName = "", int columns = 1, int rows = 1, int frame = 0, float scale = 1);
 
 	std::unique_ptr<CSimpleSprite> CreateSprite2(const char* fileName, int columns, int rows);
 

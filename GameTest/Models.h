@@ -353,7 +353,7 @@ extern struct SFX SFX;
 
 struct MMessage
 {
-	std::string door_unlocked{ "[...] : You hear the sound of a now unlocked door..." };
+	std::string door_unlocked{ "[...] : You hear a door opening..." };
 };
 
 extern struct MMessage MMessage;

@@ -34,7 +34,7 @@ void TriggerDialogue::OnOverlap()
 	if (!stateDialogue)
 		return;
 
-	stateDialogue->_currentDialogue = _dialogue;
+	stateDialogue->_currentDialogue.emplace_back(_dialogue);
 	StateMain::SetState(State::DIALOGUE);
 	_activated = false;
 }

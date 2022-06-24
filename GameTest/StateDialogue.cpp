@@ -13,46 +13,10 @@ StateDialogue::~StateDialogue()
 
 void StateDialogue::Enter()
 {
-	/*subDialogues.clear();
-	remainingDials = 0;
-	start = 0;*/
-
 	if (!_dialogueBox)
 		return;
 
-	speaker = Process(_currentDialogue, ':');
-	auto line{ Process2(_currentDialogue, ':', false) };
-
-	/*std::cout << speaker << std::endl;
-	std::cout << line << std::endl;*/
-
-	// If the dialogue to display is larger than the number of max characters allowed
-	auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
-
-	auto start{ 0 };
-	for (int i = 0; i < nbSubDials; i++)
-	{
-		subDialogues.emplace_back(line.substr(start, maxChar));
-		start = maxChar * (i + 1);
-	}
-
-
-	if (subDialogues.size() > maxLines)
-	{
-		remainingDials = subDialogues.size();
-		end = maxLines;
-	}
-	else
-	{
-		remainingDials = 0;
-		end = subDialogues.size();
-	}
-
-	/*for (const auto& d : subDialogues)
-		std::cout << d << std::endl;*/
-
-	/*std::cout << remainingDials << std::endl;
-	std::cout << line.length() << std::endl;*/
+	ProcessDialogue(_currentDialogue[0]);
 }
 
 void StateDialogue::Update()
@@ -74,8 +38,15 @@ void StateDialogue::Update()
 		}
 		else
 		{
-			onDialogueEnd();
-			StateMain::SetState(State::REGULAR);
+			_currentDialogue.erase(_currentDialogue.begin());
+
+			if (_currentDialogue.empty())
+			{
+				onDialogueEnd();
+				StateMain::SetState(State::REGULAR);
+			}
+			else
+				ProcessDialogue(_currentDialogue[0]);
 		}
 	}
 }
@@ -97,6 +68,40 @@ void StateDialogue::Render()
 }
 
 void StateDialogue::Exit()
+{
+	Clear();
+}
+
+void StateDialogue::ProcessDialogue(std::string dialogue)
+{
+	Clear();
+
+	speaker = Process(dialogue, ':');
+	auto line{ Process2(dialogue, ':', false) };
+
+	// If the dialogue to display is larger than the number of max characters allowed
+	auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
+
+	auto start{ 0 };
+	for (int i = 0; i < nbSubDials; i++)
+	{
+		subDialogues.emplace_back(line.substr(start, maxChar));
+		start = maxChar * (i + 1);
+	}
+
+	if (subDialogues.size() > maxLines)
+	{
+		remainingDials = subDialogues.size();
+		end = maxLines;
+	}
+	else
+	{
+		remainingDials = 0;
+		end = subDialogues.size();
+	}
+}
+
+void StateDialogue::Clear()
 {
 	subDialogues.clear();
 	remainingDials = 0;
