@@ -6,6 +6,7 @@
 #include "StateMain.h"
 #include "NPC.h"
 #include "Dialogues.h"
+#include "Candle.h"
 
 class StateMain;
 // Entrance scene 
@@ -22,7 +23,8 @@ public:
 	void Render() override;
 	void Exit() override;
 	bool IsRoomCleared() override;
-	void Test();
+	void Intro();
+	void Outro();
 };
 
 #endif

@@ -13,9 +13,11 @@ class Mirror : public Actor, public IInteractive
 private:
 protected:
 	bool _repaired{ false };
-	static constexpr int nbShards{ 4 };
+	static constexpr int nbShards{ 1 };
 	const char* _SMirror_repaired{ SFX.mirror_repaired };
 public:
+	Delegate _onRepaired;
+
 	Mirror(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
 	~Mirror();
 

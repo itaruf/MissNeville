@@ -23,7 +23,6 @@ void Mirror::Interact()
 		return;
 	}
 
-	std::cout << _repaired << std::endl;
 	auto p{ StateMain::_player };
 	if (!p)
 		return;
@@ -52,7 +51,8 @@ void Mirror::Interact()
 		if (!stateDialogue)
 			return;
 		
-		_delegate();
+		_onInteract();
+
 		stateDialogue->_currentDialogue.emplace_back(p->dialogues[1]);
 		StateMain::SetState(State::DIALOGUE);
 		return;
@@ -63,6 +63,8 @@ void Mirror::Interact()
 		auto mshard{ dynamic_cast<MirrorShard*>(item) };
 		if (!mshard)
 			continue;
+
+		_onRepaired();
 
 		p->_inventory->RemoveItem(mshard);
 	}

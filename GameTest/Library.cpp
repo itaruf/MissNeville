@@ -11,6 +11,8 @@ Library::Library(int ID) : Scene(ID)
 
 Library::~Library()
 {
+	if (_TPPuzzle)
+		delete _TPPuzzle;
 }
 
 void Library::Init()
@@ -49,21 +51,20 @@ void Library::Init()
 	std::string description = "Page number 2";
 	auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(), new Collision(16, 16), 0, description) };
 
+	/*Open the Lounge door*/
 	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
 
 	if (it != StateMain::_rooms[1]->GetActors().end())
-		page->_delegate += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+		page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 
 	/*Initiating Puzzles*/
 	_TPPuzzle = new TPPuzzle(TPPuzzle::Status::PENDING, page);
 
 	ObjectController* objectC{ new ObjectController() };
 
-	_startingPos = new Vector2D(LIBRARY_WALL + TRIGGER_OFFSET, MIDDLE_HEIGHT - 128);
+	_startingPos = new Vector2D(LIBRARY_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS, MIDDLE_HEIGHT);
 	/*_startingPos = new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 32);*/
 	
-	StateMain::_player->SetPosition(_startingPos);
-
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(LIBRARY_WALL + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap), _WScene) };
 	
 	auto wallH2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, (MIDDLE_HEIGHT + 64)), new Collision(2, MIDDLE_WIDTH + LIBRARY_WALL * 2)) };
@@ -151,8 +152,8 @@ void Library::Init()
 	auto papers3{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL + 100, wallH2->GetPosition()->_y - 300), new Collision(32, 32, ColliderType::Overlap)) };
 	auto papers4{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL + 150, wallH2->GetPosition()->_y - 250), new Collision(32, 32, ColliderType::Overlap)) };
 	
-	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL + 164, wallH2->GetPosition()->_y - 64), new Collision(32, 32)) };
-	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL + 164, wallH2->GetPosition()->_y - 290), new Collision(32, 32)) };
+	/*auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL + 164, wallH2->GetPosition()->_y - 64), new Collision(32, 32)) };
+	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL + 164, wallH2->GetPosition()->_y - 290), new Collision(32, 32)) };*/
 
 	auto table5{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(LIBRARY_WALL + 32, wallH2->GetPosition()->_y - 150), new Collision(32, 32), 0, 2, objectC) };
 	table5->SetDirection(Direction::RIGHT);
@@ -286,6 +287,22 @@ void Library::Init()
 	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1), new Vector2D(MIDDLE_WIDTH - 64, MIDDLE_HEIGHT), new Collision(32, 32)) };
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
+
+	/*NPC*/
+	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, 7, MCharlotte.scale), new Vector2D(LIBRARY_WALL + 32, wallH2->GetPosition()->_y - 192), new Collision(32, 32)) };
+	charlotte->dialogues.insert(std::make_pair(0, DCharlotte.l1));
+	charlotte->dialogues.insert(std::make_pair(1, DCharlotte.l2));
+	charlotte->SetCurrentDialogue(0);
+
+	/*DIALOGUES*/
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+
+	if (!stateDialogue)
+		return;
+
+	stateDialogue->_currentDialogue.emplace_back(DDetective.l1);
+	StateMain::SetState(State::DIALOGUE);
+
 }
 
 void Library::Update(float deltaTime)
@@ -315,13 +332,13 @@ bool Library::IsRoomCleared()
 
 	else if (_TPPuzzle->_status == Puzzle::Status::PENDING)
 	{
-		auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
+		auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ralph Neville"; });
 		if (it != _actors.end())
 		{
 			RemoveActor(*it);
 		}
 
-		auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == "Charlotte"; });
+		auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == MCharlotte.name; });
 		if (npc != _actors.end())
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
@@ -329,14 +346,18 @@ bool Library::IsRoomCleared()
 
 		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 
-		/*if (!stateDialogue)
+		if (!stateDialogue)
 			return true;
 
 		stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
+		stateDialogue->_currentDialogue.emplace_back(DDetective.l2);
+
 		StateMain::SetState(State::DIALOGUE);
 
-		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);*/
+		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
 
+		/*Change the player's movement speed from now on*/
+		StateMain::_player->SetMovementSpeed(4);
 		_TPPuzzle->_status = Puzzle::Status::CLEARED;
 		return true;
 	}

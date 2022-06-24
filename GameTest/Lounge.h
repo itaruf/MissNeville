@@ -3,18 +3,18 @@
 #define LOUNGE_H_
 
 #include "Scene.h"
-#include "CandlePuzzle.h"
-#include "Candle.h"
 #include "StateMain.h"
 #include "NPC.h"
+#include "DodgePuzzle.h"
 
 class StateMain;
 // Lounge scene 
-class Lounge : public Scene, std::enable_shared_from_this<Lounge>
+class Lounge : public Scene
 {
 private:
 protected:
 public:
+	DodgePuzzle* _dodgePuzzle;
 	Lounge(int ID);
 	~Lounge();
 

@@ -66,10 +66,19 @@ void Room::Init()
 	mirror->SetMobility(Mobility::MOVABLE);
 
 	_mirrorPuzzle->_mirror = mirror;
+
+	/*Open the library door*/
 	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
 
 	if (it != StateMain::_rooms[1]->GetActors().end())
-		mirror->_delegate += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+
+	/*Open the entrance door on repaired*/
+	/*auto it2 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_SScene; });
+
+	if (it2 != StateMain::_rooms[1]->GetActors().end())
+		mirror->_onRepaired += [this, it2]() {dynamic_cast<TriggerScene*>(*it2)->OnActivation(); };*/
+
 
 	// Triggers
 	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _SScene);
@@ -82,11 +91,6 @@ void Room::Init()
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
 	mirrorAnimTrigger->_onPlayingAnim += [this]() {this->OnMirrorShattered(); };
 
-	/*ObjectController* objectC{ new ObjectController() };
-	Character* character{ new Character(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(350,250), new Collision(32, 32), 0, 4, objectC) };
-	character->SetMobility(Mobility::MOVABLE);*/
-
-	std::cout << "HERE" << std::endl;
 	/*Start Puzzle*/
 	_mirrorPuzzle->StartPuzzle();
 }
@@ -118,9 +122,12 @@ bool Room::IsRoomCleared()
 
 	else if (_mirrorPuzzle->_status == Puzzle::Status::PENDING)
 	{
-		std::string description = "No";
+		auto page{ new Page(MPage.name + " 4" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, DPage.p4) };
+		
+		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_SScene; });
 
-		auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, description) };
+		if (it != StateMain::_rooms[1]->GetActors().end())
+			page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 		
 		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
 		if (it != _actors.end())
@@ -144,7 +151,7 @@ void Room::OnMirrorShattered()
 	MirrorShard* shard1{ new MirrorShard(MMirrorShard.name + "1", App::CreateSprite(MPage.model , 1, 1), new Vector2D(MIDDLE_WIDTH + 128, APP_VIRTUAL_HEIGHT - ROOM_WALL - 150), new Collision(32, 32)) };
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(MIDDLE_WIDTH + 64, APP_VIRTUAL_HEIGHT - ROOM_WALL - 64), new Collision(32, 32)) };
-	charlotte->dialogues.insert(std::make_pair(0, "Oh no.. My beautiful mirror ! The missing pieces should be all around the mansion, can you get all of them back ?"));
-	charlotte->dialogues.insert(std::make_pair(1, "You did it ! Serves her right once again, good bye Ms. Smith !"));
+	charlotte->dialogues.insert(std::make_pair(0, DCharlotte.r1));
+	charlotte->dialogues.insert(std::make_pair(1, DCharlotte.r2));
 	charlotte->SetCurrentDialogue(0);
 }

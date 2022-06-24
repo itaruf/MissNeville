@@ -11,7 +11,7 @@
 
 class StateMain;
 // Library scene 
-class Library : public Scene, std::enable_shared_from_this<Library>
+class Library : public Scene
 {
 private:
 protected:

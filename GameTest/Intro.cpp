@@ -23,7 +23,6 @@ void Intro::Init()
 	new Actor("Journal", App::CreateSprite(".\\TestData\\Backgrounds\\FlippingPages.bmp", 1, 1, 0, 3), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT), new Collision(0, 0, ColliderType::Overlap));
 
 	stateDialogue->onDialogueEnd += [this]() { StateMain::LoadScene(5); };
-
 	stateDialogue->_currentDialogue.emplace_back(DIntro.i1);
 	StateMain::SetState(State::DIALOGUE);
 }

@@ -31,46 +31,39 @@ void Hall::Init()
 	AddActor(StateMain::_player);
 	StateMain::_player->SetPosition(300, 250);
 
-	std::random_device myRandomDevice;
 	/*Background First*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - HALL_WALL * 2) / 32; j++)
 	{
 		for (int i = 0; i < (APP_VIRTUAL_WIDTH - HALL_WALL * 2) / 32; i++)
 		{
-			unsigned seed = myRandomDevice();
-			std::default_random_engine myRandomEngine(seed);
-
-			/*if (myRandomEngine() % 12 != 1)*/
 			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(HALL_WALL + 16 + i * 32, HALL_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
-			/*else
-				new Actor(MBackground.name, App::CreateSprite(MBackground.model2, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));*/
 		}
 	}
 
-	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(HALL_WALL, MIDDLE_HEIGHT), new Collision(MIDDLE_HEIGHT + HALL_WALL, 2)) };
+	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(HALL_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - HALL_WALL * 2, 2)) };
 	wallLeft->SetTag("wall");
 
-	auto wallBot{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, HALL_WALL), new Collision(2, MIDDLE_WIDTH + HALL_WALL * 2)) };
+	auto wallRight{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - HALL_WALL * 2, 2)) };
+	wallRight->SetTag("wall");
+
+	auto wallBot{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, HALL_WALL), new Collision(2, APP_VIRTUAL_WIDTH - HALL_WALL * 2)) };
 	wallBot->SetTag("wall");
 
-	auto wallTop{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL), new Collision(2, MIDDLE_WIDTH + HALL_WALL * 2)) };
+	auto wallTop{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL), new Collision(2, APP_VIRTUAL_WIDTH - HALL_WALL * 2)) };
 	wallTop->SetTag("wall");
-
-	auto wallRight{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL, MIDDLE_HEIGHT), new Collision(MIDDLE_HEIGHT + HALL_WALL, 2)) };
-	wallRight->SetTag("wall");
 
 	/*Initiating Puzzles*/
 	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
 
 	/*Triggers*/
 
-	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _SScene, false) };
+	TriggerScene* entranceTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS - 16), new Collision(32, 32, ColliderType::Overlap), _SScene, false) };
 
-	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(HALL_WALL + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap), _WScene, false) };
+	TriggerScene* loungeTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(HALL_WALL + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS - 32, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap), _WScene, false) };
 
-	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS, MIDDLE_HEIGHT),  new Collision(32, 32, ColliderType::Overlap), _EScene, false) };
+	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(LIBRARY_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS, MIDDLE_HEIGHT),  new Collision(32, 32, ColliderType::Overlap), _EScene, false) };
 
-	TriggerScene* roomTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL + 16), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _NScene, false) };
+	TriggerScene* roomTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _NScene, false) };
 	roomTrigger->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_DOOR, 1 / 15.f, { 0, 1 });
 	roomTrigger->_SInteract = SFX.door_open;
 
@@ -79,7 +72,7 @@ void Hall::Init()
 	doors.emplace_back(libraryTrigger);
 	doors.emplace_back(roomTrigger);
 
-	/*Initiating Props */
+	/*PROPS*/
 
 	auto carpet{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale), new Vector2D(512, 384), new Collision(64, 64, ColliderType::Overlap)) };
 
@@ -93,30 +86,28 @@ void Hall::Init()
 
 	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, 0, 3), new Vector2D(516, 418), new Collision(48, 32, ColliderType::Overlap)) };
 
-	auto smith{ new NPC("Ms. Smith", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(512, 394), new Collision(32, 32)) };
-	smith->dialogues.insert(std::make_pair(0, "You must not.. lighten your path.. the false angel.. shall be your doom ..!"));
-	smith->SetCurrentDialogue(0);
-
-	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(32, 32)) };
-	charlotte->dialogues.insert(std::make_pair(0, "A page from my journal must be around.. But it's so dark here ! Well, it always has been... A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been...A page from my journal must be around.. But it's so dark here ! Well, it always has been..."));
-	charlotte->dialogues.insert(std::make_pair(1, "You did it ! Serves her right once again, good bye Ms. Smith !"));
-	charlotte->SetCurrentDialogue(0);
-
 	auto pillar{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH - 70, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 16)) };
-
 	auto pillar2{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH + 70, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 16)) };
 
 	auto railing{ new Actor(MRailing.name, App::CreateSprite(MRailing.model, 1, 1, MRailing.frame, MRailing.scale), new Vector2D(MIDDLE_WIDTH - 40, APP_VIRTUAL_HEIGHT - HALL_WALL), new Collision(32, 16)) };
-
 	auto railing2{ new Actor(MRailing.name, App::CreateSprite(MRailing.model, 1, 1, MRailing.frame, MRailing.scale), new Vector2D(MIDDLE_WIDTH + 40, APP_VIRTUAL_HEIGHT - HALL_WALL), new Collision(32, 16)) };
 
 	auto picture{ new Actor(MPicture.name, App::CreateSprite(MPicture.model, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH - 150, APP_VIRTUAL_HEIGHT - HALL_WALL + TRIGGER_OFFSET), new Collision(32, 32)) };
-
 	auto picture2{ new Actor(MPicture.name, App::CreateSprite(MPicture.model2, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH + 150, APP_VIRTUAL_HEIGHT - HALL_WALL + TRIGGER_OFFSET), new Collision(32, 32)) };
 
 	auto table{ new Actor(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(HALL_WALL + 64, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 32)) };
 
 	auto commode{ new Actor(MCommode.name, App::CreateSprite(MCommode.model, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(HALL_WALL + 128, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(16, 32)) };
+
+	/*NPC*/
+	auto jones{ new NPC("\"Bright\" Jones", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(512, 394), new Collision(32, 32)) };
+	jones->dialogues.insert(std::make_pair(0, DJones.h1));
+	jones->SetCurrentDialogue(0);
+
+	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(300, 300), new Collision(32, 32)) };
+	charlotte->dialogues.insert(std::make_pair(0, DCharlotte.h1));
+	charlotte->dialogues.insert(std::make_pair(1, DCharlotte.h2));
+	charlotte->SetCurrentDialogue(0);
 
 	ObjectController* objectC{ new ObjectController() };
 	Character* candle{ new Character(MCandle.name, App::CreateSprite(MCandle.model, 1, 2), new Vector2D(150, 200), new Collision(10, 10), 0, 6, objectC) };
@@ -124,6 +115,20 @@ void Hall::Init()
 
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();
+
+	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, HALL_WALL + 32), new Collision(32, APP_VIRTUAL_WIDTH - HALL_WALL * 2, ColliderType::Overlap)) };
+
+	//Close the Entrance door 
+	trigger->_onTriggered += [this, entranceTrigger]() 
+	{
+		entranceTrigger->OnDeactivation(); 
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		if (!stateDialogue)
+			return;
+
+		stateDialogue->_currentDialogue.emplace_back(MMessage.door_locked);
+		StateMain::SetState(State::DIALOGUE);
+	};
 }
 
 void Hall::Update(float deltaTime)
@@ -153,9 +158,10 @@ bool Hall::IsRoomCleared()
 
 	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
 	{
-		auto it{ std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; }) };
+		auto it{ std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "\"Bright\" Jones"; }) };
 		if (it != _actors.end())
 		{
+			CSimpleSound::GetInstance().PlaySoundW((*it)->_SInteract, 0);
 			RemoveActor(*it);
 		}
 
@@ -193,11 +199,6 @@ bool Hall::IsRoomCleared()
 		return true;
 	}
 	return false;
-}
-
-void Hall::OnMirrorShattered()
-{
-	
 }
 
 

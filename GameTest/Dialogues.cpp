@@ -8,3 +8,4 @@ struct DFather DFather{};
 struct DMother DMother {};
 struct DDetective DDetective{};
 struct DIntro DIntro {};
+struct DPage DPage {};

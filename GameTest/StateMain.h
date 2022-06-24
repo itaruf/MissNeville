@@ -61,6 +61,7 @@ public:
 		_currentScene->Exit();
 		SetState(State::REGULAR);
 		_currentScene = scene;
+		std::cout << scene->GetID() << std::endl;
 		_currentScene->Init();
 	}
 

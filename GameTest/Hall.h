@@ -26,7 +26,6 @@ public:
 	void Render() override;
 	void Exit() override;
 	bool IsRoomCleared() override;
-	void OnMirrorShattered() override;
 };
 
 #endif

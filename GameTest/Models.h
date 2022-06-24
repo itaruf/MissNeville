@@ -346,7 +346,7 @@ struct SFX
 	const char* footstep{ ".\\TestData\\SFX\\footstep.wav" };
 	const char* footstep2{ ".\\TestData\\SFX\\footstep2.wav" };
 	const char* page_read{ ".\\TestData\\SFX\\page_read.wav" };
-	const char* tp_sound{ ".\\TestData\\SFX\\tp_sound.wav" };
+	const char* tp_sound{ ".\\TestData\\SFX\\item_pick.wav" };
 };
 
 extern struct SFX SFX;
@@ -354,6 +354,7 @@ extern struct SFX SFX;
 struct MMessage
 {
 	std::string door_unlocked{ "[...] : You hear a door opening..." };
+	std::string door_locked{ "[...] : You hear a door closing..." };
 };
 
 extern struct MMessage MMessage;

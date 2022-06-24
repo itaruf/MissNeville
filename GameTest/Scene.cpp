@@ -101,11 +101,6 @@ void Scene::Render()
 	}
 }
 
-void Scene::OnMirrorShattered()
-{
-	std::cout << "mirror shards everywhere ! " << std::endl;
-}
-
 // Remove an actor from the scene
 bool Scene::RemoveActor(Actor* actor)
 {

@@ -37,4 +37,20 @@ void Trigger::OnOverlap()
 
 void Trigger::OnActivation()
 {
+	if (_activated)
+		return;
+
+	_onActivated();
+	_activated = true;
+	CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
+}
+
+void Trigger::OnDeactivation()
+{
+	if (!_activated)
+		return;
+
+	_onDeactivated();
+	_activated = false;
+	CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
 }

@@ -7,7 +7,7 @@
 interface IInteractive
 {
 public:
-	Delegate _delegate;
+	Delegate _onInteract;
 	virtual void Interact() = 0;
 	virtual void OnInteract() = 0;
 	virtual ~IInteractive() = default;

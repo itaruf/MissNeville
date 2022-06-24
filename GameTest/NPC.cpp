@@ -21,7 +21,7 @@ void NPC::PlayDialogue()
 	if (_currentDialogue.empty())
 		stateDialogue->_currentDialogue.emplace_back("[" + GetName() + "] says : ...");
 	else
-		stateDialogue->_currentDialogue.emplace_back("[" + GetName() + "] says : " + _currentDialogue);
+		stateDialogue->_currentDialogue.emplace_back(_currentDialogue);
 }
 
 // Executing instructions when the NPC is being interacted with

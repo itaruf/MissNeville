@@ -3,10 +3,10 @@
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
-#define TRIGGER_OFFSET (24)
+#define TRIGGER_OFFSET (16)
 #define WALL (128)
 
-#define HALL_WALL (192)
+#define HALL_WALL (224)
 #define LIBRARY_WALL (128)
 
 #define ENTRANCE_WALL (192)

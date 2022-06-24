@@ -103,7 +103,7 @@ void StateInventory::Render()
 			y - height,
 			selected.r, selected.g, selected.b);
 
-		//App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Test");
+		//App::Print(((x + widthOff) + (x + width * widthOff)) / 2, ((y - heightOff + widthOff) + (y - heightOff + height * widthOff)) / 2, "Intro");
 
 		if (bag.second[i])
 		{

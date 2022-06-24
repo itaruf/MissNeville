@@ -11,7 +11,7 @@
 
 class StateMain;
 // Room scene 
-class Room : public Scene, std::enable_shared_from_this<Room>
+class Room : public Scene
 {
 private:
 protected:
