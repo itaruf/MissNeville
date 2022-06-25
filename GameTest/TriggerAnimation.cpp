@@ -17,16 +17,7 @@ void TriggerAnimation::OnOverlap()
 	if (!_collider)
 		return;
 
-	if (!StateMain::_player)
-		return;
-
-	auto p{ StateMain::_player };
-	auto v{ p->GetPosition() };
-
-	if (!v)
-		return;
-
-	if (!_collider->isColliding(p, this, v->_x, v->_y))
+	if (!_collider->isOverlapping(StateMain::_player, this))
 		return;
 
 	if (!_targetSprite)

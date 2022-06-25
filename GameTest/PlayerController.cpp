@@ -11,6 +11,9 @@ PlayerController::~PlayerController()
 
 void PlayerController::MoveHorizontally(Character* actor)
 {
+	if (!actor->_sprite)
+		return;
+
 	float x{ actor->_position->_x }, y{ actor->_position->_y };
 	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().GetLeftThumbStickX() > 0.5f)
 	{
@@ -58,6 +61,9 @@ void PlayerController::MoveHorizontally(Character* actor)
 
 void PlayerController::MoveVertically(Character* actor)
 {
+	if (!actor->_sprite)
+		return;
+
 	float x{ actor->_position->_x }, y{ actor->_position->_y };
 	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP) || App::GetController().GetLeftThumbStickY() > 0.5f)
 	{

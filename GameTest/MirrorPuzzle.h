@@ -13,7 +13,7 @@ private:
 protected:
 public:
 	Mirror* _mirror;
-	MirrorPuzzle(Status status);
+	MirrorPuzzle(Status status = Status::PENDING);
 	~MirrorPuzzle();
 	bool IsCleared() override;
 };

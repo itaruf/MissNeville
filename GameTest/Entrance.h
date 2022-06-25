@@ -7,6 +7,7 @@
 #include "NPC.h"
 #include "Dialogues.h"
 #include "Candle.h"
+#include "Room.h"
 
 class StateMain;
 // Entrance scene 

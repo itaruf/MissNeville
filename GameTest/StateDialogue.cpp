@@ -42,7 +42,7 @@ void StateDialogue::Update()
 
 			if (_currentDialogue.empty())
 			{
-				onDialogueEnd();
+				_onDialogueEnd();
 				StateMain::SetState(State::REGULAR);
 			}
 			else

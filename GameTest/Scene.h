@@ -21,6 +21,8 @@ class Page;
 #include "Models.h"
 #include "TriggerAnimation.h"
 #include <random>
+#include "Collectable.h"
+#include "TriggerScene.h"
 
 // Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene
@@ -28,7 +30,6 @@ class Scene
 private:
 protected:
 	int _ID;
-	CSimpleSprite* _background{ nullptr };
 	std::vector<Actor*> _actors;
 	const char* sfx{SFX.scene};
 
@@ -43,7 +44,6 @@ public:
 
 	std::vector<TriggerScene*> doors;
 
-	Scene(int ID, std::vector<Actor*> actors);
 	Scene(int ID);
 
 	virtual ~Scene();

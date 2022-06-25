@@ -19,6 +19,8 @@ public:
 	CandlePuzzle* _candlePuzzle;
 	std::vector<Candle*> _candles;
 	Hall(int ID);
+	Hall(int ID, CandlePuzzle*);
+
 	~Hall();
 
 	void Init() override;

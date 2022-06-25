@@ -24,7 +24,9 @@ public:
 
 	const float& GetHeight() const;
 	const float& GetWidth() const;
+
 	bool isColliding(Actor* actor, Actor* other, float x, float y);
+	bool isOverlapping(Actor* actor, Actor* other);
 
 	void SetHeight(float value);
 	void SetWidth(float value);

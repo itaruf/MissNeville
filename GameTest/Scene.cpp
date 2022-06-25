@@ -1,9 +1,5 @@
 #include "../stdafx.h"
 #include "Scene.h"
-#include "Collectable.h"
-#include "TriggerScene.h"
-
-Scene::Scene(int ID, std::vector<Actor*> actors) : _ID{ ID }, _actors{ actors } {}
 
 Scene::Scene(int ID) : _ID{ ID } {}
 
@@ -11,15 +7,15 @@ Scene::~Scene()
 {
 	std::cout << "ROOM DESTRUCTOR CALLED : " << (int) _actors.size() << std::endl;
 
-	if (_background)
-		delete _background;
-
 	for (auto& actor : _actors)
 	{
 		if (actor)
 			delete actor;
 	}
 	_actors.clear();
+
+	if (_startingPos)
+		delete _startingPos;
 }
 
 // Add an actor among all actors of the scene
@@ -55,13 +51,13 @@ void Scene::Init()
 // If we want to setup a background
 void Scene::Update(float deltaTime)
 {
-	if (_background)
-		_background->Draw();
-
 	// Updating the sprites of all the actors present in the scene
 	for (const auto& item : _actors)
 	{
 		if (!item)
+			continue;
+
+		if (!item->GetSprite())
 			continue;
 
 		item->GetSprite()->Update(deltaTime);
@@ -95,8 +91,12 @@ void Scene::Render()
 		if (dynamic_cast<Collectable*>(item) && dynamic_cast<Collectable*>(item)->itemized)
 			continue;
 		// Updating the sprites
+		if (!item->GetSprite())
+			return;
 		item->GetSprite()->Draw();
 		// Updating the colliders
+		if (!item->GetCollider())
+			return;
 		item->GetCollider()->DrawCollision(item, 50, 50, 50);
 	}
 }

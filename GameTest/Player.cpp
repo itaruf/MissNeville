@@ -23,12 +23,6 @@ Player::~Player()
 
 	if (_inventory)
 		delete _inventory;
-
-	/*if (_SBag)
-		delete[] _SBag;
-
-	if (_SCollect)
-		delete[] _SCollect;*/
 }
 
 // Moving the player on the Y-Axis

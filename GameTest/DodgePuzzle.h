@@ -13,7 +13,7 @@ private:
 protected:
 public:
 	Page* _page;
-	DodgePuzzle(Status status, Page* page);
+	DodgePuzzle(Status status = Status::PENDING, Page* page = nullptr);
 	~DodgePuzzle();
 
 	bool IsCleared() override;

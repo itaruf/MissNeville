@@ -312,6 +312,9 @@
     <ClInclude Include="Intro.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="EStatus.h">
+      <Filter>Enumerations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Sources.txt">

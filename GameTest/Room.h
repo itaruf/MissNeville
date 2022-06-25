@@ -19,6 +19,8 @@ public:
 	MirrorPuzzle* _mirrorPuzzle;
 
 	Room(int ID);
+	Room(int ID, MirrorPuzzle*);
+
 	~Room();
 
 	void Init() override;

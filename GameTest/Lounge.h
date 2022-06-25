@@ -16,6 +16,8 @@ protected:
 public:
 	DodgePuzzle* _dodgePuzzle;
 	Lounge(int ID);
+	Lounge(int ID, DodgePuzzle*);
+
 	~Lounge();
 
 	void Init() override;

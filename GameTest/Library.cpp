@@ -1,11 +1,11 @@
 #include "../stdafx.h"
 #include "Library.h"
 
-Library::Library(int ID, std::vector<Actor*> actors) : Scene(ID, actors)
+Library::Library(int ID) : Scene(ID)
 {
 }
 
-Library::Library(int ID) : Scene(ID)
+Library::Library(int ID, TPPuzzle* puzzle) : Scene(ID), _TPPuzzle(puzzle)
 {
 }
 
@@ -58,7 +58,7 @@ void Library::Init()
 		page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 
 	/*Initiating Puzzles*/
-	_TPPuzzle = new TPPuzzle(TPPuzzle::Status::PENDING, page);
+	_TPPuzzle->_page = page;
 
 	ObjectController* objectC{ new ObjectController() };
 
@@ -327,10 +327,10 @@ bool Library::IsRoomCleared()
 	if (!_TPPuzzle->IsCleared())
 		return false;
 
-	else if (_TPPuzzle->_status == Puzzle::Status::CLEARED)
+	else if (_TPPuzzle->_status == Status::CLEARED)
 		return true;
 
-	else if (_TPPuzzle->_status == Puzzle::Status::PENDING)
+	else if (_TPPuzzle->_status == Status::PENDING)
 	{
 		auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ralph Neville"; });
 		if (it != _actors.end())
@@ -358,7 +358,7 @@ bool Library::IsRoomCleared()
 
 		/*Change the player's movement speed from now on*/
 		StateMain::_player->SetMovementSpeed(4);
-		_TPPuzzle->_status = Puzzle::Status::CLEARED;
+		_TPPuzzle->_status = Status::CLEARED;
 		return true;
 	}
 }

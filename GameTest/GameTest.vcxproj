@@ -117,6 +117,7 @@
     <ClInclude Include="DodgePuzzle.h" />
     <ClInclude Include="ECollider.h" />
     <ClInclude Include="EState.h" />
+    <ClInclude Include="EStatus.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="Lethal.h" />
     <ClInclude Include="StateController.h" />

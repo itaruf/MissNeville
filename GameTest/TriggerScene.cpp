@@ -12,6 +12,7 @@ void TriggerScene::OnActivation()
 	if (_activated)
 		return;
 
+	_onActivated();
 	CSimpleSound::GetInstance().PlaySoundW(_SInteract);
 	_activated = true;
 }
@@ -28,19 +29,8 @@ void TriggerScene::OnOverlap()
 	if (!_collider)
 		return;
 
-	if (!StateMain::_player)
+	if (!_collider->isOverlapping(StateMain::_player, this))
 		return;
-
-	auto p{ StateMain::_player };
-	auto v{ p->GetPosition() };
-
-	if (!v)
-		return;
-
-	if (!_collider->isColliding(p, this, v->_x, v->_y))
-		return;
-
-	App::Print(350, 350, _name.c_str());
 
 	if (_scene)
 	{
@@ -55,7 +45,7 @@ void TriggerScene::OnOverlap()
 	if (!_playerPos)
 		return;
 
-	p->SetPosition(_playerPos->_x, _playerPos->_y);
+	StateMain::_player->SetPosition(_playerPos->_x, _playerPos->_y);
 
 	if (_SInteract == "")
 		return;

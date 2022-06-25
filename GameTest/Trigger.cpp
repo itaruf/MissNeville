@@ -18,20 +18,10 @@ void Trigger::OnOverlap()
 	if (!_collider)
 		return;
 
-	if (!StateMain::_player)
+	if (!_collider->isOverlapping(StateMain::_player, this))
 		return;
-
-	auto p{ StateMain::_player };
-	auto v{ p->GetPosition() };
-
-	if (!v)
-		return;
-
-	if (!_collider->isColliding(p, this, v->_x, v->_y))
-		return;
-
+	
 	_onTriggered();
-
 	_activated = false;
 }
 

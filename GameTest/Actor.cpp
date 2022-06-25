@@ -6,6 +6,9 @@ Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collis
 
 	// Immediately Set the position of the actor 
 
+	if (!StateMain::_currentScene)
+		return;
+
 	if (StateMain::_currentScene->initialized)
 	{
 		SetPosition(position);

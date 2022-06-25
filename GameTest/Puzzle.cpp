@@ -31,7 +31,7 @@ bool Puzzle::EndPuzzle()
 }
 
 // Get the current status of the puzzle
-Puzzle::Status Puzzle::GetStatus()
+Status Puzzle::GetStatus()
 {
 	return _status;
 }

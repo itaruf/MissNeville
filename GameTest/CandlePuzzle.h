@@ -14,7 +14,7 @@ protected:
 public:
 	Page* _page;
 
-	CandlePuzzle(Status status);
+	CandlePuzzle(Status status = Status::PENDING);
 	~CandlePuzzle();
 
 	std::vector<Candle*>& GetCandles();

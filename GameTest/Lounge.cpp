@@ -5,6 +5,10 @@ Lounge::Lounge(int ID) : Scene(ID)
 {
 }
 
+Lounge::Lounge(int ID, DodgePuzzle* puzzle) : Scene(ID), _dodgePuzzle(puzzle)
+{
+}
+
 Lounge::~Lounge()
 {
 	if (_dodgePuzzle)
@@ -91,10 +95,10 @@ bool Lounge::IsRoomCleared()
 	if (!_dodgePuzzle->IsCleared())
 		return false;
 
-	else if (_dodgePuzzle->_status == Puzzle::Status::CLEARED)
+	else if (_dodgePuzzle->_status == Status::CLEARED)
 		return true;
 
-	else if (_dodgePuzzle->_status == Puzzle::Status::PENDING)
+	else if (_dodgePuzzle->_status == Status::PENDING)
 	{
 		auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
 		if (it != _actors.end())
@@ -118,7 +122,7 @@ bool Lounge::IsRoomCleared()
 
 		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);*/
 
-		_dodgePuzzle->_status = Puzzle::Status::CLEARED;
+		_dodgePuzzle->_status = Status::CLEARED;
 		return true;
 	}
 }

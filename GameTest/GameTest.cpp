@@ -40,46 +40,12 @@ void Init()
 	state = std::make_shared<StateMain>();
 	state->_state = State::REGULAR;
 
-	/*Scenes*/
-	Intro* intro{ new Intro { 0 } };
-	Hall* hall{ new Hall{ 1 } };
-	Room* room{ new Room{ 2 } };
-	Library* library{ new Library{ 3 } };
-	Lounge* lounge{ new Lounge{ 4 } };
-	Entrance* entrance{ new Entrance{ 5 } };
-
-	/*Linking scenes*/
-	entrance->_NScene = hall;
-	lounge->_EScene = hall;
-	room->_SScene = hall;
-	library->_WScene = hall;
-
-	hall->_NScene = room;
-	hall->_WScene = lounge;
-	hall->_SScene = entrance;
-	hall->_EScene = library;
-
-	/*Setting up the first scene*/
-	/*state->_currentScene = entrance;*/
-	state->_currentScene = hall;
-	/*state->_currentScene = lounge;*/
-	/*state->_currentScene = library;*/
-	/*state->_currentScene = room;*/
-	/*state->_currentScene = intro;*/
-	
-	state->_rooms.insert(std::make_pair(0, intro));
-	state->_rooms.insert(std::make_pair(1, hall));
-	state->_rooms.insert(std::make_pair(2, room));
-	state->_rooms.insert(std::make_pair(3, library));
-	state->_rooms.insert(std::make_pair(4, lounge));
-	state->_rooms.insert(std::make_pair(5, entrance));
-
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
-	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10))};
+	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };
-	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 3, controller, new Inventory())};
+	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 3, controller, new Inventory()) };
 	player->SetTag("player");
 	player->_interactSprite = App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale);
 	/*Player base stats and configs*/
@@ -89,7 +55,7 @@ void Init()
 	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
 	player->GetSprite()->SetScale(2.0f);
 
-	player->dialogues.insert(std::make_pair(0, "["+ player->GetName() + "] says : The mirror shattered in pieces !"));
+	player->dialogues.insert(std::make_pair(0, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
 	player->dialogues.insert(std::make_pair(1, "[" + player->GetName() + "] says : I need to find all the missing pieces... But why would they spread everywhere in the mansion ?"));
 	//player->dialogues.insert(std::make_pair(2, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
 	player->SetCurrentDialogue(0);
@@ -106,6 +72,45 @@ void Init()
 	state->_stateControllers.emplace_back(stateDialogue);
 	state->_currentStateController = stateRegular;
 
+	/*Scenes*/
+	Intro* intro{ new Intro { 0 } };
+	Hall* hall{ new Hall{ 1, new CandlePuzzle()} };
+	Room* room{ new Room{ 2, new MirrorPuzzle()} };
+	Library* library{ new Library{ 3, new TPPuzzle() } };
+	Lounge* lounge{ new Lounge{ 4, new DodgePuzzle() } };
+	Entrance* entrance{ new Entrance{ 5 } };
+
+	/*entrance->AddActor(player);
+	hall->AddActor(player);
+	room->AddActor(player);
+	library->AddActor(player);*/
+
+	/*Linking scenes*/
+	entrance->_NScene = hall;
+	lounge->_EScene = hall;
+	room->_SScene = hall;
+	library->_WScene = hall;
+
+	hall->_NScene = room;
+	hall->_WScene = lounge;
+	hall->_SScene = entrance;
+	hall->_EScene = library;
+
+	/*Setting up the first scene*/
+	/*state->_currentScene = entrance;*/
+	/*state->_currentScene = hall;*/
+	/*state->_currentScene = lounge;*/
+	/*state->_currentScene = library;*/
+	/*state->_currentScene = room;*/
+	state->_currentScene = intro;
+	
+	state->_rooms.insert(std::make_pair(0, intro));
+	state->_rooms.insert(std::make_pair(1, hall));
+	state->_rooms.insert(std::make_pair(2, room));
+	state->_rooms.insert(std::make_pair(3, library));
+	state->_rooms.insert(std::make_pair(4, lounge));
+	state->_rooms.insert(std::make_pair(5, entrance));
+
 	state->_currentScene->Init();
 	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
 }
@@ -118,11 +123,6 @@ void Update(float deltaTime)
 		state->_currentScene->Update(deltaTime);
 		state->_currentStateController->Update();
 	}
-
-	/*auto player{ state->GetPlayer() };
-
-	if (player)
-		player->GetSprite()->Update(deltaTime);*/
 }
 
 void Render()
@@ -139,20 +139,23 @@ void Render()
 	/*App::Print(400, 600, GetChar(state->_currentScene->GetActors().size()).c_str());*/
 	state->_currentStateController->Render();
 
+	/*SOME PRINTS*/
+	if (state->_currentScene->IsRoomCleared())
+		App::Print(800, 700, "Scene Cleared");
+	else
+		App::Print(800, 700, "Scene Not Cleared");
+
 	/*********PLAYER RENDER*********/
 	auto player{ state->GetPlayer() };
 
 	if (!player)
 		return;
 
+	if (!player->GetSprite())
+		return;
+
 	player->GetSprite()->Draw();
 	player->GetCollider()->DrawCollision(player, 50, 50, 50);
-
-	/*SOME PRINTS*/
-	if (state->_currentScene->IsRoomCleared())
-		App::Print(800, 700, "Scene Cleared");
-	else
-		App::Print(800, 700, "Scene Not Cleared");
 }
 
 //------------------------------------------------------------------------

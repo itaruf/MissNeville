@@ -5,6 +5,10 @@ Room::Room(int ID) : Scene(ID)
 {
 }
 
+Room::Room(int ID, MirrorPuzzle* mirrorPuzzle) : Scene(ID), _mirrorPuzzle(mirrorPuzzle)
+{
+}
+
 Room::~Room()
 {
 }
@@ -23,13 +27,7 @@ void Room::Init()
 	{
 		for (int i = 0; i < (APP_VIRTUAL_WIDTH - ROOM_WALL * 2) / 32; i++)
 		{
-			unsigned seed = myRandomDevice();
-			std::default_random_engine myRandomEngine(seed);
-
-			/*if (myRandomEngine() % 12 != 1)*/
 			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ROOM_WALL + 16 + i * 32, ROOM_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
-			/*else
-				new Actor(MBackground.name, App::CreateSprite(MBackground.model2, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(128 + 16 + i * 32, 128 + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));*/
 		}
 	}
 
@@ -52,13 +50,13 @@ void Room::Init()
 	auto table{ new Actor(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 64, APP_VIRTUAL_HEIGHT - ROOM_WALL - 32), new Collision(32, 32)) };
 
 	auto commode{ new Actor(MCommode.name, App::CreateSprite(MCommode.model, 1, 1, MCommode.frame, MCommode.scale),  new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 64, APP_VIRTUAL_HEIGHT - ROOM_WALL), new Collision(16, 32)) };
-
 	auto commode2{ new Actor(MCommode.name, App::CreateSprite(MCommode.model3, 1, 1, MCommode.frame, MCommode.scale2),  new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ROOM_WALL - 16), new Collision(16, 32)) };
 
 	auto shelf{ new Actor(MCommode.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame,  MShelf.scale),  new Vector2D(MIDDLE_WIDTH + 64, APP_VIRTUAL_HEIGHT - ROOM_WALL - 8), new Collision(16, 32)) };
 	auto shelf2{ new Actor(MCommode.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame,  MShelf.scale),  new Vector2D(shelf->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - ROOM_WALL - 8), new Collision(16, 32)) };
 
-	_mirrorPuzzle = new MirrorPuzzle(MirrorPuzzle::Status::PENDING);
+	/*Instantiating puzzle*/
+	/*_mirrorPuzzle = new MirrorPuzzle(Status::PENDING);*/
 
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 6, 1, MMirror.frame, MMirror.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ROOM_WALL + 20), new Collision(96, 32)) };
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_BROKEN, 1.0f / 10.0f, { 0,1,2,3,4,5 });
@@ -72,12 +70,6 @@ void Room::Init()
 
 	if (it != StateMain::_rooms[1]->GetActors().end())
 		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
-
-	/*Open the entrance door on repaired*/
-	/*auto it2 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_SScene; });
-
-	if (it2 != StateMain::_rooms[1]->GetActors().end())
-		mirror->_onRepaired += [this, it2]() {dynamic_cast<TriggerScene*>(*it2)->OnActivation(); };*/
 
 
 	// Triggers
@@ -117,17 +109,20 @@ bool Room::IsRoomCleared()
 	if (!_mirrorPuzzle->IsCleared())
 		return false;
 
-	else if (_mirrorPuzzle->_status == Puzzle::Status::CLEARED)
+	else if (_mirrorPuzzle->_status == Status::CLEARED)
 		return true;
 
-	else if (_mirrorPuzzle->_status == Puzzle::Status::PENDING)
+	else if (_mirrorPuzzle->_status == Status::PENDING)
 	{
 		auto page{ new Page(MPage.name + " 4" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, DPage.p4) };
 		
+		// Open the Entrance door once the page is collected
 		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_SScene; });
 
 		if (it != StateMain::_rooms[1]->GetActors().end())
+		{
 			page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+		}
 		
 		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
 		if (it != _actors.end())
@@ -140,7 +135,9 @@ bool Room::IsRoomCleared()
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 		}
-		_mirrorPuzzle->_status = Puzzle::Status::CLEARED;
+
+		_mirrorPuzzle->_status = Status::CLEARED;
+		_mirrorPuzzle->_onSolved();
 
 		return true;
 	}

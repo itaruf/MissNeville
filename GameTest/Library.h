@@ -17,8 +17,8 @@ private:
 protected:
 public:
 	TPPuzzle* _TPPuzzle;
-	Library(int ID, std::vector<Actor*> actors);
 	Library(int ID);
+	Library(int ID, TPPuzzle*);
 	~Library();
 
 	void Init() override;

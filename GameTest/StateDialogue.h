@@ -10,7 +10,7 @@ class StateDialogue : public StateController
 public:
 	std::vector<std::string> _currentDialogue;
 	CSimpleSprite* _dialogueBox;
-	Delegate onDialogueEnd;
+	Delegate _onDialogueEnd;
 
 	const int maxChar{ 45 };
 	const int maxLines{ 3 };

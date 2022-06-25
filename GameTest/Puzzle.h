@@ -3,6 +3,8 @@
 #define Puzzle_H_
 
 #include <vector>
+#include "Utilities.h"
+#include "EStatus.h"
 
 // Base class to define the Puzzles of the game
 class Puzzle
@@ -12,16 +14,10 @@ protected:
 public:
 
 	// a puzzle has multiple states
-	enum class Status
-	{
-		NOTSTARTED,
-		PENDING,
-		CLEARED,
-	};
-
 	Status _status;
+	Delegate _onSolved;
 
-	Puzzle(Status status);
+	Puzzle(Status status = Status::PENDING);
 	virtual ~Puzzle();
 
 	Status GetStatus();

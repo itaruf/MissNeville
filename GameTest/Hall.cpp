@@ -5,6 +5,10 @@ Hall::Hall(int ID) : Scene(ID)
 {
 }
 
+Hall::Hall(int ID, CandlePuzzle* puzzle) : Scene(ID), _candlePuzzle(puzzle)
+{
+}
+
 
 Hall::~Hall()
 {
@@ -53,7 +57,7 @@ void Hall::Init()
 	wallTop->SetTag("wall");
 
 	/*Initiating Puzzles*/
-	_candlePuzzle = new CandlePuzzle(CandlePuzzle::Status::PENDING);
+	/*_candlePuzzle = new CandlePuzzle(Status::PENDING);*/
 
 	/*Triggers*/
 
@@ -63,7 +67,7 @@ void Hall::Init()
 
 	TriggerScene* libraryTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(LIBRARY_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS, MIDDLE_HEIGHT),  new Collision(32, 32, ColliderType::Overlap), _EScene, false) };
 
-	TriggerScene* roomTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _NScene, false) };
+	TriggerScene* roomTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap, new Vector2D(0, -24)), _NScene, false) };
 	roomTrigger->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_DOOR, 1 / 15.f, { 0, 1 });
 	roomTrigger->_SInteract = SFX.door_open;
 
@@ -153,10 +157,10 @@ bool Hall::IsRoomCleared()
 	if (!_candlePuzzle->IsCleared())
 		return false;
 
-	else if (_candlePuzzle->_status == Puzzle::Status::CLEARED)
+	else if (_candlePuzzle->_status == Status::CLEARED)
 		return true;
 
-	else if (_candlePuzzle->_status == Puzzle::Status::PENDING)
+	else if (_candlePuzzle->_status == Status::PENDING)
 	{
 		auto it{ std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "\"Bright\" Jones"; }) };
 		if (it != _actors.end())
@@ -172,9 +176,9 @@ bool Hall::IsRoomCleared()
 		}
 	}
 
-	if (_candlePuzzle->_page->itemized && _candlePuzzle->_status == Puzzle::Status::PENDING)
+	if (_candlePuzzle->_page->itemized && _candlePuzzle->_status == Status::PENDING)
 	{
-		_candlePuzzle->_status = Puzzle::Status::CLEARED;
+		_candlePuzzle->_status = Status::CLEARED;
 
 		// Looking for the doors to open
 		for (auto& door : doors)

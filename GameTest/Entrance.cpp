@@ -81,51 +81,50 @@ void Entrance::Init()
 	auto commode3{ new Actor(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale4), new Vector2D(ENTRANCE_WIDTH_WALL + 8, MIDDLE_HEIGHT - 128), new Collision(64, 32)) };
 
 	// Triggers
-	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 16), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _NScene, false) };
+	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 16), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap, new Vector2D(0, -24)), _NScene, false) };
 	hallTrigger->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_DOOR, 1 / 15.0f, { 0, 1 });
 
 	// Trigger Intro
-	/*Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
-	trigger->_onTriggered += [this]() {	Intro(); };*/
+	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
+	trigger->_onTriggered += [this]() {	Intro(); };
 
 	/*Opening the door when the dialogue ends*/
 	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 	if (!stateDialogue)
 		return;
 
-	stateDialogue->onDialogueEnd += [this, hallTrigger]() 
+	stateDialogue->_onDialogueEnd += [this, hallTrigger]() 
 	{ 
 		hallTrigger->OnActivation(); 
 		hallTrigger->GetSprite()->SetAnimation(CSimpleSprite::ANIM_DOOR); 
 	};
 
-	// Trigger Outro
-	Trigger* trigger2{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap), false) };
+	/*Trigger Outro*/
+	// Trigger Candles
+	Trigger* trigger2{ new Trigger(MTriggerScene.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 144), new Collision(32, 32, ColliderType::Overlap), false)};
 	trigger2->_SInteract = SFX.candle_enlight;
-	trigger2->_onActivated += [&]() 
-	{ 
-		candle7->GetSprite()->SetFrame(0); 
-		trigger2->_activated = false; 
-	};
-	trigger2->_onActivated += [&]() 
-	{ 
-		candle14->GetSprite()->SetFrame(0); 
+
+	trigger2->_onTriggered += [this, trigger2]()
+	{
+		for (auto& actor : GetActors())
+		{
+			auto candle{ dynamic_cast<Candle*>(actor) };
+			if (!candle) 
+				continue;
+			candle->GetSprite()->SetFrame(0);
+		}
 		trigger2->_activated = false;
 	};
 
-	Trigger* trigger3{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 128), new Collision(32, 32, ColliderType::Overlap), false) };
-	trigger3->_SInteract = SFX.candle_enlight;
-	trigger3->_onActivated += [&]() 
-	{ 
-		std::cout << "here" << std::endl;
-		candle6->GetSprite()->SetFrame(0); 
-		trigger3->_activated = false;
+	auto room{ dynamic_cast<Room*>(StateMain::_rooms[2]) };
+	room->_mirrorPuzzle->_onSolved += [this, trigger2]() 
+	{
+		std::cout << "Trigger 2 reactivated." << std::endl;
+		trigger2->_activated = true;
 	};
-	trigger3->_onActivated += [&]() 
-	{ 
-		candle13->GetSprite()->SetFrame(0); 
-		trigger3->_activated = false;
-	};
+
+
+	// Trigger Pentagramme
 }
 
 void Entrance::Update(float deltaTime)

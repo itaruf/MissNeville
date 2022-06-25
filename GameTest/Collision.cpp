@@ -28,14 +28,62 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->itemized)
 		return false;
 
+	/*auto x1{ actor->GetPosition()->_x };
+	auto y1{ actor->GetPosition()->_y };
+	auto w1{ actor->GetCollider()->GetWidth() };
+	auto h1{ actor->GetCollider()->GetHeight() };
+	auto x1off{ actor->GetCollider()->_offset->_x };
+	auto y1off{ actor->GetCollider()->_offset->_y };
+
+	auto x2{ other->GetPosition()->_x };
+	auto y2{ other->GetPosition()->_y };
+	auto w2{ other->GetCollider()->GetWidth() };
+	auto h2{ other->GetCollider()->GetHeight() };
+	auto x2off{ other->GetCollider()->_offset->_x };
+	auto y2off{ other->GetCollider()->_offset->_y };
+
+	if (y2 < y + y1 + h1 &&
+		y2 + h2 + y2off > y + y1 &&
+		x2 < x + x1 + w1 &&
+		x2 + w2 > x + x1)
+		return true;*/
+
 	if (x + _offset->_x - _width < other->GetPosition()->_x + other->GetCollider()->_offset->_x + other->GetCollider()->GetWidth() &&
 		x + _offset->_x + _width > other->GetPosition()->_x + other->GetCollider()->_offset->_x - other->GetCollider()->GetWidth() &&
 		y + _offset->_y - _height < other->GetPosition()->_y + other->GetCollider()->_offset->_y + other->GetCollider()->GetHeight() &&
 		y + _offset->_y + _height > other->GetPosition()->_y + other->GetCollider()->_offset->_y - other->GetCollider()->GetHeight())
-
-	{
 		return true;
-	}
+
+	return false;
+}
+
+bool Collision::isOverlapping(Actor* actor, Actor* other)
+{
+	if (!actor || !other)
+		return false;
+
+	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->itemized)
+		return false;
+
+	auto x1{ actor->GetPosition()->_x };
+	auto y1{ actor->GetPosition()->_y };
+	auto w1{ actor->GetCollider()->GetWidth() };
+	auto h1{ actor->GetCollider()->GetHeight() };
+	auto x1off{ actor->GetCollider()->_offset->_x };
+	auto y1off{ actor->GetCollider()->_offset->_y };
+
+	auto x2{ other->GetPosition()->_x };
+	auto y2{ other->GetPosition()->_y };
+	auto w2{ other->GetCollider()->GetWidth() };
+	auto h2{ other->GetCollider()->GetHeight() };
+	auto x2off{ other->GetCollider()->_offset->_x };
+	auto y2off{ other->GetCollider()->_offset->_y };
+
+	if (y2 + y2off < y1 + h1 + y1off &&
+		y2 + h2 + y2off> y1 + y1off &&
+		x2 + x2off < x1 + w1 + x1off &&
+		x2 + w2 + x2off > x1 + x1off)
+		return true;
 
 	return false;
 }

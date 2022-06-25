@@ -13,7 +13,7 @@ private:
 protected:
 public:
 	Page* _page;
-	TPPuzzle(Status status, Page* page);
+	TPPuzzle(Status status = Status::PENDING, Page* page = nullptr);
 	~TPPuzzle();
 
 	bool IsCleared() override;
