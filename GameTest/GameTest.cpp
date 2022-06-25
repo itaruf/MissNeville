@@ -14,7 +14,7 @@
 
 #include "Intro.h"
 #include "Hall.h"
-#include "Lounge.h"
+#include "Kitchen.h"
 #include "Room.h"
 #include "Hall.h"
 #include "Library.h"
@@ -77,7 +77,7 @@ void Init()
 	Hall* hall{ new Hall{ 1, new CandlePuzzle()} };
 	Room* room{ new Room{ 2, new MirrorPuzzle()} };
 	Library* library{ new Library{ 3, new TPPuzzle() } };
-	Lounge* lounge{ new Lounge{ 4, new DodgePuzzle() } };
+	Kitchen* kitchen{ new Kitchen{ 4, new DodgePuzzle() } };
 	Entrance* entrance{ new Entrance{ 5 } };
 
 	/*entrance->AddActor(player);
@@ -87,19 +87,19 @@ void Init()
 
 	/*Linking scenes*/
 	entrance->_NScene = hall;
-	lounge->_EScene = hall;
+	kitchen->_EScene = hall;
 	room->_SScene = hall;
 	library->_WScene = hall;
 
 	hall->_NScene = room;
-	hall->_WScene = lounge;
+	hall->_WScene = kitchen;
 	hall->_SScene = entrance;
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
 	/*state->_currentScene = entrance;*/
 	/*state->_currentScene = hall;*/
-	/*state->_currentScene = lounge;*/
+	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
 	state->_currentScene = intro;
@@ -108,7 +108,7 @@ void Init()
 	state->_rooms.insert(std::make_pair(1, hall));
 	state->_rooms.insert(std::make_pair(2, room));
 	state->_rooms.insert(std::make_pair(3, library));
-	state->_rooms.insert(std::make_pair(4, lounge));
+	state->_rooms.insert(std::make_pair(4, kitchen));
 	state->_rooms.insert(std::make_pair(5, entrance));
 
 	state->_currentScene->Init();

@@ -91,7 +91,7 @@
     <ClCompile Include="Library.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Lounge.cpp">
+    <ClCompile Include="Kitchen.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
@@ -258,7 +258,7 @@
     <ClInclude Include="Library.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Lounge.h">
+    <ClInclude Include="Kitchen.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">

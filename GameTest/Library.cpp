@@ -48,7 +48,7 @@ void Library::Init()
 	std::string description = "Page number 2";
 	auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(), new Collision(16, 16), 0, description) };
 
-	/*Open the Lounge door*/
+	/*Open the Kitchen door*/
 	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
 
 	if (it != StateMain::_rooms[1]->GetActors().end())

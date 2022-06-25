@@ -124,7 +124,7 @@
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="IDialogue.h" />
     <ClInclude Include="Library.h" />
-    <ClInclude Include="Lounge.h" />
+    <ClInclude Include="Kitchen.h" />
     <ClInclude Include="Mirror.h" />
     <ClInclude Include="MirrorShard.h" />
     <ClInclude Include="MirrorPuzzle.h" />
@@ -178,7 +178,7 @@
     <ClCompile Include="StateController.cpp" />
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="Library.cpp" />
-    <ClCompile Include="Lounge.cpp" />
+    <ClCompile Include="Kitchen.cpp" />
     <ClCompile Include="Mirror.cpp" />
     <ClCompile Include="MirrorShard.cpp" />
     <ClCompile Include="MirrorPuzzle.cpp" />

@@ -1,21 +1,21 @@
 #include "../stdafx.h"
-#include "Lounge.h"
+#include "Kitchen.h"
 
-Lounge::Lounge(int ID) : Scene(ID)
+Kitchen::Kitchen(int ID) : Scene(ID)
 {
 }
 
-Lounge::Lounge(int ID, DodgePuzzle* puzzle) : Scene(ID), _dodgePuzzle(puzzle)
+Kitchen::Kitchen(int ID, DodgePuzzle* puzzle) : Scene(ID), _dodgePuzzle(puzzle)
 {
 }
 
-Lounge::~Lounge()
+Kitchen::~Kitchen()
 {
 	if (_dodgePuzzle)
 		delete _dodgePuzzle;
 }
 
-void Lounge::Init()
+void Kitchen::Init()
 {
 	if (initialized)
 		return;
@@ -241,21 +241,21 @@ void Lounge::Init()
 	StateMain::SetState(State::DIALOGUE);
 }
 
-void Lounge::Update(float deltaTime)
+void Kitchen::Update(float deltaTime)
 {
 	Scene::Update(deltaTime);
 }
 
-void Lounge::Render()
+void Kitchen::Render()
 {
 	Scene::Render();
 }
 
-void Lounge::Exit()
+void Kitchen::Exit()
 {
 }
 
-bool Lounge::IsRoomCleared()
+bool Kitchen::IsRoomCleared()
 {
 	if (!_dodgePuzzle)
 		return false;
@@ -296,7 +296,7 @@ bool Lounge::IsRoomCleared()
 }
 
 // The cell can open only when all the interruptors are shutdown
-bool Lounge::CanOpenCell()
+bool Kitchen::CanOpenCell()
 {
 	for (const auto& button : _buttons)
 	{
