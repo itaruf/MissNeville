@@ -19,6 +19,7 @@ public:
 	
 	const char* _SBag{SFX.candle_enlight};
 	const char* _SCollect{SFX.item_pick};
+	const char* _SHit{ SFX.candle_enlight };
 	CSimpleSprite* _interactSprite;
 
 	Player(std::string name = "", CSimpleSprite* sprite = nullptr, Vector2D* position = nullptr, Collision* collider = nullptr, float HP = 0, float movementSpeed = 0, Controller* controller = nullptr, Inventory* inventory = nullptr);

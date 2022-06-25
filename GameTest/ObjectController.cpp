@@ -43,7 +43,10 @@ void ObjectController::MoveHorizontally(Character* actor)
 				if (other->GetCollider()->_colliderType == ColliderType::Block)
 				{
 					if (other->GetTag() == "wall")
+					{
+						_onChangeDirection();
 						actor->_direction = nextDir;
+					}
 					return;
 				}
 			}
@@ -65,7 +68,11 @@ void ObjectController::MoveHorizontally(Character* actor)
 			if (actor->GetCollider()->isOverlapping(actor, other))
 			{
 				if (other->GetTag() == "wall")
+				{
+					_onChangeDirection();
 					actor->_direction = nextDir;
+				}
+				return;
 			}
 			actor->GetSprite()->SetPosition(x, y);
 		}
@@ -95,7 +102,6 @@ void ObjectController::MoveVertically(Character* actor)
 		y = actor->GetPosition()->_y - actor->GetMovementSpeed();
 	}
 
-
 	if (actor->GetCollider()->_colliderType == ColliderType::Block)
 	{
 		for (const auto& other : StateMain::_currentScene->GetActors())
@@ -108,8 +114,10 @@ void ObjectController::MoveVertically(Character* actor)
 				if (other->GetCollider()->_colliderType == ColliderType::Block)
 				{
 					if (other->GetTag() == "wall")
+					{
+						_onChangeDirection();
 						actor->_direction = nextDir;
-
+					}
 					return;
 				}
 			}
@@ -130,7 +138,11 @@ void ObjectController::MoveVertically(Character* actor)
 			if (actor->GetCollider()->isOverlapping(actor, other))
 			{
 				if (other->GetTag() == "wall")
+				{
+					_onChangeDirection();
 					actor->_direction = nextDir;
+				}
+				return;
 			}
 			actor->GetSprite()->SetPosition(x, y);
 		}

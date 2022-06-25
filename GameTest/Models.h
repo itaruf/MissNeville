@@ -9,7 +9,8 @@ struct MBackground
 {
 	std::string name{ "Background" };
 	const char* model{ ".\\TestData\\Backgrounds\\background.bmp" };
-	const char* model2{ ".\\TestData\\Backgrounds\\background2.bmp" };
+	const char* model2{ ".\\TestData\\Backgrounds\\background3.bmp" };
+	const char* model3{ ".\\TestData\\Backgrounds\\background4.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
 };
@@ -192,6 +193,7 @@ struct MSkull
 {
 	std::string name{ "skull" };
 	const char* model{ ".\\TestData\\Props\\skull.bmp" };
+	const char* model2{ ".\\TestData\\Props\\skulls.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
 };
@@ -324,7 +326,7 @@ struct MBag
 	std::string name{ "Bag" };
 	const char* model{ ".\\TestData\\Props\\bags.bmp" };
 	int frame{ 0 };
-	float scale{ 1 };
+	float scale{ 2 };
 };
 
 extern struct MBag MBag;
@@ -348,6 +350,16 @@ struct MFire
 };
 
 extern struct MFire MFire;
+
+struct MCell
+{
+	std::string name{ "Cell" };
+	const char* model{ ".\\TestData\\Props\\cell.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MCell MCell;
 
 struct SFX
 {

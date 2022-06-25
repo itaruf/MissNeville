@@ -22,7 +22,9 @@ struct DCharlotte
 	std::string l2{ "[Charlotte Neville] says : Father, you always were living for and by the books.. You would always tell others how precious were your books but you would never care for me.. Until I did. Oh I was just muttering to myself, That's another page collected !" };
 
 	// Kitchen
-	std::string k1{ "[Charlotte Neville] says : Mother, you always were living for and by the books.. You would always tell others how precious were your books but you would never care for me.. Until I did. " };
+	std::string k1{ "[Charlotte Neville] says : Watch out ! Mother is trying to heavely injure you ! But there still might be a way to stop all this... Try turning off anything you can !" };
+
+	std::string k2{ "[Charlotte Neville] says : Your little and cheap tricks did not work on us ! Take your second punishment for being such a bad mother ! Haha ! Let us move on, there's only one page left !" };
 };
 
 extern struct DCharlotte DCharlotte;
@@ -80,6 +82,8 @@ struct DDetective
 
 	// Kitchen
 	std::string k1{ "[JJ Detective] says : Oh no, no... This was not supposed to be like this ! the mansion is trying to kill me !!" };
+
+	std::string k2{ "[JJ Detective] says : It seems that I have almost collected all the missing pages... I need to gather my thoughts : I am so close to the truth !" };
 };
 
 extern struct DDetective DDetective;

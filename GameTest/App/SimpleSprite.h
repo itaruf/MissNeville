@@ -72,7 +72,7 @@ public:
         ANIM_PENTAGRAMME,
         ANIM_LAMP,
         ANIM_DOOR,
-        ANIM_AXE,
+        ANIM_KNIFE,
         ANIM_BOIL,
         ANIM_FIRE,
     };

@@ -7,6 +7,7 @@
 #include "NPC.h"
 #include "DodgePuzzle.h"
 #include "Button.h"
+#include "MirrorShard.h"
 
 class StateMain;
 // Lounge scene 

@@ -21,7 +21,6 @@ void Room::Init()
 	Scene::Init();
 	AddActor(StateMain::_player);
 
-	std::random_device myRandomDevice;
 	/*Background First*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ROOM_WALL * 2) / 32; j++)
 	{
@@ -124,11 +123,11 @@ bool Room::IsRoomCleared()
 			page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 		}
 		
-		/*auto it = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Ms. Smith"; });
-		if (it != _actors.end())
+		auto it2 = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Maggy Smith"; });
+		if (it2 != _actors.end())
 		{
-			RemoveActor(*it);
-		}*/
+			RemoveActor(*it2);
+		}
 
 		auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == MCharlotte.name; });
 		if (npc != _actors.end())
@@ -151,4 +150,8 @@ void Room::OnMirrorShattered()
 	charlotte->dialogues.insert(std::make_pair(0, DCharlotte.r1));
 	charlotte->dialogues.insert(std::make_pair(1, DCharlotte.r2));
 	charlotte->SetCurrentDialogue(0);
+
+	auto maggy{ new NPC("Maggy Smith", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(MIDDLE_WIDTH - 64, APP_VIRTUAL_HEIGHT - ROOM_WALL - 64), new Collision(32, 32))};
+	maggy->dialogues.insert(std::make_pair(0, DSmith.r1));
+	maggy->SetCurrentDialogue(0);
 }

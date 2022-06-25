@@ -32,5 +32,6 @@ struct MBarrel MBarrel {};
 struct MBag MBag {};
 struct MPot MPot {};
 struct MFire MFire {};
+struct MCell MCell {};
 struct SFX SFX {};
 struct MMessage MMessage {};

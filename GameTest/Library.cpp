@@ -23,14 +23,11 @@ void Library::Init()
 	Scene::Init();
 	AddActor(StateMain::_player);
 
-	std::random_device myRandomDevice;
 	/*Background First*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - LIBRARY_WALL * 2) / 32; j++)
 	{
 		for (int i = 0; i < (APP_VIRTUAL_WIDTH - LIBRARY_WALL * 2) / 32; i++)
 		{
-			unsigned seed = myRandomDevice();
-			std::default_random_engine myRandomEngine(seed);
 			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(LIBRARY_WALL + 16 + i * 32, LIBRARY_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
 		}
 	}
@@ -284,7 +281,7 @@ void Library::Init()
 	lamp5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_LAMP, 1 / 5.0f, { 0, 1, 2, 3 }, true);
 	lamp5->GetSprite()->SetAnimation(CSimpleSprite::ANIM_LAMP);
 
-	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1), new Vector2D(MIDDLE_WIDTH - 64, MIDDLE_HEIGHT), new Collision(32, 32)) };
+	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1), new Vector2D(shelf->GetPosition()->_x, shelf->GetPosition()->_y - 48 ), new Collision(32, 32)) };
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
 

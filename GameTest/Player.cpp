@@ -226,18 +226,16 @@ void Player::Hit()
 		if (actor == this)
 			continue;
 
-		auto a{ dynamic_cast<Character*>(actor) };
-
-		if (!a)
+		if (!actor->GetCollider()->isOverlapping(actor, this))
 			continue;
 
-		if (!a->GetCollider()->isOverlapping(a, this))
-			continue;
-
-		if (a->GetTag() == "lethal")
+		if (actor->GetTag() == "lethal")
 		{
-			std::cout << "dead" << std::endl;
-			/*Respawn(StateMain::_currentScene->_startingPos);*/
+			if (CSimpleSound::GetInstance().IsPlaying(_SHit))
+				return;
+
+			CSimpleSound::GetInstance().PlaySoundW(_SHit, 0);
+			Respawn(StateMain::_currentScene->_startingPos);
 			return;
 		}
 	}

@@ -13,7 +13,7 @@ class Mirror : public Actor, public IInteractive
 private:
 protected:
 	bool _repaired{ false };
-	static constexpr int nbShards{ 1 };
+	static constexpr int nbShards{ 3 };
 	const char* _SMirror_repaired{ SFX.mirror_repaired };
 public:
 	Delegate _onRepaired;

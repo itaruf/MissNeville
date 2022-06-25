@@ -3,12 +3,14 @@
 #define OBJECTCONTROLLER_H
 
 #include "Controller.h"
+#include "Utilities.h"
 
 class ObjectController : public Controller
 {
 private:
 protected:
 public:
+	Delegate _onChangeDirection;
 	ObjectController(bool activated = true);
 	~ObjectController();
 
