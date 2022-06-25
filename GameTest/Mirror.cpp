@@ -74,7 +74,3 @@ void Mirror::Interact()
 	_repaired = true;
 	_sprite->SetFrame(0);
 }
-
-void Mirror::OnInteract()
-{
-}

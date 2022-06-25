@@ -9,7 +9,6 @@ interface IInteractive
 public:
 	Delegate _onInteract;
 	virtual void Interact() = 0;
-	virtual void OnInteract() = 0;
 	virtual ~IInteractive() = default;
 };
 

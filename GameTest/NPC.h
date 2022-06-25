@@ -29,7 +29,6 @@ public:
 
 	void PlayDialogue() override;
 	void Interact() override;
-	void OnInteract() override;
 };
 
 #endif

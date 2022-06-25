@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "ObjectController.h"
 
-ObjectController::ObjectController()
+ObjectController::ObjectController(bool activated) : Controller(activated)
 {
 }
 
@@ -11,6 +11,9 @@ ObjectController::~ObjectController()
 
 void ObjectController::MoveHorizontally(Character* actor)
 {
+	if (!_activated)
+		return;
+
 	float x{ actor->GetPosition()->_x }, y{ actor->GetPosition()->_y };
 	Direction nextDir{ actor->_direction };
 	if (actor->GetDirection() == Direction::RIGHT)
@@ -28,29 +31,53 @@ void ObjectController::MoveHorizontally(Character* actor)
 		y = actor->GetPosition()->_y;
 	}
 
-	for (const auto& other : StateMain::_currentScene->GetActors())
+	if (actor->GetCollider()->_colliderType == ColliderType::Block)
 	{
-		if (other == actor)
-			continue;
-
-		if (actor->GetCollider()->isColliding(actor, other, x, y))
+		for (const auto& other : StateMain::_currentScene->GetActors())
 		{
-			if (other->GetCollider()->_colliderType == ColliderType::Block)
+			if (other == actor)
+				continue;
+
+			if (actor->GetCollider()->isColliding(actor, other, x, y))
+			{
+				if (other->GetCollider()->_colliderType == ColliderType::Block)
+				{
+					if (other->GetTag() == "wall")
+						actor->_direction = nextDir;
+					return;
+				}
+			}
+			else
+			{
+				actor->GetSprite()->SetPosition(x, y);
+			}
+		}
+	}
+
+	// ColliderType::Overlap
+	else
+	{
+		for (const auto& other : StateMain::_currentScene->GetActors())
+		{
+			if (other == actor)
+				continue;
+
+			if (actor->GetCollider()->isOverlapping(actor, other))
 			{
 				if (other->GetTag() == "wall")
 					actor->_direction = nextDir;
-				return;
 			}
-		}
-		else
-		{
 			actor->GetSprite()->SetPosition(x, y);
 		}
 	}
+
 }
 
 void ObjectController::MoveVertically(Character* actor)
 {
+	if (!_activated)
+		return;
+
 	float x{ actor->GetPosition()->_x}, y{ actor->GetPosition()->_y };
 	Direction nextDir{ actor->_direction };
 	if (actor->GetDirection() == Direction::UP)
@@ -68,21 +95,43 @@ void ObjectController::MoveVertically(Character* actor)
 		y = actor->GetPosition()->_y - actor->GetMovementSpeed();
 	}
 
-	for (const auto& other : StateMain::_currentScene->GetActors())
+
+	if (actor->GetCollider()->_colliderType == ColliderType::Block)
 	{
-		if (other == actor)
-			continue;
-		if (actor->GetCollider()->isColliding(actor, other, x, y))
+		for (const auto& other : StateMain::_currentScene->GetActors())
 		{
-			if (other->GetCollider()->_colliderType == ColliderType::Block)
+			if (other == actor)
+				continue;
+
+			if (actor->GetCollider()->isColliding(actor, other, x, y))
+			{
+				if (other->GetCollider()->_colliderType == ColliderType::Block)
+				{
+					if (other->GetTag() == "wall")
+						actor->_direction = nextDir;
+
+					return;
+				}
+			}
+			else
+			{
+				actor->GetSprite()->SetPosition(x, y);
+			}
+		}
+	}
+	// ColliderType::Overlap
+	else
+	{
+		for (const auto& other : StateMain::_currentScene->GetActors())
+		{
+			if (other == actor)
+				continue;
+
+			if (actor->GetCollider()->isOverlapping(actor, other))
 			{
 				if (other->GetTag() == "wall")
 					actor->_direction = nextDir;
-				return;
 			}
-		}
-		else
-		{
 			actor->GetSprite()->SetPosition(x, y);
 		}
 	}

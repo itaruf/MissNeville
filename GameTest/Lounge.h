@@ -6,6 +6,7 @@
 #include "StateMain.h"
 #include "NPC.h"
 #include "DodgePuzzle.h"
+#include "Button.h"
 
 class StateMain;
 // Lounge scene 
@@ -15,6 +16,8 @@ private:
 protected:
 public:
 	DodgePuzzle* _dodgePuzzle;
+	std::vector<Button*> _buttons;
+	Delegate _onCanOpenCell;
 	Lounge(int ID);
 	Lounge(int ID, DodgePuzzle*);
 
@@ -25,6 +28,7 @@ public:
 	void Render() override;
 	void Exit() override;
 	bool IsRoomCleared() override;
+	bool CanOpenCell();
 };
 
 #endif

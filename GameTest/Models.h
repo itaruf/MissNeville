@@ -329,6 +329,26 @@ struct MBag
 
 extern struct MBag MBag;
 
+struct MPot
+{
+	std::string name{ "Pot" };
+	const char* model{ ".\\TestData\\Props\\boil.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MPot MPot;
+
+struct MFire
+{
+	std::string name{ "Fire" };
+	const char* model{ ".\\TestData\\Props\\fire.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MFire MFire;
+
 struct SFX
 {
 	const char* entrance{ ".\\TestData\\SFX\\entrance.wav" };

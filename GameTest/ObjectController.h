@@ -9,7 +9,7 @@ class ObjectController : public Controller
 private:
 protected:
 public:
-	ObjectController();
+	ObjectController(bool activated = true);
 	~ObjectController();
 
 	void MoveHorizontally(Character* actor) override;

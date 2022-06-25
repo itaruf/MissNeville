@@ -23,7 +23,7 @@ protected:
 	static constexpr Mobility defaultMobility{ Mobility::STATIC };
 	static constexpr Direction defaultDirection{ Direction::STILL };
 
-	std::string _tag{ "wall" };
+	std::string _tag{ "" };
 	std::string _name;
 	CSimpleSprite* _sprite;
 	Vector2D* _position;

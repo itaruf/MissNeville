@@ -231,26 +231,13 @@ void Player::Hit()
 		if (!a)
 			continue;
 
-		float x{ a->GetPosition()->_x }, y{ a->GetPosition()->_y };
-		if (a->GetDirection() == Direction::RIGHT)
-		{
-			x = a->GetPosition()->_x + a->GetMovementSpeed();
-			y = a->GetPosition()->_y;
-		}
-
-		else if (a->GetDirection() == Direction::LEFT)
-		{
-			x = a->GetPosition()->_x - a->GetMovementSpeed();
-			y = a->GetPosition()->_y;
-		}
-
-		if (!GetCollider()->isColliding(a, this, x, y))
+		if (!a->GetCollider()->isOverlapping(a, this))
 			continue;
 
 		if (a->GetTag() == "lethal")
 		{
-			/*std::cout << "dead" << std::endl;*/
-			Respawn(StateMain::_currentScene->_startingPos);
+			std::cout << "dead" << std::endl;
+			/*Respawn(StateMain::_currentScene->_startingPos);*/
 			return;
 		}
 	}
@@ -260,9 +247,6 @@ void Player::Respawn(Vector2D* newPos)
 {
 	if (!newPos)
 		return;
-
-	/*std::cout << newPos->_x << std::endl;
-	std::cout << newPos->_y << std::endl;*/
 
 	GetSprite()->SetPosition(newPos->_x, newPos->_y);
 }

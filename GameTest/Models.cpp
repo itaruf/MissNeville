@@ -30,5 +30,7 @@ struct MKnife MKnife {};
 struct MOven MOven {};
 struct MBarrel MBarrel {};
 struct MBag MBag {};
+struct MPot MPot {};
+struct MFire MFire {};
 struct SFX SFX {};
 struct MMessage MMessage {};

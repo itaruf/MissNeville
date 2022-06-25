@@ -109,6 +109,7 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\TextureLoader.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CandlePuzzle.h" />
     <ClInclude Include="Character.h" />
@@ -119,7 +120,6 @@
     <ClInclude Include="EState.h" />
     <ClInclude Include="EStatus.h" />
     <ClInclude Include="Intro.h" />
-    <ClInclude Include="Lethal.h" />
     <ClInclude Include="StateController.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="IDialogue.h" />
@@ -167,6 +167,7 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\TextureLoader.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CandlePuzzle.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -174,7 +175,6 @@
     <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="DodgePuzzle.cpp" />
     <ClCompile Include="Intro.cpp" />
-    <ClCompile Include="Lethal.cpp" />
     <ClCompile Include="StateController.cpp" />
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="Library.cpp" />

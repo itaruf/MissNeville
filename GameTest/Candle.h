@@ -20,7 +20,6 @@ public:
 
 	bool isEnlighted();
 	void Interact() override;
-	void OnInteract() override;
 };
 
 #endif

@@ -10,7 +10,7 @@ class PlayerController : public Controller
 private:
 protected:
 public:
-	PlayerController();
+	PlayerController(bool activated = true);
 	~PlayerController();
 
 	void MoveHorizontally(Character* actor) override;

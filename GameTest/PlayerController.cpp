@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "PlayerController.h"
 
-PlayerController::PlayerController()
+PlayerController::PlayerController(bool activated) : Controller(activated)
 {
 }
 
@@ -11,6 +11,9 @@ PlayerController::~PlayerController()
 
 void PlayerController::MoveHorizontally(Character* actor)
 {
+	if (!_activated)
+		return;
+
 	if (!actor->_sprite)
 		return;
 
@@ -61,6 +64,9 @@ void PlayerController::MoveHorizontally(Character* actor)
 
 void PlayerController::MoveVertically(Character* actor)
 {
+	if (!_activated)
+		return;
+
 	if (!actor->_sprite)
 		return;
 

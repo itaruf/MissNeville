@@ -10,7 +10,8 @@ class Controller
 private:
 protected:
 public:
-	Controller();
+	bool _activated;
+	Controller(bool activated = true);
 	virtual ~Controller();
 
 	virtual void MoveHorizontally(Character* actor) = 0;

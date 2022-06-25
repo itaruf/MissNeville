@@ -133,14 +133,14 @@
     <ClCompile Include="DodgePuzzle.cpp">
       <Filter>Puzzles</Filter>
     </ClCompile>
-    <ClCompile Include="Lethal.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
     <ClCompile Include="Intro.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Dialogues.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Actors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +300,6 @@
     <ClInclude Include="DodgePuzzle.h">
       <Filter>Puzzles</Filter>
     </ClInclude>
-    <ClInclude Include="Lethal.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
     <ClInclude Include="ECollider.h">
       <Filter>Enumerations</Filter>
     </ClInclude>
@@ -314,6 +311,9 @@
     </ClInclude>
     <ClInclude Include="EStatus.h">
       <Filter>Enumerations</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

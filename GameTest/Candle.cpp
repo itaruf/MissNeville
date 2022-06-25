@@ -32,7 +32,3 @@ void Candle::Interact()
 		_sprite->SetFrame(0);
 	}
 }
-
-void Candle::OnInteract()
-{
-}
