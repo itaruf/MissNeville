@@ -161,8 +161,17 @@ void Library::Init()
 	auto papers3{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL + 100, wallH2->GetPosition()->_y - 300), new Collision(32, 32, ColliderType::Overlap)) };
 	auto papers4{ new Actor(MPage.name, App::CreateSprite(MPage.model2, 1, 1, MPage.frame, MPage.scale2), new Vector2D(LIBRARY_WALL + 150, wallH2->GetPosition()->_y - 250), new Collision(32, 32, ColliderType::Overlap)) };
 	
-	/*auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL + 164, wallH2->GetPosition()->_y - 64), new Collision(32, 32)) };
-	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(LIBRARY_WALL + 164, wallH2->GetPosition()->_y - 290), new Collision(32, 32)) };*/
+	auto web{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(LIBRARY_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 80), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web2{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 48), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web3{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(LIBRARY_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 144), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web4{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 176), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web5{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(LIBRARY_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 208), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web6{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL - 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 240), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web7{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(LIBRARY_WALL + 16, ENTRANCE_WALL + 48), new Collision(32, 32, ColliderType::Overlap)) };
+	auto web8{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL - 16, ENTRANCE_WALL + 16), new Collision(32, 32, ColliderType::Overlap)) };
+
+	auto blood{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH - 64, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
+	auto blood2{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH + 200, MIDDLE_HEIGHT - 200), new Collision(32, 32, ColliderType::Overlap)) };
 
 	auto table5{ new Character(MTable.name, App::CreateSprite(MTable.model3, 1, 1, MTable.frame, MTable.scale), new Vector2D(LIBRARY_WALL + 32, wallH2->GetPosition()->_y - 150), new Collision(32, 32), 0, 2, objectC) };
 	table5->SetDirection(Direction::RIGHT);

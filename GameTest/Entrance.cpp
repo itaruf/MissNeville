@@ -73,6 +73,10 @@ void Entrance::Init()
 	auto web7{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16, ENTRANCE_WALL + 16), new Collision(32, 32, ColliderType::Overlap)) };
 	auto web8{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL - 16, ENTRANCE_WALL + 48), new Collision(32, 32, ColliderType::Overlap)) };
 
+	auto blood{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH - 64, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
+	auto blood2{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH + 80, MIDDLE_HEIGHT + 80), new Collision(32, 32, ColliderType::Overlap)) };
+	auto blood3{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH - 100, MIDDLE_HEIGHT + 150), new Collision(32, 32, ColliderType::Overlap)) };
+
 	auto picture{ new Actor(MPicture.name, App::CreateSprite(MPicture.model, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH - 112, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 32), new Collision(32, 32, ColliderType::Overlap)) };
 	auto picture2{ new Actor(MPicture.name, App::CreateSprite(MPicture.model2, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH + 112, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 32), new Collision(32, 32, ColliderType::Overlap)) };
 

@@ -39,7 +39,7 @@ void Kitchen::Init()
 		}
 	}
 
-	StateMain::_player->SetPosition(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 128, MIDDLE_HEIGHT);
+	/*StateMain::_player->SetPosition(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 128, MIDDLE_HEIGHT);*/
 	_startingPos = new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 48, MIDDLE_HEIGHT);
 
 	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(KITCHEN_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - KITCHEN_WALL * 2, 2)) };

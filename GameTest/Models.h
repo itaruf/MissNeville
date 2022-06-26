@@ -368,6 +368,7 @@ struct MBlood
 	const char* model2{ ".\\TestData\\VFX\\bloodsplat2.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
+	float scale2{ 1 };
 };
 
 extern struct MBlood MBlood;

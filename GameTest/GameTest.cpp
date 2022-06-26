@@ -131,7 +131,7 @@ void Render()
 		return;
 
 	state->_currentScene->Render();
-	App::Print(800, 620, ("Scene : " + GetChar(state->_currentScene->GetID())).c_str());
+	/*App::Print(800, 620, ("Scene : " + GetChar(state->_currentScene->GetID())).c_str());*/
 	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
 	state->_currentStateController->Render();
 
@@ -143,9 +143,37 @@ void Render()
 		return;
 
 	if (state->_currentScene->IsRoomCleared())
-		App::Print(800, 700, "Scene Cleared");
+		App::Print(800, 620, "Scene Cleared");
 	else
-		App::Print(800, 700, "Scene Not Cleared");
+		App::Print(800, 620, "Scene Not Cleared");
+
+	std::string room{ "" };
+	switch (state->_currentScene->GetID())
+	{
+	case 0:
+		room = "INTRO";
+		break;
+	case 1:
+		room = "HALL";
+		break;
+	case 2:
+		room = "ROOM";
+		break;
+	case 3:
+		room = "LIBRARY";
+		break;
+	case 4:
+		room = "KITCHEN";
+		break;
+	case 5:
+		room = "ENTRANCE";
+		break;
+	case 6:
+		room = "OUTRO";
+		break;
+	}
+
+	App::Print(800, 640, room.c_str());
 
 	/*********PLAYER RENDER*********/
 	auto player{ state->GetPlayer() };
