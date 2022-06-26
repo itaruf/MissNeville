@@ -22,7 +22,7 @@ struct DCharlotte
 	// Library
 	std::string l1{ "[Charlotte Neville] says : Oh no ! my father moved everything in the library to prevent you from going any further... Knowing him, he might be thinking you are not smart enough to find another way !" };
 
-	std::string l2{ "[Charlotte Neville] says : Father, you always were living for and by the books.. You would always tell others how precious were your books but you would never care for me.. Until I did. Oh I was just muttering to myself, That's another page collected !" };
+	std::string l2{ "[Charlotte Neville] says : Father, you always were living for and by the books.. You would always tell others how precious were your books but you would never care for me.. Until I did. Oh ! I was just muttering to myself, That's another page collected !" };
 
 	// Kitchen
 	std::string k1{ "[Charlotte Neville] says : Watch out ! Mother is trying to heavely injure you ! But there still might be a way to stop all this... Try turning off anything you can !" };

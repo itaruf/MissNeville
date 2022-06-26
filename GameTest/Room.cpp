@@ -98,10 +98,10 @@ void Room::Init()
 	};
 
 	/*Open the library door*/
-	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
+	/*auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
 
 	if (it != StateMain::_rooms[1]->GetActors().end())
-		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };*/
 
 	// Triggers
 	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, 0.8), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _SScene);
@@ -114,7 +114,16 @@ void Room::Init()
 	mirrorAnimTrigger->_targetAnim = CSimpleSprite::ANIM_MIRROR_BROKEN;
 	mirrorAnimTrigger->_targetSprite = mirror->GetSprite();
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
-	mirrorAnimTrigger->_onPlayingAnim += [this]() {this->OnMirrorShattered(); };
+	mirrorAnimTrigger->_onPlayingAnim += [this]() 
+	{this->OnMirrorShattered(); };
+	mirrorAnimTrigger->_onTriggered += [this]()
+	{
+		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Open Library"; });
+
+		if (it != StateMain::_rooms[1]->GetActors().end())
+			dynamic_cast<Trigger*>(*it)->_activated = true;
+	};
+
 	/*Start Puzzle*/
 	_mirrorPuzzle->StartPuzzle();
 }

@@ -33,9 +33,9 @@ void Kitchen::Init()
 			std::default_random_engine myRandomEngine(seed);
 
 			if (seed % 10 == 0)
-				new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(KITCHEN_WALL + 16 + i * 32, KITCHEN_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
+				new Actor(MBackground.name, App::CreateSprite(MBackground.model3, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(KITCHEN_WALL + 16 + i * 32, KITCHEN_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
 			else
-				new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(KITCHEN_WALL + 16 + i * 32, KITCHEN_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
+				new Actor(MBackground.name, App::CreateSprite(MBackground.model2, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(KITCHEN_WALL + 16 + i * 32, KITCHEN_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
 		}
 	}
 
@@ -64,27 +64,27 @@ void Kitchen::Init()
 
 	/*Weapons*/
 
-	auto weapon{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 1, MKnife.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - KITCHEN_WALL - 64), new Collision(16, 16, ColliderType::Overlap), 0, 4, objectC) };
+	auto weapon{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 1, MKnife.scale), new Vector2D(MIDDLE_WIDTH - 16, APP_VIRTUAL_HEIGHT - KITCHEN_WALL - 64), new Collision(32, 16, ColliderType::Overlap, new Vector2D(16, -16)), 0, 4, objectC) };
 	weapon->SetTag("lethal");
 	weapon->SetDirection(Direction::DOWN);
 
-	auto weapon3{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 2, MKnife.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 512, APP_VIRTUAL_HEIGHT - KITCHEN_WALL - 64), new Collision(16, 16, ColliderType::Overlap), 0, 4, objectC) };
+	auto weapon3{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 1, MKnife.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 512, APP_VIRTUAL_HEIGHT - KITCHEN_WALL - 64), new Collision(32, 16, ColliderType::Overlap, new Vector2D(16, -16)), 0, 4, objectC) };
 	weapon3->SetTag("lethal");
 	weapon3->SetDirection(Direction::DOWN);
 
-	auto weapon2{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 2, MKnife.scale), new Vector2D(KITCHEN_WALL + 464, KITCHEN_WALL + 32), new Collision(16, 16, ColliderType::Overlap), 0, 5, objectC) };
+	auto weapon2{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 1, MKnife.scale), new Vector2D(KITCHEN_WALL + 464, KITCHEN_WALL + 32), new Collision(32, 16, ColliderType::Overlap, new Vector2D(16, -16)), 0, 5, objectC) };
 	weapon2->SetTag("lethal");
 	weapon2->SetDirection(Direction::UP);
 
-	auto weapon4{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 2, MKnife.scale), new Vector2D(KITCHEN_WALL + 32, MIDDLE_HEIGHT + 64), new Collision(16, 16, ColliderType::Overlap), 0, 5, objectC) };
+	auto weapon4{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 3, MKnife.scale), new Vector2D(KITCHEN_WALL + 32, MIDDLE_HEIGHT + 64), new Collision(16, 32, ColliderType::Overlap, new Vector2D(16, 0)), 0, 5, objectC) };
 	weapon4->SetTag("lethal");
 	weapon4->SetDirection(Direction::LEFT);
 
-	auto weapon6{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 2, MKnife.scale), new Vector2D(KITCHEN_WALL + 32, MIDDLE_HEIGHT - 96), new Collision(16, 16, ColliderType::Overlap), 0, 5, objectC) };
+	auto weapon6{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 3, MKnife.scale), new Vector2D(KITCHEN_WALL + 32, MIDDLE_HEIGHT - 96), new Collision(16, 32, ColliderType::Overlap, new Vector2D(16, 0)), 0, 5, objectC) };
 	weapon6->SetTag("lethal");
 	weapon6->SetDirection(Direction::LEFT);
 
-	auto weapon5{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 2, MKnife.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 16, KITCHEN_WALL + 32), new Collision(16, 16, ColliderType::Overlap), 0, 8, objectC) };
+	auto weapon5{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 3, MKnife.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 64, KITCHEN_WALL + 32), new Collision(16, 32, ColliderType::Overlap, new Vector2D(16, 0)), 0, 8, objectC) };
 	weapon5->SetTag("lethal");
 	weapon5->SetDirection(Direction::RIGHT);
 
@@ -124,18 +124,18 @@ void Kitchen::Init()
 	fire7->SetTag("lethal");
 
 	/*Furnitures*/
-	auto oven{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(KITCHEN_WALL + 32, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven2{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven3{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven2->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven4{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven3->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; 
-	auto oven5{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven4->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; 
-	auto oven6{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven5->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven7{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven6->GetPosition()->_x + 96, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven8{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven7->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven9{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven8->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven10{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven9->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven11{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven10->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
-	auto oven12{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven11->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) };
+	auto oven{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(KITCHEN_WALL + 32, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven->SetTag("wall");
+	auto oven2{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven2->SetTag("wall");
+	auto oven3{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven2->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven3->SetTag("wall");
+	auto oven4{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven3->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven4->SetTag("wall");
+	auto oven5{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven4->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven5->SetTag("wall");
+	auto oven6{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven5->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven6->SetTag("wall");
+	auto oven7{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven6->GetPosition()->_x + 96, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven7->SetTag("wall");
+	auto oven8{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven7->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven8->SetTag("wall");
+	auto oven9{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven8->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven9->SetTag("wall");
+	auto oven10{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven9->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven10->SetTag("wall");
+	auto oven11{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven10->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven11->SetTag("wall");
+	auto oven12{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(oven11->GetPosition()->_x + 48, APP_VIRTUAL_HEIGHT - KITCHEN_WALL), new Collision(92, 32)) }; oven12->SetTag("wall");
 
 	auto cell{ new Actor(MCell.name, App::CreateSprite(MCell.model, 1, 1, MCell.frame, MCell.scale), new Vector2D(page->GetPosition()->_x, page->GetPosition()->_y + 32), new Collision(92, 32)) };
 
@@ -143,8 +143,12 @@ void Kitchen::Init()
 	_onCanOpenCell += [this, cell]() {RemoveActor(cell); };
 
 	auto barrel{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 32, APP_VIRTUAL_HEIGHT - KITCHEN_WALL - 80), new Collision(32, 32)) };
-	auto barre2{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(KITCHEN_WALL + 32, KITCHEN_WALL + 16), new Collision(32, 32)) };
-	auto barre3{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(MIDDLE_WIDTH + 65, KITCHEN_WALL + 16), new Collision(32, 32)) };
+	auto barrel2{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(KITCHEN_WALL + 32, KITCHEN_WALL + 16), new Collision(32, 32)) };
+	auto barrel3{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(MIDDLE_WIDTH + 65, KITCHEN_WALL + 16), new Collision(32, 32)) };
+	auto barrel4{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 32, MIDDLE_HEIGHT + 48), new Collision(32, 32)) };
+	barrel4->SetTag("wall");
+	auto barrel5{ new Actor(MBarrel.name, App::CreateSprite(MBarrel.model, 1, 1, MBarrel.frame, MBarrel.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 32, MIDDLE_HEIGHT - 96), new Collision(32, 32)) };
+	barrel5->SetTag("wall");
 
 	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(KITCHEN_WALL + 32, KITCHEN_WALL + 128), new Collision(32, 32, ColliderType::Overlap)) };
 	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 16, KITCHEN_WALL + 16), new Collision(32, 32, ColliderType::Overlap)) };

@@ -5,6 +5,7 @@
 NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller)
 	: Character(name, sprite, position, collider, HP, movementSpeed, controller)
 {
+	_SInteract = SFX.ghost_death;
 }
 
 NPC::~NPC()
@@ -29,4 +30,5 @@ void NPC::Interact()
 {
 	// Dialogue to play
 	PlayDialogue();
+	CSimpleSound::GetInstance().PlaySoundW(SFX.ghost_death, 0);
 }

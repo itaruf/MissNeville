@@ -303,6 +303,10 @@ void Library::Init()
 	charlotte->dialogues.insert(std::make_pair(1, DCharlotte.l2));
 	charlotte->SetCurrentDialogue(0);
 
+	auto ralph{ new NPC("Ralph Neville", App::CreateSprite(MFamily.model, 3, 4, MFamily.frame, MFamily.scale), new Vector2D(MIDDLE_WIDTH + 80, wallH2->GetPosition()->_y - 64), new Collision(32, 32)) };
+	ralph->dialogues.insert(std::make_pair(0, DFather.l1));
+	ralph->SetCurrentDialogue(0);
+
 	/*DIALOGUES*/
 	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 

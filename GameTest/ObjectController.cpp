@@ -47,7 +47,6 @@ void ObjectController::MoveHorizontally(Character* actor)
 						_onChangeDirection();
 						actor->_direction = nextDir;
 					}
-					return;
 				}
 			}
 			else
@@ -72,7 +71,6 @@ void ObjectController::MoveHorizontally(Character* actor)
 					_onChangeDirection();
 					actor->_direction = nextDir;
 				}
-				return;
 			}
 			actor->GetSprite()->SetPosition(x, y);
 		}
@@ -118,7 +116,6 @@ void ObjectController::MoveVertically(Character* actor)
 						_onChangeDirection();
 						actor->_direction = nextDir;
 					}
-					return;
 				}
 			}
 			else
@@ -142,7 +139,6 @@ void ObjectController::MoveVertically(Character* actor)
 					_onChangeDirection();
 					actor->_direction = nextDir;
 				}
-				return;
 			}
 			actor->GetSprite()->SetPosition(x, y);
 		}

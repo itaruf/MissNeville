@@ -99,6 +99,7 @@ void Entrance::Init()
 	{ 
 		hallTrigger->OnActivation(); 
 		hallTrigger->GetSprite()->SetAnimation(CSimpleSprite::ANIM_DOOR); 
+		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
 	};
 
 	/*Trigger Outro*/
@@ -197,8 +198,9 @@ void Entrance::Intro()
 
 	CSimpleSound::GetInstance().PlaySoundW(SFX.ghost_death, 0);
 
-	stateDialogue->_onDialogueEnd += [this, charlotte]()
+	stateDialogue->_onDialogueEnd += [this, charlotte, stateDialogue]()
 	{
+		stateDialogue->_onDialogueEnd.funcs.clear();
 		charlotte->dialogues.insert(std::make_pair(0, DCharlotte.e3));
 		charlotte->SetCurrentDialogue(0);
 	};
