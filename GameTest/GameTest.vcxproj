@@ -97,6 +97,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Credits.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="Sources.txt" />
   </ItemGroup>

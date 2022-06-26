@@ -21,7 +21,6 @@ struct MTable
 {
 	std::string name{ "Table" };
 	const char* model{ ".\\TestData\\Props\\table.bmp" };
-	const char* model2{ ".\\TestData\\Props\\table2.bmp" };
 	const char* model3{ ".\\TestData\\Props\\table3.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
@@ -35,20 +34,13 @@ struct MCommode
 	const char* model{ ".\\TestData\\Props\\commode.bmp" };
 	const char* model2{ ".\\TestData\\Props\\commode2.bmp" };
 	const char* model3{ ".\\TestData\\Props\\commode3.bmp" };
-	const char* model4{ ".\\TestData\\Props\\commode4.bmp" };
-	const char* model5{ ".\\TestData\\Props\\commode5.bmp" };
 	const char* model6{ ".\\TestData\\Props\\commode6.bmp" };
 	const char* model7{ ".\\TestData\\Props\\commode7.bmp" };
-	const char* model8{ ".\\TestData\\Props\\commode8.bmp" };
 	int frame{ 0 };
 	float scale{ 2.5 };
 	float scale2{ 2 };
 	float scale3{ 2 };
 	float scale4{ 1 };
-	float scale5{ 1 };
-	float scale6{ 1 };
-	float scale7{ 1 };
-	float scale8{ 1 };
 };
 
 extern struct MCommode MCommode;
@@ -57,10 +49,6 @@ struct MShelf
 {
 	std::string name{ "Shelf" };
 	const char* model{ ".\\TestData\\Props\\shelf.bmp" };
-	const char* model2{ ".\\TestData\\Props\\shelf2.bmp" };
-	const char* model3{ ".\\TestData\\Props\\shelf3.bmp" };
-	const char* model4{ ".\\TestData\\Props\\shelf4.bmp" };
-	const char* model5{ ".\\TestData\\Props\\shelf5.bmp" };
 	const char* model6{ ".\\TestData\\Props\\shelf6.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };

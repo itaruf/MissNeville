@@ -329,6 +329,9 @@
     <Text Include="ReadMe.txt">
       <Filter>Others</Filter>
     </Text>
+    <Text Include="Credits.txt">
+      <Filter>Others</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
