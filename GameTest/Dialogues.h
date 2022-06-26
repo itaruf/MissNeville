@@ -15,9 +15,9 @@ struct DCharlotte
 	std::string h2{ "[Charlotte Neville] says : Poor M. Jones.. You were so loyal but you lost your way since.. the incident. That's one page, keep going !" };
 
 	// Room
-	std::string r1{ "[Charlotte Neville] says : Oh no..My beautiful mirror !The missing pieces should be all around the mansion, can you get all of them back ?" };
+	std::string r1{ "[Charlotte Neville] says : Oh no... My beautiful mirror, why would you do this, Ms. Smith ?! The missing pieces should be all around the mansion, can you get all of them back ?" };
 
-	std::string r2{ "[Charlotte Neville] says : My mirror, you repaired it and made her disappear ! Serves her right once again, haha !" };
+	std::string r2{ "[Charlotte Neville] says : My mirror, you repaired it and made her disappear ! Serves her right once again, hehe ! What's that look on your face ? Look at it in the mirror, hehe !" };
 
 	// Library
 	std::string l1{ "[Charlotte Neville] says : Oh no ! my father moved everything in the library to prevent you from going any further... Knowing him, he might be thinking you are not smart enough to find another way !" };
@@ -30,13 +30,13 @@ struct DCharlotte
 	std::string k2{ "[Charlotte Neville] says : Your little and cheap tricks did not work on us ! Take your second punishment for being such a bad mother ! Haha ! Let us move on, there's only one page left !" };
 
 	//Outro
-	std::string o1{ "[Charlotte Neville] says : Where do you think you are going, mister the \"detective\" ? " };
+	std::string o1{ "[Charlotte Neville] says : Where do you think you are going, M. \"detective\" ? " };
 
-	std::string o2{ "[Charlotte Neville] says : Hehe ! Yes, it was me all along... Because you cleared every obstacles I put in your way, I'am willing to tell you more : the Neville house used to be a \"proud\" and well-respected family in the english society and thus, we, members of it, had to show that we were worthy of bearing its name. However, this was not what I wanted : I wanted to be free, and this cursed family would not allow me to be so, so... I decided to dispose of aaaaaall of them without exception and how it felt great, hehe ! And what happened afterwards was even greater : to reward my will of freedom, the \"Great Evil\" granted me necromantic powers under the condition to leave my physical shape behind and swear absolute loyalty with my soul to them !" };
+	std::string o2{ "[Charlotte Neville] says : Hehe ! Yes, it was me all along... Because you cleared every obstacles I put in your way, I'am willing to tell you more : the Neville house used to be a well-respected family in the english society and thus, we, members of it, had to show that we were worthy of bearing its name. However, this was not what I wanted : I wanted to be free, and this cursed family would not allow me to be so, so... I decided to dispose of aaaaaall of them without exception and how it felt great, hehe ! And what happened afterwards was even greater : to reward my will of freedom, the \"Great Evil\" granted me necromantic powers under the condition to leave my physical shape behind and swear absolute loyalty with my soul to them !" };
 
-	std::string o3{ "[Charlotte Neville] says : Now now, the fun has just begun... Right my \"hero\" ? Well, what shall I do with you... Oh ! I know, I was just in need of another servant and I think you'll be perfect for this !" };
+	std::string o3{ "[Charlotte Neville] says : Now now, the fun has just begun... Right, \"detective\" ? Well, what shall I do with you... Oh ! I know, I was just in need of another servant and I think you'll be perfect for this !" };
 
-	std::string o4{ "[Charlotte Neville] says : Nobody escapes... Now, I shall prepare the playground for the next toy to come, hehehe !" };
+	std::string o4{ "[Charlotte Neville] says : Nobody escapes from this place in one piece ! Now, I shall prepare the playground for the next toy to come and you'll be there, welcoming them, hehehe !" };
 };
 
 extern struct DCharlotte DCharlotte;
@@ -85,6 +85,7 @@ struct DDetective
 	// Room
 	std::string r1{ "[JJ Detective] says : The mirror shattered in pieces !" };
 	std::string r2{ "[JJ Detective] says : I need to find all the missing pieces... But why would they spread everywhere in the mansion ?" };
+	std::string r3{ "[JJ Detective] says : I finally have everything I needed... I have to get out of here now !" };
 
 	// Library
 	std::string l1{ "[JJ Detective] says : The library... but this is beyond anything I could ever imagine ! the tables are moving all by themselves, what is happening here ?!" };
@@ -108,7 +109,7 @@ extern struct DDetective DDetective;
 
 struct DIntro
 {
-	std::string i1{ "[...] says : We are in 1877, the tragedy of the Neville house, highborns in the english society found murdered in their mansion, still remains in the mind of the inhabitants, who now considerer the lands of the once proud family, cursed. No one could tell the reason of their deaths and since then, rumors started to spread. Some say ghosts of the former members still wander, waiting to take revenge, as they could not find peace... Some say spine-chilling screams and demoniac laughters can be heard from time to time from there... However, sayings without proof are superstitions.. But could there still be prooves after so long ? To step-in closer to the truth, you, JJ Detective, have decided to investigate the Neville's abandonned mansion once and for all..." };
+	std::string i1{ "[...] says : We are in 1877, the tragedy of the Neville house, highborns in the english society found murdered in their mansion, still remains in the mind of the inhabitants, who now considerer the lands of the once proud family, cursed. No one could tell the reason of their deaths and since then, rumors started to spread. Some say ghosts of the former members still wander, waiting to take revenge, as they could not find peace... Some say spine-chilling screams and demoniac laughters can be heard from time to time from there... However, sayings without proof are superstitions.. But could there still be evidence after so long ? To step-in closer to the truth, you, JJ Detective, have decided to investigate the Neville's abandonned mansion once and for all..." };
 };
 
 extern struct DIntro DIntro;
@@ -122,7 +123,7 @@ extern struct DOutro DOutro;
 
 struct DProps
 {
-	std::string p1{ "[Page 1] :" };
+	std::string p1{ "[Page 1] : Dear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nBlessed be the day she finally leaves our house !- Charlotte Neville." };
 	std::string p2{ "[Page 2] :" };
 	std::string p3{ "[Page 3] :" };
 	std::string p4{ "[Page 4] :" };

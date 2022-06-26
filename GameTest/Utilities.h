@@ -12,7 +12,7 @@
 #define ENTRANCE_WALL (192)
 #define ENTRANCE_WIDTH_WALL (384)
 
-#define LOUNGE_WALL (192)
+#define KITCHEN_WALL (192)
 #define ROOM_WALL (288)
 
 #define NEW_PLAYER_POS (32)

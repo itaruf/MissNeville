@@ -18,13 +18,13 @@ void Entrance::Init()
 	AddActor(StateMain::_player);
 	StateMain::_player->GetSprite()->SetPosition(MIDDLE_WIDTH, ENTRANCE_WALL + 64);
 
-	/*for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2) / 32; j++)
+	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2) / 32; j++)
 	{
 		for (int i = 0; i < (APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL * 2) / 32; i++)
 		{
-			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16 + i * 32, HALL_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
+			new Actor(MBackground.name, App::CreateSprite(MBackground.model, 1, 1, MBackground.frame, MBackground.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16 + i * 32, ENTRANCE_WALL + 16 + j * 32), new Collision(32, 32, ColliderType::Overlap));
 		}
-	}*/
+	}
 
 	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(ENTRANCE_WIDTH_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2, 2)) };
 	wallLeft->SetTag("wall");
@@ -84,6 +84,8 @@ void Entrance::Init()
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MTriggerScene.model, 2, 1, MTriggerScene.frame, MTriggerScene.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 16), new Vector2D(MIDDLE_WIDTH, HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap, new Vector2D(0, -24)), _NScene, false) };
 	hallTrigger->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_DOOR, 1 / 15.0f, { 0, 1 });
 
+	auto arrowUp{ new Actor(MArrow.name, App::CreateSprite(MArrow.up, 1, 1, MArrow.frame, MArrow.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL + 64), new Collision(32, 32, ColliderType::Overlap)) };
+
 	// Trigger Intro
 	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32, 32, ColliderType::Overlap)) };
 	trigger->_onTriggered += [this]() {	Intro(); };
@@ -133,6 +135,23 @@ void Entrance::Init()
 		{
 			RemoveActor(*npc);
 		}
+	};
+
+	// Close the door behind the player
+	Trigger* trigger3{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS - 32), new Collision(64, ENTRANCE_WIDTH_WALL, ColliderType::Overlap), false)};
+	trigger3->SetTag("Close Entrance");
+	trigger3->_onTriggered += [this, hallTrigger]()
+	{
+		hallTrigger->OnDeactivation();
+		hallTrigger->GetSprite()->SetFrame(0);
+
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+
+		if (!stateDialogue)
+			return true;
+
+		stateDialogue->_currentDialogue.emplace_back(MMessage.door_locked);
+		StateMain::SetState(State::DIALOGUE);
 	};
 
 	// Trigger Pentagramme

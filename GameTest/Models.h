@@ -372,6 +372,19 @@ struct MBlood
 
 extern struct MBlood MBlood;
 
+struct MArrow
+{
+	std::string name{ "Arrow" };
+	const char* left{ ".\\TestData\\Icons\\arrow_left.bmp" };
+	const char* right{ ".\\TestData\\Icons\\arrow_right.bmp" };
+	const char* up{ ".\\TestData\\Icons\\arrow_up.bmp" };
+	const char* down{ ".\\TestData\\Icons\\arrow_down.bmp" };
+	int frame{ 0 };
+	float scale{ 1 };
+};
+
+extern struct MArrow MArrow;
+
 struct SFX
 {
 	const char* entrance{ ".\\TestData\\SFX\\entrance.wav" };
@@ -382,7 +395,7 @@ struct SFX
 	const char* item_pick{ ".\\TestData\\SFX\\item_pick.wav" };
 	const char* item_pick2{ ".\\TestData\\SFX\\item_pick2.wav" };
 	const char* ghost_death{ ".\\TestData\\SFX\\ghost_death.wav" };
-	const char* door_open{ ".\\TestData\\SFX\\candle_enlight.wav" };
+	const char* door_open{ ".\\TestData\\SFX\\door_open.wav" };
 	const char* scene{ ".\\TestData\\SFX\\scene.wav" };
 	const char* bag_open{ ".\\TestData\\SFX\\bag_open.wav" };
 	const char* bag_navigate{ ".\\TestData\\SFX\\bag_navigate.wav" };

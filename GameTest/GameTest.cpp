@@ -23,6 +23,7 @@
 #include "Utilities.h"
 #include "Controller.h"
 #include "PlayerController.h"
+#include <typeinfo>
 
 std::shared_ptr<StateMain> state;
 
@@ -46,7 +47,7 @@ void Init()
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
 	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };
-	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 6, controller, new Inventory()) };
+	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 4, controller, new Inventory()) };
 	player->SetTag("player");
 	player->_interactSprite = App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale);
 	/*Player base stats and configs*/
@@ -94,12 +95,12 @@ void Init()
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
-	state->_currentScene = entrance;
+	/*state->_currentScene = entrance;*/
 	/*state->_currentScene = hall;*/
 	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	/*state->_currentScene = intro;*/
+	state->_currentScene = intro;
 	
 	state->_rooms.insert(std::make_pair(0, intro));
 	state->_rooms.insert(std::make_pair(1, hall));
@@ -155,8 +156,28 @@ void Render()
 	if (!player->GetSprite())
 		return;
 
+	if (state->_rooms[2]->initialized && !state->_rooms[2]->IsRoomCleared())
+	{
+		int nb{ 0 };
+		for (const auto& item : player->_inventory->_bags[0].second)
+		{
+			auto mshard{ dynamic_cast<MirrorShard*>(item) };
+			if (mshard)
+				nb++;
+		}
+
+		auto it = std::find_if(StateMain::_rooms[2]->GetActors().begin(), StateMain::_rooms[2]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Mirror"; });
+
+		if (it != StateMain::_rooms[2]->GetActors().end())
+			App::Print(800, 580, ("Number of shards : " + GetChar(nb) + " / " + GetChar(dynamic_cast<Mirror*>(*it)->GetNbShards())).c_str());
+	}
+		
+	
 	if (player->_footStep)
+	{
 		player->_footStep->Draw();
+		player->_footStep->SetPosition(player->GetPosition()->_x, player->GetPosition()->_y - 20);
+	}
 
 	if (state->_currentScene == state->_rooms[0] || state->_currentScene == state->_rooms[6])
 		return;

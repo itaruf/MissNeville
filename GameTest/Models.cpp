@@ -34,5 +34,6 @@ struct MPot MPot {};
 struct MFire MFire {};
 struct MCell MCell {};
 struct MBlood MBlood {};
+struct MArrow MArrow{};
 struct SFX SFX {};
 struct MMessage MMessage {};

@@ -32,18 +32,8 @@ void Mirror::Interact()
 
 	auto bag{ p->_inventory->_bags[0].second };
 
-	int nb{ 0 };
-
 	// Looking for all mirror shards in the player's bag
-	for (auto& item : bag)
-	{
-		auto mshard{ dynamic_cast<MirrorShard*>(item) };
-		if (!mshard)
-			continue;
-		nb++;
-	}
-
-	if (nb < nbShards)
+	if (GetCollectedMirrorShards() < nbShards)
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
 		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
@@ -53,7 +43,7 @@ void Mirror::Interact()
 		
 		_onInteract();
 
-		stateDialogue->_currentDialogue.emplace_back(p->dialogues[1]);
+		stateDialogue->_currentDialogue.emplace_back(DDetective.r2);
 		StateMain::SetState(State::DIALOGUE);
 		return;
 	}
@@ -73,4 +63,22 @@ void Mirror::Interact()
 	CSimpleSound::GetInstance().PlaySoundW(_SMirror_repaired, 0);
 	_repaired = true;
 	_sprite->SetFrame(0);
+}
+
+int Mirror::GetCollectedMirrorShards()
+{
+	auto bag{ StateMain::_player->_inventory->_bags[0].second };
+
+	int nb{ 0 };
+
+	// Looking for all mirror shards in the player's bag
+	for (auto& item : bag)
+	{
+		auto mshard{ dynamic_cast<MirrorShard*>(item) };
+		if (!mshard)
+			continue;
+		nb++;
+	}
+
+	return nb;
 }

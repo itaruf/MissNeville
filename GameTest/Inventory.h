@@ -5,6 +5,7 @@
 #include "Collectable.h"
 #include <vector>
 #include <unordered_map>
+#include <typeinfo>
 
 // Class to define an inventory with bags and slots
 class Inventory

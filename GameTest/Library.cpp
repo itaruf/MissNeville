@@ -45,8 +45,7 @@ void Library::Init()
 	wallRight->SetTag("wall");
 
 	/*PAGE*/
-	std::string description = "Page number 2";
-	auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(), new Collision(16, 16), 0, description) };
+	auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(), new Collision(16, 16), 0, DProps.p2) };
 
 	/*Open the Kitchen door*/
 	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
@@ -64,6 +63,8 @@ void Library::Init()
 	
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(LIBRARY_WALL + TRIGGER_OFFSET, MIDDLE_HEIGHT), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap), _WScene) };
 	
+	auto arrowLeft{ new Actor(MArrow.name, App::CreateSprite(MArrow.left, 1, 1, MArrow.frame, MArrow.scale), new Vector2D(LIBRARY_WALL  - 32, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap)) };
+
 	auto wallH2{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(MIDDLE_WIDTH, (MIDDLE_HEIGHT + 64)), new Collision(2, MIDDLE_WIDTH + LIBRARY_WALL * 2)) };
 	wallH2->SetTag("wall");
 	
@@ -80,52 +81,63 @@ void Library::Init()
 	
 	// First Part
 	TriggerScene* tp1{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y - 100), _startingPos)};
-	tp1->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 });
+	tp1->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp1->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp1->_SInteract = SFX.tp_sound;
 
 	TriggerScene* tp2{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV2->GetPosition()->_x - 100, wallH2->GetPosition()->_y - 200), new Vector2D(wallV4->GetPosition()->_x + 128,  wallH2->GetPosition()->_y + 128))};
 	tp2->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp2->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp2->_SInteract = SFX.tp_sound;
 
 	// Second Part
 	TriggerScene* tp3{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 126), new Vector2D(APP_VIRTUAL_WIDTH - LIBRARY_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS, MIDDLE_HEIGHT)) };
 	tp3->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp3->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp3->_SInteract = SFX.tp_sound;
 
 	TriggerScene* tp4{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV4->GetPosition()->_x + 256,  wallH2->GetPosition()->_y + 32),  _startingPos) };
 	tp4->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp4->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp4->_SInteract = SFX.tp_sound;
 
 	TriggerScene* tp5{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV4->GetPosition()->_x + 128,  wallH2->GetPosition()->_y + 32),  _startingPos) };
 	tp5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp5->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp5->_SInteract = SFX.tp_sound;
 
 	// Third Part
 	TriggerScene* tp6{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV3->GetPosition()->_x + 128,  wallH2->GetPosition()->_y - 100), _startingPos) };
 	tp6->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp6->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp6->_SInteract = SFX.tp_sound;
 
 	TriggerScene* tp7{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV3->GetPosition()->_x + 128,  wallH2->GetPosition()->_y - 200), new Vector2D(wallV2->GetPosition()->_x - 72, wallH2->GetPosition()->_y + 64)) };
 	tp7->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp7->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp7->_SInteract = SFX.tp_sound;
 
 	// Fourth Part
 	TriggerScene* tp8{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV2->GetPosition()->_x - 200, wallH2->GetPosition()->_y + 96), _startingPos) };
 	tp8->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp8->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp8->_SInteract = SFX.tp_sound;
 
 	TriggerScene* tp9{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV2->GetPosition()->_x , wallH2->GetPosition()->_y + 96), new Vector2D(MIDDLE_WIDTH , MIDDLE_HEIGHT - 32)) };
 	tp9->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp9->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp9->_SInteract = SFX.tp_sound;
 
 	TriggerScene* tp10{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(wallV2->GetPosition()->_x , wallH2->GetPosition()->_y + 32), _startingPos) };
 	tp10->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp10->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp10->_SInteract = SFX.tp_sound;
 
 	// Fifth Part 
 	TriggerScene* tp11{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MPentagramme.model, 4, 4, MPentagramme.frame, MPentagramme.scale), new Vector2D(MIDDLE_WIDTH , MIDDLE_HEIGHT - 128),  _startingPos)};
 	tp11->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 	tp11->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME);
+	tp11->_SInteract = SFX.tp_sound;
 
 	/****PROPS*****/
 	/*First Part*/
@@ -354,7 +366,7 @@ bool Library::IsRoomCleared()
 		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
 
 		/*Change the player's movement speed from now on*/
-		StateMain::_player->SetMovementSpeed(4);
+		StateMain::_player->SetMovementSpeed(5);
 		_TPPuzzle->_status = Status::CLEARED;
 		return true;
 	}

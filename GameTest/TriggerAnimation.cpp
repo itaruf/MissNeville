@@ -29,7 +29,8 @@ void TriggerAnimation::OnOverlap()
 	_activated = !_activated;
 
 	PlayAnimation();
-	
+	_onTriggered();
+
 	if (_SInteract == "")
 		return;
 

@@ -7,6 +7,7 @@
 #include "Puzzle.h"
 #include "App/app.h"
 #include "Utilities.h"
+#include "Dialogues.h"
 
 class Actor;
 #include "Actor.h"
@@ -23,7 +24,6 @@ class Page;
 #include <random>
 #include "Collectable.h"
 #include "TriggerScene.h"
-
 // Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene
 {

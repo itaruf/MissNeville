@@ -58,11 +58,44 @@ void Room::Init()
 	/*_mirrorPuzzle = new MirrorPuzzle(Status::PENDING);*/
 
 	Mirror* mirror{ new Mirror(MMirror.name, App::CreateSprite(MMirror.model, 6, 1, MMirror.frame, MMirror.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ROOM_WALL + 20), new Collision(96, 32)) };
+	mirror->SetTag("Mirror");
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_BROKEN, 1.0f / 10.0f, { 0,1,2,3,4,5 });
 	mirror->GetSprite()->CreateAnimation(mirror->GetSprite()->ANIM_MIRROR_REPAIRED, 1.0f / 10.0f, { 5,4,3,2,1,0 });
 	mirror->SetMobility(Mobility::MOVABLE);
 
 	_mirrorPuzzle->_mirror = mirror;
+	_mirrorPuzzle->_onSolved += [this]()
+	{
+		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetName() == MCharlotte.name; });
+		if (it != StateMain::_rooms[1]->GetActors().end())
+		{
+			StateMain::_rooms[1]->RemoveActor(*it);
+		}
+
+		// Close the library
+		auto it2 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
+
+		if (it2 != StateMain::_rooms[1]->GetActors().end())
+			dynamic_cast<TriggerScene*>(*it2)->_activated = false;
+
+		// Close the kitchen
+		auto it3 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
+
+		if (it3 != StateMain::_rooms[1]->GetActors().end())
+			dynamic_cast<TriggerScene*>(*it3)->_activated = false;
+
+		// Open the entrance
+		auto it5 = std::find_if(StateMain::_rooms[5]->GetActors().begin(), StateMain::_rooms[5]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Close Entrance"; });
+
+		if (it5 != StateMain::_rooms[5]->GetActors().end())
+			dynamic_cast<Trigger*>(*it5)->_activated = true;
+
+		// Activate the trigger which will close the room behind the player
+		auto it4 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Close Room"; });
+
+		if (it4 != StateMain::_rooms[1]->GetActors().end())
+			dynamic_cast<Trigger*>(*it4)->_activated = true;
+	};
 
 	/*Open the library door*/
 	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
@@ -70,18 +103,18 @@ void Room::Init()
 	if (it != StateMain::_rooms[1]->GetActors().end())
 		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 
-
 	// Triggers
-	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _SScene);
+	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, 0.8), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _SScene);
 
-	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), StateMain::_player->dialogues[0]) };
+	auto arrowDown{ new Actor(MArrow.name, App::CreateSprite(MArrow.down, 1, 1, MArrow.frame, MArrow.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL - 32), new Collision(32, 32, ColliderType::Overlap)) };
+
+	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), DDetective.r1) };
 
 	TriggerAnimation* mirrorAnimTrigger{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale),  new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), true)};
 	mirrorAnimTrigger->_targetAnim = CSimpleSprite::ANIM_MIRROR_BROKEN;
 	mirrorAnimTrigger->_targetSprite = mirror->GetSprite();
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
 	mirrorAnimTrigger->_onPlayingAnim += [this]() {this->OnMirrorShattered(); };
-
 	/*Start Puzzle*/
 	_mirrorPuzzle->StartPuzzle();
 }
@@ -120,7 +153,19 @@ bool Room::IsRoomCleared()
 
 		if (it != StateMain::_rooms[1]->GetActors().end())
 		{
-			page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
+			page->_onCollected += [this, it]() 
+			{
+				dynamic_cast<TriggerScene*>(*it)->OnActivation();
+				auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+
+				if (!stateDialogue)
+					return true;
+
+				stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
+				stateDialogue->_currentDialogue.emplace_back(DDetective.r3);
+
+				StateMain::SetState(State::DIALOGUE);
+			};
 		}
 		
 		auto it2 = std::find_if(_actors.begin(), _actors.end(), [](Actor* actor) { return actor->GetName() == "Maggy Smith"; });
@@ -130,11 +175,11 @@ bool Room::IsRoomCleared()
 		}
 
 		auto npc = std::find_if(_actors.begin(), _actors.end(), [](Actor* npc) { return npc->GetName() == MCharlotte.name; });
+
 		if (npc != _actors.end())
 		{
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 		}
-
 		_mirrorPuzzle->_status = Status::CLEARED;
 		_mirrorPuzzle->_onSolved();
 
