@@ -13,7 +13,9 @@ Page::~Page()
 
 bool Page::UseItem()
 {
+	Collectable::UseItem();
+
 	CSimpleSound::GetInstance().PlaySoundW(_SUsed, 0);
-	std::cout << _description << std::endl;
+	/*std::cout << _description << std::endl;*/
 	return true;
 }

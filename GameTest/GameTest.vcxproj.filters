@@ -142,6 +142,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="Outro.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -314,6 +317,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Outro.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -120,6 +120,7 @@
     <ClInclude Include="EState.h" />
     <ClInclude Include="EStatus.h" />
     <ClInclude Include="Intro.h" />
+    <ClInclude Include="Outro.h" />
     <ClInclude Include="StateController.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="IDialogue.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="DodgePuzzle.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="Outro.cpp" />
     <ClCompile Include="StateController.cpp" />
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="Library.cpp" />

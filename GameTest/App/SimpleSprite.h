@@ -75,11 +75,13 @@ public:
         ANIM_KNIFE,
         ANIM_BOIL,
         ANIM_FIRE,
+        ANIM_BLOOD,
+        ANIM_TURN,
     };
 
     // fileName: File must be a 32 bit BMP format (A8 R8 G8 B8). The alpha channel can be used to mask out the sprite.
 	// nColumns and nRows defines the number of frames in the sprite page. 
-    CSimpleSprite(const char *fileName, unsigned int nColumns = 1, unsigned int nRows = 1, int frame = 0, float scale = 0);
+    CSimpleSprite(const char *fileName, unsigned int nColumns = 1, unsigned int nRows = 1, int frame = 0, float scale = 1);
 	// Update, call from your game update function.
     void Update(float dt);
 	// Draw, call from your game draw function.

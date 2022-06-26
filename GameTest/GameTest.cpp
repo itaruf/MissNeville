@@ -18,6 +18,7 @@
 #include "Room.h"
 #include "Hall.h"
 #include "Library.h"
+#include "Outro.h"
 
 #include "Utilities.h"
 #include "Controller.h"
@@ -41,24 +42,19 @@ void Init()
 	state->_state = State::REGULAR;
 
 	/*Instantiation du personnage*/
-	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\Skeleton.bmp", 9, 4) };
+	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\player.bmp", 3, 4) };
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
 	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };
-	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 3, controller, new Inventory()) };
+	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 6, controller, new Inventory()) };
 	player->SetTag("player");
 	player->_interactSprite = App::CreateSprite(MIcon.model, 1, 1, MIcon.frame, MIcon.scale);
 	/*Player base stats and configs*/
-	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 0,1,2,3,4,5,6,7,8 });
-	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_LEFT, 1.0f / 15.0f, { 9,10,11,12,13,14,15,16,17 });
-	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 18,19,20,21,22,23,24,25,26 });
-	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 27,28,29,30,31,32,33,34,35 });
-	player->GetSprite()->SetScale(2.0f);
-
-	player->dialogues.insert(std::make_pair(0, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
-	player->dialogues.insert(std::make_pair(1, "[" + player->GetName() + "] says : I need to find all the missing pieces... But why would they spread everywhere in the mansion ?"));
-	//player->dialogues.insert(std::make_pair(2, "[" + player->GetName() + "] says : The mirror shattered in pieces !"));
-	player->SetCurrentDialogue(0);
+	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_FORWARDS, 1.0f / 15.0f, { 9, 10, 11 });
+	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_LEFT, 1.0f / 15.0f, { 3, 4, 5 });
+	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_BACKWARDS, 1.0f / 15.0f, { 0, 1, 2 });
+	player->GetSprite()->CreateAnimation(player->GetSprite()->ANIM_RIGHT, 1.0f / 15.0f, { 6, 7, 8 });
+	player->GetSprite()->SetScale(3.0f);
 
 	/*Adding the player to the gamestate*/
 	state->SetPlayer(player);
@@ -79,6 +75,7 @@ void Init()
 	Library* library{ new Library{ 3, new TPPuzzle() } };
 	Kitchen* kitchen{ new Kitchen{ 4, new DodgePuzzle() } };
 	Entrance* entrance{ new Entrance{ 5 } };
+	Outro* outro{ new Outro{ 6 } };
 
 	/*entrance->AddActor(player);
 	hall->AddActor(player);
@@ -97,12 +94,12 @@ void Init()
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
-	/*state->_currentScene = entrance;*/
+	state->_currentScene = entrance;
 	/*state->_currentScene = hall;*/
 	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	state->_currentScene = intro;
+	/*state->_currentScene = intro;*/
 	
 	state->_rooms.insert(std::make_pair(0, intro));
 	state->_rooms.insert(std::make_pair(1, hall));
@@ -110,6 +107,7 @@ void Init()
 	state->_rooms.insert(std::make_pair(3, library));
 	state->_rooms.insert(std::make_pair(4, kitchen));
 	state->_rooms.insert(std::make_pair(5, entrance));
+	state->_rooms.insert(std::make_pair(6, outro));
 
 	state->_currentScene->Init();
 	CSimpleSound::GetInstance().PlaySound(SFX.scene, true, -3500);
@@ -136,7 +134,6 @@ void Render()
 	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
 	state->_currentStateController->Render();
 
-	/*App::Print(400, 600, GetChar(state->_currentScene->GetActors().size()).c_str());*/
 	state->_currentStateController->Render();
 
 	/*SOME PRINTS*/
@@ -156,6 +153,12 @@ void Render()
 		return;
 
 	if (!player->GetSprite())
+		return;
+
+	if (player->_footStep)
+		player->_footStep->Draw();
+
+	if (state->_currentScene == state->_rooms[0] || state->_currentScene == state->_rooms[6])
 		return;
 
 	player->GetSprite()->Draw();

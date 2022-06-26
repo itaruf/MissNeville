@@ -60,6 +60,8 @@ void Actor::SetSprite(CSimpleSprite* sprite)
 	if (!sprite)
 		return;
 
+	delete _sprite;
+
 	_sprite = sprite;
 	// Immediately Set the position of the sprite and thus, of the actor
 

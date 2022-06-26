@@ -24,6 +24,8 @@ public:
 	friend class PlayerController;
 	friend class ObjectController;
 
+	CSimpleSprite* _footStep;
+
 	/*static CSimpleSound& _SFXDeath;
 	static CSimpleSound& _SFXInteract;*/
 

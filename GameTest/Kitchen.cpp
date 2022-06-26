@@ -40,7 +40,7 @@ void Kitchen::Init()
 	}
 
 	StateMain::_player->SetPosition(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 128, MIDDLE_HEIGHT);
-	_startingPos = new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 32, MIDDLE_HEIGHT);
+	_startingPos = new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 48, MIDDLE_HEIGHT);
 
 	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(LOUNGE_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - LOUNGE_WALL * 2, 2)) };
 	wallLeft->SetTag("wall");
@@ -55,7 +55,7 @@ void Kitchen::Init()
 	wallTop->SetTag("wall");
 
 	/*PAGE*/
-	auto page{ new Page(MPage.name + " 3" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(LOUNGE_WALL + 16, MIDDLE_HEIGHT + 128), new Collision(16, 16), 0, DPage.p3) };
+	auto page{ new Page(MPage.name + " 3" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(LOUNGE_WALL + 16, MIDDLE_HEIGHT + 128), new Collision(16, 16), 0, DProps.p3) };
 
 	_dodgePuzzle->_page = page;
 
@@ -69,7 +69,7 @@ void Kitchen::Init()
 	_onCanOpenCell += [this, objectC]() {objectC->_activated = false; };
 
 	/*Weapons*/
-	/*auto weapon{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 1, MKnife.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - LOUNGE_WALL - 64), new Collision(16, 16, ColliderType::Overlap), 0, 4, objectC) };
+	auto weapon{ new Character(MKnife.name, App::CreateSprite(MKnife.model, 3, 2, 1, MKnife.scale), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - LOUNGE_WALL - 64), new Collision(16, 16, ColliderType::Overlap), 0, 4, objectC) };
 	weapon->SetTag("lethal");
 	weapon->SetDirection(Direction::DOWN);
 
@@ -93,40 +93,40 @@ void Kitchen::Init()
 	weapon5->SetTag("lethal");
 	weapon5->SetDirection(Direction::RIGHT);
 
-	auto fire{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(LOUNGE_WALL + 64, MIDDLE_HEIGHT), new Collision(32,32, ColliderType::Overlap)) };
-	fire->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(LOUNGE_WALL + 64, MIDDLE_HEIGHT), new Collision(32,32, ColliderType::Overlap)) };
+	fire->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
 	fire->SetTag("lethal");
 
-	auto fire2{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(LOUNGE_WALL + 256, MIDDLE_HEIGHT - 128), new Collision(32,32, ColliderType::Overlap)) };
-	fire2->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire2{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(LOUNGE_WALL + 256, MIDDLE_HEIGHT - 128), new Collision(32,32, ColliderType::Overlap)) };
+	fire2->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire2->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
 	fire2->SetTag("lethal");
 
-	auto fire3{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32,32, ColliderType::Overlap)) };
-	fire3->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire3{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT - 64), new Collision(32,32, ColliderType::Overlap)) };
+	fire3->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire3->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
 	fire3->SetTag("lethal");
 
-	auto fire4{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(MIDDLE_WIDTH + 128, MIDDLE_HEIGHT + 100), new Collision(32,32, ColliderType::Overlap)) };
-	fire4->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire4{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(MIDDLE_WIDTH + 128, MIDDLE_HEIGHT + 100), new Collision(32,32, ColliderType::Overlap)) };
+	fire4->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire4->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
 	fire4->SetTag("lethal");
 
-	auto fire5{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(MIDDLE_WIDTH - 128,  MIDDLE_HEIGHT + 64), new Collision(32,32, ColliderType::Overlap)) };
-	fire5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire5{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(MIDDLE_WIDTH - 128,  MIDDLE_HEIGHT + 64), new Collision(32,32, ColliderType::Overlap)) };
+	fire5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire5->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
 	fire5->SetTag("lethal");
 
-	auto fire6{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 100, MIDDLE_HEIGHT - 100), new Collision(32,32, ColliderType::Overlap)) };
-	fire6->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire6{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 100, MIDDLE_HEIGHT - 100), new Collision(32,32, ColliderType::Overlap)) };
+	fire6->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire6->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
 	fire6->SetTag("lethal");
 
-	auto fire7{ new Actor(MFire.name, App::CreateSprite(MFire.model, 1, 4, MFire.frame, MFire.scale), new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 144, MIDDLE_HEIGHT + 32), new Collision(32,32, ColliderType::Overlap)) };
-	fire7->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3 }, true);
+	auto fire7{ new Actor(MFire.name, App::CreateSprite(MFire.model, 12, 1, MFire.frame, MFire.scale), new Vector2D(APP_VIRTUAL_WIDTH - LOUNGE_WALL - 144, MIDDLE_HEIGHT + 32), new Collision(32,32, ColliderType::Overlap)) };
+	fire7->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_FIRE, 1 / 15.0f, { 0,1,2,3,4,5,6,7,8,9,10,11 }, true);
 	fire7->GetSprite()->SetAnimation(CSimpleSprite::ANIM_FIRE);
-	fire7->SetTag("lethal");*/
+	fire7->SetTag("lethal");
 
 	/*Furnitures*/
 	auto oven{ new Actor(MOven.name, App::CreateSprite(MOven.model, 1, 1, MOven.frame, MOven.scale), new Vector2D(LOUNGE_WALL + 32, APP_VIRTUAL_HEIGHT - LOUNGE_WALL), new Collision(92, 32)) };
@@ -231,6 +231,8 @@ void Kitchen::Init()
 	anne->dialogues.insert(std::make_pair(0, DMother.k1));
 	anne->SetCurrentDialogue(0);
 
+	/*On Puzzle solved*/
+	_dodgePuzzle->_onSolved += [this]() {StateMain::_player->_footStep = new CSimpleSprite(MBlood.model); };
 
 	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
 
@@ -291,6 +293,8 @@ bool Kitchen::IsRoomCleared()
 		StateMain::SetState(State::DIALOGUE);
 
 		_dodgePuzzle->_status = Status::CLEARED;
+		_dodgePuzzle->_onSolved();
+
 		return true;
 	}
 }

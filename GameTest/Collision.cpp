@@ -61,17 +61,17 @@ bool Collision::isOverlapping(Actor* actor, Actor* other)
 
 	auto x1{ actor->GetPosition()->_x };
 	auto y1{ actor->GetPosition()->_y };
-	auto w1{ actor->GetCollider()->GetWidth()};
+	auto w1{ actor->GetCollider()->GetWidth() };
 	auto h1{ actor->GetCollider()->GetHeight() };
-	auto x1off{ actor->GetCollider()->_offset->_x / 2};
-	auto y1off{ actor->GetCollider()->_offset->_y / 2};
+	auto x1off{ actor->GetCollider()->_offset->_x};
+	auto y1off{ actor->GetCollider()->_offset->_y};
 
 	auto x2{ other->GetPosition()->_x };
 	auto y2{ other->GetPosition()->_y };
 	auto w2{ other->GetCollider()->GetWidth() };
 	auto h2{ other->GetCollider()->GetHeight() };
-	auto x2off{ other->GetCollider()->_offset->_x / 2};
-	auto y2off{ other->GetCollider()->_offset->_y / 2};
+	auto x2off{ other->GetCollider()->_offset->_x };
+	auto y2off{ other->GetCollider()->_offset->_y };
 
 	if (x1 + x1off - _width < x2 + x2off + w2 &&
 		x1 + x1off + _width > x2 + x2off - w2 &&

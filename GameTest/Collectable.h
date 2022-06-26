@@ -22,7 +22,7 @@ public:
 
 	// Each Collectable will have its own treatment
 	void OnCollected();
-	virtual bool UseItem() = 0;
+	virtual bool UseItem();
 };
 
 #endif

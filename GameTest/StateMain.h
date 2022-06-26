@@ -51,7 +51,7 @@ public:
 	static void LoadScene(int ID)
 	{
 		_currentScene->Exit();
-		SetState(State::REGULAR);
+		/*SetState(State::REGULAR);*/
 		_currentScene = _rooms[ID];
 		_currentScene->Init();
 	}
@@ -59,7 +59,7 @@ public:
 	static void LoadScene(Scene* scene)
 	{
 		_currentScene->Exit();
-		SetState(State::REGULAR);
+		/*SetState(State::REGULAR);*/
 		_currentScene = scene;
 		std::cout << scene->GetID() << std::endl;
 		_currentScene->Init();

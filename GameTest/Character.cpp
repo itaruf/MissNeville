@@ -6,6 +6,7 @@
 
 Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }, _controller{controller}
 {
+	/*_footStep = new CSimpleSprite(MBlood.model);*/
 	/*std::cout << "CHARACTER CONSTRUCTOR CALLED" << std::endl;*/
 	/*_SFXInteract = new CSimpleSound(SFX.item_pick);*/
 }
@@ -17,11 +18,8 @@ Character::~Character()
 	if (_controller)
 		delete _controller;
 
-	/*if (_SDeath)
-		delete[] _SDeath;
-
-	if (_SInteract)
-		delete[] _SInteract;*/
+	if (_footStep)
+		delete _footStep;
 }
 
 // Get the current HP of the character

@@ -139,9 +139,9 @@ extern struct MCharlotte MCharlotte;
 struct MFamily
 {
 	std::string name{ "Family" };
-	const char* model{ ".\\TestData\\Characters\\family.bmp" };
+	const char* model{ ".\\TestData\\Characters\\ghost.bmp" };
 	int frame{ 1 };
-	float scale{ 3.5 };
+	float scale{ 3 };
 };
 
 extern struct MFamily MFamily;
@@ -344,7 +344,7 @@ extern struct MPot MPot;
 struct MFire
 {
 	std::string name{ "Fire" };
-	const char* model{ ".\\TestData\\Props\\fire.bmp" };
+	const char* model{ ".\\TestData\\Props\\fire2.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
 };
@@ -360,6 +360,17 @@ struct MCell
 };
 
 extern struct MCell MCell;
+
+struct MBlood
+{
+	std::string name{ "Blood" };
+	const char* model{ ".\\TestData\\VFX\\blood.bmp" };
+	const char* model2{ ".\\TestData\\VFX\\bloodsplat2.bmp" };
+	int frame{ 0 };
+	float scale{ 2 };
+};
+
+extern struct MBlood MBlood;
 
 struct SFX
 {

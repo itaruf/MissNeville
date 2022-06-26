@@ -12,6 +12,6 @@ MirrorShard::~MirrorShard()
 
 bool MirrorShard::UseItem()
 {
-	std::cout << _description << std::endl;
+	Collectable::UseItem();
 	return true;
 }

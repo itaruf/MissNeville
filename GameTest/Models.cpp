@@ -33,5 +33,6 @@ struct MBag MBag {};
 struct MPot MPot {};
 struct MFire MFire {};
 struct MCell MCell {};
+struct MBlood MBlood {};
 struct SFX SFX {};
 struct MMessage MMessage {};

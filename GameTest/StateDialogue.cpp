@@ -16,6 +16,8 @@ void StateDialogue::Enter()
 	if (!_dialogueBox)
 		return;
 
+	Clear();
+
 	ProcessDialogue(_currentDialogue[0]);
 }
 
@@ -42,8 +44,8 @@ void StateDialogue::Update()
 
 			if (_currentDialogue.empty())
 			{
-				_onDialogueEnd();
 				StateMain::SetState(State::REGULAR);
+				_onDialogueEnd();
 			}
 			else
 				ProcessDialogue(_currentDialogue[0]);
