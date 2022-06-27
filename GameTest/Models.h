@@ -353,7 +353,6 @@ struct MBlood
 {
 	std::string name{ "Blood" };
 	const char* model{ ".\\TestData\\VFX\\blood.bmp" };
-	const char* model2{ ".\\TestData\\VFX\\bloodsplat2.bmp" };
 	int frame{ 0 };
 	float scale{ 2 };
 	float scale2{ 1 };

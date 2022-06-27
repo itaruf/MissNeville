@@ -197,7 +197,7 @@ void Hall::Init()
 		roomTrigger->GetSprite()->SetFrame(0);
 	};
 
-	Trigger* trigger3{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, APP_VIRTUAL_WIDTH - HALL_WALL * 2, ColliderType::Overlap), false) };
+	Trigger* trigger3{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT + 20), new Collision(32, APP_VIRTUAL_WIDTH - HALL_WALL * 2, ColliderType::Overlap), false) };
 	trigger3->SetTag("Open Library");
 
 	trigger3->_onTriggered += [this, libraryTrigger]()

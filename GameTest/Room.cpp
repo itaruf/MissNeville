@@ -122,13 +122,13 @@ void Room::Init()
 		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };*/
 
 	// Triggers
-	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, 0.8), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, 32, ColliderType::Overlap), _SScene);
+	TriggerScene* hallTrigger = new TriggerScene(MTriggerScene.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, 0.8), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT + 20), new Collision(32, 32, ColliderType::Overlap), _SScene);
 
 	auto arrowDown{ new Actor(MArrow.name, App::CreateSprite(MArrow.down, 1, 1, MArrow.frame, MArrow.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL - 32), new Collision(32, 32, ColliderType::Overlap)) };
 
-	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), DDetective.r1) };
+	TriggerDialogue* dialogueTrigger{ new TriggerDialogue(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale), new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 96), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), DDetective.r1) };
 
-	TriggerAnimation* mirrorAnimTrigger{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale),  new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 80), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), true)};
+	TriggerAnimation* mirrorAnimTrigger{ new TriggerAnimation(MTriggerScene.name, App::CreateSprite("", 1, 1, MIcon.frame, MIcon.scale),  new Vector2D(MIDDLE_WIDTH, ROOM_WALL + TRIGGER_OFFSET + 96), new Collision(16, APP_VIRTUAL_WIDTH - ROOM_WALL * 2, ColliderType::Overlap), true)};
 	mirrorAnimTrigger->_targetAnim = CSimpleSprite::ANIM_MIRROR_BROKEN;
 	mirrorAnimTrigger->_targetSprite = mirror->GetSprite();
 	mirrorAnimTrigger->_SInteract = SFX.mirror_repaired;
