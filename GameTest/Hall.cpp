@@ -88,7 +88,8 @@ void Hall::Init()
 	std::vector<Vector2D*> v{ new Vector2D(MIDDLE_WIDTH + 2, MIDDLE_HEIGHT + 70), new Vector2D(450, MIDDLE_HEIGHT + 40), new Vector2D(576, MIDDLE_HEIGHT + 40), new Vector2D(462, MIDDLE_HEIGHT - 28), new Vector2D(564, MIDDLE_HEIGHT - 28) };
 	for (int i = 0; i < v.size(); ++i)
 	{
-		_candles.emplace_back(new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), v[i], new Collision(10, 10)));
+		_candles.emplace_back(new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), v[i], new Collision(10, 10)));
+		_candles[i]->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
 		_candles[i]->_SInteract = SFX.item_pick;
 		_candlePuzzle->GetCandles().emplace_back(_candles[i]);
 	}
@@ -97,19 +98,17 @@ void Hall::Init()
 
 	// Characters
 
-	auto pentagramme{ new Character(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, 0, 3), new Vector2D(MIDDLE_WIDTH + 4, MIDDLE_HEIGHT + 32), new Collision(48, 32, ColliderType::Overlap)) };
+	auto pentagramme{ new Actor(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, 0, 3), new Vector2D(MIDDLE_WIDTH + 4, MIDDLE_HEIGHT + 32), new Collision(48, 32, ColliderType::Overlap)) };
 	pentagramme->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 
-	auto pillar{ new Character(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH - 32, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 16), 0, 4, objectC) };
+	auto pillar{ new Character(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH - 48, APP_VIRTUAL_HEIGHT - HALL_WALL - 16), new Collision(32, 16), 0, 4, objectC) };
 	pillar->SetDirection(Direction::DOWN);
 
-	auto pillar2{ new Character(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH + 32, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 16), 0, 6, objectC) };
+	auto pillar2{ new Character(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH + 48, APP_VIRTUAL_HEIGHT - HALL_WALL - 16), new Collision(32, 16), 0, 6, objectC) };
 	pillar2->SetDirection(Direction::DOWN);
 
 	auto picture{ new Character(MPicture.name, App::CreateSprite(MPicture.model, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH - 130, APP_VIRTUAL_HEIGHT - HALL_WALL + TRIGGER_OFFSET), new Collision(32, 32), 0, 8, objectC) };
-
 	auto picture2{ new Character(MPicture.name, App::CreateSprite(MPicture.model2, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH + 96, APP_VIRTUAL_HEIGHT - HALL_WALL + TRIGGER_OFFSET), new Collision(32, 32), 0, 7, objectC) };
-
 
 	auto table{ new Character(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(HALL_WALL + 64, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 32), 0, 4, objectC) };
 	table->SetDirection(Direction::DOWN);
@@ -129,11 +128,17 @@ void Hall::Init()
 	auto commode6{ new Character(MShelf.name, App::CreateSprite(MCommode.model7, 1, 1, MCommode.frame, MCommode.scale), new Vector2D(HALL_WALL + 16, APP_VIRTUAL_HEIGHT - HALL_WALL - 64), new Collision(64, 32), 0, 4, objectC) };
 	commode6->SetDirection(Direction::RIGHT);
 
-	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(HALL_WALL + 50, HALL_WALL + 128), new Collision(32, 32, ColliderType::Overlap)) };
+	auto candle{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 144, APP_VIRTUAL_HEIGHT - HALL_WALL - 16), new Collision(30, 10)) }; candle->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true); candle->GetSprite()->SetAnimation(CSimpleSprite::ANIM_CANDLE);
+	auto candle2{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 120, APP_VIRTUAL_HEIGHT - HALL_WALL - 16), new Collision(30, 10)) }; candle2->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true); candle2->GetSprite()->SetAnimation(CSimpleSprite::ANIM_CANDLE);
+	//auto candle3{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 160, APP_VIRTUAL_HEIGHT - HALL_WALL - 16), new Collision(30, 10)) }; candle3->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true); candle3->GetSprite()->SetAnimation(CSimpleSprite::ANIM_CANDLE);
+
+	auto candle4{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 96, APP_VIRTUAL_HEIGHT - HALL_WALL - 16), new Collision(30, 10)) }; candle4->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true); candle4->GetSprite()->SetAnimation(CSimpleSprite::ANIM_CANDLE);
+
+	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(HALL_WALL + 80, HALL_WALL + 128), new Collision(32, 32, ColliderType::Overlap)) };
 	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - 50, HALL_WALL + 16), new Collision(32, 32, ColliderType::Overlap)) };
-	auto skull3{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH - 44, MIDDLE_HEIGHT + 16), new Collision(32, 32, ColliderType::Overlap)) };
-	auto skull4{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH + 96, MIDDLE_HEIGHT + 100), new Collision(32, 32, ColliderType::Overlap)) };
-	auto skull5{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH + 70, MIDDLE_HEIGHT - 80), new Collision(32, 32, ColliderType::Overlap)) };
+	//auto skull3{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH - 44, MIDDLE_HEIGHT + 16), new Collision(32, 32, ColliderType::Overlap)) };
+	auto skull4{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH + 120, MIDDLE_HEIGHT + 100), new Collision(32, 32, ColliderType::Overlap)) };
+	//auto skull5{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH - 150, MIDDLE_HEIGHT - 125), new Collision(32, 32, ColliderType::Overlap)) };
 
 	auto web{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(HALL_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 80), new Collision(32, 32, ColliderType::Overlap)) };
 	auto web2{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - HALL_WALL - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 48), new Collision(32, 32, ColliderType::Overlap)) };

@@ -77,6 +77,7 @@ public:
         ANIM_FIRE,
         ANIM_BLOOD,
         ANIM_TURN,
+        ANIM_CANDLE,
     };
 
     // fileName: File must be a 32 bit BMP format (A8 R8 G8 B8). The alpha channel can be used to mask out the sprite.

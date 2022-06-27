@@ -19,7 +19,15 @@ void Mirror::Interact()
 {
 	if (_repaired)
 	{
-		std::cout << _repaired << std::endl;
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+
+		if (!stateDialogue)
+			return;
+
+		_onInteract();
+
+		stateDialogue->_currentDialogue.emplace_back(DDetective.r4);
+		StateMain::SetState(State::DIALOGUE);
 		return;
 	}
 

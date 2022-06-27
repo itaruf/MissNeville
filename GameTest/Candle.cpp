@@ -23,12 +23,13 @@ void Candle::Interact()
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SEnlight, 0);
 		_enlighted = true;
-		_sprite->SetFrame(1);
+		_sprite->SetAnimation(CSimpleSprite::ANIM_CANDLE);
 	}
 	else
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SShut, 0);
 		_enlighted = false;
+		_sprite->SetAnimation(-1);
 		_sprite->SetFrame(0);
 	}
 }

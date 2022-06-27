@@ -96,10 +96,10 @@ extern struct MBed MBed;
 struct MCandle
 {
 	std::string name{ "Candle" };
-	const char* model{ ".\\TestData\\Props\\candle.bmp" };
+	const char* model{ ".\\TestData\\Props\\candles.bmp" };
 	int frame{ 0 };
 	int frame2{ 1 };
-	float scale{ 0.5 };
+	float scale{ 2 };
 };
 
 extern struct MCandle MCandle;

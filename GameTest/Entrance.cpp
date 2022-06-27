@@ -48,21 +48,21 @@ void Entrance::Init()
 	auto pillar{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL), new Collision(32, 16)) };
 	auto pillar2{ new Actor(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH + 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL), new Collision(32, 16)) };
 
-	auto candle{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, ENTRANCE_WALL + 40), new Collision(30, 10)) };
-	auto candle2{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle3{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle2->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle4{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle3->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle5{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle4->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle6{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle5->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle7{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle6->GetPosition()->_y + 48), new Collision(30, 10)) };
+	auto candle{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, ENTRANCE_WALL + 40), new Collision(30, 10)) }; candle->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle2{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle->GetPosition()->_y + 48), new Collision(30, 10)) }; candle2->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle3{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle2->GetPosition()->_y + 48), new Collision(30, 10)) }; candle3->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle4{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle3->GetPosition()->_y + 48), new Collision(30, 10)) }; candle4->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle5{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle4->GetPosition()->_y + 48), new Collision(30, 10)) }; candle5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle6{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle5->GetPosition()->_y + 48), new Collision(30, 10)) }; candle6->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle7{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH - 48, candle6->GetPosition()->_y + 48), new Collision(30, 10)) }; candle7->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
 
-	auto candle8{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, ENTRANCE_WALL + 40), new Collision(30, 10)) };
-	auto candle9{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle8->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle10{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle9->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle11{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle10->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle12{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle11->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle13{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle12->GetPosition()->_y + 48), new Collision(30, 10)) };
-	auto candle14{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle13->GetPosition()->_y + 48), new Collision(30, 10)) };
+	auto candle8{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, ENTRANCE_WALL + 40), new Collision(30, 10)) }; candle8->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle9{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle8->GetPosition()->_y + 48), new Collision(30, 10)) }; candle9->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle10{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle9->GetPosition()->_y + 48), new Collision(30, 10)) }; candle10->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle11{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle10->GetPosition()->_y + 48), new Collision(30, 10)) }; candle11->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle12{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle11->GetPosition()->_y + 48), new Collision(30, 10)) }; candle12->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle13{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle12->GetPosition()->_y + 48), new Collision(30, 10)) }; candle13->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
+	auto candle14{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(MIDDLE_WIDTH + 48, candle13->GetPosition()->_y + 48), new Collision(30, 10)) }; candle14->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true);
 
 	auto web{ new Actor(MWeb.name, App::CreateSprite(MWeb.model, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(ENTRANCE_WIDTH_WALL + 16, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 80), new Collision(32, 32, ColliderType::Overlap)) };
 	auto web2{ new Actor(MWeb.name, App::CreateSprite(MWeb.model2, 1, 1, MWeb.frame, MWeb.scale), new Vector2D(APP_VIRTUAL_WIDTH - ENTRANCE_WIDTH_WALL - 48, APP_VIRTUAL_HEIGHT - ENTRANCE_WALL - 48), new Collision(32, 32, ColliderType::Overlap)) };
@@ -120,7 +120,7 @@ void Entrance::Init()
 			auto candle{ dynamic_cast<Candle*>(actor) };
 			if (!candle) 
 				continue;
-			candle->GetSprite()->SetFrame(1);
+			candle->GetSprite()->SetAnimation(CSimpleSprite::ANIM_CANDLE);
 
 		}
 

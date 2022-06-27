@@ -17,7 +17,7 @@ struct DCharlotte
 	// Room
 	std::string r1{ "[Charlotte Neville] says : Oh no... My beautiful mirror, why would you do this, Ms. Smith ?! The missing pieces should be all around the mansion, can you get all of them back ?" };
 
-	std::string r2{ "[Charlotte Neville] says : My mirror, you repaired it and made her disappear ! Serves her right once again, hehe ! What's that look on your face ? Look at it in the mirror, hehe !" };
+	std::string r2{ "[Charlotte Neville] says : My mirror ! you repaired it but also made her disappear ! Serves her right once again, hehe ! What's that look on your face ? Look at it in the mirror, hehe !" };
 
 	// Library
 	std::string l1{ "[Charlotte Neville] says : Oh no ! my father moved everything in the library to prevent you from going any further... Knowing him, he might be thinking you are not smart enough to find another way !" };
@@ -86,6 +86,7 @@ struct DDetective
 	std::string r1{ "[JJ Detective] says : The mirror shattered in pieces !" };
 	std::string r2{ "[JJ Detective] says : I need to find all the missing pieces... But why would they spread everywhere in the mansion ?" };
 	std::string r3{ "[JJ Detective] says : I finally have everything I needed... I have to get out of here now !" };
+	std::string r4{ "[JJ Detective] says : The mirror is intact..." };
 
 	// Library
 	std::string l1{ "[JJ Detective] says : The library... but this is beyond anything I could ever imagine ! the tables are moving all by themselves, what is happening here ?!" };
@@ -123,10 +124,10 @@ extern struct DOutro DOutro;
 
 struct DProps
 {
-	std::string p1{ "[Page 1] : Dear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nBut why is Edward bypassing everything when he behaves like a pig !? It is so unfair..\nWell, as we say : \"Birds of a feather flock together\" hehe !\nOh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nBlessed be the day she finally leaves our house !- Charlotte Neville." };
-	std::string p2{ "[Page 2] :" };
-	std::string p3{ "[Page 3] :" };
-	std::string p4{ "[Page 4] :" };
+	std::string p1{ "[Page 1] : Dear diary,\nToday's the same day as always.\nOur governess, Ms. Smith, scolded me all day for not behaving like a \"proper english lady\" or so she says..\nIt is always : \"Charlotte ! do not do this !\" or \"No.. Charlotte ! do not say this, say that instead !\", it is so frustrating !\nI cannot believe Father and Mother hired this pig to teach me how to behave ! Oh ! Ms. Pig better not read this or she is going to grunt with her pig nose wiiiiide open hehe !\nBlessed be the day she finally leaves our house ! I am hearing M. Jones coming this way, he can be a bit annoying but he still is kind ! - Charlotte Neville." };
+	std::string p2{ "[Page 2] : That's enough, Father is the worst of all, he does not care about me as a person, he only cares about me when I am his good obediant daughter, and when I am not, I am no more than that unworthy girl who needs to be corrected. That's my life. Why can't I be a teenager like ordinary people... I just want to do whatever my mind is telling me but Father restrains everything... No, that's not only him, it's every. single. damn. members of my family. This needs to change, I will not let them dictate my life !! - Charlotte." };
+	std::string p3{ "[Page 3] : Earlier in the day, I picked up a book in the library which had a bizarre and shiny symbol on its cover... Like... a star ? Back in my room, as I opened it, A strange form came off of it and... talked to me ! I do not know for certain what it said but... I felt something, I felt like I had to reach true freedom. At that moment, it became a certainty : my family is an obstacle to my freedom and I shall break my chains now ! - Charlotte." };
+	std::string p4{ "[Page 4] : Deaaar diary, this is the last time I am writing as I finally reached total freedom ! Therefore, it will not be necessary to hide my thoughts as I can express them loud and clear ! hehe ! Dress unproperly ? Done ! Badmouthing ? Done ! Ah ! it feels a bit strange having nobody yelling at you everytime you talk or move... Anywat that shadowy form seems to have projects for me so farewell ! - Charlotte" };
 	std::string m{ "[...] : A sharp mirror shard." };
 };
 

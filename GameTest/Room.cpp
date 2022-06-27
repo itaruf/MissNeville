@@ -46,7 +46,8 @@ void Room::Init()
 
 	auto bed{ new Actor(MBed.name, App::CreateSprite(MBed.model, 1, 1, MBed.frame, MBed.scale), new Vector2D(ROOM_WALL + 32, APP_VIRTUAL_HEIGHT - ROOM_WALL - 32), new Collision(48, 32)) };
 
-	auto table{ new Actor(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 64, APP_VIRTUAL_HEIGHT - ROOM_WALL - 32), new Collision(32, 32)) };
+	auto table{ new Actor(MTable.name, App::CreateSprite(MTable.model, 1, 1, MTable.frame, MTable.scale), new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 64, ROOM_WALL + 16), new Collision(32, 32)) };
+	auto candle{ new Candle(MCandle.name, App::CreateSprite(MCandle.model, 7, 2, MCandle.frame, MCandle.scale), new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 64, ROOM_WALL + 32), new Collision(30, 10)) }; candle->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_CANDLE, 1 / 15.f, { 7, 8, 9, 10, 11, 12, 13 }, true); candle->GetSprite()->SetAnimation(CSimpleSprite::ANIM_CANDLE);
 
 	auto commode{ new Actor(MCommode.name, App::CreateSprite(MCommode.model, 1, 1, MCommode.frame, MCommode.scale),  new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 64, APP_VIRTUAL_HEIGHT - ROOM_WALL), new Collision(16, 32)) };
 	auto commode2{ new Actor(MCommode.name, App::CreateSprite(MCommode.model3, 1, 1, MCommode.frame, MCommode.scale2),  new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - ROOM_WALL - 16), new Collision(16, 32)) };
@@ -55,7 +56,7 @@ void Room::Init()
 	auto shelf2{ new Actor(MCommode.name, App::CreateSprite(MShelf.model6, 1, 1, MShelf.frame,  MShelf.scale),  new Vector2D(shelf->GetPosition()->_x + 32, APP_VIRTUAL_HEIGHT - ROOM_WALL - 8), new Collision(16, 32)) };
 
 	auto skull{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(ROOM_WALL + 80, ROOM_WALL + 80), new Collision(32, 32, ColliderType::Overlap)) };
-	auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 50, ROOM_WALL + 16), new Collision(32, 32, ColliderType::Overlap)) };
+	//auto skull2{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(APP_VIRTUAL_WIDTH - ROOM_WALL - 50, ROOM_WALL + 16), new Collision(32, 32, ColliderType::Overlap)) };
 	auto skull3{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH - 44, MIDDLE_HEIGHT + 16), new Collision(32, 32, ColliderType::Overlap)) };
 	auto skull4{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH + 96, MIDDLE_HEIGHT + 100), new Collision(32, 32, ColliderType::Overlap)) };
 	auto skull5{ new Actor(MSkull.name, App::CreateSprite(MSkull.model2, 1, 1, MSkull.frame, MSkull.scale), new Vector2D(MIDDLE_WIDTH + 70, MIDDLE_HEIGHT - 80), new Collision(32, 32, ColliderType::Overlap)) };
@@ -68,6 +69,8 @@ void Room::Init()
 
 	auto blood{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH - 150, MIDDLE_HEIGHT + 64), new Collision(32, 32, ColliderType::Overlap)) };
 	auto blood2{ new Actor(MBlood.name, App::CreateSprite(MBlood.model, 1, 1, MBlood.frame, MBlood.scale2), new Vector2D(MIDDLE_WIDTH + 90, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap)) };
+
+	auto picture{ new Actor(MPicture.name, App::CreateSprite(MPicture.model, 1, 1, MPicture.frame, MPicture.scale), new Vector2D(MIDDLE_WIDTH - 96, APP_VIRTUAL_HEIGHT - ROOM_WALL + TRIGGER_OFFSET), new Collision(32, 32)) };
 
 	/*Instantiating puzzle*/
 	/*_mirrorPuzzle = new MirrorPuzzle(Status::PENDING);*/
