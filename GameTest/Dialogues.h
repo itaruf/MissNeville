@@ -117,7 +117,7 @@ extern struct DIntro DIntro;
 
 struct DOutro
 {
-	std::string o1{ "[...] says : Following the mysterious disappearance of JJ Detective who claimed to go investigate the Neville house, nobody tried to look for him and thus, the mystery of the Neville house aswell as the numerous rumors surrounding it continued to spread among the people..." };
+	std::string o1{ "[...] says : Following the mysterious disappearance of JJ Detective who went to investigate the Neville house, nobody tried to look for him and thus, the mystery of the Neville house aswell as the numerous rumors surrounding it continued to spread among the people..." };
 };
 
 extern struct DOutro DOutro;

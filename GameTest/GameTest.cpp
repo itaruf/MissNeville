@@ -100,8 +100,9 @@ void Init()
 	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	state->_currentScene = intro;
-	
+	/*state->_currentScene = intro;*/
+	state->_currentScene = outro;
+
 	state->_rooms.insert(std::make_pair(0, intro));
 	state->_rooms.insert(std::make_pair(1, hall));
 	state->_rooms.insert(std::make_pair(2, room));
