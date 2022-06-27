@@ -85,7 +85,7 @@ void Hall::Init()
 
 	auto carpet{ new Actor(MCarpet.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, MCarpet.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT), new Collision(64, 64, ColliderType::Overlap)) };
 
-	std::vector<Vector2D*> v{ new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT + 70), new Vector2D(446, MIDDLE_HEIGHT + 40), new Vector2D(580, MIDDLE_HEIGHT + 40), new Vector2D(460, MIDDLE_HEIGHT - 32), new Vector2D(564, MIDDLE_HEIGHT - 32) };
+	std::vector<Vector2D*> v{ new Vector2D(MIDDLE_WIDTH + 2, MIDDLE_HEIGHT + 70), new Vector2D(450, MIDDLE_HEIGHT + 40), new Vector2D(576, MIDDLE_HEIGHT + 40), new Vector2D(462, MIDDLE_HEIGHT - 28), new Vector2D(564, MIDDLE_HEIGHT - 28) };
 	for (int i = 0; i < v.size(); ++i)
 	{
 		_candles.emplace_back(new Candle(MCandle.name, App::CreateSprite(MCandle.model, 1, 2, MCandle.frame, MCandle.scale), v[i], new Collision(10, 10)));
@@ -98,6 +98,7 @@ void Hall::Init()
 	// Characters
 
 	auto pentagramme{ new Character(MPentagramme.name, App::CreateSprite(MPentagramme.model, 4, 4, 0, 3), new Vector2D(MIDDLE_WIDTH + 4, MIDDLE_HEIGHT + 32), new Collision(48, 32, ColliderType::Overlap)) };
+	pentagramme->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_PENTAGRAMME, 1 / 15.0f, { 5, 6, 7, 8, 9, 10, 11, 12 }, true);
 
 	auto pillar{ new Character(MPillar.name, App::CreateSprite(MPillar.model, 1, 1, MPillar.frame, MPillar.scale), new Vector2D(MIDDLE_WIDTH - 32, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET), new Collision(32, 16), 0, 4, objectC) };
 	pillar->SetDirection(Direction::DOWN);
@@ -159,6 +160,7 @@ void Hall::Init()
 
 	/*Start Puzzle*/
 	_candlePuzzle->StartPuzzle();
+	_candlePuzzle->_onSolved += [this, pentagramme]() {	pentagramme->GetSprite()->SetAnimation(CSimpleSprite::ANIM_PENTAGRAMME); };
 
 	Trigger* trigger{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, HALL_WALL + 32), new Collision(32, APP_VIRTUAL_WIDTH - HALL_WALL * 2, ColliderType::Overlap)) };
 
@@ -249,6 +251,7 @@ bool Hall::IsRoomCleared()
 
 	if (_candlePuzzle->_page->itemized && _candlePuzzle->_status == Status::PENDING)
 	{
+		_candlePuzzle->_onSolved();
 		_candlePuzzle->_status = Status::CLEARED;
 
 		// Looking for the doors to open

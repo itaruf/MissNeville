@@ -43,7 +43,7 @@ void Init()
 	state->_state = State::REGULAR;
 
 	/*Instantiation du personnage*/
-	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\player.bmp", 3, 4) };
+	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\player.bmp", 3, 4, 10) };
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
 	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };

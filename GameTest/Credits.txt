@@ -89,23 +89,32 @@ Manuel Riecke (AKA MrBeast)
 = Paintings = 
  https://kartoy.itch.io/32x32sandstone-dungeon-and-character-pack
 
- = Paper Note = 
+= Paper Note = 
  https://kartoy.itch.io/32x32sandstone-dungeon-and-character-pack
 
- = Flipping Page =
+= Flipping Page =
  https://opengameart.org/content/old-pagesflip-with-sound
 
- = Book = 
+= Book = 
  https://opengameart.org/content/book-animation
 
- = Dialogue Box =
+= Dialogue Box =
  https://opengameart.org/content/retro-pixel-art-guihud-elements-including-dialogue-box
 
- = Blood = 
+= Blood = 
  https://www.gamedevmarket.net/asset/blood-effect-fx013/
 
- = Carpet = 
+= Carpet = 
  https://opengameart.org/content/the-mana-world-woodland-indoor-tileset
+
+= Mirror = 
+ by Wiloux https://www.artstation.com/wiloux
+
+= Candle = 
+ by Wiloux https://www.artstation.com/wiloux
+
+= Door = 
+ by Wiloux https://www.artstation.com/wiloux
 
 *****SFX*****
 
