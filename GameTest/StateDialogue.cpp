@@ -80,34 +80,78 @@ void StateDialogue::ProcessDialogue(std::string dialogue)
 
 	speaker = Process(dialogue, ':');
 	auto line{ Process2(dialogue, ':', false) };
+	size_t pos{ line.find(" ", 1) };
 
+	std::cout << pos << std::endl;
+	if (pos == std::string::npos)
+		ForceLineWrap(line);
+
+	else
+		LineWrap(line, pos);
+}
+
+void StateDialogue::Clear()
+{
+	subDialogues.clear();
+	remainingDials = 0;
+	start = 0;
+}
+
+void StateDialogue::ForceLineWrap(std::string line)
+{
+	std::cout << "HERE" << std::endl;
+	std::cout << line << std::endl;
 	auto start{ 0 };
-	auto length{ line.length() };
-	size_t pos{ line.find(" ") };
+	auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
+
+	for (int i = 0; i < nbSubDials; i++)
+	{
+		subDialogues.emplace_back(line.substr(start, maxChar));
+		std::cout << line.substr(start, maxChar) << std::endl;
+		std::cout << line.substr(start, maxChar).size() << std::endl;
+		start = maxChar * (i + 1);
+	}
+
+	if (subDialogues.size() > maxLines)
+	{
+		remainingDials = subDialogues.size();
+		end = maxLines;
+	}
+	else
+	{
+		remainingDials = 0;
+		end = subDialogues.size();
+	}
+}
+
+void StateDialogue::LineWrap(std::string dialogue, size_t pos)
+{
+	auto start{ 0 };
+	auto length{ dialogue.length() };
 	auto count{ 0 };
 
 	do
 	{
 		if (length <= maxChar)
 		{
-			subDialogues.emplace_back(line);
-			std::cout << line << std::endl;
+			subDialogues.emplace_back(dialogue);
+			std::cout << dialogue << std::endl;
 			break;
 		}
 
-		pos = line.find(" ", pos + 1);
+		pos = dialogue.find(" ", pos + 1);
 		count = pos - start;
 
 		// if the an entire word is within the character limitation
 		if (count >= maxChar)
 		{
-			subDialogues.emplace_back(line.substr(start, count));
+			subDialogues.emplace_back(dialogue.substr(start, count));
 			start = pos;
 		}
 
 		if (pos > length)
 		{
-			subDialogues.emplace_back(line.substr(start, pos));
+			subDialogues.emplace_back(dialogue.substr(start, pos));
 			break;
 		}
 
@@ -123,11 +167,4 @@ void StateDialogue::ProcessDialogue(std::string dialogue)
 		remainingDials = 0;
 		end = subDialogues.size();
 	}
-}
-
-void StateDialogue::Clear()
-{
-	subDialogues.clear();
-	remainingDials = 0;
-	start = 0;
 }

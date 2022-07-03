@@ -28,6 +28,8 @@ public:
 	void Render() override;
 	void Exit() override;
 	void ProcessDialogue(std::string dialogue);
+	void ForceLineWrap(std::string dialogue);
+	void LineWrap(std::string dialogue, size_t pos);
 	void Clear();
 };
 
