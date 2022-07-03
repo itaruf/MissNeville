@@ -24,7 +24,7 @@ void StateDialogue::Enter()
 void StateDialogue::Update()
 {
 	// Check if there are more dialogues
-	if (App::GetController().CheckButton(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
+	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		CSimpleSound::GetInstance().PlaySoundW(SFX.page_read, 0);
 
@@ -81,15 +81,37 @@ void StateDialogue::ProcessDialogue(std::string dialogue)
 	speaker = Process(dialogue, ':');
 	auto line{ Process2(dialogue, ':', false) };
 
-	// If the dialogue to display is larger than the number of max characters allowed
-	auto nbSubDials{ std::ceil((double)line.length() / (double)maxChar) };
-
 	auto start{ 0 };
-	for (int i = 0; i < nbSubDials; i++)
+	auto length{ line.length() };
+	size_t pos{ line.find(" ") };
+	auto count{ 0 };
+
+	do
 	{
-		subDialogues.emplace_back(line.substr(start, maxChar));
-		start = maxChar * (i + 1);
-	}
+		if (length <= maxChar)
+		{
+			subDialogues.emplace_back(line);
+			std::cout << line << std::endl;
+			break;
+		}
+
+		pos = line.find(" ", pos + 1);
+		count = pos - start;
+
+		// if the an entire word is within the character limitation
+		if (count >= maxChar)
+		{
+			subDialogues.emplace_back(line.substr(start, count));
+			start = pos;
+		}
+
+		if (pos > length)
+		{
+			subDialogues.emplace_back(line.substr(start, pos));
+			break;
+		}
+
+	} while (true);
 
 	if (subDialogues.size() > maxLines)
 	{

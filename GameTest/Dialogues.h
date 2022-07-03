@@ -1,10 +1,42 @@
 #pragma once
 #include <string>
 
-struct DCharlotte 
+struct DJones
+{
+	// Hall
+	std::string h1{ "[\"Bright\" Jones] says : No.. Do not light your path ..! Leave this cursed place while you can..! " };
+};
+
+extern struct DJones DJones;
+
+struct DSmith
+{
+	// Room
+	std::string r1{ "[Maggie Smith] says : It was no use.. A demon disguised as an angel could never be a true member of the highborn society..." };
+};
+
+extern struct DSmith DSmith;
+
+struct DFather
+{
+	// Library
+	std::string l1{ "[Ralph Neville] says : Why..? How could I not realized that the seed of evil was growing inside our glorious family..? Do not make the same mistake... Open your eyes and leave now ..!" };
+};
+
+extern struct DFather DFather;
+
+struct DMother
+{
+	// Kitchen
+	std::string k1{ "[Anne Neville] says : How could a mother be blind to the pain of their own child ..? This eternal punishment should be mine... But she decided to make it yours now..! You cannot escape this anymore..!" };
+};
+
+extern struct DMother DMother;
+
+struct DCharlotte
 {
 	// Entrance
-	std::string e1{ "[Charlotte Neville] says : Finally.. Someone here... Can you hear me... Can you see me ?! Fear not... My name is Charlotte Neville, unique daughter of the once proud Neville house ! This place is cursed, so am I.. my words cannot tell the truth on what happened here, but my journal can ! Unfortunatly, my family spreads its pages all throughout the mansion and locked them behind vicious and perfidious enigmas ! I beg you, you have to gather all of them to reach out the truth !" };
+	std::string e1{ "[Charlotte Neville] says : Finally.. Someone here... Can you hear me... Can you see me ?! Fear not... My name is Charlotte Neville, unique daughter of the once proud Neville house ! This place is cursed, so am I.. my words cannot tell the truth on what happened here, but my journal can ! Unfortunatly, my family spreads its pages all throughout the mansion and locked them behind vicious and perfidious enigmas ! I beg you, you have to gather all of them to reach out to the truth !" };
 
 	std::string e2{ "[Charlotte Neville] says : Very well ! I shall act as your guide then !" };
 
@@ -40,38 +72,6 @@ struct DCharlotte
 };
 
 extern struct DCharlotte DCharlotte;
-
-struct DJones
-{
-	// Hall
-	std::string h1{ "[\"Bright\" Jones] says : No.. Do not light your path ..! Leave this cursed place while you can..! " };
-};
-
-extern struct DJones DJones;
-
-struct DSmith
-{
-	// Room
-	std::string r1{ "[Maggie Smith] says : It was no use.. A demon disguised as an angel could never be a true member of the highborn society..." };
-};
-
-extern struct DSmith DSmith;
-
-struct DFather
-{
-	// Library
-	std::string l1{ "[Ralph Neville] says : Why..? How could I not realized that the seed of evil was growing inside our glorious family..? Do not make the same mistake... Open your eyes and leave now ..!" };
-};
-
-extern struct DFather DFather;
-
-struct DMother
-{
-	// Kitchen
-	std::string k1{ "[Anne Neville] says : How could a mother be blind to the pain of their own child ..? This eternal punishment should be mine... But she decided to make it yours now..! You cannot escape this anymore..!" };
-};
-
-extern struct DMother DMother;
 
 struct DDetective
 {

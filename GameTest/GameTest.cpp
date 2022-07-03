@@ -31,7 +31,7 @@ void Init()
 {
 	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
 	dialBox->SetPosition(MIDDLE_WIDTH, MIDDLE_HEIGHT /  4);
-	dialBox->SetScale(7);
+	dialBox->SetScale(8);
 
 	/*GameStates*/
 	StateRegular* stateRegular{ new StateRegular() };
@@ -95,12 +95,12 @@ void Init()
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
-	/*state->_currentScene = entrance;*/
+	state->_currentScene = entrance;
 	/*state->_currentScene = hall;*/
 	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	state->_currentScene = intro;
+	/*state->_currentScene = intro;*/
 	/*state->_currentScene = outro;*/
 
 	state->_rooms.insert(std::make_pair(0, intro));

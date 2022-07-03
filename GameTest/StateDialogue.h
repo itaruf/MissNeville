@@ -4,6 +4,7 @@
 
 #include "GameState.h"
 #include "Utilities.h"
+#include <exception>
 
 class StateDialogue : public GameState
 {
