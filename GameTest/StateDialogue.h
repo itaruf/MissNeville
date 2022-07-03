@@ -2,10 +2,10 @@
 #ifndef STATEDIALOGUE_H_
 #define STATEDIALOGUE_H_
 
-#include "StateController.h"
+#include "GameState.h"
 #include "Utilities.h"
 
-class StateDialogue : public StateController
+class StateDialogue : public GameState
 {
 public:
 	std::vector<std::string> _currentDialogue;

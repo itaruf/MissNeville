@@ -15,7 +15,7 @@ NPC::~NPC()
 // Play a dialogue
 void NPC::PlayDialogue()
 {
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 

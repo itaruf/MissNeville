@@ -24,12 +24,12 @@ void Outro::Init()
 	blood->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_BLOOD, 1 / 5.0f, { 0,1,2 }, true);
 	blood->GetSprite()->SetAnimation(CSimpleSprite::ANIM_BLOOD);*/
 
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
 	stateDialogue->_currentDialogue.emplace_back(DOutro.o1);
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 }
 
 void Outro::Update(float deltaTime)
@@ -44,7 +44,7 @@ void Outro::Render()
 
 void Outro::Exit()
 {
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 

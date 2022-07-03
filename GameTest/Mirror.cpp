@@ -19,7 +19,7 @@ void Mirror::Interact()
 {
 	if (_repaired)
 	{
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 		if (!stateDialogue)
 			return;
@@ -27,11 +27,11 @@ void Mirror::Interact()
 		_onInteract();
 
 		stateDialogue->_currentDialogue.emplace_back(DDetective.r4);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 		return;
 	}
 
-	auto p{ StateMain::_player };
+	auto p{ StateController::_player };
 	if (!p)
 		return;
 
@@ -44,7 +44,7 @@ void Mirror::Interact()
 	if (GetCollectedMirrorShards() < nbShards)
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 		if (!stateDialogue)
 			return;
@@ -52,7 +52,7 @@ void Mirror::Interact()
 		_onInteract();
 
 		stateDialogue->_currentDialogue.emplace_back(DDetective.r2);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 		return;
 	}
 	
@@ -75,7 +75,7 @@ void Mirror::Interact()
 
 int Mirror::GetCollectedMirrorShards()
 {
-	auto bag{ StateMain::_player->_inventory->_bags[0].second };
+	auto bag{ StateController::_player->_inventory->_bags[0].second };
 
 	int nb{ 0 };
 

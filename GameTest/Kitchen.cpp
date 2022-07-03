@@ -21,10 +21,10 @@ void Kitchen::Init()
 		return;
 
 	Scene::Init();
-	AddActor(StateMain::_player);
+	AddActor(StateController::_player);
 
 	std::random_device myRandomDevice;
-	/*std::cout << StateMain::_player->GetPosition()->_x << std::endl;*/
+	/*std::cout << StateController::_player->GetPosition()->_x << std::endl;*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - KITCHEN_WALL * 2) / 32; j++)
 	{
 		for (int i = 0; i < (APP_VIRTUAL_WIDTH - KITCHEN_WALL * 2) / 32; i++)
@@ -39,7 +39,7 @@ void Kitchen::Init()
 		}
 	}
 
-	/*StateMain::_player->SetPosition(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 128, MIDDLE_HEIGHT);*/
+	/*StateController::_player->SetPosition(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 128, MIDDLE_HEIGHT);*/
 	_startingPos = new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - 48, MIDDLE_HEIGHT);
 
 	auto wallLeft{ new Actor(MWall.name, App::CreateSprite(MWall.model, 1, 1, MWall.frame, MWall.scale), new Vector2D(KITCHEN_WALL, MIDDLE_HEIGHT), new Collision(APP_VIRTUAL_HEIGHT - KITCHEN_WALL * 2, 2)) };
@@ -235,9 +235,9 @@ void Kitchen::Init()
 	/*On Puzzle solved*/
 	_dodgePuzzle->_onSolved += [this]() 
 	{
-		StateMain::_player->_footStep = new CSimpleSprite(MBlood.model); 
+		StateController::_player->_footStep = new CSimpleSprite(MBlood.model); 
 
-		for (auto& actor : StateMain::_rooms[1]->GetActors())
+		for (auto& actor : StateController::_rooms[1]->GetActors())
 		{
 			auto character{ dynamic_cast<Character*>(actor) };
 
@@ -251,13 +251,13 @@ void Kitchen::Init()
 		}
 	};
 
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 	if (!stateDialogue)
 		return;
 
 	stateDialogue->_currentDialogue.emplace_back(DDetective.k1);
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 }
 
 void Kitchen::Update(float deltaTime)
@@ -300,14 +300,14 @@ bool Kitchen::IsRoomCleared()
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 		}
 
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 		if (!stateDialogue)
 			return true;
 
 		stateDialogue->_currentDialogue.emplace_back(DDetective.k2);
 
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 
 		_dodgePuzzle->_status = Status::CLEARED;
 		_dodgePuzzle->_onSolved();

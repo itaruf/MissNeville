@@ -6,13 +6,13 @@
 #include "IInteractive.h"
 #include <unordered_map>
 #include "Utilities.h"
-#include "StateMain.h"
+#include "StateController.h"
 
 //class StateDialogue;
 //#include "StateDialogue.h"
 
-class StateController;
-#include "StateController.h"
+class GameState;
+#include "GameState.h"
 
 class StateDialogue;
 

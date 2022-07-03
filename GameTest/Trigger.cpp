@@ -18,7 +18,7 @@ void Trigger::OnOverlap()
 	if (!_collider)
 		return;
 
-	if (!_collider->isOverlapping(StateMain::_player, this))
+	if (!_collider->isOverlapping(StateController::_player, this))
 		return;
 	
 	_onTriggered();

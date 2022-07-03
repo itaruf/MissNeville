@@ -4,7 +4,7 @@
 #define TRIGGERANIMATION_H_
 
 #include "Trigger.h"
-#include "StateMain.h"
+#include "StateController.h"
 
 class Scene;
 

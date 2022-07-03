@@ -122,7 +122,7 @@
     <ClInclude Include="EStatus.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="Outro.h" />
-    <ClInclude Include="StateController.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Entrance.h" />
     <ClInclude Include="IDialogue.h" />
     <ClInclude Include="Library.h" />
@@ -140,7 +140,7 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Puzzle.h" />
     <ClInclude Include="Hall.h" />
-    <ClInclude Include="StateMain.h" />
+    <ClInclude Include="StateController.h" />
     <ClInclude Include="ICollectable.h" />
     <ClInclude Include="IInteractive.h" />
     <ClInclude Include="Inventory.h" />
@@ -178,7 +178,7 @@
     <ClCompile Include="DodgePuzzle.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Outro.cpp" />
-    <ClCompile Include="StateController.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Entrance.cpp" />
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="Kitchen.cpp" />
@@ -192,7 +192,7 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Puzzle.cpp" />
     <ClCompile Include="Hall.cpp" />
-    <ClCompile Include="StateMain.cpp" />
+    <ClCompile Include="StateController.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Collectable.cpp" />
@@ -215,6 +215,7 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Test.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -32,8 +32,8 @@ void Hall::Init()
 		return;
 
 	Scene::Init();
-	AddActor(StateMain::_player);
-	/*StateMain::_player->SetPosition(MIDDLE_WIDTH, 350);*/
+	AddActor(StateController::_player);
+	/*StateController::_player->SetPosition(MIDDLE_WIDTH, 350);*/
 
 	/*Background First*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - HALL_WALL * 2) / 32; j++)
@@ -173,12 +173,12 @@ void Hall::Init()
 	trigger->_onTriggered += [this, entranceTrigger]() 
 	{
 		entranceTrigger->OnDeactivation(); 
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 		if (!stateDialogue)
 			return;
 
 		stateDialogue->_currentDialogue.emplace_back(MMessage.door_locked);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 	};
 
 	Trigger* trigger2{ new Trigger(MTriggerScene.name, App::CreateSprite(), new Vector2D(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - HALL_WALL - TRIGGER_OFFSET - NEW_PLAYER_POS), new Collision(32, APP_VIRTUAL_WIDTH - HALL_WALL * 2, ColliderType::Overlap), false) };
@@ -187,12 +187,12 @@ void Hall::Init()
 	trigger2->_onTriggered += [this, roomTrigger]()
 	{
 		roomTrigger->OnDeactivation();
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 		if (!stateDialogue)
 			return;
 
 		stateDialogue->_currentDialogue.emplace_back(MMessage.door_locked);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 
 		roomTrigger->GetSprite()->SetFrame(0);
 	};
@@ -203,12 +203,12 @@ void Hall::Init()
 	trigger3->_onTriggered += [this, libraryTrigger]()
 	{
 		libraryTrigger->OnActivation();
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 		if (!stateDialogue)
 			return;
 
 		stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 	};
 
 }
@@ -264,13 +264,13 @@ bool Hall::IsRoomCleared()
 		{
 			if (door->_scene == _NScene)
 			{
-				auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+				auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 				if (!stateDialogue)
 					return true;
 
 				stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
-				StateMain::SetState(State::DIALOGUE);
+				StateController::SetState(State::DIALOGUE);
 
 				door->GetSprite()->SetAnimation(CSimpleSprite::ANIM_DOOR);
 				CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);

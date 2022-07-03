@@ -3,13 +3,13 @@
 #define ENTRANCE_H_
 
 #include "Scene.h"
-#include "StateMain.h"
+#include "StateController.h"
 #include "NPC.h"
 #include "Dialogues.h"
 #include "Candle.h"
 #include "Room.h"
 
-class StateMain;
+class StateController;
 // Entrance scene 
 class Entrance : public Scene
 {

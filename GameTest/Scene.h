@@ -12,7 +12,7 @@
 class Actor;
 #include "Actor.h"
 
-class StateMain;
+class StateController;
 class Player;
 class Candle;
 class Collectable;

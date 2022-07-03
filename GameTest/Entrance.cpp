@@ -15,8 +15,8 @@ void Entrance::Init()
 		return;
 
 	Scene::Init();
-	AddActor(StateMain::_player);
-	StateMain::_player->GetSprite()->SetPosition(MIDDLE_WIDTH, ENTRANCE_WALL + 64);
+	AddActor(StateController::_player);
+	StateController::_player->GetSprite()->SetPosition(MIDDLE_WIDTH, ENTRANCE_WALL + 64);
 
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ENTRANCE_WALL * 2) / 32; j++)
 	{
@@ -95,7 +95,7 @@ void Entrance::Init()
 	trigger->_onTriggered += [this]() {	Intro(); };
 
 	/*Opening the door when the dialogue ends*/
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
@@ -130,7 +130,7 @@ void Entrance::Init()
 		Outro();
 	};
 
-	auto room{ dynamic_cast<Room*>(StateMain::_rooms[2]) };
+	auto room{ dynamic_cast<Room*>(StateController::_rooms[2]) };
 	room->_mirrorPuzzle->_onSolved += [this, trigger2]() 
 	{
 		trigger2->_activated = true;
@@ -150,13 +150,13 @@ void Entrance::Init()
 		hallTrigger->OnDeactivation();
 		hallTrigger->GetSprite()->SetFrame(0);
 
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 		if (!stateDialogue)
 			return true;
 
 		stateDialogue->_currentDialogue.emplace_back(MMessage.door_locked);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 	};
 
 	// Trigger Pentagramme
@@ -174,7 +174,7 @@ void Entrance::Render()
 
 void Entrance::Exit()
 {
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
@@ -190,7 +190,7 @@ void Entrance::Intro()
 {
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT + 32), new Collision(32, 32)) };
 
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
@@ -198,7 +198,7 @@ void Entrance::Intro()
 	stateDialogue->_currentDialogue.emplace_back(DCharlotte.e1);
 	stateDialogue->_currentDialogue.emplace_back(DDetective.e2);
 	stateDialogue->_currentDialogue.emplace_back(DCharlotte.e2);
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 
 	CSimpleSound::GetInstance().PlaySoundW(SFX.ghost_death, 0);
 
@@ -214,18 +214,18 @@ void Entrance::Outro()
 {
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, 10, MCharlotte.scale), new Vector2D(MIDDLE_WIDTH, ENTRANCE_WALL + 64), new Collision(32, 32)) };
 
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
-	StateMain::_player->GetController()->_activated = false;
+	StateController::_player->GetController()->_activated = false;
 
 	stateDialogue->_currentDialogue.emplace_back(DCharlotte.o1);
 	stateDialogue->_currentDialogue.emplace_back(DDetective.o1);
 	stateDialogue->_currentDialogue.emplace_back(DCharlotte.o2);
 	stateDialogue->_currentDialogue.emplace_back(DDetective.o2);
 
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 
 	stateDialogue->_onDialogueEnd += [this, stateDialogue]()
 	{
@@ -243,12 +243,12 @@ void Entrance::Outro()
 		stateDialogue->_currentDialogue.emplace_back(DCharlotte.o4);
 
 		
-		StateMain::_player->SetSprite(App::CreateSprite(MFamily.model, 3, 4, 1, MFamily.scale));
-		StateMain::_player->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_TURN, 1 / 10.0f, { 1,4,7,10 }, true);
-		StateMain::_player->GetSprite()->SetAnimation(CSimpleSprite::ANIM_TURN);
-		StateMain::SetState(State::DIALOGUE);
+		StateController::_player->SetSprite(App::CreateSprite(MFamily.model, 3, 4, 1, MFamily.scale));
+		StateController::_player->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_TURN, 1 / 10.0f, { 1,4,7,10 }, true);
+		StateController::_player->GetSprite()->SetAnimation(CSimpleSprite::ANIM_TURN);
+		StateController::SetState(State::DIALOGUE);
 
-		stateDialogue->_onDialogueEnd += [this]() { StateMain::LoadScene(6); };
+		stateDialogue->_onDialogueEnd += [this]() { StateController::LoadScene(6); };
 	};
 
 	CSimpleSound::GetInstance().PlaySoundW(SFX.ghost_death, 0);

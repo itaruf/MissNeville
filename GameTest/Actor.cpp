@@ -6,13 +6,13 @@ Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collis
 
 	// Immediately Set the position of the actor 
 
-	if (!StateMain::_currentScene)
+	if (!StateController::_currentScene)
 		return;
 
-	if (StateMain::_currentScene->initialized)
+	if (StateController::_currentScene->initialized)
 	{
 		SetPosition(position);
-		StateMain::_currentScene->AddActor(this);
+		StateController::_currentScene->AddActor(this);
 	}
 }
 
@@ -164,7 +164,7 @@ const std::string& Actor::GetTag()
 
 Actor* Actor::GetClosestActor(float ms)
 {
-	auto actors{ StateMain::_currentScene->GetActors() };
+	auto actors{ StateController::_currentScene->GetActors() };
 
 	if (actors.size() <= 0)
 		return nullptr;

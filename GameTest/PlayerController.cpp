@@ -36,7 +36,7 @@ void PlayerController::MoveHorizontally(Character* actor)
 		y = actor->_position->_y;
 	}
 
-	for (const auto& other : StateMain::_currentScene->GetActors())
+	for (const auto& other : StateController::_currentScene->GetActors())
 	{
 		if (other == actor)
 			continue;
@@ -89,7 +89,7 @@ void PlayerController::MoveVertically(Character* actor)
 		y = actor->_position->_y - actor->_movementSpeed;
 	}
 
-	for (const auto& other : StateMain::_currentScene->GetActors())
+	for (const auto& other : StateController::_currentScene->GetActors())
 	{
 		if (other == actor)
 			continue;

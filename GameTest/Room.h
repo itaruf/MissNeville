@@ -4,12 +4,12 @@
 
 #include "Scene.h"
 #include "MirrorPuzzle.h"
-#include "StateMain.h"
+#include "StateController.h"
 #include "NPC.h"
 #include "MirrorShard.h"
 #include "TriggerDialogue.h"
 
-class StateMain;
+class StateController;
 // Room scene 
 class Room : public Scene
 {

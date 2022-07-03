@@ -3,8 +3,8 @@
 #ifndef CHARACTER_H_
 #define CHARACTER_H_
 
-class StateMain;
-#include "StateMain.h"
+class StateController;
+#include "StateController.h"
 #include "Actor.h"
 class Controller;
 #include "Controller.h"

@@ -29,23 +29,23 @@ void TriggerScene::OnOverlap()
 	if (!_collider)
 		return;
 
-	if (!_collider->isOverlapping(StateMain::_player, this))
+	if (!_collider->isOverlapping(StateController::_player, this))
 		return;
 
 	if (_scene)
 	{
-		StateMain::LoadScene(_scene);
+		StateController::LoadScene(_scene);
 
-		if (StateMain::_currentScene->initialized)
-			std::cout << StateMain::_currentScene->GetID() << " Initialized" << std::endl;
+		if (StateController::_currentScene->initialized)
+			std::cout << StateController::_currentScene->GetID() << " Initialized" << std::endl;
 		else
-			std::cout << StateMain::_currentScene->GetID() << " Already Initialized" << std::endl;
+			std::cout << StateController::_currentScene->GetID() << " Already Initialized" << std::endl;
 	}
 
 	if (!_playerPos)
 		return;
 
-	StateMain::_player->SetPosition(_playerPos->_x, _playerPos->_y);
+	StateController::_player->SetPosition(_playerPos->_x, _playerPos->_y);
 
 	if (_SInteract == "")
 		return;

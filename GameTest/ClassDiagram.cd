@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Actor" Collapsed="true">
+    <Position X="18.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAIANgACgJkAAESAAQAAAYAAIAAgAAAAGIwAABBAA=</HashCode>
+      <FileName>Actor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Button" Collapsed="true">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <InheritanceLine Type="Actor">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.147" Y="-0.968" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAAABAAAAAAAQAAAAgAAAIAAAAAAAAAAAAAEBAAA=</HashCode>
+      <FileName>Button.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Candle" Collapsed="true">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <InheritanceLine Type="Actor">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.14" Y="-0.996" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAEIAAAAACAAEAAAEAIAAA=</HashCode>
+      <FileName>Candle.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="20.75" Y="3" Width="1.5" />
+    <InheritanceLine Type="Actor">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.196" Y="-0.954" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAICAMBAAAAAAAAAAACAFAAgAAAAEAQAAAAEAIKAA=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collectable" Collapsed="true">
+    <Position X="15.5" Y="3" Width="1.5" />
+    <InheritanceLine Type="Actor">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.175" Y="-0.989" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>IAABAEQCAAQAAAAEAAABAQAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Collectable.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Mirror" Collapsed="true">
+    <Position X="19" Y="3" Width="1.5" />
+    <InheritanceLine Type="Actor">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.168" Y="-0.968" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQAAAAACAQAAAAAAAAQAAAEAoQAAAAAAAAAAIAABAAA=</HashCode>
+      <FileName>Mirror.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Trigger" Collapsed="true">
+    <Position X="22.5" Y="3" Width="1.5" />
+    <InheritanceLine Type="Actor">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.209" Y="-0.968" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgBAAAAABAQAAAACAEAAAAAAAAAAEggAAABAAA=</HashCode>
+      <FileName>Trigger.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MirrorShard" Collapsed="true">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MirrorShard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Page" Collapsed="true">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Page.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TriggerAnimation" Collapsed="true">
+    <Position X="21" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAgAJACAAAAAAgAAAAAAAgAAEAAAA=</HashCode>
+      <FileName>TriggerAnimation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TriggerDialogue" Collapsed="true">
+    <Position X="24.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAMAAAAABAACAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>TriggerDialogue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TriggerScene" Collapsed="true">
+    <Position X="22.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAACAAAAAQAAABAAAIgAAAAAAA=</HashCode>
+      <FileName>TriggerScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NPC" Collapsed="true">
+    <Position X="18.75" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Character">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.209" Y="-0.975" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAMAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>NPC.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="1.244" Collapsed="true" />
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="17" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="Character">
+      <InheritanceModifierLabel ManuallyPlaced="true">
+        <Position X="-0.168" Y="-0.996" />
+      </InheritanceModifierLabel>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAQAAKEAAAAIAAAEAJQAAAASAAAAQISAAABA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

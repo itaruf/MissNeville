@@ -33,7 +33,7 @@ void ObjectController::MoveHorizontally(Character* actor)
 
 	if (actor->GetCollider()->_colliderType == ColliderType::Block)
 	{
-		for (const auto& other : StateMain::_currentScene->GetActors())
+		for (const auto& other : StateController::_currentScene->GetActors())
 		{
 			if (other == actor)
 				continue;
@@ -60,7 +60,7 @@ void ObjectController::MoveHorizontally(Character* actor)
 	// ColliderType::Overlap
 	else
 	{
-		for (const auto& other : StateMain::_currentScene->GetActors())
+		for (const auto& other : StateController::_currentScene->GetActors())
 		{
 			if (other == actor)
 				continue;
@@ -103,7 +103,7 @@ void ObjectController::MoveVertically(Character* actor)
 
 	if (actor->GetCollider()->_colliderType == ColliderType::Block)
 	{
-		for (const auto& other : StateMain::_currentScene->GetActors())
+		for (const auto& other : StateController::_currentScene->GetActors())
 		{
 			if (other == actor)
 				continue;
@@ -129,7 +129,7 @@ void ObjectController::MoveVertically(Character* actor)
 	// ColliderType::Overlap
 	else
 	{
-		for (const auto& other : StateMain::_currentScene->GetActors())
+		for (const auto& other : StateController::_currentScene->GetActors())
 		{
 			if (other == actor)
 				continue;

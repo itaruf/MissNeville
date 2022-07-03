@@ -9,7 +9,7 @@
 #include "Character.h"
 #include "NPC.h"
 
-class StateMain;
+class StateController;
 // Hall scene 
 class Hall : public Scene, std::enable_shared_from_this<Hall>
 {

@@ -3,13 +3,13 @@
 #define KITCHEN_H_
 
 #include "Scene.h"
-#include "StateMain.h"
+#include "StateController.h"
 #include "NPC.h"
 #include "DodgePuzzle.h"
 #include "Button.h"
 #include "MirrorShard.h"
 
-class StateMain;
+class StateController;
 // Kitchen scene 
 class Kitchen : public Scene
 {

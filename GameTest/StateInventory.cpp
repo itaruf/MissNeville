@@ -120,7 +120,7 @@ void StateInventory::Navigation()
 	_player->_inventory->_bags[0];
 
 	// Right navigation
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
+	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_RIGHT, true))
 	{
 		// We already are at the end of the bag
 		if (_currentSlot >= _player->_inventory->GetNbSlotBag() - 1)
@@ -132,7 +132,7 @@ void StateInventory::Navigation()
 	}
 
 	// Left navigation
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
+	if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT) || App::GetController().CheckButton(XINPUT_GAMEPAD_DPAD_LEFT, true))
 	{
 		// We already are at the beginning of the bag
 		if (_currentSlot <= 0)

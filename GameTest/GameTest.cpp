@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------
 #include "../stdafx.h"
 //------------------------------------------------------------------------
-//#include "StateMain.h"	
+//#include "StateController.h"	
 #include "Player.h"
 
 #include "StateRegular.h"
@@ -25,12 +25,12 @@
 #include "PlayerController.h"
 #include <typeinfo>
 
-std::shared_ptr<StateMain> state;
+std::shared_ptr<StateController> state;
 
 void Init()
 {
 	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
-	dialBox->SetPosition(MIDDLE_WIDTH, 100);
+	dialBox->SetPosition(MIDDLE_WIDTH, MIDDLE_HEIGHT /  4);
 	dialBox->SetScale(7);
 
 	/*GameStates*/
@@ -39,7 +39,7 @@ void Init()
 	StateDialogue* stateDialogue{ new StateDialogue(dialBox) };
 
 	/*Instantiate the gamestate which will be persistent across all scenes*/
-	state = std::make_shared<StateMain>();
+	state = std::make_shared<StateController>();
 	state->_state = State::REGULAR;
 
 	/*Instantiation du personnage*/
@@ -64,10 +64,10 @@ void Init()
 	stateDialogue->_player = player;
 
 	/*Other states*/
-	state->_stateControllers.emplace_back(stateRegular);
-	state->_stateControllers.emplace_back(stateInventory);
-	state->_stateControllers.emplace_back(stateDialogue);
-	state->_currentStateController = stateRegular;
+	state->_gameStates.emplace_back(stateRegular);
+	state->_gameStates.emplace_back(stateInventory);
+	state->_gameStates.emplace_back(stateDialogue);
+	state->_currentGameState = stateRegular;
 
 	/*Scenes*/
 	Intro* intro{ new Intro { 0 } };
@@ -121,7 +121,7 @@ void Update(float deltaTime)
 	{
 		state->SwitchState();
 		state->_currentScene->Update(deltaTime);
-		state->_currentStateController->Update();
+		state->_currentGameState->Update();
 	}
 }
 
@@ -134,9 +134,9 @@ void Render()
 	state->_currentScene->Render();
 	/*App::Print(800, 620, ("Scene : " + GetChar(state->_currentScene->GetID())).c_str());*/
 	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
-	state->_currentStateController->Render();
+	state->_currentGameState->Render();
 
-	state->_currentStateController->Render();
+	state->_currentGameState->Render();
 
 	/*SOME PRINTS*/
 	
@@ -195,9 +195,9 @@ void Render()
 				nb++;
 		}
 
-		auto it = std::find_if(StateMain::_rooms[2]->GetActors().begin(), StateMain::_rooms[2]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Mirror"; });
+		auto it = std::find_if(StateController::_rooms[2]->GetActors().begin(), StateController::_rooms[2]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Mirror"; });
 
-		if (it != StateMain::_rooms[2]->GetActors().end())
+		if (it != StateController::_rooms[2]->GetActors().end())
 			App::Print(800, 580, ("Number of shards : " + GetChar(nb) + " / " + GetChar(dynamic_cast<Mirror*>(*it)->GetNbShards())).c_str());
 	}
 		

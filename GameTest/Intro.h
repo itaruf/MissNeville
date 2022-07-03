@@ -3,10 +3,10 @@
 #define INTRO_H_
 
 #include "Scene.h"
-#include "StateMain.h"
+#include "StateController.h"
 #include "Dialogues.h"
 
-class StateMain;
+class StateController;
 // Intro scene 
 class Intro : public Scene
 {

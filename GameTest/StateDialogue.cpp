@@ -24,7 +24,7 @@ void StateDialogue::Enter()
 void StateDialogue::Update()
 {
 	// Check if there are more dialogues
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
+	if (App::GetController().CheckButton(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		CSimpleSound::GetInstance().PlaySoundW(SFX.page_read, 0);
 
@@ -44,7 +44,7 @@ void StateDialogue::Update()
 
 			if (_currentDialogue.empty())
 			{
-				StateMain::SetState(State::REGULAR);
+				StateController::SetState(State::REGULAR);
 				_onDialogueEnd();
 			}
 			else

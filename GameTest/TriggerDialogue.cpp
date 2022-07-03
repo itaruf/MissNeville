@@ -17,16 +17,16 @@ void TriggerDialogue::OnOverlap()
 	if (!_collider)
 		return;
 
-	if (!_collider->isOverlapping(StateMain::_player, this))
+	if (!_collider->isOverlapping(StateController::_player, this))
 		return;
 
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 	if (!stateDialogue)
 		return;
 
 	stateDialogue->_currentDialogue.emplace_back(_dialogue);
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 	_activated = false;
 }
 

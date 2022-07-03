@@ -21,12 +21,12 @@ void Collectable::OnCollected()
 
 bool Collectable::UseItem()
 {
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return false;
 
 	stateDialogue->_currentDialogue.emplace_back(_description);
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 
 	return true;
 }

@@ -3,10 +3,10 @@
 #define OUTRO_H_
 
 #include "Scene.h"
-#include "StateMain.h"
+#include "StateController.h"
 #include "Dialogues.h"
 
-class StateMain;
+class StateController;
 // Outro scene 
 class Outro : public Scene
 {

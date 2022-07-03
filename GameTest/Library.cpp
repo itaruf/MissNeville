@@ -21,7 +21,7 @@ void Library::Init()
 		return;
 
 	Scene::Init();
-	AddActor(StateMain::_player);
+	AddActor(StateController::_player);
 
 	/*Background First*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - LIBRARY_WALL * 2) / 32; j++)
@@ -48,9 +48,9 @@ void Library::Init()
 	auto page{ new Page(MPage.name + " 2" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(), new Collision(16, 16), 0, DProps.p2) };
 
 	/*Open the Kitchen door*/
-	auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
+	auto it = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateController::_rooms[1]->_WScene; });
 
-	if (it != StateMain::_rooms[1]->GetActors().end())
+	if (it != StateController::_rooms[1]->GetActors().end())
 		page->_onCollected += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };
 
 	/*Initiating Puzzles*/
@@ -317,13 +317,13 @@ void Library::Init()
 	ralph->SetCurrentDialogue(0);
 
 	/*DIALOGUES*/
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 	if (!stateDialogue)
 		return;
 
 	stateDialogue->_currentDialogue.emplace_back(DDetective.l1);
-	StateMain::SetState(State::DIALOGUE);
+	StateController::SetState(State::DIALOGUE);
 
 }
 
@@ -366,7 +366,7 @@ bool Library::IsRoomCleared()
 			dynamic_cast<NPC*>(*npc)->SetCurrentDialogue(1);
 		}
 
-		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 		if (!stateDialogue)
 			return true;
@@ -374,12 +374,12 @@ bool Library::IsRoomCleared()
 		stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
 		stateDialogue->_currentDialogue.emplace_back(DDetective.l2);
 
-		StateMain::SetState(State::DIALOGUE);
+		StateController::SetState(State::DIALOGUE);
 
 		CSimpleSound::GetInstance().PlaySoundW(SFX.door_open, 0);
 
 		/*Change the player's movement speed from now on*/
-		StateMain::_player->SetMovementSpeed(5);
+		StateController::_player->SetMovementSpeed(5);
 		_TPPuzzle->_status = Status::CLEARED;
 		return true;
 	}

@@ -19,7 +19,7 @@ void Room::Init()
 		return;
 
 	Scene::Init();
-	AddActor(StateMain::_player);
+	AddActor(StateController::_player);
 
 	/*Background First*/
 	for (int j = 0; j < (APP_VIRTUAL_HEIGHT - ROOM_WALL * 2) / 32; j++)
@@ -84,41 +84,41 @@ void Room::Init()
 	_mirrorPuzzle->_mirror = mirror;
 	_mirrorPuzzle->_onSolved += [this]()
 	{
-		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetName() == MCharlotte.name; });
-		if (it != StateMain::_rooms[1]->GetActors().end())
+		auto it = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetName() == MCharlotte.name; });
+		if (it != StateController::_rooms[1]->GetActors().end())
 		{
-			StateMain::_rooms[1]->RemoveActor(*it);
+			StateController::_rooms[1]->RemoveActor(*it);
 		}
 
 		// Close the library
-		auto it2 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
+		auto it2 = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateController::_rooms[1]->_EScene; });
 
-		if (it2 != StateMain::_rooms[1]->GetActors().end())
+		if (it2 != StateController::_rooms[1]->GetActors().end())
 			dynamic_cast<TriggerScene*>(*it2)->_activated = false;
 
 		// Close the kitchen
-		auto it3 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_WScene; });
+		auto it3 = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateController::_rooms[1]->_WScene; });
 
-		if (it3 != StateMain::_rooms[1]->GetActors().end())
+		if (it3 != StateController::_rooms[1]->GetActors().end())
 			dynamic_cast<TriggerScene*>(*it3)->_activated = false;
 
 		// Open the entrance
-		auto it5 = std::find_if(StateMain::_rooms[5]->GetActors().begin(), StateMain::_rooms[5]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Close Entrance"; });
+		auto it5 = std::find_if(StateController::_rooms[5]->GetActors().begin(), StateController::_rooms[5]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Close Entrance"; });
 
-		if (it5 != StateMain::_rooms[5]->GetActors().end())
+		if (it5 != StateController::_rooms[5]->GetActors().end())
 			dynamic_cast<Trigger*>(*it5)->_activated = true;
 
 		// Activate the trigger which will close the room behind the player
-		auto it4 = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Close Room"; });
+		auto it4 = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Close Room"; });
 
-		if (it4 != StateMain::_rooms[1]->GetActors().end())
+		if (it4 != StateController::_rooms[1]->GetActors().end())
 			dynamic_cast<Trigger*>(*it4)->_activated = true;
 	};
 
 	/*Open the library door*/
-	/*auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_EScene; });
+	/*auto it = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateController::_rooms[1]->_EScene; });
 
-	if (it != StateMain::_rooms[1]->GetActors().end())
+	if (it != StateController::_rooms[1]->GetActors().end())
 		mirror->_onInteract += [this, it]() {dynamic_cast<TriggerScene*>(*it)->OnActivation(); };*/
 
 	// Triggers
@@ -136,9 +136,9 @@ void Room::Init()
 	{this->OnMirrorShattered(); };
 	mirrorAnimTrigger->_onTriggered += [this]()
 	{
-		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Open Library"; });
+		auto it = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { return actor->GetTag() == "Open Library"; });
 
-		if (it != StateMain::_rooms[1]->GetActors().end())
+		if (it != StateController::_rooms[1]->GetActors().end())
 			dynamic_cast<Trigger*>(*it)->_activated = true;
 	};
 
@@ -176,14 +176,14 @@ bool Room::IsRoomCleared()
 		auto page{ new Page(MPage.name + " 4" , App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, DProps.p4) };
 		
 		// Open the Entrance door once the page is collected
-		auto it = std::find_if(StateMain::_rooms[1]->GetActors().begin(), StateMain::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateMain::_rooms[1]->_SScene; });
+		auto it = std::find_if(StateController::_rooms[1]->GetActors().begin(), StateController::_rooms[1]->GetActors().end(), [](Actor* actor) { if (dynamic_cast<TriggerScene*>(actor)) return dynamic_cast<TriggerScene*>(actor)->_scene == StateController::_rooms[1]->_SScene; });
 
-		if (it != StateMain::_rooms[1]->GetActors().end())
+		if (it != StateController::_rooms[1]->GetActors().end())
 		{
 			page->_onCollected += [this, it]() 
 			{
 				dynamic_cast<TriggerScene*>(*it)->OnActivation();
-				auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+				auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 
 				if (!stateDialogue)
 					return true;
@@ -191,7 +191,7 @@ bool Room::IsRoomCleared()
 				stateDialogue->_currentDialogue.emplace_back(MMessage.door_unlocked);
 				stateDialogue->_currentDialogue.emplace_back(DDetective.r3);
 
-				StateMain::SetState(State::DIALOGUE);
+				StateController::SetState(State::DIALOGUE);
 			};
 		}
 		

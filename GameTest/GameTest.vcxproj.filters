@@ -64,13 +64,13 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="StateMain.cpp">
+    <ClCompile Include="StateController.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
     <ClCompile Include="GameTest.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="StateController.cpp">
+    <ClCompile Include="GameState.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
     <ClCompile Include="StateDialogue.cpp">
@@ -231,10 +231,10 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="StateMain.h">
+    <ClInclude Include="StateController.h">
       <Filter>GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="StateController.h">
+    <ClInclude Include="GameState.h">
       <Filter>GameStates</Filter>
     </ClInclude>
     <ClInclude Include="StateDialogue.h">
@@ -375,5 +375,6 @@
     <None Include="Test.csv">
       <Filter>Others</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

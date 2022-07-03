@@ -46,15 +46,15 @@ void Player::MoveHorizontally()
 // Player's main function to interact with other actors and trigger their response to the interaction
 bool Player::Interact(IInteractive* actor)
 {
-	if (StateMain::_state != State::REGULAR)
+	if (StateController::_state != State::REGULAR)
 		return false;
 
 	if (!actor)
 		return false;
 
-	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
+	if (App::GetController().CheckButton(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
-		if (StateMain::_state != State::REGULAR)
+		if (StateController::_state != State::REGULAR)
 			return false;
 
 		/*if (dynamic_cast<Actor*>(actor)->_SInteract)
@@ -63,7 +63,7 @@ bool Player::Interact(IInteractive* actor)
 		actor->Interact();
 
 		if (dynamic_cast<IDialogue*>(actor))
-			StateMain::SetState(State::DIALOGUE);
+			StateController::SetState(State::DIALOGUE);
 
 		return true;
 	}
@@ -73,13 +73,13 @@ bool Player::Interact(IInteractive* actor)
 // Player's main function to interact with other actors (collectable) and trigger their response to the interaction
 bool Player::Interact(Collectable* collectable)
 {
-	if (StateMain::_state != State::REGULAR)
+	if (StateController::_state != State::REGULAR)
 		return false;
 
 	if (!collectable)
 		return false;
 
-	if (App::IsKeyPressed(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
+	if (App::GetController().CheckButton(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
 		for (auto i = 0; i < _inventory->_bags[collectable->_ID].second.size(); ++i)
@@ -92,7 +92,7 @@ bool Player::Interact(Collectable* collectable)
 				collectable->OnCollected();
 				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
 				// Removing the actor from the current scene as it is being itemized
-				StateMain::_currentScene->RemoveActor(collectable);
+				StateController::_currentScene->RemoveActor(collectable);
 				/*CSimpleSound::GetInstance().PlaySound(collectable->_SInteract, 0, -2500);*/
 				return true;
 			}
@@ -207,7 +207,7 @@ void Player::DisplayIcon(CSimpleSprite* icon)
 
 void Player::PlayDialogue()
 {
-	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateMain::_stateControllers[2]) };
+	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
@@ -219,7 +219,7 @@ void Player::PlayDialogue()
 
 void Player::Hit()
 {
-	auto actors{ StateMain::_currentScene->GetActors() };
+	auto actors{ StateController::_currentScene->GetActors() };
 
 	for (const auto& actor : actors)
 	{
@@ -235,7 +235,7 @@ void Player::Hit()
 				return;
 
 			CSimpleSound::GetInstance().PlaySoundW(_SHit, 0);
-			Respawn(StateMain::_currentScene->_startingPos);
+			Respawn(StateController::_currentScene->_startingPos);
 			return;
 		}
 	}

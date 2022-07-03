@@ -4,12 +4,12 @@
 
 #include "Scene.h"
 #include "TPPuzzle.h"
-#include "StateMain.h"
+#include "StateController.h"
 #include "NPC.h"
 #include "StateDialogue.h"
 #include "MirrorShard.h"
 
-class StateMain;
+class StateController;
 // Library scene 
 class Library : public Scene
 {
