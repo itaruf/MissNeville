@@ -110,12 +110,12 @@ void Display()
 	gUserRenderProfiler.Start();	
 	Render();						// Call user defined render.
 	gUserRenderProfiler.Stop();
-	if (gRenderUpdateTimes)
+	/*if (gRenderUpdateTimes)
 	{
 		gUpdateDeltaTime.Print	 (10, 40, "Update");
 		gUserRenderProfiler.Print(10, 25, "User Render");
 		gUserUpdateProfiler.Print(10, 10, "User Update");
-	}
+	}*/
 	glFlush();  // Render now						 
 }
 
@@ -147,10 +147,10 @@ void Idle()
 			WINDOW_HEIGHT = tileClientArea.bottom - tileClientArea.top;
 		}
 
-		if (App::GetController().CheckButton(APP_ENABLE_DEBUG_INFO_BUTTON) )
+		/*if (App::GetController().CheckButton(APP_ENABLE_DEBUG_INFO_BUTTON) )
 		{
 			gRenderUpdateTimes = !gRenderUpdateTimes;
-		}
+		}*/
 
 		if (App::IsKeyPressed(APP_QUIT_KEY))
 		{	

@@ -52,7 +52,7 @@ void StateController::SwitchState()
 	{
 	case State::REGULAR:
 		// Start button to open the inventory / change the state back to INVENTORY
-		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_START))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START))
 		{
 			_currentGameState->Exit();
 			// Updating state
@@ -83,7 +83,7 @@ void StateController::SwitchState()
 
 	case State::INVENTORY:
 		// Face button Right to close the inventory / change the state back to REGULAR
-		if (App::IsKeyPressed('B') || App::GetController().CheckButton(XINPUT_GAMEPAD_START) || App::GetController().CheckButton(XINPUT_GAMEPAD_B))
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_START) || App::GetController().CheckButton(XINPUT_GAMEPAD_B))
 		{
 			_currentGameState->Exit();
 			// Updating state

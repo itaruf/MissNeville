@@ -29,7 +29,7 @@ std::shared_ptr<StateController> state;
 
 void Init()
 {
-	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
+	CSimpleSprite* dialBox{ App::CreateSprite("..\\..\\GameTest\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
 	dialBox->SetPosition(MIDDLE_WIDTH, MIDDLE_HEIGHT /  4);
 	dialBox->SetScale(8);
 
@@ -43,7 +43,7 @@ void Init()
 	state->_state = State::REGULAR;
 
 	/*Instantiation du personnage*/
-	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\player.bmp", 3, 4, 10) };
+	CSimpleSprite* playerSprite{ App::CreateSprite("..\\..\\GameTest\\TestData\\Characters\\player.bmp", 3, 4, 10) };
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
 	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };
@@ -95,12 +95,12 @@ void Init()
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
-	state->_currentScene = entrance;
+	/*state->_currentScene = entrance;*/
 	/*state->_currentScene = hall;*/
 	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	/*state->_currentScene = intro;*/
+	state->_currentScene = intro;
 	/*state->_currentScene = outro;*/
 
 	state->_rooms.insert(std::make_pair(0, intro));
@@ -133,9 +133,7 @@ void Render()
 
 	state->_currentScene->Render();
 	/*App::Print(800, 620, ("Scene : " + GetChar(state->_currentScene->GetID())).c_str());*/
-	App::Print(800, 600, ("State : " + state->PrintState()).c_str());
-	state->_currentGameState->Render();
-
+	/*App::Print(800, 600, ("State : " + state->PrintState()).c_str());*/
 	state->_currentGameState->Render();
 
 	/*SOME PRINTS*/
@@ -144,9 +142,9 @@ void Render()
 		return;
 
 	if (state->_currentScene->IsRoomCleared())
-		App::Print(800, 620, "Scene Cleared");
+		App::Print(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - 92, "Scene Cleared");
 	else
-		App::Print(800, 620, "Scene Not Cleared");
+		App::Print(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - 92, "Scene Not Cleared");
 
 	std::string room{ "" };
 	switch (state->_currentScene->GetID())
@@ -174,7 +172,7 @@ void Render()
 		break;
 	}
 
-	App::Print(800, 640, room.c_str());
+	App::Print(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - 64, room.c_str());
 
 	/*********PLAYER RENDER*********/
 	auto player{ state->GetPlayer() };
@@ -201,7 +199,6 @@ void Render()
 			App::Print(800, 580, ("Number of shards : " + GetChar(nb) + " / " + GetChar(dynamic_cast<Mirror*>(*it)->GetNbShards())).c_str());
 	}
 		
-	
 	if (player->_footStep)
 	{
 		player->_footStep->Draw();

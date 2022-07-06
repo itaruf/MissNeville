@@ -198,7 +198,7 @@ void Player::DisplayIcon(CSimpleSprite* icon)
 
 	if (dynamic_cast<IInteractive*>(closest) || dynamic_cast<Collectable*>(closest));
 	{
-		App::Print(800, 660, closest->GetName().c_str(), 0.7, 0,  0.5);
+		App::Print(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - 120, closest->GetName().c_str(), 0.7, 0,  0.5);
 		icon->SetPosition(_position->_x, _position->_y + 32);
 		icon->Draw();
 	}
