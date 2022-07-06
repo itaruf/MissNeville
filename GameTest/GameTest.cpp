@@ -95,12 +95,12 @@ void Init()
 	hall->_EScene = library;
 
 	/*Setting up the first scene*/
-	state->_currentScene = entrance;
+	/*state->_currentScene = entrance;*/
 	/*state->_currentScene = hall;*/
 	/*state->_currentScene = kitchen;*/
 	/*state->_currentScene = library;*/
 	/*state->_currentScene = room;*/
-	/*state->_currentScene = intro;*/
+	state->_currentScene = intro;
 	/*state->_currentScene = outro;*/
 
 	state->_rooms.insert(std::make_pair(0, intro));
