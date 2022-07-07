@@ -52,7 +52,7 @@ bool Player::Interact(IInteractive* actor)
 	if (!actor)
 		return false;
 
-	if (App::GetController().CheckButton(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		if (StateController::_state != State::REGULAR)
 			return false;
@@ -79,7 +79,7 @@ bool Player::Interact(Collectable* collectable)
 	if (!collectable)
 		return false;
 
-	if (App::GetController().CheckButton(VK_SPACE) || App::GetController().CheckButton(XINPUT_GAMEPAD_A))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
 		for (auto i = 0; i < _inventory->_bags[collectable->_ID].second.size(); ++i)
