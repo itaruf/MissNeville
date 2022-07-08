@@ -213,7 +213,7 @@ struct MMirrorShard
 	std::string name{ "Mirror Shard" };
 	const char* model{ ".\\TestData\\Props\\.bmp" };
 	int frame{ 0 };
-	float scale{ 3 };
+	float scale{ 4 };
 };
 
 extern struct MMirrorShard MMirrorShard;

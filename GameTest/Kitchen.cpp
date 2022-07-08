@@ -215,7 +215,7 @@ void Kitchen::Init()
 	_buttons.emplace_back(button2);
 	_buttons.emplace_back(button3);
 
-	MirrorShard* shard3{ new MirrorShard(MMirrorShard.name + "3", App::CreateSprite(MPage.model , 1, 1), new Vector2D(page->GetPosition()->_x, page->GetPosition()->_y + 16), new Collision(32, 32)) };
+	MirrorShard* shard3{ new MirrorShard(MMirrorShard.name + "3", App::CreateSprite(MPage.model , 1, 1, 1, 2), new Vector2D(page->GetPosition()->_x, page->GetPosition()->_y - 16), new Collision(32, 32)) };
 
 	// Triggers
 	TriggerScene* hallTrigger{ new TriggerScene(MTriggerScene.name, App::CreateSprite(MCarpet.model, 1, 1, MCarpet.frame, 0.8), new Vector2D(APP_VIRTUAL_WIDTH - KITCHEN_WALL - TRIGGER_OFFSET, MIDDLE_HEIGHT),new Vector2D(HALL_WALL + TRIGGER_OFFSET + NEW_PLAYER_POS, MIDDLE_HEIGHT), new Collision(32, 32, ColliderType::Overlap), _EScene) };

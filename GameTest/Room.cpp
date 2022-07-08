@@ -216,7 +216,7 @@ bool Room::IsRoomCleared()
 
 void Room::OnMirrorShattered()
 {
-	MirrorShard* shard1{ new MirrorShard(MMirrorShard.name + "1", App::CreateSprite(MPage.model , 1, 1), new Vector2D(MIDDLE_WIDTH + 128, APP_VIRTUAL_HEIGHT - ROOM_WALL - 150), new Collision(32, 32)) };
+	MirrorShard* shard1{ new MirrorShard(MMirrorShard.name + "1", App::CreateSprite(MPage.model , 1, 1, 1, 2), new Vector2D(MIDDLE_WIDTH + 128, APP_VIRTUAL_HEIGHT - ROOM_WALL - 150), new Collision(32, 32)) };
 
 	auto charlotte{ new NPC(MCharlotte.name, App::CreateSprite(MCharlotte.model, 3, 4, MCharlotte.frame, MCharlotte.scale), new Vector2D(MIDDLE_WIDTH + 64, APP_VIRTUAL_HEIGHT - ROOM_WALL - 64), new Collision(32, 32)) };
 	charlotte->dialogues.insert(std::make_pair(0, DCharlotte.r1));

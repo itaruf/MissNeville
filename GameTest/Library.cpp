@@ -302,7 +302,7 @@ void Library::Init()
 	lamp5->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_LAMP, 1 / 5.0f, { 0, 1, 2, 3 }, true);
 	lamp5->GetSprite()->SetAnimation(CSimpleSprite::ANIM_LAMP);
 
-	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1), new Vector2D(shelf->GetPosition()->_x, shelf->GetPosition()->_y - 48 ), new Collision(32, 32)) };
+	MirrorShard* shard2{ new MirrorShard(MMirrorShard.name + "2", App::CreateSprite(MPage.model , 1, 1, 1, 2), new Vector2D(shelf->GetPosition()->_x, shelf->GetPosition()->_y - 48 ), new Collision(32, 32)) };
 
 	page->SetPosition(tp11->GetPosition()->_x, tp11->GetPosition()->_y - 64);
 
