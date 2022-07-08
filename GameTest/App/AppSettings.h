@@ -19,21 +19,24 @@
 // Pad emulation. (Uses keyboard if no pad is present) Maps the following keys to the pad inputs.
 // Note analog inputs are either 0 or 1 when emulated. 
 #define APP_PAD_EMUL_LEFT_THUMB_LEFT	('Q')
+#define APP_PAD_EMUL_LEFT_THUMB_LEFT2	('A')
 #define APP_PAD_EMUL_LEFT_THUMB_RIGHT	('D')
-#define APP_PAD_EMUL_LEFT_THUMB_UP		('Z')
-#define APP_PAD_EMUL_LEFT_THUMB_DOWN	('S')
+#define APP_PAD_EMUL_LEFT_THUMB_UP		('S')
+#define APP_PAD_EMUL_LEFT_THUMB_DOWN	('Z')
+#define APP_PAD_EMUL_LEFT_THUMB_DOWN2	('W')
 #define APP_PAD_EMUL_BUTTON_ALT_A		(VK_SPACE)
-#define APP_PAD_EMUL_START				(VK_RETURN)
+#define APP_PAD_EMUL_START				('B')
 
 #define APP_PAD_EMUL_RIGHT_THUMB_LEFT	(VK_NUMPAD4)
-#define APP_PAD_EMUL_RIGHT_THUMB_RIGHT	(VK_NUMPAD6)
+#define APP_PAD_EMUL_RIGHT_THUMB_RIGHT	('D')
 #define APP_PAD_EMUL_RIGHT_THUMB_UP		(VK_NUMPAD8)
 #define APP_PAD_EMUL_RIGHT_THUMB_DOWN	(VK_NUMPAD2)
 
 #define APP_PAD_EMUL_DPAD_UP			(VK_UP)
 #define APP_PAD_EMUL_DPAD_DOWN			(VK_DOWN)
-#define APP_PAD_EMUL_DPAD_LEFT			(VK_LEFT)
-#define APP_PAD_EMUL_DPAD_RIGHT			(VK_RIGHT)
+#define APP_PAD_EMUL_DPAD_LEFT			('Q')
+#define APP_PAD_EMUL_DPAD_LEFT2			('A')
+#define APP_PAD_EMUL_DPAD_RIGHT			('D')
 	
 #define APP_PAD_EMUL_BUTTON_BACK		(VK_BACK)
 #define APP_PAD_EMUL_BUTTON_A			(VK_DELETE)

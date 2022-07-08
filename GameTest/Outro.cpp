@@ -16,7 +16,7 @@ void Outro::Init()
 
 	Scene::Init();
 
-	auto b{ new Actor("Journal", App::CreateSprite("..\\..\\GameTest\\TestData\\Backgrounds\\theend.bmp", 5, 1, 5, 2), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT), new Collision(0, 0, ColliderType::Overlap)) };
+	auto b{ new Actor("Journal", App::CreateSprite(".\\TestData\\Backgrounds\\theend.bmp", 5, 1, 5, 2), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT), new Collision(0, 0, ColliderType::Overlap)) };
 	b->GetSprite()->CreateAnimation(CSimpleSprite::ANIM_BLOOD, 1 / 5.0f, { 0, 1, 2, 3, 4 }, true);
 	b->GetSprite()->SetAnimation(CSimpleSprite::ANIM_BLOOD);
 

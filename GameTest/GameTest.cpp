@@ -29,7 +29,7 @@ std::shared_ptr<StateController> state;
 
 void Init()
 {
-	CSimpleSprite* dialBox{ App::CreateSprite("..\\..\\GameTest\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
+	CSimpleSprite* dialBox{ App::CreateSprite(".\\TestData\\Icons\\hintbox2.bmp", 1, 1) };
 	dialBox->SetPosition(MIDDLE_WIDTH, MIDDLE_HEIGHT /  4);
 	dialBox->SetScale(8);
 
@@ -43,7 +43,7 @@ void Init()
 	state->_state = State::REGULAR;
 
 	/*Instantiation du personnage*/
-	CSimpleSprite* playerSprite{ App::CreateSprite("..\\..\\GameTest\\TestData\\Characters\\player.bmp", 3, 4, 10) };
+	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\player.bmp", 3, 4, 10) };
 	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
 	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };
