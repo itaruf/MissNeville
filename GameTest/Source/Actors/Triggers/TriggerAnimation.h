@@ -3,7 +3,8 @@
 #ifndef TRIGGERANIMATION_H_
 #define TRIGGERANIMATION_H_
 
-#include "StateController.h"
+#include "../../Systems/States/StateController.h"
+
 #include "Trigger.h"
 
 class Scene;

@@ -6,13 +6,13 @@
 
 #include "../Actors/Actor.h"
 #include "../Actors/Collectibles/Collectable.h"
-#include "../Systems/Dialogues/Dialogues.h"
-#include "../Utilities/Models.h"
 #include "../Actors/Collectibles/Page.h"
-#include "../Systems/Puzzles/Puzzle.h"
 #include "../Actors/Triggers/TriggerAnimation.h"
 #include "../Actors/Triggers/TriggerScene.h"
+#include "../Systems/Dialogues/Dialogues.h"
+#include "../Systems/Puzzles/Puzzle.h"
 #include "../Utilities/Utilities.h"
+#include "../Utilities/Models.h"
 
 #include <algorithm>
 #include <random>

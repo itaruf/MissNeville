@@ -4,8 +4,6 @@
 
 #include "../../../App/app.h"
 
-//#include "../../Actors/Actor.h"
-//#include "../../Actors/Collectibles/Collectable.h"
 #include "../../Enums/EDirection.h"
 #include "../../Enums/ECollider.h"
 #include "../../Utilities/Maths/Vector2D.h"

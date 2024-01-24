@@ -3,11 +3,12 @@
 #define KITCHEN_H_
 
 #include "../Actors/Buttons/Button.h"
-#include "../Systems/Puzzles/DodgePuzzle.h"
-#include "../Actors/Collectibles/MirrorShard.h"
 #include "../Actors/Characters/NPC.h"
-#include "Scene.h"
+#include "../Actors/Collectibles/MirrorShard.h"
+#include "../Systems/Puzzles/DodgePuzzle.h"
 #include "../Systems/States/StateController.h"
+
+#include "Scene.h"
 
 // Kitchen scene 
 class Kitchen : public Scene

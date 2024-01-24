@@ -2,12 +2,13 @@
 #ifndef LIBRARY_H_
 #define LIBRARY_H_
 
-#include "../Actors/Collectibles/MirrorShard.h"
 #include "../Actors/Characters/NPC.h"
-#include "Scene.h"
+#include "../Actors/Collectibles/MirrorShard.h"
 #include "../Systems/States/StateController.h"
 #include "../Systems/States/StateDialogue.h"
 #include "../Systems/Puzzles/TPPuzzle.h"
+
+#include "Scene.h"
 
 // Library scene 
 class Library : public Scene

@@ -8,8 +8,8 @@
 #include "../Controllers/Controller.h"
 #include "../Enums/EDirection.h"
 #include "../Enums/EMobility.h"
-#include "../Utilities/Models.h"
 #include "../Scenes/Scene.h"
+#include "../Utilities/Models.h"
 #include "../Utilities/Maths/Vector2D.h"
 
 #include <memory>

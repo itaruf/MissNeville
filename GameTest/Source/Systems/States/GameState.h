@@ -3,7 +3,6 @@
 #ifndef GameState_H_
 #define GameState_H_
 
-class Player;
 #include "../../Actors/Characters/Player.h"
 
 class GameState

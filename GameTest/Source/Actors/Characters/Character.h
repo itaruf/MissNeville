@@ -5,9 +5,9 @@
 
 #include "../../../App/SimpleSound.h"
 
-#include "../../Interfaces/IDialogue.h"
 #include "../../Actors/Actor.h"
 #include "../../Controllers/Controller.h"
+#include "../../Interfaces/IDialogue.h"
 #include "../../Systems/States/StateController.h"
 
 class Controller;

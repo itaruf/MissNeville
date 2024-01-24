@@ -3,7 +3,7 @@
 #ifndef IINTERACTIVE_H_
 #define IINTERACTIVE_H_
 
-#include "../../Utilities/Utilities.h"
+#include "../Utilities/Utilities.h"
 
 #include <combaseapi.h>
 

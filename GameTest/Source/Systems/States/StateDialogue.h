@@ -2,8 +2,9 @@
 #ifndef STATEDIALOGUE_H_
 #define STATEDIALOGUE_H_
 
-#include "GameState.h"
 #include "../../Utilities/Utilities.h"
+
+#include "GameState.h"
 
 #include <exception>
 

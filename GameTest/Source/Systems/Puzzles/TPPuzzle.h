@@ -4,6 +4,7 @@
 
 #include "../../Actors/Candles/Candle.h"
 #include "../../Actors/Collectibles/Page.h"
+
 #include "Puzzle.h"
 
 // Class which defines a puzzle involving candles

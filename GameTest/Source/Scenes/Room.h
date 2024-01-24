@@ -2,12 +2,12 @@
 #ifndef ROOM_H_
 #define ROOM_H_
 
-#include "../Systems/Puzzles/MirrorPuzzle.h"
-#include "../Actors/Collectibles/MirrorShard.h"
 #include "../Actors/Characters/NPC.h"
-#include "../Scenes/Scene.h"
-#include "../Systems/States/StateController.h"
+#include "../Actors/Collectibles/MirrorShard.h"
 #include "../Actors/Triggers/TriggerDialogue.h"
+#include "../Scenes/Scene.h"
+#include "../Systems/Puzzles/MirrorPuzzle.h"
+#include "../Systems/States/StateController.h"
 
 // Room scene 
 class Room : public Scene

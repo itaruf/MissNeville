@@ -2,12 +2,12 @@
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 
-#include "../../Utilities/Utilities.h"
-#include "../../Scenes/Entrance.h"
-#include "../../Enums/EState.h"
 #include "../../Controllers/ObjectController.h"
 #include "../../Controllers/PlayerController.h"
+#include "../../Enums/EState.h"
+#include "../../Scenes/Entrance.h"
 #include "../../Systems/States/StateDialogue.h"
+#include "../../Utilities/Utilities.h"
 
 #include <chrono>
 #include <thread>

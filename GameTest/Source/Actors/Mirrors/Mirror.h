@@ -3,9 +3,9 @@
 #define MIRROR_H_
 
 #include "../../Actors/Collectibles/Collectable.h"
+#include "../../Actors/Collectibles/MirrorShard.h"
 #include "../../Interfaces/IInteractive.h"
 #include "../../Systems/States/StateController.h"
-#include "../../Actors/Collectibles/MirrorShard.h"
 
 // Class defining a candle which has a specific interaction
 class Mirror : public Actor, public IInteractive

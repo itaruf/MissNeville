@@ -2,14 +2,11 @@
 #ifndef COLLECTABLE_H_
 #define COLLECTABLE_H_
 
-#include "../../Interfaces/ICollectable.h"
-//#include "../../Components/Physics2D/Collision.h"
 #include "../../Actors/Actor.h"
+#include "../../Interfaces/ICollectable.h"
 #include "../../Utilities/Maths/Vector2D.h"
 #include "../../Utilities/Models.h"
 
-class Actor;
-class Collision;
 // Actor which can be collected by the player and itemized
 class Collectable : public Actor, public ICollectable
 {

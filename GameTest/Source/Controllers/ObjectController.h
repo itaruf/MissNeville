@@ -2,8 +2,9 @@
 #ifndef OBJECTCONTROLLER_H
 #define OBJECTCONTROLLER_H
 
-#include "Controller.h"
 #include "../Utilities/Utilities.h"
+
+#include "Controller.h"
 
 class ObjectController : public Controller
 {

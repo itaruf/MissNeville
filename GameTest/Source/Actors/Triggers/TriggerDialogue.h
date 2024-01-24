@@ -3,8 +3,9 @@
 #ifndef TRIGGERDIALOGUE_H_
 #define TRIGGERDIALOGUE_H_
 
-#include "StateController.h"
-#include "StateDialogue.h"
+#include "../../Systems/States/StateController.h"
+#include "../../Systems/States/StateDialogue.h"
+
 #include "Trigger.h"
 
 class Scene;

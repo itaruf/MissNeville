@@ -2,12 +2,13 @@
 #ifndef NPC_H_
 #define NPC_H_
 
-#include "Character.h"
 #include "../../Interfaces/IInteractive.h"
 #include "../../Systems/States/GameState.h"
 #include "../../Systems/States/StateController.h"
 #include "../../Systems/States/StateDialogue.h"
 #include "../../Utilities/Utilities.h"
+
+#include "Character.h"
 
 #include <unordered_map>
 

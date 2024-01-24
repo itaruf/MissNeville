@@ -2,11 +2,12 @@
 #ifndef HALL_H_
 #define HALL_H_
 
-#include "../Systems/Puzzles/CandlePuzzle.h"
 #include "../Actors/Characters/Character.h"
 #include "../Actors/Characters/NPC.h"
-#include "Scene.h"
 #include "../Actors/Triggers/TriggerScene.h";
+#include "../Systems/Puzzles/CandlePuzzle.h"
+
+#include "Scene.h"
 
 // Hall scene 
 class Hall : public Scene, std::enable_shared_from_this<Hall>
