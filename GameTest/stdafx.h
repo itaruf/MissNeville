@@ -18,7 +18,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include "./Source/Utilities.h"
-#include "./Source/StateController.h"
+#include "./Source/Utilities/Utilities.h"
+#include "./Source/Systems/States/StateController.h"
 //#include  "Models.h"
 //#include "Character.h"

@@ -4,25 +4,25 @@
 #include "../stdafx.h"
 //------------------------------------------------------------------------
 //#include "StateController.h"	
-#include "./Source/Player.h"
+#include "./Source/Actors/Characters/Player.h"
 
-#include "./Source/StateRegular.h"
-#include "./Source/StateInventory.h"
-#include "./Source/StateDialogue.h"
+#include "./Source/Systems/States/StateRegular.h"
+#include "./Source/Systems/States/StateInventory.h"
+#include "./Source/Systems/States/StateDialogue.h"
 
-#include "./Source/EState.h"
+#include "./Source/Enums/EState.h"
 
-#include "./Source/Intro.h"
-#include "./Source/Hall.h"
-#include "./Source/Kitchen.h"
-#include "./Source/Room.h"
-#include "./Source/Hall.h"
-#include "./Source/Library.h"
-#include "./Source/Outro.h"
+#include "./Source/Scenes/Intro.h"
+#include "./Source/Scenes/Hall.h"
+#include "./Source/Scenes/Kitchen.h"
+#include "./Source/Scenes/Room.h"
+#include "./Source/Scenes/Hall.h"
+#include "./Source/Scenes/Library.h"
+#include "./Source/Scenes/Outro.h"
 
-#include "./Source/Utilities.h"
-#include "./Source/Controller.h"
-#include "./Source/PlayerController.h"
+#include "./Source/Utilities/Utilities.h"
+#include "./Source/Controllers/Controller.h"
+#include "./Source/Controllers/PlayerController.h"
 
 #include <typeinfo>
 
