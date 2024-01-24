@@ -22,129 +22,47 @@
     <ClCompile Include="App\TextureLoader.cpp">
       <Filter>API</Filter>
     </ClCompile>
-    <ClCompile Include="CandlePuzzle.cpp">
-      <Filter>Puzzles</Filter>
-    </ClCompile>
-    <ClCompile Include="Puzzle.cpp">
-      <Filter>Puzzles</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Hall.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Candle.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Collectable.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Page.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="StateController.cpp">
-      <Filter>GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTest.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="StateDialogue.cpp">
-      <Filter>GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="StateInventory.cpp">
-      <Filter>GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="StateRegular.cpp">
-      <Filter>GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="Entrance.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Library.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Kitchen.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Trigger.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggerScene.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="MirrorShard.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="MirrorPuzzle.cpp">
-      <Filter>Puzzles</Filter>
-    </ClCompile>
-    <ClCompile Include="Mirror.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectController.cpp">
-      <Filter>Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Models.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggerAnimation.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="TPPuzzle.cpp">
-      <Filter>Puzzles</Filter>
-    </ClCompile>
-    <ClCompile Include="TriggerDialogue.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="DodgePuzzle.cpp">
-      <Filter>Puzzles</Filter>
-    </ClCompile>
-    <ClCompile Include="Intro.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialogues.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Outro.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
+    <ClCompile Include="Source\Actor.cpp" />
+    <ClCompile Include="Source\Button.cpp" />
+    <ClCompile Include="Source\Candle.cpp" />
+    <ClCompile Include="Source\CandlePuzzle.cpp" />
+    <ClCompile Include="Source\Character.cpp" />
+    <ClCompile Include="Source\Collectable.cpp" />
+    <ClCompile Include="Source\Collision.cpp" />
+    <ClCompile Include="Source\Controller.cpp" />
+    <ClCompile Include="Source\Dialogues.cpp" />
+    <ClCompile Include="Source\DodgePuzzle.cpp" />
+    <ClCompile Include="Source\Entrance.cpp" />
+    <ClCompile Include="Source\GameState.cpp" />
+    <ClCompile Include="Source\Hall.cpp" />
+    <ClCompile Include="Source\Intro.cpp" />
+    <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\Kitchen.cpp" />
+    <ClCompile Include="Source\Library.cpp" />
+    <ClCompile Include="Source\Mirror.cpp" />
+    <ClCompile Include="Source\MirrorPuzzle.cpp" />
+    <ClCompile Include="Source\MirrorShard.cpp" />
+    <ClCompile Include="Source\Models.cpp" />
+    <ClCompile Include="Source\NPC.cpp" />
+    <ClCompile Include="Source\ObjectController.cpp" />
+    <ClCompile Include="Source\Outro.cpp" />
+    <ClCompile Include="Source\Page.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerController.cpp" />
+    <ClCompile Include="Source\Puzzle.cpp" />
+    <ClCompile Include="Source\Room.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
+    <ClCompile Include="Source\StateController.cpp" />
+    <ClCompile Include="Source\StateDialogue.cpp" />
+    <ClCompile Include="Source\StateInventory.cpp" />
+    <ClCompile Include="Source\StateRegular.cpp" />
+    <ClCompile Include="Source\TPPuzzle.cpp" />
+    <ClCompile Include="Source\Trigger.cpp" />
+    <ClCompile Include="Source\TriggerAnimation.cpp" />
+    <ClCompile Include="Source\TriggerDialogue.cpp" />
+    <ClCompile Include="Source\TriggerScene.cpp" />
+    <ClCompile Include="Source\Vector2D.cpp" />
+    <ClCompile Include="GameTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\app.h">
@@ -174,207 +92,62 @@
     <ClInclude Include="App\TextureLoader.h">
       <Filter>API</Filter>
     </ClInclude>
-    <ClInclude Include="CandlePuzzle.h">
-      <Filter>Puzzles</Filter>
-    </ClInclude>
-    <ClInclude Include="Puzzle.h">
-      <Filter>Puzzles</Filter>
-    </ClInclude>
-    <ClInclude Include="NPC.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="ICollectable.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IDialogue.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IInteractive.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Hall.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="EDirection.h">
-      <Filter>Enumerations</Filter>
-    </ClInclude>
-    <ClInclude Include="EMobility.h">
-      <Filter>Enumerations</Filter>
-    </ClInclude>
-    <ClInclude Include="Candle.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Collectable.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Page.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="StateController.h">
-      <Filter>GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateDialogue.h">
-      <Filter>GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateInventory.h">
-      <Filter>GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateRegular.h">
-      <Filter>GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="EState.h">
-      <Filter>Enumerations</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Entrance.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Library.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Kitchen.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Trigger.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerScene.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="MirrorShard.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="MirrorPuzzle.h">
-      <Filter>Puzzles</Filter>
-    </ClInclude>
-    <ClInclude Include="Mirror.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectController.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="Models.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerAnimation.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="TPPuzzle.h">
-      <Filter>Puzzles</Filter>
-    </ClInclude>
-    <ClInclude Include="TriggerDialogue.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="DodgePuzzle.h">
-      <Filter>Puzzles</Filter>
-    </ClInclude>
-    <ClInclude Include="ECollider.h">
-      <Filter>Enumerations</Filter>
-    </ClInclude>
-    <ClInclude Include="Dialogues.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Intro.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="EStatus.h">
-      <Filter>Enumerations</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Outro.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Sources.txt">
-      <Filter>Others</Filter>
-    </Text>
-    <Text Include="ReadMe.txt">
-      <Filter>Others</Filter>
-    </Text>
-    <Text Include="Credits.txt">
-      <Filter>Others</Filter>
-    </Text>
+    <ClInclude Include="Source\Actor.h" />
+    <ClInclude Include="Source\Button.h" />
+    <ClInclude Include="Source\Candle.h" />
+    <ClInclude Include="Source\CandlePuzzle.h" />
+    <ClInclude Include="Source\Character.h" />
+    <ClInclude Include="Source\Collectable.h" />
+    <ClInclude Include="Source\Collision.h" />
+    <ClInclude Include="Source\Controller.h" />
+    <ClInclude Include="Source\Dialogues.h" />
+    <ClInclude Include="Source\DodgePuzzle.h" />
+    <ClInclude Include="Source\ECollider.h" />
+    <ClInclude Include="Source\EDirection.h" />
+    <ClInclude Include="Source\EMobility.h" />
+    <ClInclude Include="Source\Entrance.h" />
+    <ClInclude Include="Source\EState.h" />
+    <ClInclude Include="Source\EStatus.h" />
+    <ClInclude Include="Source\GameState.h" />
+    <ClInclude Include="Source\Hall.h" />
+    <ClInclude Include="Source\ICollectable.h" />
+    <ClInclude Include="Source\IDialogue.h" />
+    <ClInclude Include="Source\IInteractive.h" />
+    <ClInclude Include="Source\Intro.h" />
+    <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\Kitchen.h" />
+    <ClInclude Include="Source\Library.h" />
+    <ClInclude Include="Source\Mirror.h" />
+    <ClInclude Include="Source\MirrorPuzzle.h" />
+    <ClInclude Include="Source\MirrorShard.h" />
+    <ClInclude Include="Source\Models.h" />
+    <ClInclude Include="Source\NPC.h" />
+    <ClInclude Include="Source\ObjectController.h" />
+    <ClInclude Include="Source\Outro.h" />
+    <ClInclude Include="Source\Page.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerController.h" />
+    <ClInclude Include="Source\Puzzle.h" />
+    <ClInclude Include="Source\Room.h" />
+    <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\StateController.h" />
+    <ClInclude Include="Source\StateDialogue.h" />
+    <ClInclude Include="Source\StateInventory.h" />
+    <ClInclude Include="Source\StateRegular.h" />
+    <ClInclude Include="Source\TPPuzzle.h" />
+    <ClInclude Include="Source\Trigger.h" />
+    <ClInclude Include="Source\TriggerAnimation.h" />
+    <ClInclude Include="Source\TriggerDialogue.h" />
+    <ClInclude Include="Source\TriggerScene.h" />
+    <ClInclude Include="Source\Utilities.h" />
+    <ClInclude Include="Source\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
       <UniqueIdentifier>{3e1485bf-3449-4966-8760-976ee866544b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Puzzles">
-      <UniqueIdentifier>{70f5b63f-2ba3-474f-8e1a-005d4ece3c9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actors">
-      <UniqueIdentifier>{4ad1c31b-c0aa-44df-baa9-d82a15df3c06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{fbaa0f1a-c15e-4ec1-aab3-584c846e0a39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces">
-      <UniqueIdentifier>{41cdd803-5497-4472-b147-b546dcb4c0be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{ec19d3d5-889a-4938-abfa-254bbaaba369}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enumerations">
-      <UniqueIdentifier>{17abfc6d-d31d-4f64-801d-dae54e3a6ee3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Inventory">
-      <UniqueIdentifier>{d875e7dd-28ab-45f4-ad41-92ba0d5f682c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameStates">
-      <UniqueIdentifier>{0ee3356c-857f-4eb1-acf6-31b3b6031a4d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Others">
-      <UniqueIdentifier>{cdfea50a-a8be-4b40-a30c-34ac40231da9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main">
-      <UniqueIdentifier>{cca1c4a1-e101-45e5-8d70-510a9a98c00b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller">
-      <UniqueIdentifier>{0f5f052b-7db8-4f18-8e85-93ee4eeb42f4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Test.csv">
-      <Filter>Others</Filter>
-    </None>
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

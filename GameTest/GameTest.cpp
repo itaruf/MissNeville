@@ -4,25 +4,26 @@
 #include "../stdafx.h"
 //------------------------------------------------------------------------
 //#include "StateController.h"	
-#include "Player.h"
+#include "./Source/Player.h"
 
-#include "StateRegular.h"
-#include "StateInventory.h"
-#include "StateDialogue.h"
+#include "./Source/StateRegular.h"
+#include "./Source/StateInventory.h"
+#include "./Source/StateDialogue.h"
 
-#include "EState.h"
+#include "./Source/EState.h"
 
-#include "Intro.h"
-#include "Hall.h"
-#include "Kitchen.h"
-#include "Room.h"
-#include "Hall.h"
-#include "Library.h"
-#include "Outro.h"
+#include "./Source/Intro.h"
+#include "./Source/Hall.h"
+#include "./Source/Kitchen.h"
+#include "./Source/Room.h"
+#include "./Source/Hall.h"
+#include "./Source/Library.h"
+#include "./Source/Outro.h"
 
-#include "Utilities.h"
-#include "Controller.h"
-#include "PlayerController.h"
+#include "./Source/Utilities.h"
+#include "./Source/Controller.h"
+#include "./Source/PlayerController.h"
+
 #include <typeinfo>
 
 std::shared_ptr<StateController> state;
