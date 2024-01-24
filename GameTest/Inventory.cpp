@@ -1,19 +1,12 @@
 #include "../stdafx.h"
 #include "Inventory.h"
 
-Inventory::Inventory()
-{
-}
-
 Inventory::Inventory(std::map<int, std::vector<Collectable*>>)
 {
 }
 
 Inventory::~Inventory()
 {
-	printf("INVENTORY DESTRUCTOR CALLED\n");
-
-	//Freeing the memory allocated on the heap
 	for (auto& bag : _bags)
 		for (auto& item : bag.second.second)
 			if (item)
@@ -65,7 +58,7 @@ bool Inventory::IsBagOpened(int ID)
 // Check if any bag is opened
 bool Inventory::IsAnyBagAlreadyOpened()
 {
-	for (auto i = 0; i < _nbBags; ++i)
+	for (auto i = 0; i < GetNbBags(); ++i)
 	{
 		// return at the first opened bag found
 		if (IsBagOpened(i))
@@ -100,4 +93,3 @@ bool Inventory::AddItem(Collectable* item)
 	std::cout << "item ID : " << 0 << " couldn't be added to the inventory" << std::endl;
 	return false;
 }
-

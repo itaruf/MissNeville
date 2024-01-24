@@ -7,14 +7,11 @@
 // Class which represents a page which has a specific interaction
 class Page : public Collectable
 {
-private:
-protected:
 public:
-	Page(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, int ID = 0, std::string description = " ");
-	~Page();
+	Page(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, int ID = 0, std::string description = " ");
+	~Page() = default;
 
-	bool UseItem() override;
+	void UseItem() override;
 };
-
 
 #endif

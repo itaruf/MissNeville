@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "Mirror.h"
 
-Mirror::Mirror(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : Actor(name, sprite, position, collider)
+Mirror::Mirror(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider) : Actor(name, sprite, position, collider)
 {
 	_SInteract = SFX.mirror_broken;
 }
@@ -15,6 +15,11 @@ bool Mirror::isRepaired()
 	return _repaired;
 }
 
+void Mirror::SetRepaired(bool value)
+{
+	_repaired = value;
+}
+
 void Mirror::Interact()
 {
 	if (_repaired)
@@ -24,7 +29,7 @@ void Mirror::Interact()
 		if (!stateDialogue)
 			return;
 
-		_onInteract();
+		onInteract();
 
 		stateDialogue->_currentDialogue.emplace_back(DDetective.r4);
 		StateController::SetState(State::DIALOGUE);
@@ -41,7 +46,7 @@ void Mirror::Interact()
 	auto bag{ p->_inventory->_bags[0].second };
 
 	// Looking for all mirror shards in the player's bag
-	if (GetCollectedMirrorShards() < nbShards)
+	if (GetCollectedMirrorShards() < GetNbShards())
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
 		auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
@@ -49,7 +54,7 @@ void Mirror::Interact()
 		if (!stateDialogue)
 			return;
 		
-		_onInteract();
+		onInteract();
 
 		stateDialogue->_currentDialogue.emplace_back(DDetective.r2);
 		StateController::SetState(State::DIALOGUE);
@@ -62,14 +67,14 @@ void Mirror::Interact()
 		if (!mshard)
 			continue;
 
-		_onRepaired();
+		onRepaired();
 
 		p->_inventory->RemoveItem(mshard);
 	}
 
 	// the mirror is repaired
 	CSimpleSound::GetInstance().PlaySoundW(_SMirror_repaired, 0);
-	_repaired = true;
+	SetRepaired(true);
 	_sprite->SetFrame(0);
 }
 
@@ -89,4 +94,9 @@ int Mirror::GetCollectedMirrorShards()
 	}
 
 	return nb;
+}
+
+int Mirror::GetNbShards()
+{
+	return nbShards;
 }

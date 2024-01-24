@@ -2,23 +2,21 @@
 #ifndef KITCHEN_H_
 #define KITCHEN_H_
 
+#include "Button.h"
+#include "DodgePuzzle.h"
+#include "MirrorShard.h"
+#include "NPC.h"
 #include "Scene.h"
 #include "StateController.h"
-#include "NPC.h"
-#include "DodgePuzzle.h"
-#include "Button.h"
-#include "MirrorShard.h"
 
-class StateController;
 // Kitchen scene 
 class Kitchen : public Scene
 {
 private:
-protected:
-public:
 	DodgePuzzle* _dodgePuzzle;
 	std::vector<Button*> _buttons;
-	Delegate _onCanOpenCell;
+	Delegate onOpenCell;
+public:
 	Kitchen(int ID);
 	Kitchen(int ID, DodgePuzzle*);
 
@@ -28,7 +26,9 @@ public:
 	void Update(float deltaTime) override;
 	void Render() override;
 	void Exit() override;
+
 	bool IsRoomCleared() override;
+
 	bool CanOpenCell();
 };
 

@@ -45,7 +45,7 @@ void StateDialogue::Update()
 			if (_currentDialogue.empty())
 			{
 				StateController::SetState(State::REGULAR);
-				_onDialogueEnd();
+				onDialogueEnd();
 			}
 			else
 				ProcessDialogue(_currentDialogue[0]);

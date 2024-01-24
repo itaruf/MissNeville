@@ -10,8 +10,8 @@ class GameState
 {
 public:
 	Player* _player;
-
-	virtual ~GameState();
+public:
+	virtual ~GameState() = default;
 	
 	virtual void Enter() = 0;
 	virtual void Update() = 0;

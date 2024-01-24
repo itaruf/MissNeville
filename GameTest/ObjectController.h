@@ -7,12 +7,11 @@
 
 class ObjectController : public Controller
 {
-private:
-protected:
 public:
-	Delegate _onChangeDirection;
+	Delegate onChangeDirection;
+public:
 	ObjectController(bool activated = true);
-	~ObjectController();
+	~ObjectController() = default;
 
 	void MoveHorizontally(Character* actor) override;
 	void MoveVertically(Character* actor) override;

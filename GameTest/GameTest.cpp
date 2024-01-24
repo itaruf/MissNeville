@@ -44,8 +44,8 @@ void Init()
 
 	/*Instantiation du personnage*/
 	CSimpleSprite* playerSprite{ App::CreateSprite(".\\TestData\\Characters\\player.bmp", 3, 4, 10) };
-	Vector2D* vector{ new Vector2D{ MIDDLE_WIDTH, 350.0f } };
-	Collision* collider{ new Collision(24, 24, ColliderType::Block, new Vector2D(0, -10)) };
+	Vector2D vector{ Vector2D{ MIDDLE_WIDTH, 350.0f } };
+	Collision* collider{ new Collision(24, 24, ColliderType::Block, Vector2D(0, -10)) };
 	PlayerController* controller{ new PlayerController() };
 	Player* player{ new Player("JJ Detective", playerSprite, vector, collider, 20, 4, controller, new Inventory()) };
 	player->SetTag("player");
@@ -202,7 +202,7 @@ void Render()
 	if (player->_footStep)
 	{
 		player->_footStep->Draw();
-		player->_footStep->SetPosition(player->GetPosition()->_x, player->GetPosition()->_y - 20);
+		player->_footStep->SetPosition(player->GetPosition().x, player->GetPosition().y - 20);
 	}
 
 	if (state->_currentScene == state->_rooms[0] || state->_currentScene == state->_rooms[6])

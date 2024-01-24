@@ -2,21 +2,19 @@
 #ifndef LIBRARY_H_
 #define LIBRARY_H_
 
-#include "Scene.h"
-#include "TPPuzzle.h"
-#include "StateController.h"
-#include "NPC.h"
-#include "StateDialogue.h"
 #include "MirrorShard.h"
+#include "NPC.h"
+#include "Scene.h"
+#include "StateController.h"
+#include "StateDialogue.h"
+#include "TPPuzzle.h"
 
-class StateController;
 // Library scene 
 class Library : public Scene
 {
 private:
-protected:
-public:
 	TPPuzzle* _TPPuzzle;
+public:
 	Library(int ID);
 	Library(int ID, TPPuzzle*);
 	~Library();

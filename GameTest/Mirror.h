@@ -10,25 +10,23 @@
 // Class defining a candle which has a specific interaction
 class Mirror : public Actor, public IInteractive
 {
-private:
 protected:
 	bool _repaired{ false };
 	static constexpr int nbShards{ 3 };
 	const char* _SMirror_repaired{ SFX.mirror_repaired };
 public:
-	Delegate _onRepaired;
+	Delegate onRepaired;
+public:
 
-	Mirror(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
+	Mirror(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider);
 	~Mirror();
 
-	bool isRepaired();
 	void Interact() override;
-	int GetCollectedMirrorShards();
 
-	inline static constexpr int GetNbShards()
-	{
-		return nbShards;
-	}
+	bool isRepaired();
+	void SetRepaired(bool value);
+	int GetCollectedMirrorShards();
+	int GetNbShards();
 };
 
 #endif

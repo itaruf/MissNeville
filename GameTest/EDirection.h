@@ -1,4 +1,5 @@
 #pragma once
+
 #ifndef EDIRECTION_H_
 #define EDIRECTION_H_
 

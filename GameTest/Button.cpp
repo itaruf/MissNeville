@@ -1,13 +1,9 @@
 #include "../stdafx.h"
 #include "Button.h"
 
-Button::Button(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, bool activated) : Actor(name, sprite, position, collider), _activated{activated}
+Button::Button(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, bool activated) : Actor(name, sprite, position, collider), _activated{activated}
 {
 	_SInteract = SFX.candle_enlight;
-}
-
-Button::~Button()
-{
 }
 
 bool Button::isActivated()
@@ -21,14 +17,14 @@ void Button::Interact()
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
 		_activated = true;
-		_onActivated();
+		onActivated();
 		_sprite->SetFrame(1);
 	}
 	else
 	{
 		CSimpleSound::GetInstance().PlaySoundW(_SInteract, 0);
 		_activated = false;
-		_onDeactivated();
+		onDeactivated();
 		_sprite->SetFrame(0);
 	}
 }

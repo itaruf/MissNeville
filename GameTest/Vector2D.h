@@ -1,4 +1,3 @@
-
 #pragma once
 #ifndef VECTOR2D_H_
 #define VECTOR2D_H_
@@ -7,9 +6,9 @@
 class Vector2D
 {
 public:
-	float _x;
-	float _y;
-
+	float x;
+	float y;
+public:
 	Vector2D(float x = 0, float y = 0);
 	~Vector2D() = default;
 };

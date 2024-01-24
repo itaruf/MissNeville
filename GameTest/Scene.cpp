@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "Scene.h"
 
-Scene::Scene(int ID) : _ID{ ID } {}
+Scene::Scene(int ID) : _ID { ID } {}
 
 Scene::~Scene()
 {
@@ -13,9 +13,6 @@ Scene::~Scene()
 			delete actor;
 	}
 	_actors.clear();
-
-	if (_startingPos)
-		delete _startingPos;
 }
 
 // Add an actor among all actors of the scene
@@ -31,7 +28,7 @@ Actor* Scene::GetActor(int index)
 }
 
 // Get the scene ID
-const int& Scene::GetID() const
+int Scene::GetID() const
 {
 	return _ID;
 }
@@ -45,38 +42,37 @@ std::vector<Actor*>& Scene::GetActors()
 void Scene::Init()
 {
 	initialized = true;
-	/*_startingPos = new Vector2D(StateController::_player->GetPosition()->_x, StateController::_player->GetPosition()->_y);*/
 }
 
 // If we want to setup a background
 void Scene::Update(float deltaTime)
 {
 	// Updating the sprites of all the actors present in the scene
-	for (const auto& item : _actors)
+	for (const auto& actor : _actors)
 	{
-		if (!item)
+		if (!actor)
 			continue;
 
-		if (!item->GetSprite())
+		if (!actor->GetSprite())
 			continue;
 
-		item->GetSprite()->Update(deltaTime);
+		actor->GetSprite()->Update(deltaTime);
 
-		if (dynamic_cast<Trigger*>(item))
+		if (dynamic_cast<Trigger*>(actor))
 		{
-			dynamic_cast<Trigger*>(item)->OnOverlap();
+			dynamic_cast<Trigger*>(actor)->OnOverlap();
 			continue;
 		}
 
-		auto c{ dynamic_cast<Character*>(item) };
+		auto character{ dynamic_cast<Character*>(actor) };
 
-		if (!c)
+		if (!character)
 			continue;
 
-		if (c && dynamic_cast<ObjectController*>(c->GetController()))
+		if (character && dynamic_cast<ObjectController*>(character->GetController()))
 		{
-			c->MoveHorizontally();
-			c->MoveVertically();
+			character->MoveHorizontally();
+			character->MoveVertically();
 			continue;
 		}
 	}
@@ -84,20 +80,20 @@ void Scene::Update(float deltaTime)
 
 void Scene::Render()
 {
-	for (const auto& item : _actors)
+	for (const auto& actor : _actors)
 	{
-		if (!item)
+		if (!actor)
 			continue;
-		if (dynamic_cast<Collectable*>(item) && dynamic_cast<Collectable*>(item)->itemized)
+		if (dynamic_cast<Collectable*>(actor) && dynamic_cast<Collectable*>(actor)->isItemized())
 			continue;
 		// Updating the sprites
-		if (!item->GetSprite())
+		if (!actor->GetSprite())
 			return;
-		item->GetSprite()->Draw();
+		actor->GetSprite()->Draw();
 		// Updating the colliders
-		if (!item->GetCollider())
+		if (!actor->GetCollider())
 			return;
-		item->GetCollider()->DrawCollision(item, 50, 50, 50);
+		actor->GetCollider()->DrawCollision(actor, 50, 50, 50);
 	}
 }
 

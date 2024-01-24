@@ -8,18 +8,18 @@
 // Class defining a candle which has a specific interaction
 class Candle : public Actor, public IInteractive
 {
-private:
 protected:
 	bool _enlighted{ false };
-public:
-	
+public:	
 	const char* _SEnlight{SFX.candle_enlight};
 	const char* _SShut{ SFX.candle_enlight };
-	Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider);
+public:
+	Candle(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider);
 	~Candle();
 
-	bool isEnlighted();
 	void Interact() override;
+
+	bool isEnlighted();
 };
 
 #endif

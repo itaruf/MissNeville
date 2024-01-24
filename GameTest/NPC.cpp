@@ -2,14 +2,10 @@
 #include "NPC.h"
 #include "StateDialogue.h"
 
-NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller)
+NPC::NPC(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, float HP, float movementSpeed, Controller* controller)
 	: Character(name, sprite, position, collider, HP, movementSpeed, controller)
 {
 	_SInteract = SFX.ghost_death;
-}
-
-NPC::~NPC()
-{
 }
 
 // Play a dialogue

@@ -7,20 +7,23 @@
 
 class Trigger : public Actor
 {
-public:
+protected:
 	bool _activated{ true };
 	CSimpleSprite::Anim _anim;
+public:
+	Delegate onTriggered;
+	Delegate onActivated;
+	Delegate onDeactivated;
+public:
 
-	Delegate _onTriggered;
-	Delegate _onActivated;
-	Delegate _onDeactivated;
-
-	Trigger(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider = new Collision(16, 16, ColliderType::Overlap), bool activated = true, const char* sfx = SFX.tp_sound);
-	virtual ~Trigger();
+	Trigger(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider = new Collision(16, 16, ColliderType::Overlap), bool activated = true, const char* sfx = SFX.tp_sound);
+	virtual ~Trigger() = default;
 
 	virtual void OnOverlap();
 	virtual void OnActivation();
 	virtual void OnDeactivation();
+
+	void SetActivation(bool value);
 };
 
 #endif

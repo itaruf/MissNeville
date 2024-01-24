@@ -7,8 +7,6 @@ CandlePuzzle::CandlePuzzle(Status status) : Puzzle(status)
 
 CandlePuzzle::~CandlePuzzle()
 {
-	printf("CANDLE Puzzle DESTRUCTOR CALLED\n");
-
 	/*for (auto& candle : _candles)
 	{
 		if (candle)
@@ -32,7 +30,7 @@ bool CandlePuzzle::IsCleared()
 
 	if (!_page)
 	{
-		auto page{ new Page(MPage.name + " 1", App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), new Vector2D(512, 394), new Collision(16, 16), 0, DProps.p1) };
+		auto page{ new Page(MPage.name + " 1", App::CreateSprite(MPage.model, 1, 1, MPage.frame, MPage.scale), Vector2D(512, 394), new Collision(16, 16), 0, DProps.p1) };
 		_page = page;
 	}
 

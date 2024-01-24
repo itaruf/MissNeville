@@ -3,17 +3,18 @@
 #ifndef TRIGGERDIALOGUE_H_
 #define TRIGGERDIALOGUE_H_
 
-#include "Trigger.h"
 #include "StateController.h"
 #include "StateDialogue.h"
+#include "Trigger.h"
 
 class Scene;
 
 class TriggerDialogue : public Trigger
 {
-public:
+private:
 	std::string _dialogue;
-	TriggerDialogue(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider = new Collision(16, 16, ColliderType::Overlap), std::string dialogue = " ", bool activated = true, const char* sfx = SFX.tp_sound);
+public:
+	TriggerDialogue(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider = new Collision(16, 16, ColliderType::Overlap), std::string dialogue = " ", bool activated = true, const char* sfx = SFX.tp_sound);
 	~TriggerDialogue();
 
 	void OnOverlap() override;

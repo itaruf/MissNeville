@@ -3,9 +3,10 @@
 #define INVENTORY_H_
 
 #include "Collectable.h"
-#include <vector>
+
 #include <unordered_map>
 #include <typeinfo>
+#include <vector>
 
 // Class to define an inventory with bags and slots
 class Inventory
@@ -13,12 +14,12 @@ class Inventory
 private:
 	static constexpr int _nbBags{ 1 };
 	static constexpr int _nbSlotBag{ 9 };
-protected:
 public:
 	// Allow the Player class to access Inventory members
 	friend class Player;
 	std::unordered_map<int, std::pair<bool, std::vector<Collectable*>>> _bags;
-	Inventory();
+public:
+	Inventory() = default;
 	Inventory(std::map<int, std::vector<Collectable*>>);
 	~Inventory();
 
@@ -27,6 +28,7 @@ public:
 	bool IsBagExist(int ID);
 	bool IsBagOpened(int ID);
 	bool IsAnyBagAlreadyOpened();
+
 	Collectable* GetItem(int ID, int slotNumber);
 
 	inline static constexpr int GetNbSlotBag()

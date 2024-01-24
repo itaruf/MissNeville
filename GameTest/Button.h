@@ -9,18 +9,18 @@
 // Class defining a button which has a specific interaction
 class Button : public Actor, public IInteractive
 {
-private:
 protected:
 	bool _activated{ true };
 public:
-	Delegate _onActivated;
-	Delegate _onDeactivated;
+	Delegate onActivated;
+	Delegate onDeactivated;
+public:
+	Button(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, bool activated = true);
+	~Button() = default;
 
-	Button(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, bool activated = true);
-	~Button();
+	void Interact() override;
 
 	bool isActivated();
-	void Interact() override;
 };
 
 #endif

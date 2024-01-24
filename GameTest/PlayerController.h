@@ -7,11 +7,9 @@
 
 class PlayerController : public Controller
 {
-private:
-protected:
 public:
 	PlayerController(bool activated = true);
-	~PlayerController();
+	~PlayerController() = default;
 
 	void MoveHorizontally(Character* actor) override;
 	void MoveVertically(Character* actor) override;

@@ -1,14 +1,6 @@
 #include "../stdafx.h"
 #include "StateInventory.h"
 
-StateInventory::StateInventory()
-{
-}
-
-StateInventory::~StateInventory()
-{
-}
-
 void StateInventory::Enter()
 {
 	if (_SBag_open)

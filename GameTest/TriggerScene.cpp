@@ -12,12 +12,12 @@ void TriggerScene::OnActivation()
 	if (_activated)
 		return;
 
-	_onActivated();
+	onActivated();
 	CSimpleSound::GetInstance().PlaySoundW(_SInteract);
-	_activated = true;
+	SetActivation(true);
 }
 
-TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D* position, Vector2D* playerPos, Collision* collider, Scene* scene, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx), _scene{ scene }, _playerPos{ playerPos }
+TriggerScene::TriggerScene(std::string name, CSimpleSprite* sprite, Vector2D position, Vector2D playerPos, Collision* collider, Scene* scene, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx), _scene{ scene }, _playerPos{ playerPos }
 {
 }
 
@@ -42,16 +42,10 @@ void TriggerScene::OnOverlap()
 			std::cout << StateController::_currentScene->GetID() << " Already Initialized" << std::endl;
 	}
 
-	if (!_playerPos)
-		return;
-
-	StateController::_player->SetPosition(_playerPos->_x, _playerPos->_y);
+	StateController::_player->SetPosition(_playerPos.x, _playerPos.y);
 
 	if (_SInteract == "")
 		return;
 
-	/*_sprite->SetAnimation(_anim);*/
-
-	/*if (!CSimpleSound::GetInstance().IsPlaying(_SInteract))*/
-		CSimpleSound::GetInstance().PlaySoundW(_SInteract);
+	CSimpleSound::GetInstance().PlaySoundW(_SInteract);
 }

@@ -5,10 +5,6 @@ PlayerController::PlayerController(bool activated) : Controller(activated)
 {
 }
 
-PlayerController::~PlayerController()
-{
-}
-
 void PlayerController::MoveHorizontally(Character* actor)
 {
 	if (!_activated)
@@ -17,14 +13,14 @@ void PlayerController::MoveHorizontally(Character* actor)
 	if (!actor->_sprite)
 		return;
 
-	float x{ actor->_position->_x }, y{ actor->_position->_y };
+	float x{ actor->_position.x }, y{ actor->_position.y };
 	if (App::GetController().GetLeftThumbStickX() > 0.5f)
 	{
 		// Setting up the data to match the RIGHT direction
 		actor->_direction = Direction::RIGHT;
 		actor->_sprite->SetAnimation(actor->_sprite->ANIM_RIGHT);
-		x = actor->_position->_x + actor->_movementSpeed;
-		y = actor->_position->_y;
+		x = actor->_position.x + actor->_movementSpeed;
+		y = actor->_position.y;
 	}
 
 	else if (App::GetController().GetLeftThumbStickX() < -0.5f)
@@ -32,8 +28,8 @@ void PlayerController::MoveHorizontally(Character* actor)
 		// Setting up the data to match the LEFT direction
 		actor->_direction = Direction::LEFT;
 		actor->_sprite->SetAnimation(actor->_sprite->ANIM_LEFT);
-		x = actor->_position->_x - actor->_movementSpeed;
-		y = actor->_position->_y;
+		x = actor->_position.x - actor->_movementSpeed;
+		y = actor->_position.y;
 	}
 
 	for (const auto& other : StateController::_currentScene->GetActors())
@@ -70,14 +66,14 @@ void PlayerController::MoveVertically(Character* actor)
 	if (!actor->_sprite)
 		return;
 
-	float x{ actor->_position->_x }, y{ actor->_position->_y };
+	float x{ actor->_position.x }, y{ actor->_position.y };
 	if (App::GetController().GetLeftThumbStickY() > 0.5f)
 	{
 		// Setting up the data to match the UP direction
 		actor->_direction = Direction::UP;
 		actor->_sprite->SetAnimation(actor->_sprite->ANIM_FORWARDS);
-		x = actor->_position->_x;
-		y = actor->_position->_y + actor->_movementSpeed;
+		x = actor->_position.x;
+		y = actor->_position.y + actor->_movementSpeed;
 	}
 
 	else if (App::GetController().GetLeftThumbStickY() < -0.5f)
@@ -85,8 +81,8 @@ void PlayerController::MoveVertically(Character* actor)
 		// Setting up the data to match the DOWN direction
 		actor->_direction = Direction::DOWN;
 		actor->_sprite->SetAnimation(actor->_sprite->ANIM_BACKWARDS);
-		x = actor->_position->_x;
-		y = actor->_position->_y - actor->_movementSpeed;
+		x = actor->_position.x;
+		y = actor->_position.y - actor->_movementSpeed;
 	}
 
 	for (const auto& other : StateController::_currentScene->GetActors())

@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "TriggerAnimation.h"
 
-TriggerAnimation::TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx)
+TriggerAnimation::TriggerAnimation(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx)
 {
 }
 
@@ -20,16 +20,16 @@ void TriggerAnimation::OnOverlap()
 	if (!_collider->isOverlapping(StateController::_player, this))
 		return;
 
-	if (!_targetSprite)
+	if (!targetSprite)
 		return;
 
-	if (!_targetAnim)
+	if (!targetAnim)
 		return;
 
 	_activated = !_activated;
 
 	PlayAnimation();
-	_onTriggered();
+	onTriggered();
 
 	if (_SInteract == "")
 		return;
@@ -41,17 +41,17 @@ void TriggerAnimation::OnOverlap()
 
 void TriggerAnimation::OnActivation()
 {
-	_activated = true;
+	SetActivation(true);
 }
 
 void TriggerAnimation::PlayAnimation()
 {
-	_onPlayingAnim();
-	_targetSprite->SetAnimation(_targetAnim);
-	auto tmp = _targetSprite->GetAnimations()[_targetSprite->GetCurrentAnim()].m_frames;
-	if (tmp[_targetSprite->GetFrame()] == tmp[tmp.size() - 1])
+	onPlayingAnim();
+	targetSprite->SetAnimation(targetAnim);
+	auto tmp = targetSprite->GetAnimations()[targetSprite->GetCurrentAnim()].m_frames;
+	if (tmp[targetSprite->GetFrame()] == tmp[tmp.size() - 1])
 	{
-		_targetSprite->SetAnimation(-1);
+		targetSprite->SetAnimation(-1);
 		return;
 	}
 }

@@ -7,6 +7,6 @@ interface ICollectable
 {
 public:
 	// Each item will have its own treatment
-	virtual bool UseItem() = 0;
+	virtual void UseItem() = 0;
 	virtual ~ICollectable() = default;
 };

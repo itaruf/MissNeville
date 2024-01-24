@@ -1,7 +1,7 @@
 #include "../stdafx.h"
 #include "TriggerDialogue.h"
 
-TriggerDialogue::TriggerDialogue(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, std::string dialogue, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx), _dialogue{ dialogue }
+TriggerDialogue::TriggerDialogue(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, std::string dialogue, bool activated, const char* sfx) : Trigger(name, sprite, position, collider, activated, sfx), _dialogue{ dialogue }
 {
 }
 
@@ -27,10 +27,10 @@ void TriggerDialogue::OnOverlap()
 
 	stateDialogue->_currentDialogue.emplace_back(_dialogue);
 	StateController::SetState(State::DIALOGUE);
-	_activated = false;
+	SetActivation(false);
 }
 
 void TriggerDialogue::OnActivation()
 {
-	_activated = true;
+	SetActivation(true);
 }

@@ -2,28 +2,30 @@
 #ifndef Puzzle_H_
 #define Puzzle_H_
 
-#include <vector>
-#include "Utilities.h"
 #include "EStatus.h"
+#include "Utilities.h"
+
+#include <vector>
 
 // Base class to define the Puzzles of the game
 class Puzzle
 {
-private:
 protected:
-public:
-
-	// a puzzle has multiple states
 	Status _status;
-	Delegate _onSolved;
-
+public:
+	// a puzzle has multiple states
+	Delegate onSolved;
+public:
 	Puzzle(Status status = Status::PENDING);
-	virtual ~Puzzle();
+	virtual ~Puzzle() = default;
 
 	Status GetStatus();
-	virtual bool IsCleared() = 0;
+	void SetStatus(Status status);
+
 	bool StartPuzzle();
 	bool EndPuzzle();
+
+	virtual bool IsCleared() = 0;
 };
 
 #endif

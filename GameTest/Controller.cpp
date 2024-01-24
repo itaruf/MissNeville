@@ -5,6 +5,7 @@ Controller::Controller(bool activated) : _activated{activated}
 {
 }
 
-Controller::~Controller()
+void Controller::SetActivation(bool value)
 {
+	_activated = value;
 }

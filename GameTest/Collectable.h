@@ -8,21 +8,25 @@
 // Actor which can be collected by the player and itemized
 class Collectable : public Actor, public ICollectable
 {
-private:
-protected:
 public:
-	Delegate _onCollected;
-	int _ID;
-	std::string _description;
-	bool itemized = false;
+	Delegate onCollected;
 	const char* _SCollected{ SFX.item_pick2 };
 	const char* _SUsed{ SFX.item_pick2 };
-	Collectable(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, int ID = 0, std::string description = "");
+protected:
+	int _ID;
+	std::string _description;
+	bool _itemized = false;
+public:
+	Collectable(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, int ID = 0, std::string description = "");
 	~Collectable();
 
-	// Each Collectable will have its own treatment
+	int GetID();
+	bool isItemized();
+
 	void OnCollected();
-	virtual bool UseItem();
+
+	// Each Collectable will have its own treatment
+	virtual void UseItem();
 };
 
 #endif

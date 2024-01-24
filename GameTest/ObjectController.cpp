@@ -5,30 +5,26 @@ ObjectController::ObjectController(bool activated) : Controller(activated)
 {
 }
 
-ObjectController::~ObjectController()
-{
-}
-
 void ObjectController::MoveHorizontally(Character* actor)
 {
 	if (!_activated)
 		return;
 
-	float x{ actor->GetPosition()->_x }, y{ actor->GetPosition()->_y };
+	float x{ actor->GetPosition().x }, y{ actor->GetPosition().y };
 	Direction nextDir{ actor->_direction };
 	if (actor->GetDirection() == Direction::RIGHT)
 	{
 		nextDir = Direction::LEFT;
 		actor->GetSprite()->SetAnimation(actor->GetSprite()->ANIM_RIGHT);
-		x = actor->GetPosition()->_x + actor->GetMovementSpeed();
-		y = actor->GetPosition()->_y;
+		x = actor->GetPosition().x + actor->GetMovementSpeed();
+		y = actor->GetPosition().y;
 	}
 	else if (actor->GetDirection() == Direction::LEFT)
 	{
 		nextDir = Direction::RIGHT;
 		actor->GetSprite()->SetAnimation(actor->GetSprite()->ANIM_LEFT);
-		x = actor->GetPosition()->_x - actor->GetMovementSpeed();
-		y = actor->GetPosition()->_y;
+		x = actor->GetPosition().x - actor->GetMovementSpeed();
+		y = actor->GetPosition().y;
 	}
 
 	if (actor->GetCollider()->_colliderType == ColliderType::Block)
@@ -44,7 +40,7 @@ void ObjectController::MoveHorizontally(Character* actor)
 				{
 					if (other->GetTag() == "wall")
 					{
-						_onChangeDirection();
+						onChangeDirection();
 						actor->_direction = nextDir;
 					}
 					return;
@@ -69,14 +65,13 @@ void ObjectController::MoveHorizontally(Character* actor)
 			{
 				if (other->GetTag() == "wall")
 				{
-					_onChangeDirection();
+					onChangeDirection();
 					actor->_direction = nextDir;
 				}
 			}
 			actor->GetSprite()->SetPosition(x, y);
 		}
 	}
-
 }
 
 void ObjectController::MoveVertically(Character* actor)
@@ -84,21 +79,21 @@ void ObjectController::MoveVertically(Character* actor)
 	if (!_activated)
 		return;
 
-	float x{ actor->GetPosition()->_x}, y{ actor->GetPosition()->_y };
+	float x{ actor->GetPosition().x}, y{ actor->GetPosition().y };
 	Direction nextDir{ actor->_direction };
 	if (actor->GetDirection() == Direction::UP)
 	{
 		nextDir = Direction::DOWN;
 		actor->GetSprite()->SetAnimation(actor->GetSprite()->ANIM_FORWARDS);
-		x = actor->GetPosition()->_x;
-		y = actor->GetPosition()->_y + actor->GetMovementSpeed();
+		x = actor->GetPosition().x;
+		y = actor->GetPosition().y + actor->GetMovementSpeed();
 	}
 	else if (actor->GetDirection() == Direction::DOWN)
 	{
 		nextDir = Direction::UP;
 		actor->GetSprite()->SetAnimation(actor->GetSprite()->ANIM_BACKWARDS);
-		x = actor->GetPosition()->_x;
-		y = actor->GetPosition()->_y - actor->GetMovementSpeed();
+		x = actor->GetPosition().x;
+		y = actor->GetPosition().y - actor->GetMovementSpeed();
 	}
 
 	if (actor->GetCollider()->_colliderType == ColliderType::Block)
@@ -114,7 +109,7 @@ void ObjectController::MoveVertically(Character* actor)
 				{
 					if (other->GetTag() == "wall")
 					{
-						_onChangeDirection();
+						onChangeDirection();
 						actor->_direction = nextDir;
 					}
 					return;
@@ -138,7 +133,7 @@ void ObjectController::MoveVertically(Character* actor)
 			{
 				if (other->GetTag() == "wall")
 				{
-					_onChangeDirection();
+					onChangeDirection();
 					actor->_direction = nextDir;
 				}
 			}

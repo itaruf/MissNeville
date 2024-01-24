@@ -5,14 +5,10 @@ TPPuzzle::TPPuzzle(Status status, Page* page) : Puzzle(status), _page{page}
 {
 }
 
-TPPuzzle::~TPPuzzle()
-{
-}
-
 bool TPPuzzle::IsCleared()
 {
 	if (_status == Status::CLEARED || _status == Status::NOTSTARTED)
 		return true;
 
-	return _page->itemized;
+	return _page->isItemized();
 }

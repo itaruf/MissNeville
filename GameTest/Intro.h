@@ -2,19 +2,16 @@
 #ifndef INTRO_H_
 #define INTRO_H_
 
-#include "Scene.h"
-#include "StateController.h"
 #include "Dialogues.h"
+#include "StateController.h"
+#include "Scene.h"
 
-class StateController;
 // Intro scene 
 class Intro : public Scene
 {
-private:
-protected:
 public:
 	Intro(int ID);
-	~Intro();
+	~Intro() = default;
 
 	void Init() override;
 	void Update(float deltaTime) override;

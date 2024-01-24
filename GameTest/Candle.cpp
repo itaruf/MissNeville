@@ -1,13 +1,12 @@
 #include "../stdafx.h"
 #include "Candle.h"
 
-Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : Actor(name, sprite, position, collider)
+Candle::Candle(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider) : Actor(name, sprite, position, collider)
 {
 }
 
 Candle::~Candle()
 {
-	printf("CANDLE DESTRUCTOR CALLED\n");
 }
 
 // Get the current enlightnement of the candle

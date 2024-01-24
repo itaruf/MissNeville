@@ -1,26 +1,19 @@
 #include "../stdafx.h"
 #include "Player.h"
 
-Player::Player(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed, controller), _inventory{ inventory }
+Player::Player(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, float HP, float movementSpeed, Controller* controller, Inventory* inventory) : Character(name, sprite, position, collider, _HP, movementSpeed, controller), _inventory{ inventory }
 {
-	/*_SFXInteract = CSimpleSound::GetInstance();
-	_SFXDeath = CSimpleSound::GetInstance();*/
-
 	// Instantiating all the bags and slots of the inventory
-	for (auto i = 0; i < Inventory::_nbBags; ++i)
+	for (auto i = 0; i < Inventory::GetNbBags(); ++i)
 	{
 		_inventory->_bags.insert(std::make_pair(i, std::make_pair(false, std::vector<Collectable*>())));
-		for (auto j = 0; j < Inventory::_nbSlotBag; ++j)
+		for (auto j = 0; j < Inventory::GetNbSlotBag(); ++j)
 			_inventory->_bags[i].second.emplace_back(nullptr);
 	}
 }
 
 Player::~Player()
 {
-	printf("CHARACTER DESTRUCTOR CALLED\n");
-
-	// Freeing the memory allocated on the heap
-
 	if (_inventory)
 		delete _inventory;
 }
@@ -57,9 +50,6 @@ bool Player::Interact(IInteractive* actor)
 		if (StateController::_state != State::REGULAR)
 			return false;
 
-		/*if (dynamic_cast<Actor*>(actor)->_SInteract)
-			CSimpleSound::GetInstance().PlaySound(dynamic_cast<Actor*>(actor)->_SInteract, 0);*/
-
 		actor->Interact();
 
 		if (dynamic_cast<IDialogue*>(actor))
@@ -82,22 +72,21 @@ bool Player::Interact(Collectable* collectable)
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A))
 	{
 		// The collectable is meant to be stored in a dedicated bag (decided with the collectable ID)
-		for (auto i = 0; i < _inventory->_bags[collectable->_ID].second.size(); ++i)
+		for (auto i = 0; i < _inventory->_bags[collectable->GetID()].second.size(); ++i)
 		{
 			// Looking for the first empty slot
-			if (!_inventory->_bags[collectable->_ID].second[i])
+			if (!_inventory->_bags[collectable->GetID()].second[i])
 			{
 				// Stock the collected object in an empty bag slot
-				_inventory->_bags[collectable->_ID].second[i] = collectable;
+				_inventory->_bags[collectable->GetID()].second[i] = collectable;
 				collectable->OnCollected();
-				std::cout << collectable->GetName() << " added in bag " << collectable->_ID << " at slot " << i << std::endl;
-				// Removing the actor from the current scene as it is being itemized
+				std::cout << collectable->GetName() << " added in bag " << collectable->GetID() << " at slot " << i << std::endl;
+				// Removing the actor from the current scene as it is being isItemized()
 				StateController::_currentScene->RemoveActor(collectable);
-				/*CSimpleSound::GetInstance().PlaySound(collectable->_SInteract, 0, -2500);*/
 				return true;
 			}
 		}
-		std::cout << collectable->_ID << std::endl;
+		std::cout << collectable->GetID() << std::endl;
 		std::cout << collectable->GetName() << " couldn't be added" << std::endl;
 	}
 
@@ -148,7 +137,7 @@ void Player::GoToBagSlot(int ID, int slotNumber)
 
 	// Check if an item is stored at the specific slot
 	if (_inventory->GetItem(ID, slotNumber))
-		std::cout << _inventory->GetItem(ID, slotNumber)->UseItem() << std::endl;
+		std::cout << "item found at slot " << slotNumber << std::endl;
 	else
 		std::cout << "No item found at slot " << slotNumber << std::endl;
 }
@@ -199,11 +188,10 @@ void Player::DisplayIcon(CSimpleSprite* icon)
 	if (dynamic_cast<IInteractive*>(closest) || dynamic_cast<Collectable*>(closest));
 	{
 		App::Print(MIDDLE_WIDTH, APP_VIRTUAL_HEIGHT - 120, closest->GetName().c_str(), 0.7, 0,  0.5);
-		icon->SetPosition(_position->_x, _position->_y + 32);
+		icon->SetPosition(_position.x, _position.y + 32);
 		icon->Draw();
 	}
 }
-
 
 void Player::PlayDialogue()
 {
@@ -241,10 +229,7 @@ void Player::Hit()
 	}
 }
 
-void Player::Respawn(Vector2D* newPos)
+void Player::Respawn(Vector2D newPos)
 {
-	if (!newPos)
-		return;
-
-	GetSprite()->SetPosition(newPos->_x, newPos->_y);
+	GetSprite()->SetPosition(newPos.x, newPos.y);
 }

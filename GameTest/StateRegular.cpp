@@ -1,14 +1,6 @@
 #include "../stdafx.h"
 #include "StateRegular.h"
 
-StateRegular::StateRegular()
-{
-}
-
-StateRegular::~StateRegular()
-{
-}
-
 void StateRegular::Enter()
 {
 }

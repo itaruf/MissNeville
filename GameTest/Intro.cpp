@@ -5,10 +5,6 @@ Intro::Intro(int ID) : Scene(ID)
 {
 }
 
-Intro::~Intro()
-{
-}
-
 void Intro::Init()
 {
 	if (initialized)
@@ -16,13 +12,13 @@ void Intro::Init()
 
 	Scene::Init();
 
-	new Actor("Journal", App::CreateSprite(".\\TestData\\Backgrounds\\FlippingPages.bmp", 1, 1, 0, 3), new Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT), new Collision(0, 0, ColliderType::Overlap));
+	new Actor("Journal", App::CreateSprite(".\\TestData\\Backgrounds\\FlippingPages.bmp", 1, 1, 0, 3), Vector2D(MIDDLE_WIDTH, MIDDLE_HEIGHT), new Collision(0, 0, ColliderType::Overlap));
 
 	auto stateDialogue{ dynamic_cast<StateDialogue*>(StateController::_gameStates[2]) };
 	if (!stateDialogue)
 		return;
 
-	stateDialogue->_onDialogueEnd += [this]() { StateController::LoadScene(5); };
+	stateDialogue->onDialogueEnd += [this]() { StateController::LoadScene(5); };
 	stateDialogue->_currentDialogue.emplace_back(DIntro.i1);
 
 	StateController::SetState(State::DIALOGUE);
@@ -44,7 +40,7 @@ void Intro::Exit()
 	if (!stateDialogue)
 		return;
 
-	stateDialogue->_onDialogueEnd.funcs.clear();
+	stateDialogue->onDialogueEnd.funcs.clear();
 }
 
 bool Intro::IsRoomCleared()

@@ -5,8 +5,10 @@ MirrorPuzzle::MirrorPuzzle(Status status) : Puzzle(status), _mirror{nullptr}
 {
 }
 
-MirrorPuzzle::~MirrorPuzzle()
+void MirrorPuzzle::SetMirror(Mirror* mirror)
 {
+	_mirror = mirror;
+	mirror = nullptr;
 }
 
 bool MirrorPuzzle::IsCleared()

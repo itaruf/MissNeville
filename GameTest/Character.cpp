@@ -1,20 +1,12 @@
 #include "../stdafx.h"
 #include "Character.h"
 
-//CSimpleSound& Character::_SFXDeath = CSimpleSound::GetInstance();
-//CSimpleSound& Character::_SFXInteract = CSimpleSound::GetInstance();
-
-Character::Character(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider, float HP, float movementSpeed, Controller* controller) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }, _controller{controller}
+Character::Character(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider, float HP, float movementSpeed, Controller* controller) : Actor(name, sprite, position, collider), _HP{ HP }, _movementSpeed{ movementSpeed }, _controller{controller}
 {
-	/*_footStep = new CSimpleSprite(MBlood.model);*/
-	/*std::cout << "CHARACTER CONSTRUCTOR CALLED" << std::endl;*/
-	/*_SFXInteract = new CSimpleSound(SFX.item_pick);*/
 }
 
 Character::~Character()
 {
-	printf("CHARACTER DESTRUCTOR CALLED\n");
-
 	if (_controller)
 		delete _controller;
 
@@ -72,7 +64,6 @@ bool Character::IsMoving()
 {
 	if (App::GetController().GetLeftThumbStickY() == 0.f && App::GetController().GetLeftThumbStickX() == 0.f)
 	{
-		/*_direction = Direction::STILL;*/
 		if (_sprite->GetCurrentAnim() == -1)
 			return false;
 

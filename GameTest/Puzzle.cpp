@@ -5,11 +5,6 @@ Puzzle::Puzzle(Status status) : _status{ status }
 {
 }
 
-Puzzle::~Puzzle()
-{
-	printf("Puzzle DESTRUCTOR CALLED\n");
-}
-
 // Start the Puzzle 
 bool Puzzle::StartPuzzle()
 {
@@ -34,4 +29,9 @@ bool Puzzle::EndPuzzle()
 Status Puzzle::GetStatus()
 {
 	return _status;
+}
+
+void Puzzle::SetStatus(Status status)
+{
+	_status = status;
 }

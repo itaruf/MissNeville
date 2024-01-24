@@ -2,21 +2,17 @@
 #include "Collision.h"
 #include "Collectable.h"
 
-Collision::Collision() : Collision(32 / 2, 32 / 2, ColliderType::Block, new Vector2D())
+Collision::Collision() : Collision(32 / 2, 32 / 2, ColliderType::Block, Vector2D(0,0))
 {
 }
 
-Collision::Collision(float height, float width, ColliderType colliderType, Vector2D* offset)
+Collision::Collision(float height, float width, ColliderType colliderType, Vector2D offset)
 	: _colliderType{ colliderType }, _height{ height / 2 }, _width{ width / 2 }, _offset{std::move(offset)}
 {
 }
 
 Collision::~Collision()
 {
-	/*printf("COLLISION DESTRUCTOR CALLED\n");*/
-
-	if (_offset)
-		delete _offset;
 }
 
 // Check if an actor is colliding with another by projecting their future move
@@ -25,22 +21,22 @@ bool Collision::isColliding(Actor* actor, Actor* other, float x, float y)
 	if (!actor || !other)
 		return false;
 
-	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->itemized)
+	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->isItemized())
 		return false;
 
-	auto x1{ actor->GetPosition()->_x };
-	auto y1{ actor->GetPosition()->_y };
+	auto x1{ actor->GetPosition().x };
+	auto y1{ actor->GetPosition().y };
 	auto w1{ actor->GetCollider()->GetWidth() };
 	auto h1{ actor->GetCollider()->GetHeight() };
-	auto x1off{ actor->GetCollider()->_offset->_x };
-	auto y1off{ actor->GetCollider()->_offset->_y };
+	auto x1off{ actor->GetCollider()->_offset.x };
+	auto y1off{ actor->GetCollider()->_offset.y };
 
-	auto x2{ other->GetPosition()->_x };
-	auto y2{ other->GetPosition()->_y };
+	auto x2{ other->GetPosition().x };
+	auto y2{ other->GetPosition().y };
 	auto w2{ other->GetCollider()->GetWidth() };
 	auto h2{ other->GetCollider()->GetHeight() };
-	auto x2off{ other->GetCollider()->_offset->_x };
-	auto y2off{ other->GetCollider()->_offset->_y };
+	auto x2off{ other->GetCollider()->_offset.x };
+	auto y2off{ other->GetCollider()->_offset.y };
 
 	if (x + x1off - _width < x2 + x2off + w2 &&
 		x + x1off + _width > x2 + x2off - w2 &&
@@ -56,22 +52,22 @@ bool Collision::isOverlapping(Actor* actor, Actor* other)
 	if (!actor || !other)
 		return false;
 
-	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->itemized)
+	if (dynamic_cast<Collectable*>(other) && dynamic_cast<Collectable*>(other)->isItemized())
 		return false;
 
-	auto x1{ actor->GetPosition()->_x };
-	auto y1{ actor->GetPosition()->_y };
+	auto x1{ actor->GetPosition().x };
+	auto y1{ actor->GetPosition().y };
 	auto w1{ actor->GetCollider()->GetWidth() };
 	auto h1{ actor->GetCollider()->GetHeight() };
-	auto x1off{ actor->GetCollider()->_offset->_x};
-	auto y1off{ actor->GetCollider()->_offset->_y};
+	auto x1off{ actor->GetCollider()->_offset.x};
+	auto y1off{ actor->GetCollider()->_offset.y};
 
-	auto x2{ other->GetPosition()->_x };
-	auto y2{ other->GetPosition()->_y };
+	auto x2{ other->GetPosition().x };
+	auto y2{ other->GetPosition().y };
 	auto w2{ other->GetCollider()->GetWidth() };
 	auto h2{ other->GetCollider()->GetHeight() };
-	auto x2off{ other->GetCollider()->_offset->_x };
-	auto y2off{ other->GetCollider()->_offset->_y };
+	auto x2off{ other->GetCollider()->_offset.x };
+	auto y2off{ other->GetCollider()->_offset.y };
 
 	if (x1 + x1off - _width < x2 + x2off + w2 &&
 		x1 + x1off + _width > x2 + x2off - w2 &&
@@ -119,33 +115,33 @@ void Collision::DrawCollision(Actor* actor, float r, float g, float b)
 
 	// Upper Bound
 	App::DrawLine(
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x - _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y + _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x + _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y + _height,
 		r, g, b);
 
 	// Bottom Bound
 	App::DrawLine(
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x - _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y - _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x + _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y - _height,
 		r, g, b);
 
 	// Left Bound
 	App::DrawLine(
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x - _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x - _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y - _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x - _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y + _height,
 		r, g, b);
 
 	// Right Bound
 	App::DrawLine(
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y - _height,
-		actor->GetPosition()->_x + actor->GetCollider()->_offset->_x + _width,
-		actor->GetPosition()->_y + actor->GetCollider()->_offset->_y + _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x + _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y - _height,
+		actor->GetPosition().x + actor->GetCollider()->_offset.x + _width,
+		actor->GetPosition().y + actor->GetCollider()->_offset.y + _height,
 		r, g, b);
 }

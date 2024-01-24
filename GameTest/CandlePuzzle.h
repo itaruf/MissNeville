@@ -2,18 +2,17 @@
 #ifndef CANDLEPUZZLE_H_
 #define CANDLEPUZZLE_H_
 
-#include "Puzzle.h"
 #include "Candle.h"
+#include "Puzzle.h"
 
 // Class which defines a puzzle involving candles
 class CandlePuzzle : public Puzzle
 {
-private:
 protected:
 	std::vector<Candle*> _candles;
 public:
 	Page* _page;
-
+public:
 	CandlePuzzle(Status status = Status::PENDING);
 	~CandlePuzzle();
 

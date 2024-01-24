@@ -7,17 +7,9 @@ Player* StateController::_player;
 State StateController::_state;
 std::vector<GameState*> StateController::_gameStates;
 GameState* StateController::_currentGameState;
-StateController::Delegate StateController::delegate;
-
-StateController::StateController()
-{
-}
-
 
 StateController::~StateController()
 {
-	printf("GAME STATE DESTRUCTOR CALLED\n");
-
 	if (_player)
 		delete _player;
 
@@ -46,8 +38,6 @@ void StateController::SetPlayer(Player* player)
 
 void StateController::SwitchState()
 {
-	/*delegate();*/
-
 	switch (_state)
 	{
 	case State::REGULAR:

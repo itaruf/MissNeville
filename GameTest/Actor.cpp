@@ -1,9 +1,8 @@
 #include "../stdafx.h"
 #include "Actor.h"
 
-Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collision* collider) : _name{ std::move(name) }, _sprite(std::move(sprite)), _position{ position }, _collider{ std::move(collider) }
+Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D position, Collision* collider) : _name{ std::move(name) }, _sprite(std::move(sprite)), _position{ position }, _collider{ std::move(collider) }
 {
-
 	// Immediately Set the position of the actor 
 
 	if (!StateController::_currentScene)
@@ -18,19 +17,12 @@ Actor::Actor(std::string name, CSimpleSprite* sprite, Vector2D* position, Collis
 
 Actor::Actor(Actor* actor) : _name(actor->_name), _sprite(actor->_sprite), _position(actor->_position), _collider(actor->_collider), _mobility(actor->_mobility), _direction(actor->_direction)
 {
-
 }
 
 Actor::~Actor()
-{	std::cout << "ACTOR DESTRUCTOR CALLED" << std::endl;
-
-	// Freeing all the memory allocated on the heap
-
+{
 	if (_sprite)
 		delete _sprite;
-
-	if (_position)
-		delete _position;
 
 	if (_collider)
 		delete _collider;
@@ -65,10 +57,7 @@ void Actor::SetSprite(CSimpleSprite* sprite)
 	_sprite = sprite;
 	// Immediately Set the position of the sprite and thus, of the actor
 
-	if (!_position)
-		return;
-
-	_sprite->SetPosition(_position->_x, _position->_y);
+	_sprite->SetPosition(_position.x, _position.y);
 }
 
 // Set the sprite of the actor
@@ -76,35 +65,27 @@ void Actor::SetSprite(CSimpleSprite& sprite)
 {
 	*(_sprite) = sprite;
 	// Immediately Set the position of the sprite and thus, of the actor
-	_sprite->SetPosition(_position->_x, _position->_y);
+	_sprite->SetPosition(_position.x, _position.y);
 }
 
 // Get the current position of the actor
-Vector2D* Actor::GetPosition()
+Vector2D& Actor::GetPosition()
 {
 	if (!_sprite)
-		return nullptr;
-
-	if (!_position)
-		return nullptr;
+		_position;
 
 	// The sprite of the actor manages its position
-	_sprite->GetPosition(_position->_x, _position->_y);
+	_sprite->GetPosition(_position.x, _position.y);
 	return _position;
 }
 
 // Set the position of the actor
-void Actor::SetPosition(Vector2D* position)
+void Actor::SetPosition(Vector2D position)
 {
 	if (!_sprite)
 		return;
 
-	if (!position)
-		return;
-
-	_sprite->SetPosition(position->_x, position->_y);
-	_position->_x = position->_x;
-	_position->_y = position->_y;
+	_sprite->SetPosition(position.x, position.y);
 }
 
 // Set the position of the actor
@@ -114,8 +95,6 @@ void Actor::SetPosition(float x, float y)
 		return;
 
 	_sprite->SetPosition(x, y);
-	_position->_x = x;
-	_position->_y = y;
 }
 
 // Return the collider of the actor
@@ -182,21 +161,21 @@ Actor* Actor::GetClosestActor(float ms)
 	if (GetDirection() == Direction::LEFT || GetDirection() == Direction::DOWN)
 		ms = -ms;
 
-	float x{ GetPosition()->_x };
-	float y{ GetPosition()->_y };
+	float x{ GetPosition().x };
+	float y{ GetPosition().y };
 
 	if (GetDirection() == Direction::RIGHT || GetDirection() == Direction::LEFT)
-		x = GetPosition()->_x + ms;
+		x = GetPosition().x + ms;
 	else
-		y = GetPosition()->_y + ms;
+		y = GetPosition().y + ms;
 
 	/*SORT : FROM CLOSEST ACTOR TO FARTHEST*/
 	std::sort(std::begin(interactiveActors), std::end(interactiveActors), [this, ms](Actor* const& l, Actor* const& r)
 		{
 			return
-				std::abs(GetPosition()->_x + ms - l->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - l->GetPosition()->_y + ms)
+				std::abs(GetPosition().x + ms - l->GetPosition().x + ms) + std::abs(GetPosition().y + ms - l->GetPosition().y + ms)
 				<
-				std::abs(GetPosition()->_x + ms - r->GetPosition()->_x + ms) + std::abs(GetPosition()->_y + ms - r->GetPosition()->_y + ms);
+				std::abs(GetPosition().x + ms - r->GetPosition().x + ms) + std::abs(GetPosition().y + ms - r->GetPosition().y + ms);
 		});
 
 	if (!GetCollider()->isColliding(this, interactiveActors[0], x, y))

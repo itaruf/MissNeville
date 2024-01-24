@@ -7,9 +7,9 @@
 class StateRegular : public GameState
 {
 public:
+	StateRegular() = default;
+	~StateRegular() = default;
 
-	StateRegular();
-	~StateRegular();
 	void Enter() override;
 	void Update() override;
 	void Render() override;

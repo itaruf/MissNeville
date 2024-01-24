@@ -2,54 +2,55 @@
 #ifndef SCENE_H_
 #define SCENE_H_
 
-#include <algorithm>
-#include <vector>
-#include "Puzzle.h"
 #include "App/app.h"
-#include "Utilities.h"
+
+#include "Actor.h"
+#include "Collectable.h"
 #include "Dialogues.h"
+#include "Models.h"
+#include "Page.h"
+#include "Puzzle.h"
+#include "TriggerAnimation.h"
+#include "TriggerScene.h"
+#include "Utilities.h"
+
+#include <algorithm>
+#include <random>
+#include <vector>
 
 class Actor;
-#include "Actor.h"
-
-class StateController;
-class Player;
 class Candle;
 class Collectable;
 class Page;
-#include "Page.h"
-#include "TriggerScene.h";
-#include "Models.h"
-#include "TriggerAnimation.h"
-#include <random>
-#include "Collectable.h"
-#include "TriggerScene.h"
+class Player;
+class StateController;
+
 // Class which defines a scene : the game is meant to be divided in multiple scenes
 class Scene
 {
-private:
 protected:
 	int _ID;
 	std::vector<Actor*> _actors;
 	const char* sfx{SFX.scene};
-
 public:
 	Delegate _delegate;
-	Vector2D* _startingPos{ nullptr };
+	Vector2D _startingPos{ 0,0 };
+
 	bool initialized{ false };
+
 	Scene* _NScene{ nullptr };
 	Scene* _EScene{ nullptr };
 	Scene* _WScene{ nullptr };
 	Scene* _SScene{ nullptr };
 
 	std::vector<TriggerScene*> doors;
-
+public:
 	Scene(int ID);
-
 	virtual ~Scene();
 
+	int GetID() const;
+
 	Actor* GetActor(int index);
-	const int& GetID() const;
 	std::vector<Actor*>& GetActors();
 	bool RemoveActor(Actor* item);
 	void AddActor(Actor* actor);
