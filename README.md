@@ -1,11 +1,13 @@
-# DevelopAtUbisoft-IVT-2022
+# Develop@Ubisoft 2022
   - Second version of the game for the 27/06/2022 deadline.
 
 # Miss Neville : A 2D Puzzle Game 🧩
 ![Build Passing](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
-[![Itch.io](https://img.shields.io/badge/itch.io%20page%20link-%23f2448a)](https://itaruf.itch.io/miss-neville)
-[![Portfolio](https://img.shields.io/badge/detailed%20project%20link-%235203fc)](https://itaruf.github.io/projects.html)
+[![Itch.io](https://img.shields.io/badge/download-itch.io-%23e3326d)](https://itaruf.itch.io/miss-neville)
+[![Youtube](https://img.shields.io/badge/demo-youtube-%23db1818)](https://www.youtube.com/watch?v=Mg9MkwpjBAU)
+[![Portfolio](https://img.shields.io/badge/details-personal%20website-%235203fc)](https://itaruf.github.io/projects.html)
+
 - You are a detective who goes investigating the mysterious disappearance of an english noble familly, the Neville, in their mansion now cursed by the people. Solve puzzles which will allow you to get closer to the truth...
 
 ## Skills :fire:
