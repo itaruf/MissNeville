@@ -26,22 +26,29 @@
 ## Game Visuals & Game Systems 🎲 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
   <div style="margin: 10px; text-align: center;">
-    <img src="https://media.giphy.com/media/4FAYugZa9sY9r9vEw2/giphy.gif" style="display: block; margin: auto;" width="300" />
+    <img src="https://media.giphy.com/media/4FAYugZa9sY9r9vEw2/giphy.gif" style="display: block; margin: auto;" width="246" />
     <img src="https://media.giphy.com/media/XtCaFbDTnot4LhiSNs/giphy.gif" style="display: block; margin: auto;" width="400" />
   </div>
 </div>
-<br>
-<ol>
+<h4>Dialog system</h4>
+<ul>
   <li>
-    The Dialog system: Provides scripted interactions between characters, enriching the story while guiding the player. They can be triggered when the player waks a certain area, talks to a NPC or complete a puzzle.
+    Provides scripted interactions between characters, enriching the story while guiding the player. They can be triggered when the player waks a certain area, talks to a NPC or complete a puzzle.
   </li>
+</ul>
+</ul>
+<h4>Event system</h4>
+<ul>
   <li>
-    The Event system: throughout the game, events are triggered to enhance/advance the narrative or gameplay experience. Like above, they can be triggered through different ways.
+    throughout the game, events are triggered to enhance/advance the narrative or gameplay experience. Like above, they can be triggered through different ways.
   </li> 
-    <li>
-    The Puzzle system: The player progresses by solving puzzles with a consistent mechanism: start, await condition fulfillment, then conclude. Each solved puzzle rewards pages that deepen story understanding.
+</ul>
+<h4>Puzzle system</h4>
+<ul>
+  <li>
+  The player progresses by solving puzzles with a consistent mechanism: start, await condition fulfillment, then conclude. Each solved puzzle rewards pages that deepen story understanding.
   </li> 
-</ol>
+</ul>
 <br>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
   <div style="margin: 10px; text-align: center;">
@@ -49,18 +56,24 @@
     <img src="https://media.giphy.com/media/WPanaEqHygj4wlT0h9/giphy.gif" style="display: block; margin: auto;" width="410" />
   </div>
 </div>
-<br>
-<ol>
+<h4>Map system</h4>
+<ul>
   <li>
-    The map system: Each room is connected to another, but can/can't be accessible depending on the player's current progression in the story.
+    Each room is connected to another, but can/can't be accessible depending on the player's current progression in the story.
   </li>
+</ul>
+<h4>Inventory system</h4>
+<ul>
   <li>
-    The inventory system: The player can navigate through their inventory, which has 9 slots. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
+    The player can navigate through their inventory, which has 9 slots. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
   </li> 
-    <li>
-    The collision system: A 2D-square shaped collision with different collision responses: trigger, block, and overlap, that enables versatile interaction with the environment, and triggers to start events.
+</ul>
+<h4>Collision system</h4>
+<ul>
+  <li>
+   A 2D-square shaped collision with different collision responses: trigger, block, and overlap, that enables versatile interaction with the environment, and triggers to start events.
   </li> 
-</ol>
+</ul>
 
 ## Challenges Encountered ⚡
 - **First (semi) professional project** with deadlines and weekly meetings to attend to.
