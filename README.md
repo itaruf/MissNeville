@@ -12,7 +12,7 @@
 
 ## Skills :fire:
 - **Programming Languages**: C++
-- **Tools**: VS Community 2019, Git
+- **Tools**: Visual Studio Community 2019, Git
 
 ## Project Highlights ⭐ 
 - **Participated** in a mentorship program focused on developing a C++ game, **Miss Neville**, and presented it to game development experts.
