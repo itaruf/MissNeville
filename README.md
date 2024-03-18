@@ -1,7 +1,7 @@
 ## Develop@Ubisoft 2022
   - Second version of the game for the 27/06/2022 deadline.
 
-## Miss Neville : A 2D Puzzle Game 🧩
+## Miss Neville: A 2D Puzzle Game 🧩
 ![Build Passing](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 [![Itch.io](https://img.shields.io/badge/download-itch.io-%23e3326d)](https://itaruf.itch.io/miss-neville)
