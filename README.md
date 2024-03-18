@@ -1,7 +1,7 @@
-# Develop@Ubisoft 2022
+## Develop@Ubisoft 2022
   - Second version of the game for the 27/06/2022 deadline.
 
-# Miss Neville : A 2D Puzzle Game 🧩
+## Miss Neville : A 2D Puzzle Game 🧩
 ![Build Passing](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 [![Itch.io](https://img.shields.io/badge/download-itch.io-%23e3326d)](https://itaruf.itch.io/miss-neville)
@@ -38,6 +38,9 @@
   <li>
     The Event system: throughout the game, events are triggered to enhance/advance the narrative or gameplay experience. Like above, they can be triggered through different ways.
   </li> 
+    <li>
+    The Puzzle system: The player progresses by solving puzzles with a consistent mechanism: start, await condition fulfillment, then conclude. Each solved puzzle rewards pages that deepen story understanding.
+  </li> 
 </ol>
 <br>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
@@ -52,7 +55,10 @@
     The map system: Each room is connected to another, but can/can't be accessible depending on the player's current progression in the story.
   </li>
   <li>
-    The inventory system: The player can navigate through their inventory which currently has 2 items. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
+    The inventory system: The player can navigate through their inventory, which has 9 slots. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
+  </li> 
+    <li>
+    The collision system: A 2D-square shaped collision with different collision responses: trigger, block, and overlap, that enables versatile interaction with the environment, and triggers to start events.
   </li> 
 </ol>
 
