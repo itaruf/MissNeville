@@ -1,6 +1,5 @@
 # DevelopAtUbisoft-IVT-2022
-  Second version of the game for the 27/06/2022 deadline.
-  Credits.txt
+  - Second version of the game for the 27/06/2022 deadline.
 
 # Miss Neville : A 2D Puzzle Game 🧩
 ![Build Passing](https://img.shields.io/badge/build-passing-brightgreen)
@@ -13,7 +12,7 @@
 - **Programming Languages**: C++
 - **Tools**: VS Community 2019, Git
 
-## Project Highlights :star: 
+## Project Highlights ⭐ 
 - **Participated** in a mentorship program focused on developing a C++ game, **Miss Neville**, and presented it to game development experts.
 - **Handled every aspect** of its development, including **programming, art, sound, story, and design**.
 - **Implemented game mechanics** including inventory, puzzles, objectives, environment, and NPC interactions.
@@ -22,7 +21,7 @@
 - **Managed the project cycle** in weekly reports with Ubisoft mentors.
 - **Conducted a post-challenge interview** available on Ubisoft’s website : [here's a direct link !](https://www.ubisoft.com/en-us/company/careers/interns-graduates/articles/imane-taruf-gameplay-programmer)
 
-## Game Visuals & Game Systems :video_game: 
+## Game Visuals & Game Systems 🎲 
 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
   <div style="margin: 10px; text-align: center;">
     <img src="https://media.giphy.com/media/4FAYugZa9sY9r9vEw2/giphy.gif" style="display: block; margin: auto;" width="300" />
@@ -46,7 +45,7 @@
 <br>
 4. The inventory system: The player can navigate through their inventory which currently has 2 items. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
       
-## :zap: Challenges Encountered
+## Challenges Encountered ⚡
 - **First (semi) professional project** with deadlines and weekly meetings to attend to.
 - **Explain as precisely as possible** what was done, and what’s planned for the next meeting.
 - **Get the hang of the provided API** to start developing the main features as soon as possible.
