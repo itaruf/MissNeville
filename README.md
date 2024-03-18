@@ -29,10 +29,14 @@
   </div>
 </div>
 <br>
-1. The Dialog system: Provides scripted interactions between characters, enriching the story while guiding the player. They can be triggered when the player waks a certain area, talks to a NPC or complete a puzzle.
-<br>
-2. The Event system: throughout the game, events are triggered to enhance/advance the narrative or gameplay experience. Like above, they can be triggered through different ways.
-<br>
+<ol>
+  <li>
+    The Dialog system: Provides scripted interactions between characters, enriching the story while guiding the player. They can be triggered when the player waks a certain area, talks to a NPC or complete a puzzle.
+  </li>
+  <li>
+    The Event system: throughout the game, events are triggered to enhance/advance the narrative or gameplay experience. Like above, they can be triggered through different ways.
+  </li> 
+</ol>
 <br>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
   <div style="margin: 10px; text-align: center;">
@@ -41,10 +45,15 @@
   </div>
 </div>
 <br>
-3. The map system: Each room is connected to another, but can/can't be accessible depending on the player's current progression in the story.
-<br>
-4. The inventory system: The player can navigate through their inventory which currently has 2 items. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
-      
+<ol>
+  <li>
+    The map system: Each room is connected to another, but can/can't be accessible depending on the player's current progression in the story.
+  </li>
+  <li>
+    The inventory system: The player can navigate through their inventory which currently has 2 items. They can also read the items' description by selecting them, prompting a chat box to appear on screen.
+  </li> 
+</ol>
+
 ## Challenges Encountered ⚡
 - **First (semi) professional project** with deadlines and weekly meetings to attend to.
 - **Explain as precisely as possible** what was done, and what’s planned for the next meeting.
