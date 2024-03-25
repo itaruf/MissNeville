@@ -108,6 +108,8 @@
 
 </ol>
 
+</details>
+
 ### :zap: Challenges encountered
 - **First (semi) professional project** with deadlines and weekly meetings to attend to.
 - **Explain as precisely as possible** what was done, and what’s planned for the next meeting.
