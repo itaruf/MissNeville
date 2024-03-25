@@ -108,7 +108,7 @@
 
 </ol>
 
-### :zap: Challenges Encountered
+### :zap: Challenges encountered
 - **First (semi) professional project** with deadlines and weekly meetings to attend to.
 - **Explain as precisely as possible** what was done, and what’s planned for the next meeting.
 - **Get the hang of the provided API** to start developing the main features as soon as possible.
