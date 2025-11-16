@@ -32,6 +32,7 @@
 *.app
 
 # VS generated and binary files
+.vs/
 *.pfx
 *.user
 *.v11.suo
